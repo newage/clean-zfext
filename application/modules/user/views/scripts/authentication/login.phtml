@@ -1,0 +1,16 @@
+    <?php
+        $this->form->setAction($this->url());
+        echo $this->form;
+
+//        $this->JsValidate($this->form)->render();
+    ?>
+
+    <br/>
+    
+    <a href="<?php echo $this->url(array('controller'=>'registration', 'action'=>'index')) ?>">
+        <?php echo $this->translate('Registration') ?>
+    </a><br/>
+
+    <a href="<?php echo $this->url(array('controller'=>'forgot', 'action'=>'index')) ?>">
+        <?php echo $this->translate('Forgot Password?') ?>
+    </a>

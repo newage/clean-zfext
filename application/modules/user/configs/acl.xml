@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+<!--        <roles>
+             default role 
+            <guest/>
+            <user>
+                <guest/>
+            </user>
+            <admin>
+                <user/>
+            </admin>
+        </roles>-->
+
+        <!-- resources -->
+<!--        <resources>
+            <balalayka allow="admin" />
+        </resources>-->
+        
+        <roles>
+            <guest parent="guest" />
+            <user parent="guest" />
+        </roles>
+        <mvc>
+            <user>
+                <index allow="guest" />
+                <authentication>
+                    <login allow="guest" deny="user"/>
+                    <logout allow="user" deny="guest"/>
+                </authentication>
+                <registration>
+                    <index allow="guest" deny="user"/>
+                </registration>
+                <forgot>
+                    <index allow="guest" deny="user"/>
+                    <restore allow="guest" deny="user"/>
+                </forgot>
+                <users>
+                    <create allow="admin"/>
+                    <delete allow="admin"/>
+                    <update allow="admin"/>
+                    <read allow="admin"/>
+                </users>
+            </user>
+        </mvc>
+   </production>
+</configdata>

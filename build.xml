@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="ZendExt" basedir="." default="main">
+    <!-- Path to ZendFramework -->
+    <property name="zend.dir" value="/usr/local/lib/ZendFramework" />
+    <!-- Path to phing/etc -->
+    <property name="phpunit.styles.dir" value="/usr/share/php/data/phing/etc" />
+    
+    <property name="apidocs" value="docs/api" />
+    <property name="test.dir" value="tests" />
+    <property name="lib.dir" value="library/Core" />
+    <property name="app.dir" value="application" />
+    <property name="test.report.dir" value="data/tests/report" />
+    <property name="build.target" value="data/build/project.tar" />
+    <property name="coverage.report.dir" value="data/tests/coverage" />
+    <property name="logsdir" value="data/logs" />
+    <property name="reports" value="data/reports" />
+
+    <fileset dir="${app.dir}" id="app">
+        <include name="models/**"/>
+        <include name="modules/**/*.php" />
+        <include name="plugins/**" />
+        <include name="services/**" />
+    </fileset>
+    
+    <fileset dir="${lib.dir}" id="lib">
+        <include name="**/*.php"/>
+    </fileset>
+
+    <fileset dir="${test.dir}" id="test">
+        <include name="**/*Test.php" />
+    </fileset>
+
+    <fileset dir="." id="build">
+         <include name="**/**" />
+         <exclude name="data/**" />
+         <exclude name="data/logs/**" />
+         <exclude name="data/session/**" />
+         <exclude name="data/build/**" />
+         <exclude name="data/tests/**" />
+         <exclude name="data/uploads/**" />
+         <exclude name="data/searchIndex/**" />
+         <exclude name="application/configs/*.development.ini" />
+    </fileset>
+
+    <!-- ============================================  -->
+    <!-- (DEFAULT) Target: Main                        -->
+    <!-- ============================================  -->
+    <target name="main" depends="setup,tests,api">
+        <!-- Commit to SVN -->
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHP CodeSniffer                       -->
+    <!-- ============================================  -->
+    <target name="phpcs">
+        <exec command="phpcs --standard=ZEND --report=checkstyle ${app.dir} > ${reports}/checkstyle.xml" escape="false" />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHP dependency checker                       -->
+    <!-- ============================================  -->
+    <target name="depend">
+        <exec command="pdepend --bad-documentation --jdepend-xml=${reports}/jdepend.xml ${app.dir}" escape="false" />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Setup project                         -->
+    <!-- ============================================  -->
+    <target name="setup">
+        <chmod file="data/cache" mode="0777" />
+        <chmod file="data/uploads" mode="0777" />
+        <chmod file="data/logs" mode="0777" />
+        <mkdir dir="${apidocs}"/>
+        <mkdir dir="${reports}"/>
+        <chmod file="${apidocs}" mode="0777" />
+        <chmod file="${reports}" mode="0777" />
+    </target>
+    
+    <!-- ============================================  -->
+    <!-- Target: Generate API Doc                      -->
+    <!-- ============================================  -->
+    <target name="api">
+        <phpdoc title="API Documentation"
+            destdir="${apidocs}"
+            sourcecode="no"
+            output="HTML:frames:DOM/earthli">
+            <fileset refid="lib" />
+            <fileset refid="app" />
+        </phpdoc>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Create build file                     -->
+    <!-- ============================================  -->
+    <target name="build">
+        <tar destfile="${build.target}" compression="gzip">
+            <fileset refid="build" />
+        </tar>
+    </target>
+
+
+    <!-- ============================================  -->
+    <!-- Target: Start unit tests and generate report  -->
+    <!-- ============================================  -->
+    <target name="tests">
+        <!-- Create the report directories -->
+        <delete dir="${test.report.dir}"/>
+        <delete dir="${coverage.report.dir}"/>
+        
+        <mkdir dir="${test.report.dir}"/>
+        <mkdir dir="${coverage.report.dir}"/>
+
+        <coverage-setup database="${coverage.report.dir}/coverage.db">
+            <fileset refid="app" />
+            <fileset refid="lib" />
+        </coverage-setup>
+
+        <adhoc>
+            <![CDATA[
+                set_include_path(
+                    '${zend.dir}/library' . PATH_SEPARATOR . get_include_path());
+                require_once "Zend/Loader.php";
+                Zend_Loader::registerAutoload();
+            ]]>
+        </adhoc>
+
+        <!-- Run the tests -->
+        <phpunit bootstrap="${test.dir}/bootstrap.php"
+            codecoverage="true">
+            <batchtest>
+                <fileset refid="test" />
+            </batchtest>
+            <formatter type="xml" todir="${test.report.dir}" outfile="logfile.xml" />
+        </phpunit>
+
+        <!--Create the unit test report -->
+        <phpunitreport infile="${test.report.dir}/logfile.xml"
+            styledir="${phpunit.styles.dir}"
+            format="frames"
+            todir="${test.report.dir}" />
+
+        <!-- Create the coverage report -->
+        <coverage-report outfile="${coverage.report.dir}/coverage.xml">
+            <report styledir="${phpunit.styles.dir}" todir="${coverage.report.dir}"/>
+        </coverage-report>
+    </target>
+</project>

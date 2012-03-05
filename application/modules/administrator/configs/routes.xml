@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <routes>
+            <admin type="Zend_Controller_Router_Route_Static">
+                <route value="admin" />
+                <defaults>
+                    <module value="administrator" />
+                    <controller value="index" />
+                    <action value="index" />
+                </defaults>
+            </admin>
+         </routes>
+    </production>
+</configdata>

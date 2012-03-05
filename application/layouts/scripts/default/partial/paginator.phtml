@@ -1,0 +1,85 @@
+<?php
+/**
+ * Digg pagination style
+ *
+ * @preview  « Previous  1 2 … 5 6 7 8 9 10 11 12 13 14 … 25 26  Next »
+ */
+?>
+
+<div class="pagination">
+
+	<?php if ((isset($this->previous))): ?>
+            <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+                &laquo;&nbsp;<?php echo $this->translate('Previous'); ?>
+            </a>
+        <?php else: ?>
+            <span class="disabled">&laquo;&nbsp;<?php echo $this->translate('Previous'); ?></span>
+        <?php endif; ?>
+
+
+	<?php if ($this->pageCount < 13): /* « Previous  1 2 3 4 5 6 7 8 9 10 11 12  Next » */ ?>
+
+		<?php for ($i = 1; $i <= $this->pageCount; $i++): ?>
+			<?php if ($i == $this->current): ?>
+				<strong><?php echo $i ?></strong>
+			<?php else: ?>
+				<a href="<?php echo $this->url(array('page' => $i)); ?>"><?php echo $i ?></a>
+			<?php endif ?>
+		<?php endfor ?>
+
+	<?php elseif ($this->current < 9): /* « Previous  1 2 3 4 5 6 7 8 9 10 … 25 26  Next » */ ?>
+
+		<?php for ($i = 1; $i <= 10; $i++): ?>
+			<?php if ($i == $this->current): ?>
+				<strong><?php echo $i ?></strong>
+			<?php else: ?>
+				<a href="<?php echo $this->url(array('page' => $i)); ?>"><?php echo $i ?></a>
+			<?php endif ?>
+		<?php endfor ?>
+
+		&hellip;
+		<a href="<?php echo $this->url(array('page' => $this->pageCount - 1)); ?>"><?php echo $this->pageCount - 1 ?></a>
+		<a href="<?php echo $this->url(array('page' =>  $this->pageCount )); ?>"><?php echo $this->pageCount ?></a>
+
+	<?php elseif ($this->current > $this->pageCount - 8): /* « Previous  1 2 … 17 18 19 20 21 22 23 24 25 26  Next » */ ?>
+
+		<a href="<?php echo $this->url(array('page' => 1)); ?>">1</a>
+		<a href="<?php echo $this->url(array('page' => 2)); ?>">2</a>
+		&hellip;
+
+		<?php for ($i = $this->pageCount - 9; $i <= $this->pageCount; $i++): ?>
+			<?php if ($i == $this->current): ?>
+				<strong><?php echo $i ?></strong>
+			<?php else: ?>
+				<a href="<?php echo $this->url(array('page' => $i)); ?>"><?php echo $i ?></a>
+			<?php endif ?>
+		<?php endfor ?>
+
+	<?php else: /* « Previous  1 2 … 5 6 7 8 9 10 11 12 13 14 … 25 26  Next » */ ?>
+
+		<a href="<?php echo $this->url(array('page' => 1)); ?>">1</a>
+		<a href="<?php echo $this->url(array('page' => 2)); ?>">2</a>
+		&hellip;
+
+		<?php for ($i = $this->current - 5; $i <= $this->current + 5; $i++): ?>
+			<?php if ($i == $this->current): ?>
+				<strong><?php echo $i ?></strong>
+			<?php else: ?>
+				<a href="<?php echo $this->url(array('page' => $i)); ?>"><?php echo $i ?></a>
+			<?php endif ?>
+		<?php endfor ?>
+
+		&hellip;
+		<a href="<?php echo $this->url(array('page' => $this->pageCount - 1)); ?>"><?php echo $this->pageCount - 1 ?></a>
+		<a href="<?php echo $this->url(array('page' => $this->pageCount )); ?>"><?php echo $this->pageCount ?></a>
+
+	<?php endif ?>
+
+
+	<?php if (isset($this->next)): ?>
+		<a href="<?php echo $this->url(array('page' => $this->next)); ?>"><?php echo $this->translate('Next'); ?>&nbsp;&raquo;</a>
+	<?php else: ?>
+                <span class="disabled"><?php echo $this->translate('Next'); ?>&nbsp;&raquo;</span>
+	<?php endif ?>
+
+</div>

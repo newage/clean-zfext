@@ -1,0 +1,18 @@
+<?php echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <base href="http://<?php echo isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'zend' ?>/layouts/default/" />
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->headTitle() ?>
+    <?php
+        $this->headLink()->headLink(array('rel' => 'favicon', 'href' => 'favicon.ico'));
+        $this->headLink()->appendStylesheet('css/style.css');
+        $this->headLink()->appendStylesheet('/core/css/ui.selectmenu.css');
+        $this->headScript()->appendFile('js/messenger.js');
+        $this->headScript()->appendFile('/core/js/jquery/ui/ui.selectmenu.js');
+    ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+    <?php echo $this->jQuery() ?>
+    <?php echo $this->headScript() ?>
+</head>

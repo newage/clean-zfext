@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+} 
+html, body, #zf_content {
+	height:100%;
+	margin: 0;
+}
+html>body>#zf_content {
+	min-height:100%;
+	height:auto;
+}
+body {
+	font-family:Arial,Helvetica,sans-serif;
+	margin: 0;
+	padding: 0;
+	position: relative;
+    font: 80% sans-serif;
+}
+
+#header {
+    background: url(../images/bg-header.jpg);
+    height: 80px;
+    width: 100%;
+}
+
+#zf_body {
+	margin: 50px auto;
+	width: 960px;
+	border: solid 1px #0C2A4C;
+	position: relative;
+	background: #fff;
+}
+#zf_header {
+	background: url(../images/administration/PoweredBy_ZF_4LightBG.png) no-repeat 10px 10px;
+	width: 100%;
+	height: 80px;
+	text-align: right;
+}
+#zf_header ul {
+	width:100%;
+	list-style: none;
+	height: 35px;
+	padding-bottom: 30px;
+}
+#zf_header li {
+	float: left;
+	line-height: 35px;
+	width: 130px;
+	text-align: center;
+	text-transform: uppercase;
+	background: url(../images/top_menu_arrow.gif) right bottom no-repeat;
+}
+
+ul.errors {
+	list-style: none;
+	padding-left: 0px;
+}
+
+ul.errors li {
+	color: red;
+	font-size: 9pt;
+}
+
+dt {
+	padding-top: 10px;
+}
+
+dd {
+	text-align: left;
+	padding-top: 10px;
+}
+
+input { padding: .3em .5em; text-decoration: none; }
+
+#messenger{
+    /*position: absolute;*/
+    display: block;
+    background-color: red;
+    width: 300px;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 5px 5px 5px 5px;
+    float: right;
+}

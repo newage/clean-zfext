@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <login>
+            <label>Login</label>
+            <module>user</module>
+            <controller>authentication</controller>
+            <action>login</action>
+            <resource>user/authentication</resource>
+            <privilege>login</privilege>
+            <pages>
+                <registration>
+                    <label>Registration</label>
+                    <module>user</module>
+                    <controller>registration</controller>
+                    <action>index</action>
+                    <resource>user/registration</resource>
+                    <privilege>index</privilege>
+                </registration>
+
+                <forgot>
+                    <label>Forgot</label>
+                    <module>user</module>
+                    <controller>forgot</controller>
+                    <action>index</action>
+                    <resource>user/forgot</resource>
+                    <privilege>index</privilege>
+                </forgot>
+            </pages>
+        </login>
+
+        <logout>
+            <label>Logout</label>
+            <module>user</module>
+            <controller>authentication</controller>
+            <action>logout</action>
+            <resource>user/authentication</resource>
+            <privilege>logout</privilege>
+        </logout>
+    </production>
+</configdata>

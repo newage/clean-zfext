@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <admin>
+            <label>Admin</label>
+            <module>administrator</module>
+            <controller>index</controller>
+            <action>index</action>
+            <route>admin</route>
+            <resource>administrator/index</resource>
+            <privilege>index</privilege>
+            <pages>
+                <users>
+                    <label>Users</label>
+                    <module>user</module>
+                    <controller>users</controller>
+                    <action>read</action>
+                    <resource>user/users</resource>
+                    <privilege>read</privilege>
+                </users>
+            </pages>
+        </admin>
+    </production>
+</configdata>

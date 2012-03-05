@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <mvc>
+            <default>
+                <index allow="guest" />
+                <error allow="guest" />
+            </default>
+        </mvc>
+   </production>
+</configdata>

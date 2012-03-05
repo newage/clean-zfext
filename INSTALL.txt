@@ -1,0 +1,24 @@
+Setup
+
+Set Zend_Tool following the manual
+http://framework.zend.com/manual/en/zend.tool.extending.html
+
+Set Doctrine library 1.2
+http://www.doctrine-project.org/projects/orm/download
+or
+$ pear install pear.doctrine-project.org/Doctrine-1.2.3.tgz
+
+$ zf show config
+If not enable config, run command
+$ zf create config
+
+$ zf enable config.manifest Manifest
+$ zf ?
+
+Create schema from database and edit USER, PASSWORD and SCHEMA_NAME params in application.ini
+
+;Add doctrine config params
+resources.doctrine.connections.default.dsn = "mysql://USER:PASSWORD@localhost/SCHEMA_NAME"
+
+$ zf execute-migration doctrine
+$ zf load-data doctrine

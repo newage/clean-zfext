@@ -1,0 +1,50 @@
+
+<a id="createUrl" href="<?php echo $this->url(array('action'=>'create'))?>">Create</a>
+
+<table id="userUsers" class="dataGrid">
+<!-- count paginator -->
+<?php if (count($this->paginator)) : ?>
+    <?php $firstRow = $this->paginator->getAdapter()->getItems(0,1); ?>
+    <tr>
+        <!-- get column name -->
+        <?php foreach (array_keys($firstRow[0]) as $columnName) : ?>
+            <th><?php echo ucfirst($columnName); ?></th>
+        <?php endforeach; ?>
+
+        <th>Update</th>
+        <th>Disable</th>
+        <th>Enable</th>
+    </tr>
+
+    <!-- get all items of paginator -->
+    <?php foreach ($this->paginator as $item) : ?>
+        <tr>
+        <!-- get item property -->
+        <?php foreach ($item as $key=>$column) : ?>
+            <td><?php echo $column ?></td>
+        <?php endforeach; ?>
+
+        <td><a href="<?php echo $this->url(array('action'=>'update', 'id'=>$item['id'])) ?>">X</a></td>
+        <td>
+            <?php if ($item['status'] > 0) : ?>
+                <a href="<?php echo $this->url(array('action'=>'disable', 'id'=>$item['id'])) ?>">X</a>
+            <?php endif; ?>
+        </td>
+        <td>
+            <?php if ($item['status'] == 0) : ?>
+                <a href="<?php echo $this->url(array('action'=>'enable', 'id'=>$item['id'])) ?>">X</a>
+            <?php endif; ?>
+        </td>
+        </tr>
+    <?php endforeach; ?>
+
+    <tr class="paginator">
+        <td colspan="<?php echo count($firstRow[0]) + 2 ?>">
+        <?php echo $this->paginationControl($this->paginator,
+                                          'Sliding',
+                                          'pagination_control.phtml'); ?>
+        </td>
+    </tr>
+
+<?php endif; ?>
+</table>

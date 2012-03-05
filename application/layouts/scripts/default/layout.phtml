@@ -1,0 +1,67 @@
+<?php echo $this->partial('default/partial/header.phtml') ?>
+
+<body>
+    <div class="body">
+        <div class="header">
+            <div class="cont_width">
+                <div class="logo">
+                    <h1><a href="/" title="Homepage"><?php print $this->translate('TITLE') ?></a></h1>
+                    <h2>&nbsp;</h2>
+                </div>
+                <div class="menu small">
+                    <?php echo $this->navigation()->menu()->setMinDepth(0)->setMaxDepth(0); ?>
+                </div>
+                <div class="menu clearright">
+                    <?php echo $this->navigation()->menu()->setMinDepth(1)->setMaxDepth(1); ?>
+                    <br class="clear"/>
+                </div>
+            </div>
+            <div class="topgreen clear">
+                <div class="cont_width">
+                <?php
+                    $titleArr = $this->headTitle()->getIterator();
+                    $title = reset($titleArr);
+                    if (sizeof($titleArr) != 1) {
+                        echo $this->translate($title);
+                    } else {
+                        $nav = $this->navigation()->menu()->setMinDepth(1)->setMaxDepth(1)->findByActive('true');
+                        if ($nav) {
+                        //showing page title or smthn another from navigation
+                        //done only for 1st lev navigation
+                            echo $this->translate($nav->getLabel());
+                        } else {
+                            echo '&nbsp;';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="tophelp">
+                <div class="cont_width">
+                    <?php echo $this->navigation()->breadcrumbs()->render(); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="content cont_width">
+            <?php /*echo $this->fieldset('' ,$this->formLabel('translate', 'Language') .
+                $this->formSelect(
+                    'translate',
+                    Zend_Registry::get('Zend_Translate')->getLocale(),
+                    null,
+                    array('en'=>'en', 'ru'=>'ru')));*/
+            ?>
+
+            <br/>
+
+            <?php echo $this->layout()->content ?>
+        </div>
+
+        <?php echo $this->partial('default/partial/messenger.phtml') ?>
+
+        <div class="footer">
+            <?php echo $this->partial('default/partial/footer.phtml') ?>
+        </div>
+    </div>
+</body>
+</html>

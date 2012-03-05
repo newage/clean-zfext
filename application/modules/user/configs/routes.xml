@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <routes>
+            <logout type="Zend_Controller_Router_Route_Static">
+                <route value="logout" />
+                <defaults>
+                    <module value="user" />
+                    <controller value="authentication" />
+                    <action value="logout" />
+                </defaults>
+            </logout>
+
+            <forgot type="Zend_Controller_Router_Route_Static">
+                <route value="forgot" />
+                <defaults>
+                    <module value="user" />
+                    <controller value="forgot" />
+                    <action value="index" />
+                </defaults>
+            </forgot>
+        </routes>
+    </production>
+</configdata>

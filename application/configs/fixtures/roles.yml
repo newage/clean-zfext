@@ -1,0 +1,9 @@
+roles:
+  admin_role:
+    id: 1
+    name: admin
+    parent_id: 1
+  user_role:
+    id: 2
+    name: user
+    parent_id: 2
