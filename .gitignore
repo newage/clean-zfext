@@ -1,0 +1,4 @@
+/application/configs/application.development.ini
+/data/*
+/docs/*
+/build/*
