@@ -87,7 +87,9 @@ class Core_Migration_Fixture
         $db = Zend_Db_Table::getDefaultAdapter();
         
         foreach ($rowset as $row){
-            $db->insert($tableName, $row->toArray());
+            if ($row instanceof Zend_Db_Table_Row_Abstract) {
+                $db->insert($tableName, $row->toArray());
+            }
         }
     }
     
