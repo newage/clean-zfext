@@ -87,7 +87,7 @@ class Core_Migration_Fixture
         $db = Zend_Db_Table::getDefaultAdapter();
         
         foreach ($rowset as $row){
-            if ($row instanceof Zend_Db_Table_Row_Abstract) {
+            if ($row instanceof Vivo_Migration_Reader_Abstract) {
                 $db->insert($tableName, $row->toArray());
             }
         }
