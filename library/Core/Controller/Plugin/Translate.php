@@ -86,9 +86,9 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         $route  = new Zend_Controller_Router_Route(
             ':translate/:module/:controller/:action/*',
             array(
-                'module' => 'default',
-                'controller' => 'index',
-                'action' => 'index',
+                'module' => Zend_Controller_Front::getInstance()->getDefaultModule(),
+                'controller' => Zend_Controller_Front::getInstance()->getDefaultControllerName(),
+                'action' => Zend_Controller_Front::getInstance()->getDefaultAction(),
                 'translate' => $this->_default
             ),
             array(
