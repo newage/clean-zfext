@@ -6,8 +6,6 @@
  * @category Core
  * @package Core_View
  * @author V.Leontiev
- *
- * @version $Id$
  */
 class Core_View extends Zend_View
 {

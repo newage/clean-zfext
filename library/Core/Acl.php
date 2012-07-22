@@ -4,8 +4,6 @@
  *
  * @category Core
  * @package  Core_Acl
- *
- * @version $Id: Acl.php 87 2010-08-29 10:15:50Z vadim.leontiev $
  */
 
 class Core_Acl extends Zend_Acl
@@ -131,13 +129,13 @@ class Core_Acl extends Zend_Acl
     {
 
         if (isset($rules[self::ALLOW])) {
-            $rules[self::ALLOW] = split(',', $rules[self::ALLOW]);
+            $rules[self::ALLOW] = explode(',', $rules[self::ALLOW]);
         } else {
             $rules[self::ALLOW] = array();
         }
 
         if (isset($rules[self::DENY])) {
-            $rules[self::DENY] = split(',', $rules[self::DENY]);
+            $rules[self::DENY] = explode(',', $rules[self::DENY]);
         } else {
             $rules[self::DENY] = array();
         }
@@ -152,7 +150,7 @@ class Core_Acl extends Zend_Acl
         }
         unset($rules[self::DENY]);
 
-        if (sizeof($rules) > 0) {
+        if (count($rules) > 0) {
             foreach ($rules as $privileges => $rules) {
                 $this->_addRule($rules, $resource, $privileges);
             }

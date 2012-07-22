@@ -6,8 +6,6 @@
  * @category Core
  * @package Core_Debug
  * @author V.Leontiev
- * 
- * @version $Id$
  */
 class Core_Debug extends Zend_Debug
 {

@@ -1,4 +1,5 @@
 <?php
+
 /* 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -41,10 +42,14 @@ class Core_Form_Decorator_JQueryErrors extends Zend_Form_Decorator_Abstract
         
         switch ($placement) {
             case self::APPEND:
-                return $content . $separator . $append;
+                $content = $content . $separator . $append;
+                break;
             case self::PREPEND:
-                return $append . $separator . $content;
+                $content = $append . $separator . $content;
+                break;
         }
+        
+        return $content;
     }
 
     private function addErrorToContent($error, $errorName)
@@ -61,4 +66,3 @@ class Core_Form_Decorator_JQueryErrors extends Zend_Form_Decorator_Abstract
         </div><br/>';
     }
 }
-

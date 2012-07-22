@@ -6,8 +6,6 @@
  * @category Core
  * @package Core_Form
  * @author V.Leontiev
- *
- * @version $Id$
  */
 
 class Core_Form extends Zend_Form
@@ -43,7 +41,7 @@ class Core_Form extends Zend_Form
      * @param type $suppressArrayNotation
      * @return type 
      */
-    public function getElementErrorMessages($name = null, $suppressArrayNotation = false)
+    public function getElementErrorMessages($name = null)
     {
         $errors = $this->getErrors($name, true);
 
@@ -69,30 +67,36 @@ class Core_Form extends Zend_Form
         switch ($element->getType()) {
             case 'Zend_Form_Element_Submit':
                 $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all ui-submit');
-                $element->setDecorators(array(
-                    'ViewHelper',
-                    'Description',
-                    'Errors',
-                    array('HtmlTag', array('tag' => 'dd', 'id' => $elementIdName))
-                ));
+                $element->setDecorators(
+                    array(
+                        'ViewHelper',
+                        'Description',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'dd', 'id' => $elementIdName))
+                    )
+                );
                 break;
             case 'Zend_Form_Element_Reset':
                 $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all ui-cancel');
-                $element->setDecorators(array(
-                    'ViewHelper',
-                    'Description',
-                    'Errors',
-                    array('HtmlTag', array('tag' => 'dd', 'id' => $elementIdName))
-                ));         
+                $element->setDecorators(
+                    array(
+                        'ViewHelper',
+                        'Description',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'dd', 'id' => $elementIdName))
+                    )
+                );
                 break;
             case 'Zend_Form_Element_Button':
                 $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only');
-                $element->setDecorators(array(
-                    'ViewHelper',
-                    'Description',
-                    'Errors',
-                    array('HtmlTag', array('tag' => 'dd', 'id' => $elementIdName))
-                ));      
+                $element->setDecorators(
+                    array(
+                        'ViewHelper',
+                        'Description',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'dd', 'id' => $elementIdName))
+                    )
+                );
                 break;
             case 'Zend_Form_Element_Checkbox':
                 $element->setAttrib('class', 'checkbox-input text ui-widget-content ui-corner-all');
