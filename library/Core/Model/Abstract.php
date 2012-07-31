@@ -65,7 +65,7 @@ abstract class Core_Model_Abstract
         $methodName = 'get' . ucfirst($columnName);
         
         if (method_exists($this, $methodName)) {
-            return $methodName($value);
+            return $methodName();
         }
         return false;
     }

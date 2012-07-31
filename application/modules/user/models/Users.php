@@ -10,7 +10,7 @@
  * @author     ##NAME## <##EMAIL##>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class User_Model_Users extends User_Model_Base_Users
+class User_Model_Users extends Core_Model_Abstract
 {
 
     const STATUS_REGISTER = 1;

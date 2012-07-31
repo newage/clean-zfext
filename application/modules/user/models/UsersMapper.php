@@ -98,7 +98,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function register($request)
     {
-        $user = self::getInstance()->getRecord();
+        $user = self::getDbTable()->createRow();
 
         $user->login = $request['login'];
         $user->email = $request['email'];

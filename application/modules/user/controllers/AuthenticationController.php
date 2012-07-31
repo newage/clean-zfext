@@ -35,7 +35,7 @@ class User_AuthenticationController extends Zend_Controller_Action
         $form = new User_Form_Authentication();
 
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-            $model = User_Model_UsersTable::getInstance();
+            $model = User_Model_Users();
 
             if ($model->authenticate($form->getValues())) {
                 $this->_helper->FlashMessenger('Successful Login');
