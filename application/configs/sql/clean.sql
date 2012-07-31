@@ -34,16 +34,17 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE  `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
-  `dob` date DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `salt` varchar(32) DEFAULT NULL,
+  `password` varchar(32) NOT NULL,
+  `salt` varchar(32) NOT NULL,
   `role_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `last_logon_at` datetime DEFAULT NULL,
   `password_reset_hash` varchar(32) DEFAULT NULL,
   `status` enum('ENABLE', 'DISABLE') NOT NULL DEFAULT 'DISABLE',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email` (`email` ASC),
+  INDEX `status` (`status` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
