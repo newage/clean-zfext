@@ -20,7 +20,7 @@ class Core_Form extends Zend_Form
     {
         parent::__construct($options);
         
-        $this->addDecorator(new Zend_Form_Decorator_FormErrors());
+//        $this->addDecorator(new Zend_Form_Decorator_FormErrors());
         
         $elements = array_keys($this->getElements());
         
@@ -52,7 +52,7 @@ class Core_Form extends Zend_Form
     }
     
     /**
-     *
+     * @todo move this code to decorator
      * @param type $element
      * @return type 
      */

@@ -29,9 +29,10 @@ class User_RegistrationController extends Zend_Controller_Action
         $form = new User_Form_Registration();
 
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-            $model = User_Model_UsersTable::getInstance();
-
-            if (true === (bool)$model->registrate($form->getValues())) {
+            $model = new User_Model_Users($form->getValues());
+            $mapper = new User_Model_UsersMapper();
+            
+            if (true === (bool)$mapper->save($model)) {
                 $this->_helper->FlashMessenger('Registration successful');
                 $this->getHelper('Redirector')->gotoUrl('/');
             } else {

@@ -8,7 +8,7 @@
 /**
  * Description of JUErrors
  *
- * @author vadim
+ * @author V.Leontiev
  */
 class Core_Form_Decorator_JQueryErrors extends Zend_Form_Decorator_Abstract
 {

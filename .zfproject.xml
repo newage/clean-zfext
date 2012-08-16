@@ -24,10 +24,6 @@
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
             <dbTableDirectory>
-              <dbTableFile dbTableName="Roles"/>
-              <dbTableFile dbTableName="Actions"/>
-              <dbTableFile dbTableName="Resources"/>
-              <dbTableFile dbTableName="Rules"/>
               <dbTableFile dbTableName="Users"/>
             </dbTableDirectory>
           </modelsDirectory>

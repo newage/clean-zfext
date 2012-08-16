@@ -16,6 +16,7 @@ abstract class Core_Model_Abstract
      */
     public function __construct($options = null)
     {
+        $this->setDefault();
         if (null != $options) {
             $this->setOptions($options);
         }
@@ -25,7 +26,7 @@ abstract class Core_Model_Abstract
      * Set options
      *
      * @param array $options
-     * @return Core_Db_Table_Row_Abstract 
+     * @return Core_Model_Abstract 
      */
     public function setOptions($options)
     {
@@ -38,35 +39,14 @@ abstract class Core_Model_Abstract
         }
         return $this;
     }
-
-    /**
-     * Check and init set method on value
-     *
-     * @param string $columnName
-     * @param string $value
-     * @return string|bool
-     */
-    public function  __set($columnName, $value) {
-        $methodName = 'set' . ucfirst($columnName);
-
-        if (method_exists($this, $methodName)) {
-            return $this->$methodName($value);
-        }
-        return false;
+    
+    public function getMysqlDate()
+    {
+        return date('Y-m-d');
     }
-
-    /**
-     * Check and init get method for value
-     * 
-     * @param string $columnName
-     * @return string|bool
-     */
-    public function __get($columnName) {
-        $methodName = 'get' . ucfirst($columnName);
-        
-        if (method_exists($this, $methodName)) {
-            return $methodName();
-        }
-        return false;
+    
+    public function getSqlDateTime()
+    {
+        return date('Y-m-d H:i:s');
     }
 }
