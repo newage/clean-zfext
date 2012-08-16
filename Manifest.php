@@ -5,9 +5,9 @@ set_include_path(get_include_path() . PATH_SEPARATOR .
 );
 
 require_once 'Core/Tool/Project/Provider/Abstract.php';
-require_once 'Core/Tool/MigrationProvider.php';
-require_once 'Core/Tool/SchemaProvider.php';
-require_once 'Core/Tool/FixtureProvider.php';
+require_once 'Core/Tool/Project/Provider/Migration.php';
+require_once 'Core/Tool/Project/Provider/Schema.php';
+require_once 'Core/Tool/Project/Provider/Fixture.php';
 
 class Manifest
     implements Zend_Tool_Framework_Manifest_Interface,
@@ -16,10 +16,11 @@ class Manifest
 
     public function getProviders()
     {
+
         return array(
-            new Core_Tool_SchemaProvider(),
-            new Core_Tool_MigrationProvider(),
-            new Core_Tool_FixtureProvider()
+            new Core_Tool_Project_Provider_Schema(),
+            new Core_Tool_Project_Provider_Migration(),
+            new Core_Tool_Project_Provider_Fixture()
         );
     }
 }

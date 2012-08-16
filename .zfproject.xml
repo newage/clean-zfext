@@ -10,7 +10,12 @@
       <controllersDirectory/>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
-      <modelsDirectory/>
+      <modelsDirectory>
+        <modelFile modelName="Email"/>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Email"/>
+        </dbTableDirectory>
+      </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="user">
           <apisDirectory enabled="false"/>

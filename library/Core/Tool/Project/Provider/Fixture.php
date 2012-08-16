@@ -10,7 +10,7 @@
  *
  * @version  $Id$
  */
-class Core_Tool_FixtureProvider
+class Core_Tool_Project_Provider_Fixture
     extends Core_Tool_Project_Provider_Abstract
         implements Zend_Tool_Framework_Provider_Pretendable
 {

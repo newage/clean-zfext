@@ -9,7 +9,7 @@
  *
  * @version  $Id$
  */
-class Core_Tool_SchemaProvider
+class Core_Tool_Project_Provider_Schema
     extends Core_Tool_Project_Provider_Abstract
         implements Zend_Tool_Framework_Provider_Pretendable
 {
