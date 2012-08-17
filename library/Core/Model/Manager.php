@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * Core model manager
+ *
+ * @category Core
+ * @package  Core_Model
+ * @author V.Leontiev
+ */
+class Core_Model_Manager
+{
+    /**
+     * CodeGenerator for DbModel
+     * 
+     * @var Core_CodeGenerator_DbModel
+     */
+    protected $_generator = null;
+    
+    /**
+     * Array with all resource from config
+     * 
+     * @var array
+     */
+    protected $_resources = array();
+    
+    /**
+     * Initialize generator
+     */
+    public function __construct(array $resources)
+    {
+        $this->_resources = $resources;
+        $this->_generator = new Core_CodeGenerator_DbModel();
+    }
+    
+    /**
+     * Create model, dbTable, mapper
+     * 
+     * @return array
+     * @author V.Leonteiv
+     */
+    public function create($nameClass, $tableName, $moduleName)
+    {
+        $this->_generator->setModule($moduleName);
+        
+        $fieldsName = $this->_getFieldsName($tableName);
+        $methods = array_walk($fieldsName, $funcname);
+        $this->_generator->generateModel($nameClass, $fieldsName);
+    }
+    
+    /**
+     * Get fields name from table
+     * 
+     * @param type $tableName 
+     * @return array
+     * @author V.Leontiev
+     */
+    protected function _getFieldsName($tableName)
+    {
+        $schemaName = $this->_resources['db']['params']['dbname'];
+        
+        $sql = 'SELECT `COLUMN_NAME`
+            FROM information_schema.`COLUMNS`
+            WHERE `TABLE_SCHEMA` = "'.$schemaName.'"
+            AND `TABLE_NAME` = "'.$tableName.'"';
+        return Zend_Db_Table::getDefaultAdapter()->fetchCol($sql);
+    }
+}

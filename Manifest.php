@@ -8,6 +8,7 @@ require_once 'Core/Tool/Project/Provider/Abstract.php';
 require_once 'Core/Tool/Project/Provider/Migration.php';
 require_once 'Core/Tool/Project/Provider/Schema.php';
 require_once 'Core/Tool/Project/Provider/Fixture.php';
+require_once 'Core/Tool/Project/Provider/DbModel.php';
 
 class Manifest
     implements Zend_Tool_Framework_Manifest_Interface,
@@ -20,7 +21,8 @@ class Manifest
         return array(
             new Core_Tool_Project_Provider_Schema(),
             new Core_Tool_Project_Provider_Migration(),
-            new Core_Tool_Project_Provider_Fixture()
+            new Core_Tool_Project_Provider_Fixture(),
+            new Core_Tool_Project_Provider_DbModel()
         );
     }
 }

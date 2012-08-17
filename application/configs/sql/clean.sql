@@ -30,7 +30,7 @@ CREATE TABLE  `sessions` (
 --
 
 CREATE TABLE  `users` (
-  `id` int(11) NOT NULL UNSIGNED AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
   `salt` varchar(32) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE  `users` (
 --
 
 CREATE TABLE  `roles` (
-  `id` int(11) NOT NULL UNSIGNED AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `parent_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -61,7 +61,7 @@ CREATE TABLE  `roles` (
 --
 
 CREATE  TABLE `emails` (
-  `email_template_id` TINYINT UNSIGNED NOT NULL ,
+  `email_template_id` TINYINT NOT NULL ,
   `to_email` VARCHAR(255) NOT NULL ,
   `status` ENUM('NEW','SENT') NULL DEFAULT 'NEW' ,
   INDEX `template` (`email_template_id` ASC)
@@ -72,7 +72,7 @@ CREATE  TABLE `emails` (
 --
 
 CREATE  TABLE `emails_template` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NULL ,
   `template` TINYTEXT NULL ,
   PRIMARY KEY (`id`) ,

@@ -34,9 +34,11 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
      */
     public function initialize()
     {
-        parent::initialize();
-        $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
-        $this->_bootstrapWithOtherConfig();
+//        if (!self::$_isInitialized) {
+            parent::initialize();
+            $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
+            $this->_bootstrapWithOtherConfig();
+//        }
     }
     
     /**
@@ -57,6 +59,12 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
             $this->_app->bootstrap();
             
             self::$_bootstrap = true;
+        } else {
+            $applicationEnv = getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production';
+            $this->_app = new Zend_Application(
+                    $applicationEnv,
+                    $this->_getDevelopmentConfig()
+            );
         }
     }
     
@@ -69,13 +77,16 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
     private function _getDevelopmentConfig()
     {
         $configPath = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs';
-        
-        if (file_exists($configPath . '/application.development.ini')) {
-            $config = new Zend_Config_Ini($configPath . '/application.development.ini', 'development');
+        if (!defined('APPLICATION_ENV')) {
+            define('APPLICATION_ENV', 'development');
+        }
+        if (file_exists($configPath . '/application.' . APPLICATION_ENV . '.ini')) {
+            $config = new Zend_Config_Ini($configPath . '/application.' . APPLICATION_ENV . '.ini', APPLICATION_ENV);
+            return $config->toArray();
+        } else {
+            $config = new Zend_Config_Ini($configPath . '/application.ini', APPLICATION_ENV);
             return $config->toArray();
         }
-        
-        return array();
     }
     
     /**
