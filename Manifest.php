@@ -17,7 +17,6 @@ class Manifest
 
     public function getProviders()
     {
-
         return array(
             new Core_Tool_Project_Provider_Schema(),
             new Core_Tool_Project_Provider_Migration(),
