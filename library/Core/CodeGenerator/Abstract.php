@@ -54,6 +54,16 @@ abstract class Core_CodeGenerator_Abstract
         }
 
         $method = new Zend_CodeGenerator_Php_Method();
+        $method->setDocblock(
+            array(
+                'longDescription' => 'Method description',
+                'tags'            => array(
+                    'return'      => '',
+                    'param'       => '',
+                    'author'      => ''
+                )
+            )
+        );
         $method->setName($methodName);
         $method->setVisibility($visibility);
         $method->setBody($body);
@@ -88,13 +98,13 @@ abstract class Core_CodeGenerator_Abstract
                     'description' => '###SUBPACKAGE###'
                 ),
                 array(
-                    'name'        => 'version',
-                    'description' => '$Id$',
+                    'name'        => 'license',
+                    'description' => 'New BSD'
                 ),
                 array(
-                    'name'        => 'license',
-                    'description' => 'New BSD',
-                ),
+                    'name'        => 'author',
+                    'description' => 'autogenarate'
+                )
             )
         ));
     }

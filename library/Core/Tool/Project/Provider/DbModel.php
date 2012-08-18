@@ -41,10 +41,8 @@ class Core_Tool_Project_Provider_DbModel
      */
     public function create($name, $actualTableName, $module = null)
     {
-        $file = $this->_manager->create($name, $actualTableName, $module);
-        
-        $this->_print('Create new Model, DbTable, ModelMapper', array('color' => 'green'));
-        $this->_print('Migration file migrations/' . $file . '.php');
+        $this->_manager->create($name, $actualTableName, $module);
+        $this->_print('Create new Model and ModelMapper', array('color' => 'green'));
     }
 }
 

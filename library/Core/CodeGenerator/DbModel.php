@@ -31,46 +31,18 @@ class Core_CodeGenerator_DbModel extends Core_CodeGenerator_Abstract
     {
         $class = new Zend_CodeGenerator_Php_Class();
         $className = $this->_generateClassName(ucfirst($modelName));
+        $path = $this->_generatePath($className);
 
-        $classDoc = new Zend_CodeGenerator_Php_Docblock(array(
-            'shortDescription' => 'Model class for ' . $className,
-            'tags' => array(
-                array(
-                    'name' => 'category',
-                    'description' => 'Application'
-                ),
-                array(
-                    'name' => 'package',
-                    'description' => 'Application_Model',
-                ),
-                array(
-                    'name' => 'subpackage',
-                    'description' => 'Model',
-                ),
-                array(
-                    'name' => 'author',
-                    'description' => 'autogenerate'
-                ),
-                array(
-                    'name' => 'version',
-                    'description' => '$Id$'
-                )
-            )
-        ));
-        
         $class->setName($className)
               ->setExtendedClass('Core_Model_Abstract')
-              ->setDocblock($classDoc);
+              ->setDocblock($this->_generateDocBlock());
         
         foreach ($methods as $fieldName) {
-            $class->setMethod($this->_generateModelMethod($fieldName, 'set'));
-            $class->setMethod($this->_generateModelMethod($fieldName, 'get'));
+            $class->setMethod($this->_createMethod('get' . ucfirst($fieldName)));
+            $class->setMethod($this->_createMethod('set' . ucfirst($fieldName)));
         }
         
-        $file = new Zend_CodeGenerator_Php_File();
-        $file->setClass($class)
-             ->setFilename($path . DIRECTORY_SEPARATOR . $nameClass . '.php')
-             ->write();
+        $this->_generateFile($class->generate(), $path);
     }
     
     /**
@@ -81,6 +53,7 @@ class Core_CodeGenerator_DbModel extends Core_CodeGenerator_Abstract
      */
     protected function _generateClassName($modelName)
     {
+        $className = array();
         $className[] = !is_string($this->_moduleName) ? 'Application' : ucfirst($this->_moduleName);
         $className[] = 'Model';
         $className[] = $modelName;
@@ -88,13 +61,37 @@ class Core_CodeGenerator_DbModel extends Core_CodeGenerator_Abstract
         return implode('_', $className);
     }
     
-    public function generateDbTable($nameClass)
+    /**
+     * Generate path to file
+     * 
+     * @param string $className
+     * @return string 
+     */
+    protected function _generatePath($className)
     {
+        $module = $this->_moduleName !== null ? DIRECTORY_SEPARATOR . 'modules' .
+                DIRECTORY_SEPARATOR .$this->_moduleName : '';
+        $classExplode = explode('_', $className);
+        $file = array_pop($classExplode);
+        $path = APPLICATION_PATH . $module . DIRECTORY_SEPARATOR . 'models'
+                . DIRECTORY_SEPARATOR . $file . '.php';
         
+        return $path;
     }
     
-    public function generateMapper($nameClass)
+    public function generateMapper($modelName)
     {
+        $class = new Zend_CodeGenerator_Php_Class();
+        $className = $this->_generateClassName(ucfirst($modelName . 'Mapper'));
+        $path = $this->_generatePath($className);
+
+        $class->setName($className)
+              ->setExtendedClass('Core_Model_Mapper_Abstract')
+              ->setDocblock($this->_generateDocBlock());
         
+//        $class->setMethod($this->_createMethod('get' . ucfirst($fieldName)));
+//        $class->setMethod($this->_createMethod('set' . ucfirst($fieldName)));
+        
+        $this->_generateFile($class->generate(), $path);
     }
 }

@@ -43,8 +43,9 @@ class Core_Model_Manager
         $this->_generator->setModule($moduleName);
         
         $fieldsName = $this->_getFieldsName($tableName);
-        $methods = array_walk($fieldsName, $funcname);
         $this->_generator->generateModel($nameClass, $fieldsName);
+        
+        $this->_generator->generateMapper($nameClass);
     }
     
     /**
