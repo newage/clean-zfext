@@ -9,10 +9,11 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     /**
      * Return bool if find registerd user on fields email and password
      *
-     * @param array $request
+     * @param string $login
+     * @param string $password
      * @return bool
      */
-    public function authenticate($request)
+    public function authenticate($login, $password)
     {
         $authAdapter = new Zend_Auth_Adapter_DbTable();
         $authAdapter->setTableName('users')
@@ -21,8 +22,8 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
                     ->setCredentialTreatment('MD5(CONCAT(salt, ?)) AND status = "' .
                         User_Model_Users::STATUS_ENABLE . '"');
 
-        $authAdapter->setIdentity($request['login'])
-                    ->setCredential($request['password']);
+        $authAdapter->setIdentity($login)
+                    ->setCredential($password);
 
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session('Zend_Auth'));
