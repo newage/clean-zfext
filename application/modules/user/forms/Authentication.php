@@ -21,11 +21,11 @@ class User_Form_Authentication extends Core_Form
              ->setDescription('User Authentication');
 
         //create login field
-        $element = new Zend_Form_Element_Text('login');
+        $element = new Zend_Form_Element_Text('email');
         $element->setRequired(true);
         $element->setLabel('Login');
-        $element->addValidator('StringLength', false, array(3,20))
-                ->addValidator('Alnum', true, array(false));
+        $element->addValidator('StringLength', false, array(8,30))
+                ->addValidator('EmailAddress', true, array('domain' => false));
         $element->setOrder(1);
 
         $this->addElement($element);

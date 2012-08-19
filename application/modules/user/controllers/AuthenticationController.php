@@ -38,7 +38,7 @@ class User_AuthenticationController extends Zend_Controller_Action
             $model = new User_Model_Users($form->getValues());
             $mapper = new User_Model_UsersMapper();
 
-            if ($mapper->authenticate($model)) {
+            if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'))) {
                 $this->_helper->FlashMessenger('Successful Login');
                 $this->getHelper('Redirector')->gotoUrl('/');
             } else {

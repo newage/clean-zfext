@@ -15,9 +15,9 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function authenticate($login, $password)
     {
-        $authAdapter = new Zend_Auth_Adapter_DbTable();
+        $authAdapter = new Core_Auth_Adapter_DbTable();
         $authAdapter->setTableName('users')
-                    ->setIdentityColumn('login')
+                    ->setIdentityColumn('email')
                     ->setCredentialColumn('password')
                     ->setCredentialTreatment('MD5(CONCAT(salt, ?)) AND status = "' .
                         User_Model_Users::STATUS_ENABLE . '"');
