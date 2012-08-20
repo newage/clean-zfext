@@ -85,10 +85,12 @@ class Core_Migration_Fixture
     protected function _setDataToTable($tableName, $rowset)
     {
         $db = Zend_Db_Table::getDefaultAdapter();
-        
+
         foreach ($rowset as $row){
-            if ($row instanceof Vivo_Migration_Reader_Abstract) {
+            if ($row instanceof Core_Migration_Reader_Abstract) {
                 $db->insert($tableName, $row->toArray());
+            } else {
+                throw new Core_Migration_Exception('Row not instance Core_Migration_Reader_Abstract');
             }
         }
     }
