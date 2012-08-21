@@ -26,14 +26,14 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
      *
      * @var string
      */
-    protected $_default = 'ru';
+    protected $_default = 'en';
 
     /**
      * Current language
      *
      * @var string
      */
-    protected $_language = 'ru';
+    protected $_language = 'en';
 
     /**
      * Map of supported locales.
