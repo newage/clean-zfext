@@ -23,9 +23,10 @@ class User_Form_Authentication extends Core_Form
         //create login field
         $element = new Zend_Form_Element_Text('email');
         $element->setRequired(true);
-        $element->setLabel('Login');
+        $element->setLabel('Email');
         $element->addValidator('StringLength', false, array(8,30))
                 ->addValidator('EmailAddress', true, array('domain' => false));
+        $element->addDecorator(new Core_Form_Decorator_TwitterInput);
         $element->setOrder(1);
 
         $this->addElement($element);
@@ -36,14 +37,15 @@ class User_Form_Authentication extends Core_Form
         $element->setLabel('Password');
         $element->addValidator('StringLength', false, array(6,20))
                 ->addValidator('Alnum', true, array(false));
+        $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
         $element->setOrder(2);
 
         $this->addElement($element);
 
         //create submit button
         $element = new Zend_Form_Element_Submit('submit');
-        $element->setLabel('Log In');
-        $element->setAttrib('class', 'ui-button ui-widget ui-state-default ui-corner-all');
+        $element->setLabel('Sign In');
+        $element->addDecorator(new Core_Form_Decorator_TwitterButton);
         $element->setOrder(3);
 
         $this->addElement($element);
