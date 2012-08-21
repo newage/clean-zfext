@@ -1,0 +1,6 @@
+emails_template:
+  user_registration:
+    id: 1
+    name: registration
+    template: "You registration! Login: %login%, Password: %password%"
+  

@@ -10,12 +10,7 @@
       <controllersDirectory/>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
-      <modelsDirectory>
-        <modelFile modelName="Email"/>
-        <dbTableDirectory>
-          <dbTableFile dbTableName="Email"/>
-        </dbTableDirectory>
-      </modelsDirectory>
+      <modelsDirectory/>
       <modulesDirectory>
         <moduleDirectory moduleName="user">
           <apisDirectory enabled="false"/>
@@ -67,6 +62,26 @@
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory/>
+          <viewsDirectory>
+            <viewScriptsDirectory/>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="email">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory/>
+          <formsDirectory enabled="false"/>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Emails"/>
+              <dbTableFile dbTableName="EmailsTemplate"/>
+            </dbTableDirectory>
+            <modelFile modelName="Emails"/>
+            <modelFile modelName="EmailsTemplate"/>
+          </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory/>
             <viewHelpersDirectory/>
