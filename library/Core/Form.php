@@ -20,7 +20,8 @@ class Core_Form extends Zend_Form
     {
         parent::__construct($options);
         
-//        $this->addDecorator(new Zend_Form_Decorator_FormErrors());
+        $this->addDecorator(new Core_Form_Decorator_TwitterFormErrors(array(
+            'placement' => Zend_Form_Decorator_Abstract::PREPEND)));
         
         $elements = array_keys($this->getElements());
         

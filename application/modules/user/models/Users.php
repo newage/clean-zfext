@@ -9,8 +9,8 @@
  */
 class User_Model_Users extends Core_Model_Abstract
 {
-    const STATUS_ENABLE  = 1;
-    const STATUS_DISABLE = 2;
+    const STATUS_ENABLE  = 'ENABLE';
+    const STATUS_DISABLE = 'DISABLE';
 
     /**
      * Set default variable
@@ -58,6 +58,16 @@ class User_Model_Users extends Core_Model_Abstract
     }
     
     /**
+     * Get email
+     * 
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    
+    /**
      * Generate hash to password
      *
      * @param string $value
@@ -77,6 +87,16 @@ class User_Model_Users extends Core_Model_Abstract
         return $this;
     }
 
+    /**
+     * Get password
+     * 
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    
     /**
      * Create and set dynamic salt for password
      *

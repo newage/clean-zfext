@@ -56,6 +56,6 @@ class Core_Form_Decorator_TwitterErrors extends Zend_Form_Decorator_Abstract
             $translator = $this->getElement()->getTranslator();
             $errorName = $translator->translate('Error');
         }
-        return '<div class="alert alert-error"><strong>' . $errorName . ':</strong> '.$error.'</div>';
+        return '<div class="alert alert-error">'.$error.'</div>';
     }
 }

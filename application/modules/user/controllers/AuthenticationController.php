@@ -35,7 +35,6 @@ class User_AuthenticationController extends Zend_Controller_Action
         $form = new User_Form_Authentication();
 
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-            $model = new User_Model_Users($form->getValues());
             $mapper = new User_Model_UsersMapper();
 
             if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'))) {

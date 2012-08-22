@@ -26,7 +26,7 @@ class Core_Auth_Adapter_DbTable extends Zend_Auth_Adapter_DbTable
             $adapter = Zend_Db_Table::getDefaultAdapter();
             $select = $adapter->select()
                       ->from('roles', array('role'))
-                      ->where('role_id = ?', $object->role_id);
+                      ->where('id = ?', $object->role_id);
             $role = $adapter->fetchOne($select);
         }
         $object->role = $role;

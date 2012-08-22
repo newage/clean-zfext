@@ -24,7 +24,8 @@ class User_Form_Forgot extends Core_Form
         $element = new Zend_Form_Element_Text('email');
         $element->setRequired(true);
         $element->setLabel('E-mail');
-        $element->addValidator('EmailAddress', true);
+        $element->addValidator('EmailAddress', true, array('domain' => false));
+        $element->addValidator('Db_RecordExists', true, array('users','email'));
         $element->addDecorator(new Core_Form_Decorator_TwitterInput());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(1);

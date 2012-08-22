@@ -13,7 +13,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      * @param string $password
      * @return bool
      */
-    public function authenticate($login, $password)
+    public function authenticate($email, $password, $remember = false)
     {
         $authAdapter = new Core_Auth_Adapter_DbTable();
         $authAdapter->setTableName('users')
@@ -22,7 +22,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
                     ->setCredentialTreatment('MD5(CONCAT(salt, ?)) AND status = "' .
                         User_Model_Users::STATUS_ENABLE . '"');
 
-        $authAdapter->setIdentity($login)
+        $authAdapter->setIdentity($email)
                     ->setCredential($password);
 
         $auth = Zend_Auth::getInstance();
@@ -33,7 +33,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
             $data = $authAdapter->getResultRowObject(null, array('password','salt','hash'));
             $auth->getStorage()->write($data);
 
-            if (isset($request['rememberme'])) {
+            if ($remember === true) {
                 Zend_Session::rememberMe(60*60*24*14);
             }
 
