@@ -52,34 +52,10 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
      */
     protected function _initNavigation() 
     {
-//        $config = $this->_getConfig();
-//        if (!empty($config)) {
-//            $container = new Zend_Navigation($config);
+        $config = $this->_getConfig();
 
-            $container = new Zend_Navigation(
-                array(
-                    array(
-                        'label'  => 'Home',
-                        'action'     => 'index',
-                        'controller' => 'index',
-                        'module'     => 'default',
-                        'pages' => array(
-                            array(
-                                'label'  => 'Login',
-                                'action'     => 'login',
-                                'controller' => 'authentication',
-                                'module'     => 'user',
-                            ),
-                            array(
-                                'label'  => 'Registration',
-                                'action'     => 'index',
-                                'controller' => 'registration',
-                                'module'     => 'user',
-                            )
-                        )
-                    )
-                )
-            );
+        if (!empty($config)) {
+            $container = new Zend_Navigation($config);
             
             Zend_Layout::getMvcInstance()->getView()->navigation($container);
 
@@ -95,7 +71,7 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
                                              ->setRole($role)
                                              ->setTranslator($translator);
             }
-//        }
+        }
     }
     
     /**

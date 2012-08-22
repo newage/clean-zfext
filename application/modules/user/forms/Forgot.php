@@ -21,18 +21,20 @@ class User_Form_Forgot extends Core_Form
              ->setDescription('Forgot login and password?');
 
         //create login field
-        $email = new Zend_Form_Element_Text('email');
-        $email->setRequired(true);
-        $email->setLabel('E-mail');
-        $email->addValidator('EmailAddress', true);
-        $email->setOrder(1);
+        $element = new Zend_Form_Element_Text('email');
+        $element->setRequired(true);
+        $element->setLabel('E-mail');
+        $element->addValidator('EmailAddress', true);
+        $element->addDecorator(new Core_Form_Decorator_TwitterInput());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(1);
+        $this->addElement($element);
 
         //create submit button
-        $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Recall');
-        $submit->setOrder(2);
-
-        $this->addElement($email);
-        $this->addElement($submit);
+        $element = new Zend_Form_Element_Submit('submit');
+        $element->setLabel('Send email');
+        $element->setOrder(2);
+        $element->addDecorator(new Core_Form_Decorator_TwitterButton());
+        $this->addElement($element);
     }
 }

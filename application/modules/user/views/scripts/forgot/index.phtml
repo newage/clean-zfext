@@ -1,4 +1,13 @@
+<ul class="breadcrumb">
+    <?php echo $this->navigation()->breadcrumbs(); ?>
+</ul>
+<div class="hero-unit">
+    <h1><?php $this->_e('Remind password') ?></h1>
+    <hr/>
     <?php
         $this->form->setAction($this->url());
+        $this->form->setAttrib('class', 'form-horizontal');
+        $this->form->removeDecorator('HtmlTag');
         echo $this->form;
     ?>
+</div>

@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
-    <?php echo $this->navigation()->breadcrumbs()->render(); ?>
+    <?php echo $this->navigation()->breadcrumbs(); ?>
 </ul>
 <div class="hero-unit">
     <h1><?php $this->_e('Sign In') ?></h1>
@@ -9,5 +9,5 @@
     <?php $this->form->removeDecorator('HtmlTag') ?>
     <?php echo $this->form ?>
     <a href="/user/registration/index" class="btn btn-link">Registration</a>
-    <a href="/user/registration/index" class="btn btn-link">Forgotten password?</a>
+    <a href="/user/forgot/index" class="btn btn-link">Forgotten password?</a>
 </div>

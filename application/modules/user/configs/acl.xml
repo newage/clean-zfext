@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configdata>
     <production>
-<!--        <roles>
-             default role 
-            <guest/>
-            <user>
-                <guest/>
-            </user>
-            <admin>
-                <user/>
-            </admin>
-        </roles>-->
-
-        <!-- resources -->
-<!--        <resources>
-            <balalayka allow="admin" />
-        </resources>-->
-        
         <roles>
             <guest parent="guest" />
             <user parent="guest" />
         </roles>
+        
         <mvc>
             <user>
                 <index allow="guest" />
