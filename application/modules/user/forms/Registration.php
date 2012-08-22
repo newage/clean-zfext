@@ -27,7 +27,8 @@ class User_Form_Registration extends Core_Form
         $element->setLabel('E-mail');
         $element->addValidator('EmailAddress', true);
         $element->addValidator('Db_NoRecordExists', true, array('users','email'));
-        $element->addDecorator(new Core_Form_Decorator_TwitterInput);
+        $element->addDecorator(new Core_Form_Decorator_TwitterInput());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(1);
 
         $this->addElement($element);
@@ -38,7 +39,8 @@ class User_Form_Registration extends Core_Form
         $element->setLabel('Password');
         $element->addValidator('StringLength', false, array(6,30))
                  ->addValidator('Alnum', true, array(false));
-        $element->addDecorator(new Core_Form_Decorator_TwitterPassword);
+        $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(2);
 
         $this->addElement($element);
@@ -50,7 +52,8 @@ class User_Form_Registration extends Core_Form
         $element->addValidator('StringLength', false, array(6,30))
                     ->addValidator('Alnum', true, array(false))
                     ->addValidator(new Zend_Validate_Callback(array($this, 'comparePassword')));
-        $element->addDecorator(new Core_Form_Decorator_TwitterPassword);
+        $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(3);
 
         $this->addElement($element);
