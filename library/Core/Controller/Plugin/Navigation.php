@@ -59,24 +59,22 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
             $container = new Zend_Navigation(
                 array(
                     array(
-                        'label'  => 'Page 1',
-                        'action'     => 'read',
+                        'label'  => 'Home',
+                        'action'     => 'index',
                         'controller' => 'index',
                         'module'     => 'default',
                         'pages' => array(
                             array(
-                                'label'  => 'Page 2',
-                                'action'     => 'delete',
-                                'controller' => 'index',
-                                'module'     => 'default',
-                                'pages'      => array(
-                                    array(
-                                        'label'  => 'Page 3',
-                                        'action'     => 'index',
-                                        'controller' => 'index',
-                                        'module'     => 'default',
-                                    )
-                                )
+                                'label'  => 'Login',
+                                'action'     => 'login',
+                                'controller' => 'authentication',
+                                'module'     => 'user',
+                            ),
+                            array(
+                                'label'  => 'Registration',
+                                'action'     => 'index',
+                                'controller' => 'registration',
+                                'module'     => 'user',
                             )
                         )
                     )
