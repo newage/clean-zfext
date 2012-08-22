@@ -1,4 +1,8 @@
-<?php
-    $this->form->setAction($this->url());
-    echo $this->form;
-?>
+<div class="hero-unit">
+    <h1><?php $this->_e('Registration') ?></h1>
+    <hr/>
+    <?php $this->form->setAction($this->url()) ?>
+    <?php $this->form->setAttrib('class', 'form-horizontal') ?>
+    <?php $this->form->removeDecorator('HtmlTag') ?>
+    <?php echo $this->form ?>
+</div>

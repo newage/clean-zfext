@@ -10,7 +10,11 @@
  */
 class Core_Form_Decorator_TwitterButton extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<button type="submit" class="btn">%s</button>';
+    protected $_format = '<div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">%s</button>
+    </div>
+  </div>';
     
     public function render($content)
     {

@@ -10,7 +10,12 @@
  */
 class Core_Form_Decorator_TwitterPassword extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<input class="span2" id="%s" name="%s" type="password" placeholder="%s" value="%s"/>';
+    protected $_format = '<div class="control-group">
+        <label class="control-label" for="%s">%s</label>
+        <div class="controls">
+          <input type="password" id="%s" name="%s" value="%s">
+        </div>
+      </div>';
     
     public function render($content)
     {
@@ -20,7 +25,7 @@ class Core_Form_Decorator_TwitterPassword extends Zend_Form_Decorator_Abstract
         $id      = htmlentities($element->getId());
         $value   = htmlentities($element->getValue());
  
-        $markup  = sprintf($this->_format, $id, $name, $label, $value);
+        $markup  = sprintf($this->_format, $id, $label, $id, $name, $value);
         return $markup;
     }
 }
