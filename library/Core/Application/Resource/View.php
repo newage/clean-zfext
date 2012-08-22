@@ -64,6 +64,10 @@ class Core_Application_Resource_View extends Zend_Application_Resource_ResourceA
                 $this->_view->headTitle()->setSeparator($options['titleSeparator']);
             }
             
+            if (isset($options['title'])) {
+                $this->_view->projectTitle($options['title']);
+            }
+            
             $this->_view->assign('env', defined('APPLICATION_ENV') ? APPLICATION_ENV : '');
         }
         return $this->_view;

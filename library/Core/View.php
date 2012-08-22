@@ -9,6 +9,13 @@
  */
 class Core_View extends Zend_View
 {
+ 
+    /**
+     * Title project
+     * 
+     * @var string
+     */
+    protected $_projectTitle = null;
     
     /**
      * __
@@ -34,6 +41,20 @@ class Core_View extends Zend_View
         }
         
         echo $this->translate($messageid);
+    }
+    
+    /**
+     * Get project title
+     * 
+     * @return string
+     */
+    public function projectTitle()
+    {
+        if (func_num_args() == 1) {
+            $param = func_get_arg(0);
+            $this->_projectTitle = $param;
+        }
+        return $this->_projectTitle;
     }
 }
 
