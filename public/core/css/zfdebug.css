@@ -1,8 +1,8 @@
 #ZFDebug_debug {
 	font: 11px/1.4em Lucida Grande, Lucida Sans Unicode, sans-serif;
 	position:fixed;
-	bottom:5px;
-	left:5px;
+	bottom:4px;
+	left:1px;
 	color:#000;
 }
 #ZFDebug_debug ol {
@@ -23,6 +23,8 @@
 	border-right:0px;
 	background:#DFDFDF;
 	padding: 5px 5px;
+    margin-left: 0px !important;
+    float: none !important;
 }
 .ZFDebug_last {
 	border: 1px solid #999;
