@@ -27,10 +27,10 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
 
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session('Zend_Auth'));
-        $result = $auth->authenticate($authAdapter);
+        $result = $authAdapter->authenticate($authAdapter);
 
         if ($result->isValid() === true) {
-            $data = $authAdapter->getResultRowObject(null, array('password','salt','hash'));
+            $data = $authAdapter->getResultRowObject(null, array('password','salt','password_reset_hash'));
             $auth->getStorage()->write($data);
 
             if ($remember === true) {
