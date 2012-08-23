@@ -71,7 +71,11 @@
         <moduleDirectory moduleName="email">
           <apisDirectory enabled="false"/>
           <configsDirectory enabled="false"/>
-          <controllersDirectory/>
+          <controllersDirectory>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
@@ -83,7 +87,11 @@
             <modelFile modelName="EmailsTemplate"/>
           </modelsDirectory>
           <viewsDirectory>
-            <viewScriptsDirectory/>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
             <viewHelpersDirectory/>
             <viewFiltersDirectory/>
           </viewsDirectory>
@@ -135,6 +143,15 @@
         <testApplicationControllerDirectory>
           <testApplicationControllerFile/>
         </testApplicationControllerDirectory>
+        <testApplicationModulesDirectory>
+          <testApplicationModuleDirectory forModuleName="email">
+            <testApplicationControllerDirectory>
+              <testApplicationControllerFile forControllerName="Index">
+                <testApplicationActionMethod forActionName="index"/>
+              </testApplicationControllerFile>
+            </testApplicationControllerDirectory>
+          </testApplicationModuleDirectory>
+        </testApplicationModulesDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>
         <testLibraryBootstrapFile filesystemName="bootstrap.php"/>
