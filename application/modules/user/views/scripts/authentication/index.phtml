@@ -1,0 +1,13 @@
+<?php if ($this->identity === false) : ?>
+    <a href="/user/authentication/login" class="btn btn-primary pull-right">
+        <?php $this->_e('Sign In') ?>
+    </a>
+<?php else : ?>
+    <ul class="nav pull-right">
+        <li>
+            <a href="/user/authentication/logout">
+                <?php $this->_e('Logout') ?>
+            </a>
+        </li>
+    </ul>
+<?php endif; ?>

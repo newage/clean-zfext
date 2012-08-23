@@ -31,32 +31,5 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $container = new Zend_Navigation(
-            array(
-                array(
-                    'label'  => 'Page 1',
-                    'action'     => 'read',
-                    'controller' => 'index',
-                    'module'     => 'default',
-                    'pages' => array(
-                        array(
-                            'label'  => 'Page 2',
-                            'action'     => 'delete',
-                            'controller' => 'index',
-                            'module'     => 'default',
-                            'pages'      => array(
-                                array(
-                                    'label'  => 'Page 3',
-                                    'action'     => 'index',
-                                    'controller' => 'index',
-                                    'module'     => 'default',
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        );
-        $this->view->container = $container;
     }
 }

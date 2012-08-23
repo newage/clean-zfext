@@ -12,6 +12,7 @@
                 <authentication>
                     <login allow="guest" deny="user"/>
                     <logout allow="user" deny="guest"/>
+                    <index allow="guest,user" />
                 </authentication>
                 <registration>
                     <index allow="guest" deny="user"/>
