@@ -8,6 +8,7 @@
  *
  * @version  $Id: IndexController.php 101 2010-09-22 08:10:53Z vadim.leontiev $
  *
+ *
  */
 
 class IndexController extends Zend_Controller_Action
@@ -18,6 +19,7 @@ class IndexController extends Zend_Controller_Action
      * /url/format/json
      *
      *
+     *
      */
     public function init()
     {
@@ -26,12 +28,6 @@ class IndexController extends Zend_Controller_Action
             ->initContext();
     }
 
-    /**
-     * Intex action
-     * Generate login form
-     *
-     *
-     */
     public function indexAction()
     {
     }
@@ -41,6 +37,9 @@ class IndexController extends Zend_Controller_Action
         // action body
     }
 
-
+    public function dologinAction()
+    {
+        
+    }
 }
 

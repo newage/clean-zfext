@@ -44,22 +44,15 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
     );
     
     /**
-     * Login page
+     * Page for redirect after logined
      * @var array
      */
-    protected $_loginPage = array(
-        'module'     => 'parent',
-        'controller' => 'registration',
-        'action'     => 'index'  
+    protected $_doLogin = array(
+        'module'     => 'default',
+        'controller' => 'index',
+        'action'     => 'index'
     );
     
-    /**
-     * Url to redirect when user unlogined
-     *
-     * @var string
-     */
-    protected $_unLogined = '/';
-
     /**
      * default role name
      *
@@ -97,20 +90,16 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $this->_deniedPage = array_merge($this->_deniedPage, $options['denied']);
         }
         
-        if (isset($options['login'])) {
-            $this->_loginPage = array_merge($this->_loginPage, $options['login']);
-        }
-        
         if (isset($options['error'])) {
             $this->_errorPage = array_merge($this->_errorPage, $options['error']);
+        }
+        
+        if (isset($options['redirect'])) {
+            $this->_doLogin = array_merge($this->_doLogin, $options['redirect']);
         }
 
         if (isset($options['role'])) {
             $this->_roleName = $options['role'];
-        }
-
-        if (isset($options['unlogined'])) {
-        	$this->_unLogined = $options['unlogined'];
         }
 
         $this->_options = $options;
@@ -230,6 +219,13 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
     {
         $acl = $this->getAcl();
         $resource = $request->getModuleName() . '/' . $request->getControllerName();
+        $session = new Zend_Session_Namespace('Core_Request');
+        
+        if (!empty($session->params)) {
+            $params = $session->params;
+            $session->unsetAll();
+            $this->_setDispatched($params);
+        }
 
         /** Check resource */
         if (!$acl->has($resource)) {
@@ -245,16 +241,12 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         if ($acl->isAllowed($this->getRoleName(), $resource, $request->getActionName()) === true) {
             return true;
         } else {
-            /** Redirect to access denied page or login */
-            if (Zend_Auth::getInstance()->hasIdentity()) {
-                $this->_denyAccess();
-            } else {
+            if (Zend_Auth::getInstance()->hasIdentity() === false) {
                 /** Save request to session */
-                $session = new Zend_Session_Namespace('Core_Request');
                 $session->params = $this->_request->getParams();
-            
-                $this->_toLogin();
             }
+            
+            $this->_denyAccess();
         }
     }
     
@@ -278,15 +270,6 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
     protected function _denyAccess()
     {
         $this->_setDispatched($this->_deniedPage);
-    }
-
-    /**
-     * Allow Access function
-     * 
-     */
-    protected function _toLogin()
-    {
-        $this->_setDispatched($this->_loginPage);
     }
 
     /**

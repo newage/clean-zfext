@@ -3,7 +3,11 @@
     <production>
         <mvc>
             <default>
-                <index allow="guest" />
+                <index>
+                    <index allow="guest" />
+                    <about allow="guest" />
+                    <dologin allow="user" />
+                </index> 
                 <error allow="guest" />
             </default>
         </mvc>

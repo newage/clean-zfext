@@ -48,17 +48,6 @@ class ErrorController extends Zend_Controller_Action
     {
         $this->view->headTitle('Access denied');
 
-        $session = new Zend_Session_Namespace('Zend_Request');
-
-        if (!empty($session->params) && Zend_Auth::getInstance()->hasIdentity()) {
-            $this->view->deny = $session->params['module'] . '/' .
-                    $session->params['controller'] . '/' .
-                    $session->params['action'];
-            $session->params = null;
-        } else {
-            $this->view->deny = $this->getRequest()->getParam('module') . '/' .
-                    $this->getRequest()->getParam('controller') . '/' .
-                    $this->getRequest()->getParam('action');
-        }
+        $this->view->identity = Zend_Auth::getInstance()->hasIdentity();
     }
 }

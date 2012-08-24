@@ -54,6 +54,9 @@
               <viewControllerScriptsDirectory forControllerName="Index">
                 <viewScriptFile forActionName="about"/>
               </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="dologin"/>
+              </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
             <viewFiltersDirectory/>
