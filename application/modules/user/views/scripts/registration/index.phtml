@@ -4,8 +4,7 @@
 <div class="hero-unit">
     <h1><?php $this->_e('Registration') ?></h1>
     <hr/>
-    <?php $this->form->setAction($this->url()) ?>
+    <?php $this->form->setAction($this->url(array('module'=>'user','controller'=>'registration','action'=>'index'))) ?>
     <?php $this->form->setAttrib('class', 'form-horizontal') ?>
-    <?php $this->form->removeDecorator('HtmlTag') ?>
     <?php echo $this->form ?>
 </div>

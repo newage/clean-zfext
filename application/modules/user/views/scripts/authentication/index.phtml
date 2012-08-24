@@ -1,13 +1,24 @@
 <?php if ($this->identity === false) : ?>
-    <a href="/user/authentication/login" class="btn btn-primary pull-right">
-        <?php $this->_e('Sign In') ?>
-    </a>
+    <?php echo $this->link(
+        array(
+            'module' => 'user',
+            'controller' => 'authentication',
+            'action' => 'login'
+        ),
+        $this->__('Sign In'),
+        array('class' => 'btn btn-primary pull-right')
+    ) ?>
 <?php else : ?>
     <ul class="nav pull-right">
         <li>
-            <a href="/user/authentication/logout">
-                <?php $this->_e('Logout') ?>
-            </a>
+            <?php echo $this->link(
+                array(
+                    'module'=>'user',
+                    'controller'=>'authentication',
+                    'action'=> 'logout'
+                ),
+                $this->__('Logout')
+            ) ?>
         </li>
     </ul>
 <?php endif; ?>
