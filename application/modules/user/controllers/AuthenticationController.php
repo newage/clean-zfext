@@ -23,6 +23,10 @@ class User_AuthenticationController extends Zend_Controller_Action
      */
     public function indexAction()
     {
+//        $this->view->headScript()->appendScript('$(".dropdown-toggle").dropdown()');
+        
+        $auth = Zend_Auth::getInstance();
+        $this->view->identity = $auth->hasIdentity();
     }
 
     /**

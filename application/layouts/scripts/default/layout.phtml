@@ -11,9 +11,7 @@
           </a>
           <a class="brand" href="/"><?php print strip_tags($this->projectTitle()) ?></a>
           <div class="nav-collapse collapse">
-            <?php //echo $this->navigation()->menu()->setUlClass('nav')->setMinDepth(0)->setMaxDepth(0); ?>
-            
-            <a href="/user/authentication/login" class="btn btn-primary pull-right">Sign In</a>
+            <?php echo $this->action('index','authentication','user'); ?>
           </div>
         </div>
       </div>
