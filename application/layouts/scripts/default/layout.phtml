@@ -11,6 +11,8 @@
           </a>
           <a class="brand" href="/"><?php print strip_tags($this->projectTitle()) ?></a>
           <div class="nav-collapse collapse">
+            <?php $homeMenu = $this->navigation()->findOneByLabel('Home'); ?>
+            <?php echo $this->navigation()->menu()->setMinDepth(0)->setMaxDepth(0)->renderMenu($homeMenu, array('ulClass'=>'nav')); ?>
             <?php echo $this->action('index','authentication','user'); ?>
           </div>
         </div>

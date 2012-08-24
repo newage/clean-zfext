@@ -50,7 +50,11 @@
           <layoutsDirectory enabled="false"/>
           <modelsDirectory/>
           <viewsDirectory>
-            <viewScriptsDirectory/>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="about"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
             <viewHelpersDirectory/>
             <viewFiltersDirectory/>
           </viewsDirectory>

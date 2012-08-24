@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configdata>
     <production>
-        <default>
+        <user>
+            <label>Index</label>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>default/index</resource>
+            <privilege>index</privilege>
             <pages>
                 <login>
                     <label>Login</label>
@@ -38,6 +44,6 @@
                     <privilege>logout</privilege>
                 </logout>
             </pages>
-        </default>
+        </user>
     </production>
 </configdata>
