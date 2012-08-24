@@ -39,7 +39,7 @@ msgstr "Подтвердить пароль"
 #: application/modules/user/forms/Registration.php:27
 #: application/modules/user/forms/Restore.php:28
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: application/modules/user/forms/Users.php:63
 #: application/modules/user/forms/Registration.php:62
@@ -56,7 +56,7 @@ msgstr "Отправить email"
 
 #: application/modules/user/forms/Authentication.php:26
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: application/modules/user/forms/Authentication.php:49
 msgid "Sign In"
@@ -118,7 +118,7 @@ msgstr "Ваш пароль успешно обновлен"
 
 #: application/modules/user/controllers/AuthenticationController.php:45
 msgid "Successful Login"
-msgstr ""
+msgstr "Успешный вход"
 
 #: application/modules/user/controllers/AuthenticationController.php:48
 msgid "Not correct login or password! Or not active account"

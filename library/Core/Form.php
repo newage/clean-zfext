@@ -20,6 +20,8 @@ class Core_Form extends Zend_Form
     {
         parent::__construct($options);
         
+        $this->removeDecorator('HtmlTag');
+        
         $this->addDecorator(new Core_Form_Decorator_TwitterFormErrors(array(
             'placement' => Zend_Form_Decorator_Abstract::PREPEND)));
         

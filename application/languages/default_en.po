@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendExt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-09 16:34+0300\n"
+"POT-Creation-Date: 2012-08-24 14:05+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: vadim <vadim.leontiev@gmail.com>\n"
+"Last-Translator: V.Leontiev\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -13,98 +13,156 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: Ukraine\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-KeywordsList: _;__;_e;translate;setLabel;setValue;setMessage;setLegend\n"
-"X-Poedit-SearchPath-0: /var/www/zend/application/modules\n"
+"X-Poedit-Basepath: /var/www/clean-zfext\n"
+"X-Poedit-KeywordsList: _;__;_e;translate;setLabel;setValue;setMessage;setLegend;label;addError;FlashMessenger\n"
+"X-Poedit-SearchPath-0: application/modules\n"
+"X-Poedit-SearchPath-1: application/layouts\n"
+"X-Poedit-SearchPath-2: library\n"
 
-#: /var/www/zend/application/modules/user/controllers/ForgotController.php:27
-msgid "Forgot password?"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/controllers/ForgotController.php:48
-msgid "Update user password"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:27
-msgid "Login *"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:34
-msgid "Password *"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:41
-msgid "Role_id *"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:47
-msgid "Hash"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:54
-msgid "Email *"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:60
-msgid "Disable"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:67
-msgid "Created_at *"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:74
-msgid "Updated_at *"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:80
-msgid "Create"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Users.php:92
-msgid "Update"
-msgstr ""
-
-#: /var/www/zend/application/modules/user/forms/Registration.php:26
-#: /var/www/zend/application/modules/user/forms/Authentication.php:26
+#: application/modules/user/forms/Users.php:26
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
-#: /var/www/zend/application/modules/user/forms/Registration.php:36
-#: /var/www/zend/application/modules/user/forms/Authentication.php:37
+#: application/modules/user/forms/Users.php:36
+#: application/modules/user/forms/Authentication.php:38
+#: application/modules/user/forms/Registration.php:39
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
-#: /var/www/zend/application/modules/user/forms/Registration.php:45
+#: application/modules/user/forms/Users.php:45
+#: application/modules/user/forms/Registration.php:51
 msgid "Confirm Password"
-msgstr ""
+msgstr "Confirm Password"
 
-#: /var/www/zend/application/modules/user/forms/Registration.php:55
-#: /var/www/zend/application/modules/user/forms/Forgot.php:26
+#: application/modules/user/forms/Users.php:55
+#: application/modules/user/forms/Forgot.php:26
+#: application/modules/user/forms/Registration.php:27
+#: application/modules/user/forms/Restore.php:28
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
-#: /var/www/zend/application/modules/user/forms/Registration.php:63
+#: application/modules/user/forms/Users.php:63
+#: application/modules/user/forms/Registration.php:62
 msgid "Registration"
-msgstr ""
+msgstr "Registration"
 
-#: /var/www/zend/application/modules/user/forms/Forgot.php:32
+#: application/modules/user/forms/Users.php:91
+msgid "Update"
+msgstr "Update"
+
+#: application/modules/user/forms/Forgot.php:36
+msgid "Send email"
+msgstr "Send email"
+
+#: application/modules/user/forms/Authentication.php:26
+msgid "Email"
+msgstr "Email"
+
+#: application/modules/user/forms/Authentication.php:49
+msgid "Sign In"
+msgstr "Sign In"
+
+#: application/modules/user/forms/Restore.php:34
 msgid "Recall"
-msgstr ""
+msgstr "Recall"
 
-#: /var/www/zend/application/modules/user/forms/Authentication.php:47
-msgid "Log In"
-msgstr ""
+#: application/modules/user/controllers/UsersController.php:28
+#: application/modules/user/controllers/RegistrationController.php:36
+msgid "Registration successful"
+msgstr "Registration successful"
 
-#: /var/www/zend/application/modules/default/forms/Search.php:21
+#: application/modules/user/controllers/UsersController.php:31
+#: application/modules/user/controllers/RegistrationController.php:39
+msgid "Registration failed!"
+msgstr "Registration failed!"
+
+#: application/modules/user/controllers/UsersController.php:49
+#: application/modules/user/controllers/UsersController.php:72
+msgid "Disable user account"
+msgstr "Disable user account"
+
+#: application/modules/user/controllers/UsersController.php:51
+#: application/modules/user/controllers/UsersController.php:74
+msgid "Error disabled account"
+msgstr "Error disabled account"
+
+#: application/modules/user/controllers/UsersController.php:54
+#: application/modules/user/controllers/UsersController.php:77
+#: application/modules/user/controllers/UsersController.php:109
+msgid "Error validate"
+msgstr "Error validate"
+
+#: application/modules/user/controllers/UsersController.php:100
+msgid "Update user account success"
+msgstr "Update user account success"
+
+#: application/modules/user/controllers/UsersController.php:103
+msgid "Error"
+msgstr "Error"
+
+#: application/modules/user/controllers/ForgotController.php:27
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+#: application/modules/user/controllers/ForgotController.php:34
+msgid "You will be sent email with instructions"
+msgstr "You will be sent email with instructions"
+
+#: application/modules/user/controllers/ForgotController.php:48
+msgid "Update user password"
+msgstr "Update user password"
+
+#: application/modules/user/controllers/ForgotController.php:55
+msgid "You password update successful"
+msgstr "You password update successful"
+
+#: application/modules/user/controllers/AuthenticationController.php:45
+msgid "Successful Login"
+msgstr "Successful Login"
+
+#: application/modules/user/controllers/AuthenticationController.php:48
+msgid "Not correct login or password! Or not active account"
+msgstr "Not correct login or password! Or not active account"
+
+#: application/modules/default/forms/Search.php:21
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
-#: /var/www/zend/application/modules/user/views/scripts/authentication/login.phtml:11
-msgid "Forgot Login or Password?"
-msgstr ""
+#: library/Core/Form/Decorator/TwitterFormErrors.php:52
+msgid "Form Error"
+msgstr "Form Error"
 
-#: /var/www/zend/application/modules/default/views/scripts/index/index.phtml:1
-msgid "message"
-msgstr ""
+#: application/modules/user/views/scripts/authentication/index.phtml:20
+msgid "Logout"
+msgstr "Logout"
+
+#: application/modules/user/views/scripts/authentication/login.phtml:27
+msgid "Forgotten password?"
+msgstr "Forgotten password?"
+
+#: application/modules/user/views/scripts/forgot/index.phtml:5
+msgid "Remind password"
+msgstr "Remind password"
+
+#: application/modules/default/views/scripts/error/deniedmvc.phtml:1
+msgid "Access denied for request the mvc resource"
+msgstr "Access denied for request the mvc resource"
+
+#: application/layouts/scripts/administrator/layout.phtml:8
+msgid "TITLE"
+msgstr "TITLE"
+
+#: application/layouts/scripts/default/partial/paginator.phtml:13
+#: application/layouts/scripts/default/partial/paginator.phtml:16
+msgid "Previous"
+msgstr "Previous"
+
+#: application/layouts/scripts/default/partial/paginator.phtml:80
+#: application/layouts/scripts/default/partial/paginator.phtml:82
+msgid "Next"
+msgstr "Next"
+
+#: application/layouts/scripts/default/partial/footer.phtml:3
+msgid "Back to top"
+msgstr "Back to top"
 

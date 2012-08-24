@@ -129,9 +129,7 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         $this->_options['locale'] = $locale;
         
         if ($this->_options['logUntranslated']) {
-            $db = Zend_Db_Table::getDefaultAdapter();
-
-            $writer = new Zend_Log_Writer_Db($db, $this->_options['logTable']);
+            $writer = new Zend_Log_Writer_Stream($this->_options['logPath']);
 
             $this->_options['log'] = new Zend_Log($writer);
             $this->_options['log']->setTimestampFormat('Y-m-d H:i:s');
