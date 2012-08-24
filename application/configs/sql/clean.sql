@@ -18,11 +18,11 @@
 --
 
 CREATE TABLE  `sessions` (
-  `id` varchar(32) NOT NULL,
+  `session_id` varchar(32) NOT NULL,
   `modified` int(11) NOT NULL,
   `lifetime` int(11) NOT NULL,
   `data` mediumtext,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Db table to hold user session data';
 
 --
