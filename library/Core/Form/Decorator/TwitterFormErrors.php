@@ -49,7 +49,7 @@ class Core_Form_Decorator_TwitterFormErrors extends Zend_Form_Decorator_Abstract
     private function addErrorToContent($error)
     {
         $translate = $this->getElement()->getDefaultTranslator();
-        $strongMessage = $translate->translate('Error');
+        $strongMessage = $translate->translate('Form Error');
         $error = $translate->translate($error);
         return '<div class="alert alert-error"><strong>' . $strongMessage . ':</strong> ' . $error . '</div>';
     }

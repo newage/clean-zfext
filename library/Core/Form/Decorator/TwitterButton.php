@@ -19,7 +19,7 @@ class Core_Form_Decorator_TwitterButton extends Zend_Form_Decorator_Abstract
     public function render($content)
     {
         $element = $this->getElement();
-        $label   = htmlentities($element->getLabel());
+        $label   = $element->getLabel();
  
         $markup  = sprintf($this->_format, $label);
         return $markup;

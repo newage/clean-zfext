@@ -21,9 +21,9 @@ class Core_Form_Decorator_TwitterPassword extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         $name    = htmlentities($element->getFullyQualifiedName());
-        $label   = htmlentities($element->getLabel());
+        $label   = $element->getLabel();
         $id      = htmlentities($element->getId());
-        $value   = htmlentities($element->getValue());
+        $value   = $element->getValue();
  
         $markup  = sprintf($this->_format, $id, $label, $id, $name, $value);
         return $markup;

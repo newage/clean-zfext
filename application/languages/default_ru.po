@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendExt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-02 18:29+0300\n"
+"POT-Creation-Date: 2012-08-24 11:42+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: vadim <vadim.leontiev@gmail.com>\n"
+"Last-Translator: V.Leontiev\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -13,35 +13,66 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: Ukraine\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: /var/www/zend\n"
+"X-Poedit-Basepath: /var/www/clean-zfext\n"
 "X-Poedit-KeywordsList: _;__;_e;translate;setLabel;setValue;setMessage;setLegend;label;addError;FlashMessenger\n"
 "X-Poedit-SearchPath-0: application/modules\n"
 "X-Poedit-SearchPath-1: application/layouts\n"
 "X-Poedit-SearchPath-2: library\n"
 
-#: application/modules/user/controllers/ForgotController.php:27
-msgid "Forgot password?"
-msgstr "Забыли пароль?"
+#: application/modules/user/forms/Users.php:26
+msgid "Login"
+msgstr "Логин"
 
-#: application/modules/user/controllers/ForgotController.php:34
-msgid "You will be sent email with instructions"
-msgstr "На ваш почтовый ящик отправлено сообщение с инструкциями"
+#: application/modules/user/forms/Users.php:36
+#: application/modules/user/forms/Authentication.php:38
+#: application/modules/user/forms/Registration.php:39
+msgid "Password"
+msgstr "Пароль"
 
-#: application/modules/user/controllers/ForgotController.php:48
-msgid "Update user password"
-msgstr "Изменить пароль пользователя"
+#: application/modules/user/forms/Users.php:45
+#: application/modules/user/forms/Registration.php:51
+msgid "Confirm Password"
+msgstr "Подтвердить пароль"
 
-#: application/modules/user/controllers/ForgotController.php:55
-msgid "You password update successful"
-msgstr "Ваш пароль успешно обновлен"
+#: application/modules/user/forms/Users.php:55
+#: application/modules/user/forms/Forgot.php:26
+#: application/modules/user/forms/Registration.php:27
+#: application/modules/user/forms/Restore.php:28
+msgid "E-mail"
+msgstr ""
 
-#: application/modules/user/controllers/RegistrationController.php:35
+#: application/modules/user/forms/Users.php:63
+#: application/modules/user/forms/Registration.php:62
+msgid "Registration"
+msgstr "Регистрация"
+
+#: application/modules/user/forms/Users.php:91
+msgid "Update"
+msgstr "Обновить"
+
+#: application/modules/user/forms/Forgot.php:36
+msgid "Send email"
+msgstr ""
+
+#: application/modules/user/forms/Authentication.php:26
+msgid "Email"
+msgstr ""
+
+#: application/modules/user/forms/Authentication.php:49
+msgid "Sign In"
+msgstr "Вход"
+
+#: application/modules/user/forms/Restore.php:34
+msgid "Recall"
+msgstr "Напомнить"
+
 #: application/modules/user/controllers/UsersController.php:28
+#: application/modules/user/controllers/RegistrationController.php:36
 msgid "Registration successful"
 msgstr "Регистрация успешна!"
 
-#: application/modules/user/controllers/RegistrationController.php:38
 #: application/modules/user/controllers/UsersController.php:31
+#: application/modules/user/controllers/RegistrationController.php:39
 msgid "Registration failed!"
 msgstr "Регистрация не удалась!"
 
@@ -69,69 +100,51 @@ msgstr "Данные пользователя обновлены"
 msgid "Error"
 msgstr "Ошибка"
 
-#: application/modules/user/controllers/AuthenticationController.php:41
+#: application/modules/user/controllers/ForgotController.php:27
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: application/modules/user/controllers/ForgotController.php:34
+msgid "You will be sent email with instructions"
+msgstr "На ваш почтовый ящик отправлено сообщение с инструкциями"
+
+#: application/modules/user/controllers/ForgotController.php:48
+msgid "Update user password"
+msgstr "Изменить пароль пользователя"
+
+#: application/modules/user/controllers/ForgotController.php:55
+msgid "You password update successful"
+msgstr "Ваш пароль успешно обновлен"
+
+#: application/modules/user/controllers/AuthenticationController.php:45
 msgid "Successful Login"
 msgstr ""
 
-#: application/modules/user/controllers/AuthenticationController.php:44
+#: application/modules/user/controllers/AuthenticationController.php:48
 msgid "Not correct login or password! Or not active account"
 msgstr "Не правильный логин или пароль! Или аккаунт не активирован"
-
-#: application/modules/user/forms/Users.php:26
-#: application/modules/user/forms/Registration.php:26
-#: application/modules/user/forms/Authentication.php:26
-msgid "Login"
-msgstr "Логин"
-
-#: application/modules/user/forms/Users.php:36
-#: application/modules/user/forms/Registration.php:36
-#: application/modules/user/forms/Authentication.php:37
-msgid "Password"
-msgstr "Пароль"
-
-#: application/modules/user/forms/Users.php:45
-#: application/modules/user/forms/Registration.php:45
-msgid "Confirm Password"
-msgstr "Подтвердить пароль"
-
-#: application/modules/user/forms/Users.php:55
-#: application/modules/user/forms/Registration.php:55
-#: application/modules/user/forms/Restore.php:28
-#: application/modules/user/forms/Forgot.php:26
-msgid "E-mail"
-msgstr ""
-
-#: application/modules/user/forms/Users.php:63
-#: application/modules/user/forms/Registration.php:63
-msgid "Registration"
-msgstr "Регистрация"
-
-#: application/modules/user/forms/Users.php:91
-msgid "Update"
-msgstr "Обновить"
-
-#: application/modules/user/forms/Restore.php:34
-#: application/modules/user/forms/Forgot.php:32
-msgid "Recall"
-msgstr "Напомнить"
-
-#: application/modules/user/forms/Authentication.php:47
-msgid "Log In"
-msgstr "Вход"
 
 #: application/modules/default/forms/Search.php:21
 msgid "Search"
 msgstr "Поиск"
 
-#: application/modules/user/views/scripts/authentication/login.phtml:15
-msgid "Forgot Password?"
+#: application/modules/user/views/scripts/authentication/index.phtml:9
+msgid "Logout"
+msgstr "Выход"
+
+#: application/modules/user/views/scripts/authentication/login.phtml:12
+msgid "Forgotten password?"
 msgstr "Забыли пароль?"
+
+#: application/modules/user/views/scripts/forgot/index.phtml:5
+msgid "Remind password"
+msgstr "Напомнить пароль"
 
 #: application/modules/default/views/scripts/error/deniedmvc.phtml:1
 msgid "Access denied for request the mvc resource"
 msgstr "Доступ к этому ресурсу запрещен"
 
-#: application/layouts/scripts/default/layout.phtml:8
+#: application/layouts/scripts/administrator/layout.phtml:8
 msgid "TITLE"
 msgstr "ПРОЕКТ"
 
@@ -145,26 +158,27 @@ msgstr "Обратно"
 msgid "Next"
 msgstr "Далее"
 
-#: application/modules/user/configs/navigation.xml:22
-msgid "Forgot"
-msgstr ""
+#: application/layouts/scripts/default/partial/footer.phtml:3
+msgid "Back to top"
+msgstr "Вверх"
 
-#: application/modules/user/configs/navigation.xml:33
-msgid "Logout"
-msgstr "Выход"
+#~ msgid "Log In"
+#~ msgstr "Вход"
 
-#: application/modules/administrator/configs/navigation.xml:5
-msgid "Admin"
-msgstr "Администратор"
+#~ msgid "Forgot Password?"
+#~ msgstr "Забыли пароль?"
 
-#: application/modules/administrator/configs/navigation.xml:14
-msgid "Users"
-msgstr "Пользователь"
+#~ msgid "Admin"
+#~ msgstr "Администратор"
+
+#~ msgid "Users"
+#~ msgstr "Пользователь"
 
 #~ msgid "Form Error"
 #~ msgstr "Ошибка Формы"
+
 #~ msgid "Hash"
 #~ msgstr "Хеш"
+
 #~ msgid "Create"
 #~ msgstr "Создать"
-

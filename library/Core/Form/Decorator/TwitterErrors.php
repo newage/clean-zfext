@@ -32,7 +32,7 @@ class Core_Form_Decorator_TwitterErrors extends Zend_Form_Decorator_Abstract
 
         $append = '';
         foreach ($errors as $error) {
-            $append .= $this->addErrorToContent($error, $element->getLabel()) . PHP_EOL;
+            $append .= $this->addErrorToContent($error) . PHP_EOL;
         }
 
         $separator = $this->getSeparator();
@@ -50,12 +50,8 @@ class Core_Form_Decorator_TwitterErrors extends Zend_Form_Decorator_Abstract
         return $content;
     }
 
-    private function addErrorToContent($error, $errorName)
+    private function addErrorToContent($error)
     {
-        if (empty($errorName)) {
-            $translator = $this->getElement()->getTranslator();
-            $errorName = $translator->translate('Error');
-        }
         return '<div class="alert alert-error">'.$error.'</div>';
     }
 }
