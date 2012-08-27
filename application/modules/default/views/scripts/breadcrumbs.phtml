@@ -1,0 +1,20 @@
+<?php
+    $func = function($a) {
+        if ($a->isActive() === true) {
+            $active = 'class="active"';
+            $href = $a->getLabel();
+            $divider = '';
+        } else {
+            $active = '';
+            $href = '<a href="'.$a->getHref().'">' . $a->getLabel() . '</a>';
+            $divider = ' <span class="divider">/</span>';
+        }
+        return '<li '.$active.'>'.$href.$divider.'</li>';
+    }
+?>
+
+<ul class="breadcrumb">
+  <?php echo implode(' ', array_map(
+        $func,
+        $this->pages)); ?>
+</ul>

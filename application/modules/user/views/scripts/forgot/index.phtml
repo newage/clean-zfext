@@ -1,6 +1,5 @@
-<ul class="breadcrumb">
-    <?php echo $this->navigation()->breadcrumbs(); ?>
-</ul>
+<?php echo $this->navigation()->breadcrumbs()->setPartial(array('breadcrumbs.phtml', 'default')); ?>
+
 <div class="hero-unit">
     <h1><?php $this->_e('Remind password') ?></h1>
     <hr/>
