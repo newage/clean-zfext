@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Errors elemetn message it Twitter Bootstrap
+ * Errors elemetn message use twitter bootstrap framework
  *
  * @category Core
  * @package Core_Form_Decorator

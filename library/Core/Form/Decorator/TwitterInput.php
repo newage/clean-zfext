@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of TwitterInput
+ * Create text field use twitter bootstrap framework
  *
  * @category Core
  * @package Core_Form_Decorator
- * @subpackage SimpleInput
+ * @subpackage TwitterInput
  * @author V.Leontiev
  */
 class Core_Form_Decorator_TwitterInput extends Zend_Form_Decorator_Abstract
@@ -24,7 +24,7 @@ class Core_Form_Decorator_TwitterInput extends Zend_Form_Decorator_Abstract
         $label   = $element->getLabel();
         $id      = htmlentities($element->getId());
         $value   = $element->getValue();
- 
+        
         $markup  = sprintf($this->_format, $id, $label, $id, $name, $value);
         return $markup;
     }

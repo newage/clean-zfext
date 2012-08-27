@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Errors for form used twitter bootstrap
+ * Errors for form use twitter bootstrap framework
  *
  * @category Core
  * @package Core_Form_Decorator

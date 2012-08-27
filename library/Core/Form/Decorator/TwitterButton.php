@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of TwitterButton
+ * Create button use twitter bootstrap framework
  *
  * @category Core
  * @package Core_Form_Decorator
- * @subpackage SimpleInput
+ * @subpackage TwitterButton
  * @author V.Leontiev
  */
 class Core_Form_Decorator_TwitterButton extends Zend_Form_Decorator_Abstract

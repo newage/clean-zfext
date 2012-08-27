@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of TwitterPassword
+ * Create password field use twitter bootstrap framework
  *
  * @category Core
  * @package Core_Form_Decorator
- * @subpackage SimpleInput
+ * @subpackage TwitterPassword
  * @author V.Leontiev
  */
 class Core_Form_Decorator_TwitterPassword extends Zend_Form_Decorator_Abstract
