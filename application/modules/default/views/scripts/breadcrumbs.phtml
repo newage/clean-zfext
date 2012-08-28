@@ -6,7 +6,7 @@
             $divider = '';
         } else {
             $active = '';
-            $href = '<a href="'.$a->getHref().'">' . $a->getLabel() . '</a>';
+            $href = '<a href="'.$a->getHref().'">' . $this->__($a->getLabel()) . '</a>';
             $divider = ' <span class="divider">/</span>';
         }
         return '<li '.$active.'>'.$href.$divider.'</li>';
