@@ -89,9 +89,6 @@ class Core_CodeGenerator_DbModel extends Core_CodeGenerator_Abstract
               ->setExtendedClass('Core_Model_Mapper_Abstract')
               ->setDocblock($this->_generateDocBlock());
         
-//        $class->setMethod($this->_createMethod('get' . ucfirst($fieldName)));
-//        $class->setMethod($this->_createMethod('set' . ucfirst($fieldName)));
-        
         $this->_generateFile($class->generate(), $path);
     }
 }
