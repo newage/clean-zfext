@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendExt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-24 12:44+0300\n"
+"POT-Creation-Date: 2012-08-28 14:02+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: V.Leontiev\n"
 "Language-Team: \n"
@@ -25,12 +25,11 @@ msgstr "Логин"
 
 #: application/modules/user/forms/Users.php:36
 #: application/modules/user/forms/Authentication.php:38
-#: application/modules/user/forms/Registration.php:39
+#: application/modules/user/forms/Registration.php:40
 msgid "Password"
 msgstr "Пароль"
 
 #: application/modules/user/forms/Users.php:45
-#: application/modules/user/forms/Registration.php:51
 msgid "Confirm Password"
 msgstr "Подтвердить пароль"
 
@@ -42,7 +41,7 @@ msgid "E-mail"
 msgstr "E-mail"
 
 #: application/modules/user/forms/Users.php:63
-#: application/modules/user/forms/Registration.php:62
+#: application/modules/user/forms/Registration.php:63
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -61,6 +60,10 @@ msgstr "Email"
 #: application/modules/user/forms/Authentication.php:49
 msgid "Sign In"
 msgstr "Вход"
+
+#: application/modules/user/forms/Registration.php:51
+msgid "Repeat password"
+msgstr "Повторите пароль"
 
 #: application/modules/user/forms/Restore.php:34
 msgid "Recall"
@@ -128,25 +131,33 @@ msgstr "Не правильный логин или пароль! Или акк�
 msgid "Search"
 msgstr "Поиск"
 
-#: library/Core/Form/Decorator/TwitterFormErrors.php:52
-msgid "Form Error"
-msgstr "Ошибка Формы"
+#: library/Core/Form/Decorator/TwitterPopover.php:23
+msgid "Description"
+msgstr "Описание"
 
-#: application/modules/user/views/scripts/authentication/index.phtml:9
+#: application/modules/user/views/scripts/authentication/index.phtml:20
 msgid "Logout"
 msgstr "Выход"
 
-#: application/modules/user/views/scripts/authentication/login.phtml:12
+#: application/modules/user/views/scripts/authentication/login.phtml:26
 msgid "Forgotten password?"
 msgstr "Забыли пароль?"
 
-#: application/modules/user/views/scripts/forgot/index.phtml:5
+#: application/modules/user/views/scripts/forgot/index.phtml:4
 msgid "Remind password"
 msgstr "Напомнить пароль"
 
-#: application/modules/default/views/scripts/error/deniedmvc.phtml:1
-msgid "Access denied for request the mvc resource"
-msgstr "Доступ к этому ресурсу запрещен"
+#: application/modules/default/views/scripts/error/deniedmvc.phtml:3
+msgid "Access denied!"
+msgstr "Доступ запрещен!"
+
+#: application/modules/default/views/scripts/error/deniedmvc.phtml:5
+msgid "Access to this page is closed."
+msgstr "Доступ к этой странице закрыт."
+
+#: application/modules/default/views/scripts/error/deniedmvc.phtml:7
+msgid "To access this page you must logged."
+msgstr "Для доступа к этой странице необходимо залогиниться."
 
 #: application/layouts/scripts/administrator/layout.phtml:8
 msgid "TITLE"
@@ -165,6 +176,12 @@ msgstr "Далее"
 #: application/layouts/scripts/default/partial/footer.phtml:3
 msgid "Back to top"
 msgstr "Вверх"
+
+#~ msgid "Form Error"
+#~ msgstr "Ошибка Формы"
+
+#~ msgid "Access denied for request the mvc resource"
+#~ msgstr "Доступ к этому ресурсу запрещен"
 
 #~ msgid "Log In"
 #~ msgstr "Вход"
