@@ -221,7 +221,7 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         $resource = $request->getModuleName() . '/' . $request->getControllerName();
         $session = new Zend_Session_Namespace('Core_Request');
         
-        if (!empty($session->params)) {
+        if (!empty($session->params) && Zend_Auth::getInstance()->hasIdentity() !== false) {
             $params = $session->params;
             $session->unsetAll();
             $this->_setDispatched($params);
