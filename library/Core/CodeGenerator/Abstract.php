@@ -58,9 +58,18 @@ abstract class Core_CodeGenerator_Abstract
             array(
                 'longDescription' => 'Method description',
                 'tags'            => array(
-                    'return'      => '',
-                    'param'       => '',
-                    'author'      => ''
+                    array(
+                        'name'        => 'return',
+                        'description' => ''
+                    ),
+                    array(
+                        'name' => 'param',
+                        'description' => ''
+                    ),
+                    array(
+                        'name' =>'author',
+                        'description' => ''
+                    )
                 )
             )
         );
