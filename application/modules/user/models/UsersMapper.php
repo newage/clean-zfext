@@ -49,7 +49,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function update(array $request)
     {
-        $user = self::getInstance()->findOneById($request['id']);
+        $user = $this->getDbTable()->getById($request['id']);
 
         $user->login = $request['login'];
         $user->email = $request['email'];
@@ -66,7 +66,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function disable(array $request)
     {
-        $instance = self::getInstance()->findOneById($request['id']);
+        $instance = $this->getDbTable()->getById($request['id']);
 
         $user->status = User_Model_Users::STATUS_BLOCKED;
 
@@ -97,7 +97,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function register($request)
     {
-        $user = self::getDbTable()->createRow();
+        $user = $this->getDbTable()->createRow();
 
         $user->login = $request['login'];
         $user->email = $request['email'];
