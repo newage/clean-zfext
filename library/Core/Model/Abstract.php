@@ -2,10 +2,10 @@
 /**
  * Initialize set/get method in model
  *
- * @category   Core
- * @package    Core_Model
- *
- * @version  $Id: Abstract.php 103 2010-09-22 15:03:07Z vadim.leontiev $
+ * @category Core
+ * @package Core_Model
+ * @license New BSD
+ * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
 abstract class Core_Model_Abstract
 {
@@ -16,7 +16,10 @@ abstract class Core_Model_Abstract
      */
     public function __construct($options = null)
     {
-        $this->setDefault();
+        if (method_exists($this, 'setDefault')) {
+            $this->setDefault();
+        }
+        
         if (null != $options) {
             $this->setOptions($options);
         }
