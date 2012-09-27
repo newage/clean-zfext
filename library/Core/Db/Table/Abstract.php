@@ -18,7 +18,7 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
      *
      * @var string
      */
-    protected $_rowClass = 'Core_Model_Dto';
+    protected $_rowClass = 'Core_Db_Table_Row_Abstract';
     
     /**
      * Return Primary Key
