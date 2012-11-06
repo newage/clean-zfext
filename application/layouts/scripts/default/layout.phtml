@@ -1,6 +1,8 @@
 <?php echo $this->partial('default/partial/header.phtml') ?>
 
   <body>
+      
+      <div id="wrap">
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -21,6 +23,9 @@
 
     <div class="container">
       <?php echo $this->layout()->content ?>
+    </div>
+      
+    <div id="push"></div>
     </div>
       
     <?php echo $this->partial('default/partial/footer.phtml') ?>
