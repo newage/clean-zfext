@@ -1,148 +1,136 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<!-- http://jenkins-php.org/ -->
+<?xml version="1.0" encoding="UTF-8"?>
 
-<project name="ZendExt" basedir="." default="main">
-    <!-- Path to ZendFramework -->
-    <property name="zend.dir" value="/usr/local/lib/ZendFramework" />
-    <!-- Path to phing/etc -->
-    <property name="phpunit.styles.dir" value="/usr/share/php/data/phing/etc" />
-    
-    <property name="apidocs" value="docs/api" />
-    <property name="test.dir" value="tests" />
-    <property name="lib.dir" value="library/Core" />
-    <property name="app.dir" value="application" />
-    <property name="test.report.dir" value="data/tests/report" />
-    <property name="build.target" value="data/build/project.tar" />
-    <property name="coverage.report.dir" value="data/tests/coverage" />
-    <property name="logsdir" value="data/logs" />
-    <property name="reports" value="data/reports" />
+<project name="Clean ZFExt" default="build">
+ <target name="build"
+   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
 
-    <fileset dir="${app.dir}" id="app">
-        <include name="models/**"/>
-        <include name="modules/**/*.php" />
-        <include name="plugins/**" />
-        <include name="services/**" />
-    </fileset>
-    
-    <fileset dir="${lib.dir}" id="lib">
-        <include name="**/*.php"/>
-    </fileset>
+ <target name="build-parallel"
+   depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
 
-    <fileset dir="${test.dir}" id="test">
-        <include name="**/*Test.php" />
-    </fileset>
+ <target name="tools-parallel" description="Run tools in parallel">
+  <parallel threadCount="2">
+   <sequential>
+    <antcall target="pdepend"/>
+    <antcall target="phpmd-ci"/>
+   </sequential>
+   <antcall target="phpcpd"/>
+   <antcall target="phpcs-ci"/>
+   <antcall target="phploc"/>
+   <antcall target="phpdox"/>
+  </parallel>
+ </target>
 
-    <fileset dir="." id="build">
-         <include name="**/**" />
-         <exclude name="data/**" />
-         <exclude name="data/logs/**" />
-         <exclude name="data/session/**" />
-         <exclude name="data/build/**" />
-         <exclude name="data/tests/**" />
-         <exclude name="data/uploads/**" />
-         <exclude name="data/searchIndex/**" />
-         <exclude name="application/configs/*.development.ini" />
-    </fileset>
+ <target name="clean" description="Cleanup build artifacts">
+  <delete dir="${basedir}/build/api"/>
+  <delete dir="${basedir}/build/code-browser"/>
+  <delete dir="${basedir}/build/coverage"/>
+  <delete dir="${basedir}/build/logs"/>
+  <delete dir="${basedir}/build/pdepend"/>
+ </target>
 
-    <!-- ============================================  -->
-    <!-- (DEFAULT) Target: Main                        -->
-    <!-- ============================================  -->
-    <target name="main" depends="setup,tests,api">
-        <!-- Commit to SVN -->
-    </target>
+ <target name="prepare" depends="clean" description="Prepare for build">
+  <mkdir dir="${basedir}/build/api"/>
+  <mkdir dir="${basedir}/build/code-browser"/>
+  <mkdir dir="${basedir}/build/coverage"/>
+  <mkdir dir="${basedir}/build/logs"/>
+  <mkdir dir="${basedir}/build/pdepend"/>
+  <mkdir dir="${basedir}/build/phpdox"/>
+ </target>
 
-    <!-- ============================================  -->
-    <!-- Target: PHP CodeSniffer                       -->
-    <!-- ============================================  -->
-    <target name="phpcs">
-        <exec command="phpcs --standard=ZEND --report=checkstyle ${app.dir} > ${reports}/checkstyle.xml" escape="false" />
-    </target>
+ <target name="lint" description="Perform syntax check of sourcecode files">
+  <apply executable="php" failonerror="true">
+   <arg value="-l" />
 
-    <!-- ============================================  -->
-    <!-- Target: PHP dependency checker                       -->
-    <!-- ============================================  -->
-    <target name="depend">
-        <exec command="pdepend --bad-documentation --jdepend-xml=${reports}/jdepend.xml ${app.dir}" escape="false" />
-    </target>
+   <fileset dir="${basedir}/src">
+    <include name="**/*.php" />
+    <modified />
+   </fileset>
 
-    <!-- ============================================  -->
-    <!-- Target: Setup project                         -->
-    <!-- ============================================  -->
-    <target name="setup">
-        <chmod file="data/cache" mode="0777" />
-        <chmod file="data/uploads" mode="0777" />
-        <chmod file="data/logs" mode="0777" />
-        <mkdir dir="${apidocs}"/>
-        <mkdir dir="${reports}"/>
-        <chmod file="${apidocs}" mode="0777" />
-        <chmod file="${reports}" mode="0777" />
-    </target>
-    
-    <!-- ============================================  -->
-    <!-- Target: Generate API Doc                      -->
-    <!-- ============================================  -->
-    <target name="api">
-        <phpdoc title="API Documentation"
-            destdir="${apidocs}"
-            sourcecode="no"
-            output="HTML:frames:DOM/earthli">
-            <fileset refid="lib" />
-            <fileset refid="app" />
-        </phpdoc>
-    </target>
+   <fileset dir="${basedir}/tests">
+    <include name="**/*.php" />
+    <modified />
+   </fileset>
+  </apply>
+ </target>
 
-    <!-- ============================================  -->
-    <!-- Target: Create build file                     -->
-    <!-- ============================================  -->
-    <target name="build">
-        <tar destfile="${build.target}" compression="gzip">
-            <fileset refid="build" />
-        </tar>
-    </target>
+ <target name="phploc" description="Measure project size using PHPLOC">
+  <exec executable="phploc">
+   <arg value="--log-csv" />
+   <arg value="${basedir}/build/logs/phploc.csv" />
+   <arg path="${basedir}/src" />
+  </exec>
+ </target>
 
+ <target name="pdepend" description="Calculate software metrics using PHP_Depend">
+  <exec executable="pdepend">
+   <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+   <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+   <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+   <arg path="${basedir}/src" />
+  </exec>
+ </target>
 
-    <!-- ============================================  -->
-    <!-- Target: Start unit tests and generate report  -->
-    <!-- ============================================  -->
-    <target name="tests">
-        <!-- Create the report directories -->
-        <delete dir="${test.report.dir}"/>
-        <delete dir="${coverage.report.dir}"/>
-        
-        <mkdir dir="${test.report.dir}"/>
-        <mkdir dir="${coverage.report.dir}"/>
+ <target name="phpmd"
+         description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+  <exec executable="phpmd">
+   <arg path="${basedir}/src" />
+   <arg value="text" />
+   <arg value="${basedir}/build/phpmd.xml" />
+  </exec>
+ </target>
 
-        <coverage-setup database="${coverage.report.dir}/coverage.db">
-            <fileset refid="app" />
-            <fileset refid="lib" />
-        </coverage-setup>
+ <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+  <exec executable="phpmd">
+   <arg path="${basedir}/src" />
+   <arg value="xml" />
+   <arg value="${basedir}/build/phpmd.xml" />
+   <arg value="--reportfile" />
+   <arg value="${basedir}/build/logs/pmd.xml" />
+  </exec>
+ </target>
 
-        <adhoc>
-            <![CDATA[
-                set_include_path(
-                    '${zend.dir}/library' . PATH_SEPARATOR . get_include_path());
-                require_once "Zend/Loader.php";
-                Zend_Loader::registerAutoload();
-            ]]>
-        </adhoc>
+ <target name="phpcs"
+         description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+  <exec executable="phpcs">
+   <arg value="--standard=${basedir}/build/phpcs.xml" />
+   <arg path="${basedir}/src" />
+  </exec>
+ </target>
 
-        <!-- Run the tests -->
-        <phpunit bootstrap="${test.dir}/bootstrap.php"
-            codecoverage="true">
-            <batchtest>
-                <fileset refid="test" />
-            </batchtest>
-            <formatter type="xml" todir="${test.report.dir}" outfile="logfile.xml" />
-        </phpunit>
+ <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+  <exec executable="phpcs" output="/dev/null">
+   <arg value="--report=checkstyle" />
+   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+   <arg value="--standard=${basedir}/build/phpcs.xml" />
+   <arg path="${basedir}/src" />
+  </exec>
+ </target>
 
-        <!--Create the unit test report -->
-        <phpunitreport infile="${test.report.dir}/logfile.xml"
-            styledir="${phpunit.styles.dir}"
-            format="frames"
-            todir="${test.report.dir}" />
+ <target name="phpcpd" description="Find duplicate code using PHPCPD">
+  <exec executable="phpcpd">
+   <arg value="--log-pmd" />
+   <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+   <arg path="${basedir}/src" />
+  </exec>
+ </target>
 
-        <!-- Create the coverage report -->
-        <coverage-report outfile="${coverage.report.dir}/coverage.xml">
-            <report styledir="${phpunit.styles.dir}" todir="${coverage.report.dir}"/>
-        </coverage-report>
-    </target>
+ <target name="phpdox" description="Generate API documentation using phpDox">
+  <exec executable="phpdox"/>
+ </target>
+
+ <target name="phpunit" description="Run unit tests with PHPUnit">
+  <exec executable="phpunit" failonerror="true"/>
+ </target>
+
+ <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
+  <exec executable="phpcb">
+   <arg value="--log" />
+   <arg path="${basedir}/build/logs" />
+   <arg value="--source" />
+   <arg path="${basedir}/src" />
+   <arg value="--output" />
+   <arg path="${basedir}/build/code-browser" />
+  </exec>
+ </target>
 </project>
