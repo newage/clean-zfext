@@ -12,10 +12,10 @@ defined('APPLICATION_ENV')
 defined('VENDOR_PATH')
     || define('VENDOR_PATH', realpath(dirname(__FILE__) . '/../vendor/'));
 
-require_once VENDOR_PATH . '/autoload.php';
+$prefixes = require_once VENDOR_PATH . '/autoload.php';
 
 $paths = array(APPLICATION_PATH);
-foreach (ComposerAutoloaderInit::getLoader()->getPrefixes() as $path) {
+foreach ($prefixes->getPrefixes() as $path) {
     $paths[] = $path[0];
 }
 
@@ -41,7 +41,7 @@ $application->bootstrap()->run();
 
 /**
  * Read config options from config file
- * 
+ *
  * @return Zend_Config_Ini
  */
 function getConfig()
