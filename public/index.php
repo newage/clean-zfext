@@ -9,25 +9,17 @@ defined('APPLICATION_PATH')
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
-//defined('VENDOR_PATH')
-//    || define('VENDOR_PATH', realpath(dirname(__FILE__) . '/../vendor/'));
+defined('VENDOR_PATH')
+    || define('VENDOR_PATH', realpath(dirname(__FILE__) . '/../vendor/'));
 
-//set_include_path(implode(PATH_SEPARATOR, array(
-//    APPLICATION_PATH , VENDOR_PATH , get_include_path()
-//)));
+require_once VENDOR_PATH . '/autoload.php';
 
-//require_once 'autoload.php';
-//spl_autoload_unregister(array(
-//    'Zend_Loader_Autoloader' , 'autoload'
-//));
+$paths = array(APPLICATION_PATH);
+foreach (ComposerAutoloaderInit::getLoader()->getPrefixes() as $path) {
+    $paths[] = $path[0];
+}
 
-set_include_path(get_include_path() . PATH_SEPARATOR .
-    BASE_PATH . DIRECTORY_SEPARATOR . 'library'
-);
-
-require_once 'Zend/Application.php';
-require_once 'Zend/Config/Ini.php';
-require_once 'Zend/Cache.php';
+set_include_path(implode(PATH_SEPARATOR, $paths));
 
 if (APPLICATION_ENV == 'production') {
     $frontendOptions = array('automatic_serialization' => true);

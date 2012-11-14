@@ -19,6 +19,10 @@ class Core_Application_Resource_Debug extends Zend_Application_Resource_Resource
      */
     public function init()
     {
+        if (!class_exists('ZFDebug_Controller_Plugin_Debug')) {
+            return false;
+        }
+        
         return $this->setDebugger();
     }
 
