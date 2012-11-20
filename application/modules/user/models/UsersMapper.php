@@ -2,7 +2,7 @@
 
 /**
  * User_Model_UsersTable
- * 
+ *
  */
 class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
 {
@@ -66,7 +66,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function disable(array $request)
     {
-        $instance = $this->getDbTable()->getById($request['id']);
+        $user = $this->getDbTable()->getById($request['id']);
 
         $user->status = User_Model_Users::STATUS_BLOCKED;
 
@@ -81,7 +81,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function enable(array $request)
     {
-        $instance = self::getInstance()->findOneById($request['id']);
+        $user = self::getInstance()->findOneById($request['id']);
 
         $user->status = User_Model_Users::STATUS_ACTIVE;
 
@@ -104,7 +104,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
         $user->password = $request['password'];
         $user->role = 'user';
         $user->status = User_Model_Users::STATUS_ACTIVE;
-        
+
         $user->save();
         return $user->getLastModified();
     }
@@ -147,5 +147,20 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
         $user->save();
 
         return true;
+    }
+
+    public function getPaginator()
+    {
+        $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('users'));
+        $adapter->setRowCount(
+            $this->getDbTable()->select()->from(
+                'users',
+                array(
+                   Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'id'
+                )
+            )
+        );
+
+        return $adapter;
     }
 }
