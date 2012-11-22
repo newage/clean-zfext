@@ -1,1 +1,25 @@
-<?php echo $this->navigation()->breadcrumbs()->render($this->container) ?>
+<div class="hero-unit">
+    <h1><?php $this->_e('Welcome to')?> <span class="zf-green">Zend Framework</span></h1>
+    <p><?php $this->_e('Congratulations! You have successfully installed the <a href="http://framework.zend.com">Zend Framework</a> with extends library.') ?>
+    <?php $this->_e('This extends framework can serve as a simple starting point for you to begin building your application on ZF.') ?></p>
+    <p><a class="btn btn-success btn-large" href="https://bitbucket.org/newage/clean-zfext"><?php $this->_e('Fork on git repository') ?> &raquo;</a></p>
+</div>
+
+<!-- Example row of columns -->
+<div class="row">
+<div class="span4">
+    <h2><?php $this->_e('Existing plugins') ?></h2>
+    <p>Exist plugins <a href="">ZFDebug</a>, and support multilingual with support the gettext. Support Auth, Navigation and Route from xml config.</p>
+    <p><a class="btn btn-success" href="#">View details &raquo;</a></p>
+</div>
+<div class="span4">
+    <h2>Support migrations</h2>
+    <p>Support migrations for Data Base, and create/load data fixtures.</p>
+    <p><a class="btn btn-success" href="#">View details &raquo;</a></p>
+</div>
+<div class="span4">
+    <h2>Setup from config</h2>
+    <p>All setup framework from config ".ini" file. Support config file for development environment.</p>
+    <p><a class="btn btn-success" href="#">View details &raquo;</a></p>
+</div>
+</div>

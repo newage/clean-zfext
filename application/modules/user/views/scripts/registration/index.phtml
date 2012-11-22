@@ -1,4 +1,9 @@
-<?php
-    $this->form->setAction($this->url());
-    echo $this->form;
-?>
+<?php echo $this->navigation()->breadcrumbs()->setPartial(array('breadcrumbs.phtml', 'default')); ?>
+
+<div class="hero-unit">
+    <h1><?php $this->_e('Registration') ?></h1>
+    <hr/>
+    <?php $this->form->setAction($this->url(array('module'=>'user','controller'=>'registration','action'=>'index'))) ?>
+    <?php $this->form->setAttrib('class', 'form-horizontal') ?>
+    <?php echo $this->form ?>
+</div>

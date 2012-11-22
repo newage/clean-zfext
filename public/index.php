@@ -9,14 +9,17 @@ defined('APPLICATION_PATH')
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+defined('VENDOR_PATH')
+    || define('VENDOR_PATH', realpath(dirname(__FILE__) . '/../vendor/'));
 
-set_include_path(get_include_path() . PATH_SEPARATOR .
-    BASE_PATH . DIRECTORY_SEPARATOR . 'library'
-);
+$prefixes = require_once VENDOR_PATH . '/autoload.php';
 
-require_once 'Zend/Application.php';
-require_once 'Zend/Config/Ini.php';
-require_once 'Zend/Cache.php';
+$paths = array(APPLICATION_PATH);
+foreach ($prefixes->getPrefixes() as $path) {
+    $paths[] = $path[0];
+}
+
+set_include_path(implode(PATH_SEPARATOR, $paths));
 
 if (APPLICATION_ENV == 'production') {
     $frontendOptions = array('automatic_serialization' => true);
@@ -38,7 +41,7 @@ $application->bootstrap()->run();
 
 /**
  * Read config options from config file
- * 
+ *
  * @return Zend_Config_Ini
  */
 function getConfig()

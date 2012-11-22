@@ -3,11 +3,12 @@
 /**
  * 
  * Class definition for the Core_Model_Dto. This represents our data transfer object.
- * @author Thunder Raven-Stoker
- * @category Core
- * @package Core_Db
- * @subpackage Table
  *
+ * @category Core
+ * @package Core_Db_Table
+ * @subpackage Row
+ * @license New BSD
+ * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
 class Core_Db_Table_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
@@ -54,6 +55,31 @@ class Core_Db_Table_Row_Abstract extends Zend_Db_Table_Row_Abstract
             return $this->$methodName(parent::__get($columnName));
         }
         return parent::__get($columnName);
+    }
+    
+    /**
+     * Return model from DbTable with data from query
+     * 
+     * @return Core_Model_Abstract
+     */
+    public function toModel()
+    {
+        $tableClassName = get_class($this->getTable());
+        $modelName = str_replace('DbTable_', '', $tableClassName);
+        $model = new $modelName();
+        $fields = $this->toArray();
+        return $model->setOptions($this->toArray());
+    }
+    
+    /**
+     * Return composite model
+     * 
+     * @return Core_Model_Composite
+     */
+    public function toCompositeModel()
+    {
+        $model = new Core_Model_Composite();
+        return $model->fromArray($this->toArray());
     }
 }
 

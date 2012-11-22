@@ -1,1 +1,11 @@
-    <p><?php print $this->translate('Access denied for request the mvc resource') . ': ' . $this->deny ?></p>
+<div class="hero-unit">
+    <div class="alert alert-error">
+        <h4><?php $this->_e('Access denied!') ?></h4>
+        <?php if ($this->identity === true) : ?>
+            <?php $this->_e('Access to this page is closed.') ?>
+        <?php else : ?>
+            <?php $this->_e('To access this page you must logged.') ?>
+        <?php endif; ?>
+    </div>
+</div>
+

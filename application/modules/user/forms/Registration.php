@@ -21,48 +21,48 @@ class User_Form_Registration extends Core_Form
              ->setName('registration')
              ->setDescription('User Registration');
              
-        $element = new Zend_Form_Element_Text('login');
-        $element->setRequired(true);
-        $element->setLabel('Login');
-        $element->addValidator('StringLength', false, array(3,40))
-                ->addValidator('Alnum', true, array(false))
-                ->addValidator(new Zend_Validate_Db_NoRecordExists('users','login'));
-        $element->setOrder(1);
-
-        $this->addElement($element);
-        
-        $element = new Zend_Form_Element_Password('password');
-        $element->setRequired(true);
-        $element->setLabel('Password');
-        $element->addValidator('StringLength', false, array(3,30))
-                 ->addValidator('Alnum', true, array(false));
-        $element->setOrder(2);
-
-        $this->addElement($element);
-
-        $element = new Zend_Form_Element_Password('re_password');
-        $element->setRequired(true);
-        $element->setLabel('Confirm Password');
-        $element->addValidator('StringLength', false, array(3,30))
-                    ->addValidator('Alnum', true, array(false))
-                    ->addValidator(new Zend_Validate_Callback(array($this, 'comparePassword')));
-        $element->setOrder(3);
-
-        $this->addElement($element);
-
+        //Add email
         $element = new Zend_Form_Element_Text('email');
         $element->setRequired(true);
         $element->setLabel('E-mail');
-        $element->addValidator('EmailAddress', true);
+        $element->setDescription('This email used be for the login');
+        $element->addValidator('EmailAddress', true, array('domain' => false));
         $element->addValidator('Db_NoRecordExists', true, array('users','email'));
-        $element->setOrder(4);
+        $element->addDecorator(new Core_Form_Decorator_TwitterInput());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->addDecorator(new Core_Form_Decorator_TwitterPopover());
+        $element->setOrder(1);
+        $this->addElement($element);
+        
+        //Add password
+        $element = new Zend_Form_Element_Password('password');
+        $element->setRequired(true);
+        $element->setLabel('Password');
+        $element->addValidator('StringLength', false, array(6,30))
+                 ->addValidator('Alnum', true, array(false));
+        $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(2);
+        $this->addElement($element);
 
+        //Repeat password
+        $element = new Zend_Form_Element_Password('re_password');
+        $element->setRequired(true);
+        $element->setLabel('Repeat password');
+        $element->setDescription('Repeat the password');
+        $element->addValidator('StringLength', false, array(6,30))
+                    ->addValidator('Alnum', true, array(false))
+                    ->addValidator(new Zend_Validate_Callback(array($this, 'comparePassword')));
+        $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->addDecorator(new Core_Form_Decorator_TwitterPopover());
+        $element->setOrder(3);
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');
+        $element->addDecorator(new Core_Form_Decorator_TwitterButton);
         $element->setOrder(5);
-
         $this->addElement($element);
     }
 
@@ -73,7 +73,7 @@ class User_Form_Registration extends Core_Form
      */
     public function comparePassword($value)
     {
-        $password = Zend_Controller_Front::getInstance()->getRequest()->getParam('password');
+        $password = $this->getElement('password')->getValue();
         if ($password == $value) {
             return true;
         } else {

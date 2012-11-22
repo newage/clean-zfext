@@ -1,18 +1,9 @@
-    <div class="cont_width">
-        <div class="footer_logo">
-            &nbsp;
-        </div>
-        <div>
-            <ul>
-                <li>
-                    <h4>Home </h4>
-                </li>
-            </ul>
-            <ul>
-                <li><h4>Terms of use</h4></li>
-                <li>Privacy policy</li>
-                <li>Terms and conditions</li>
-            </ul>
-        </div>
+    <div id="footer">
+      <div class="container">
+        <p class="pull-right"><a href="<?php echo $this->url() ?>#top"><?php $this->_e('Back to top') ?></a></p>
+        <p>2011 - 2012</p>
+      </div>
     </div>
-
+<!-- // Scripts -->
+<?php $this->headScript()->appendScript('$("a").tooltip()') ?>
+<?php echo $this->headScript() ?>

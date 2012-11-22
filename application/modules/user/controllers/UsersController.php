@@ -2,7 +2,7 @@
 
 /**
  * This is a class generated with Zend_CodeGenerator.
- * 
+ *
  * @category ###CATEGORY###
  * @package ###PACKAGE###
  * @subpackage ###SUBPACKAGE###
@@ -41,10 +41,10 @@ class User_UsersController extends Zend_Controller_Action
     {
         $validator = new Zend_Validator_Int();
         $param = $this->_request->getParam('id');
-        
+
         if ($param && $validator->isValid($param)) {
             $model = Doctrine_Core::getTable('User_Model_Users');
-        
+
             if ($model->disable($param)) {
                 $this->_helper->FlashMessenger('Disable user account');
             } else {
@@ -89,13 +89,13 @@ class User_UsersController extends Zend_Controller_Action
         $validator = new Zend_Validate_Int();
         $id = $this->_request->getParam('id');
         $form = new User_Form_Users();
-        
+
         if ($id && $validator->isValid($id)) {
             $mapper = new User_Model_UsersTable();
-        
+
             if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
                 $model = Doctrine_Core::getTable('User_Model_Users');
-        
+
                 if ($model->update($form->getValues())) {
                     $this->_helper->FlashMessenger('Update user account success');
                     $this->getHelper('Redirector')->gotoUrl('/');
@@ -113,12 +113,10 @@ class User_UsersController extends Zend_Controller_Action
 
     public function readAction()
     {
-        $model = Doctrine_Core::getTable('User_Model_Users');
-        $paginator = new Zend_Paginator(
-            new Zend_Paginator_Adapter_Array($model->findAll()->toArray())
-        );
+        $mapper = new User_Model_UsersMapper();
+        $paginator = new Zend_Paginator($mapper->getPaginator());
         $paginator->setCurrentPageNumber($this->_request->getParam('page'));
-        
+
         $this->view->paginator = $paginator;
     }
 

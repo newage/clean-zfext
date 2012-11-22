@@ -182,7 +182,7 @@ class Core_Migration_Manager
         $methodUp = new Zend_CodeGenerator_Php_Method();
         $methodUp->setName('up')
                  ->setDocblock($methodUpDoc)
-                 ->setBody('// upgrade');
+                 ->setBody('$this->query("");');
                  
         // Configuring after instantiation
         $methodDownDoc = new Zend_CodeGenerator_Php_Docblock(array(
@@ -202,7 +202,7 @@ class Core_Migration_Manager
         $methodDown = new Zend_CodeGenerator_Php_Method();
         $methodDown->setName('down')
                    ->setDocblock($methodDownDoc)
-                   ->setBody('// downgrade');
+                   ->setBody('$this->query("");');
                    
         $class = new Zend_CodeGenerator_Php_Class();
         $className = 'Migration_' . $_migrationName;
@@ -255,15 +255,12 @@ class Core_Migration_Manager
     {
         $applyMigration = $this->getLastMigration();
         
-        if ($toMigration == 0 || $toMigration == 'last') {
+        if ($toMigration == 0 || $toMigration == 'last' || $toMigration > $applyMigration) {
             //upgrade
             $upgrade = true;
         } elseif ($toMigration < $applyMigration) {
             //downgrade
             $upgrade = false;
-        } elseif ($toMigration > $applyMigration) {
-            //upgrade
-            $upgrade = true;
         }
         
         $applyMigrationFiles = $this->_getApplyMigrationFiles($toMigration, $upgrade);
@@ -286,7 +283,6 @@ class Core_Migration_Manager
 
             include_once $includePath;
 
-            $applyMigration = $upgrade === true ? ++$applyMigration : --$applyMigration;
             $methodName = $upgrade === true ? 'up' : 'down';
             $migrationClass  = 'Migration_'.$migration;
             $migrationObject = new $migrationClass;  
@@ -297,15 +293,20 @@ class Core_Migration_Manager
                 $migrationObject->$methodName();
                 $migrationObject->getDbAdapter()->commit();
                 if ($upgrade === true) {
-                    $this->addMessage('Upgrade revision ' . $applyMigration, 'green');
+                    ++$applyMigration;
+                    $this->addMessage('Upgrade revision ' . $applyMigration . '. #' . $migration, 'green');
                 } else {
-                    $this->addMessage('Downgrade revision ' . $applyMigration, 'green');
+                    $this->addMessage('Downgrade revision ' . $applyMigration . '. #' . $migration, 'green');
+                    --$applyMigration;
                 }
                 //update migration version
                 $this->_updateMigration($applyMigration);
             } catch (Exception $e) {
                 $migrationObject->getDbAdapter()->rollBack();
+                $this->_updateMigration($applyMigration);
                 $this->addMessage('Commit failed of migration "' . $migration . '"', 'red');
+                $this->addMessage($e->getMessage(), 'red');
+                break;
             }
         }
     }
@@ -333,7 +334,7 @@ class Core_Migration_Manager
             return $applyMigrationFiles;
             
         } elseif ($toMigration < $applyMigration) {
-            $applyMigrationFiles = array_slice($existFiles, $toMigration, $applyMigration);
+            $applyMigrationFiles = array_slice($existFiles, $toMigration, $applyMigration - $toMigration);
             rsort($applyMigrationFiles);
             return $applyMigrationFiles;
             

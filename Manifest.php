@@ -1,13 +1,10 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR .
-    dirname(__FILE__) . DIRECTORY_SEPARATOR . 'library'
-);
+defined('VENDOR_PATH')
+    || define('VENDOR_PATH', realpath(dirname(__FILE__) . '/vendor/'));
 
-require_once 'Core/Tool/Project/Provider/Abstract.php';
-require_once 'Core/Tool/MigrationProvider.php';
-require_once 'Core/Tool/SchemaProvider.php';
-require_once 'Core/Tool/FixtureProvider.php';
+require_once VENDOR_PATH . '/autoload.php';
+Zend_Loader_Autoloader::getInstance();
 
 class Manifest
     implements Zend_Tool_Framework_Manifest_Interface,
@@ -17,9 +14,11 @@ class Manifest
     public function getProviders()
     {
         return array(
-            new Core_Tool_SchemaProvider(),
-            new Core_Tool_MigrationProvider(),
-            new Core_Tool_FixtureProvider()
+            new ZFTool_Tool_Project_Provider_Scaffold(),
+            new ZFTool_Tool_Project_Provider_Schema(),
+            new ZFTool_Tool_Project_Provider_DbModel(),
+            new ZFTool_Tool_Project_Provider_Migration(),
+            new ZFTool_Tool_Project_Provider_Fixture()
         );
     }
 }

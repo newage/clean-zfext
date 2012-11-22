@@ -23,6 +23,10 @@ class User_AuthenticationController extends Zend_Controller_Action
      */
     public function indexAction()
     {
+//        $this->view->headScript()->appendScript('$(".dropdown-toggle").dropdown()');
+        
+        $auth = Zend_Auth::getInstance();
+        $this->view->identity = $auth->hasIdentity();
     }
 
     /**
@@ -35,9 +39,9 @@ class User_AuthenticationController extends Zend_Controller_Action
         $form = new User_Form_Authentication();
 
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-            $model = User_Model_UsersTable::getInstance();
+            $mapper = new User_Model_UsersMapper();
 
-            if ($model->authenticate($form->getValues())) {
+            if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'))) {
                 $this->_helper->FlashMessenger('Successful Login');
                 $this->getHelper('Redirector')->gotoUrl('/');
             } else {

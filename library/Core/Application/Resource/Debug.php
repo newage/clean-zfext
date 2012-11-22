@@ -19,12 +19,16 @@ class Core_Application_Resource_Debug extends Zend_Application_Resource_Resource
      */
     public function init()
     {
+        if (isset($_SERVER['argc']) && $_SERVER['argc'] > 0) {
+            return false;
+        }
+
         return $this->setDebugger();
     }
 
     /**
      * Registrate plugin zfdebug
-     * 
+     *
      * @return bool
      */
     public function setDebugger()

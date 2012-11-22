@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <default>
+            <label>Home</label>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>default/index</resource>
+            <privilege>index</privilege>
+            <pages>
+                <index>
+                    <label>Index</label>
+                    <module>default</module>
+                    <controller>index</controller>
+                    <action>index</action>
+                    <resource>default/index</resource>
+                    <privilege>index</privilege>
+                </index>
+                <about>
+                    <label>About</label>
+                    <module>default</module>
+                    <controller>index</controller>
+                    <action>about</action>
+                    <resource>default/index</resource>
+                    <privilege>about</privilege>
+                </about>
+            </pages>
+        </default>
+    </production>
+</configdata>

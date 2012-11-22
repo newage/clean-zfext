@@ -37,7 +37,7 @@ function ZFDebugSlideBar() {
     } else {
         document.cookie = "ZFDebugCollapsed=0;expires=;path=/";
         jQuery("#ZFDebug_toggler").html("&#171;");
-        return jQuery("#ZFDebug_debug").animate({left:"5px"}, "normal", "swing");
+        return jQuery("#ZFDebug_debug").animate({left:"1px"}, "normal", "swing");
     }
 }
 

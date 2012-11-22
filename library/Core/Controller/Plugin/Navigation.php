@@ -53,14 +53,15 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
     protected function _initNavigation() 
     {
         $config = $this->_getConfig();
+
         if (!empty($config)) {
             $container = new Zend_Navigation($config);
-
+            
             Zend_Layout::getMvcInstance()->getView()->navigation($container);
 
             if (Zend_Registry::isRegistered('Zend_Translate') && Zend_Registry::isRegistered('Zend_Acl')) {
                 $acl = Zend_Registry::get('Zend_Acl');
-                //$translator = Zend_Registry::get('Zend_Translate');
+                $translator = Zend_Registry::get('Zend_Translate');
 
                 $identity = Zend_Auth::getInstance()->getIdentity();
                 $role = $identity ? $identity->role : 'guest';
@@ -68,7 +69,7 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
                 Zend_Layout::getMvcInstance()->getView()->navigation()
                                              ->setAcl($acl)
                                              ->setRole($role)
-                                             /*->setTranslator($translator)*/;
+                                             ->setTranslator($translator);
             }
         }
     }

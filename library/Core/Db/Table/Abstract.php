@@ -8,8 +8,6 @@
  * @package Core_Db
  * @subpackage Table
  * @author V.Leontiev
- *
- * @version  $Id$
  */
 class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
 {
@@ -18,7 +16,14 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
      *
      * @var string
      */
-    protected $_rowClass = 'Core_Model_Dto';
+    protected $_rowClass = 'Core_Db_Table_Row';
+    
+    /**
+     * Set default Rowset class
+     * 
+     * @var string
+     */
+    protected $_rowsetClass = 'Core_Db_Table_Rowset';
     
     /**
      * Return Primary Key
@@ -29,7 +34,7 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
     {
         return $this->_primary;
     }
-
+    
     /**
      * Fetches a new blank row (not from the database).
      *

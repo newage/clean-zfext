@@ -1,16 +1,29 @@
-    <?php
-        $this->form->setAction($this->url());
-        echo $this->form;
+<?php echo $this->navigation()->breadcrumbs()->setPartial(array('breadcrumbs.phtml', 'default')); ?>
 
-//        $this->JsValidate($this->form)->render();
-    ?>
-
-    <br/>
+<div class="hero-unit">
+    <h1><?php $this->_e('Sign In') ?></h1>
+    <hr/>
+    <?php $this->form->setAction($this->url(array('module'=>'user','controller'=>'authentication','action'=>'login'))) ?>
+    <?php $this->form->setAttrib('class', 'form-horizontal') ?>
+    <?php echo $this->form ?>
     
-    <a href="<?php echo $this->url(array('controller'=>'registration', 'action'=>'index')) ?>">
-        <?php echo $this->translate('Registration') ?>
-    </a><br/>
-
-    <a href="<?php echo $this->url(array('controller'=>'forgot', 'action'=>'index')) ?>">
-        <?php echo $this->translate('Forgot Password?') ?>
-    </a>
+    <?php echo $this->link(
+        array(
+            'module' => 'user',
+            'controller' => 'registration',
+            'action' => 'index'
+        ),
+        $this->__('Registration'),
+        array('class' => 'btn btn-link', 'rel' => 'tooltip', 'title' => 'Registration new user')
+    ) ?>
+    
+    <?php echo $this->link(
+        array(
+            'module' => 'user',
+            'controller' => 'forgot',
+            'action' => 'index'
+        ),
+        $this->__('Forgotten password?'),
+        array('class' => 'btn btn-link')
+    ) ?>
+</div>

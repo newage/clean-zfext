@@ -1,1 +1,24 @@
-<br /><br /><center>View script for controller <b>Authentication</b> and script/action name <b>index</b></center>
+<?php if ($this->identity === false) : ?>
+    <?php echo $this->link(
+        array(
+            'module' => 'user',
+            'controller' => 'authentication',
+            'action' => 'login'
+        ),
+        $this->__('Sign In'),
+        array('class' => 'btn btn-success pull-right')
+    ) ?>
+<?php else : ?>
+    <ul class="nav pull-right">
+        <li>
+            <?php echo $this->link(
+                array(
+                    'module'=>'user',
+                    'controller'=>'authentication',
+                    'action'=> 'logout'
+                ),
+                $this->__('Logout')
+            ) ?>
+        </li>
+    </ul>
+<?php endif; ?>

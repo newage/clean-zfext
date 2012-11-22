@@ -86,9 +86,9 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         $route  = new Zend_Controller_Router_Route(
             ':translate/:module/:controller/:action/*',
             array(
-                'module' => 'default',
-                'controller' => 'index',
-                'action' => 'index',
+                'module' => Zend_Controller_Front::getInstance()->getDefaultModule(),
+                'controller' => Zend_Controller_Front::getInstance()->getDefaultControllerName(),
+                'action' => Zend_Controller_Front::getInstance()->getDefaultAction(),
                 'translate' => $this->_default
             ),
             array(
@@ -129,9 +129,7 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         $this->_options['locale'] = $locale;
         
         if ($this->_options['logUntranslated']) {
-            $db = Zend_Db_Table::getDefaultAdapter();
-
-            $writer = new Zend_Log_Writer_Db($db, $this->_options['logTable']);
+            $writer = new Zend_Log_Writer_Stream($this->_options['logPath']);
 
             $this->_options['log'] = new Zend_Log($writer);
             $this->_options['log']->setTimestampFormat('Y-m-d H:i:s');

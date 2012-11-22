@@ -2,39 +2,38 @@
 
 /**
  * User_Model_UsersTable
- * 
+ *
  */
 class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
 {
-
     /**
      * Return bool if find registerd user on fields email and password
      *
-     * @param array $request
+     * @param string $login
+     * @param string $password
      * @return bool
      */
-    public function authenticate($request)
+    public function authenticate($email, $password, $remember = false)
     {
-        $authAdapter = new Zend_Auth_Adapter_DbTable();
+        $authAdapter = new Core_Auth_Adapter_DbTable();
         $authAdapter->setTableName('users')
-                    ->setIdentityColumn('login')
+                    ->setIdentityColumn('email')
                     ->setCredentialColumn('password')
-                    ->setCredentialTreatment('MD5(CONCAT(salt, ?, "' .
-                        Zend_Registry::get('static_salt') . '")) AND status = "' .
-                        User_Model_Users::STATUS_ACTIVE . '"');
+                    ->setCredentialTreatment('MD5(CONCAT(salt, ?)) AND status = "' .
+                        User_Model_Users::STATUS_ENABLE . '"');
 
-        $authAdapter->setIdentity($request['login'])
-                    ->setCredential($request['password']);
+        $authAdapter->setIdentity($email)
+                    ->setCredential($password);
 
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session('Zend_Auth'));
-        $result = $auth->authenticate($authAdapter);
+        $result = $authAdapter->authenticate($authAdapter);
 
         if ($result->isValid() === true) {
-            $data = $authAdapter->getResultRowObject(null, array('password','salt','hash'));
+            $data = $authAdapter->getResultRowObject(null, array('password','salt','password_reset_hash'));
             $auth->getStorage()->write($data);
 
-            if (isset($request['rememberme'])) {
+            if ($remember === true) {
                 Zend_Session::rememberMe(60*60*24*14);
             }
 
@@ -50,7 +49,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function update(array $request)
     {
-        $user = self::getInstance()->findOneById($request['id']);
+        $user = $this->getDbTable()->getById($request['id']);
 
         $user->login = $request['login'];
         $user->email = $request['email'];
@@ -67,7 +66,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function disable(array $request)
     {
-        $instance = self::getInstance()->findOneById($request['id']);
+        $user = $this->getDbTable()->getById($request['id']);
 
         $user->status = User_Model_Users::STATUS_BLOCKED;
 
@@ -82,7 +81,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function enable(array $request)
     {
-        $instance = self::getInstance()->findOneById($request['id']);
+        $user = self::getInstance()->findOneById($request['id']);
 
         $user->status = User_Model_Users::STATUS_ACTIVE;
 
@@ -98,14 +97,14 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
      */
     public function register($request)
     {
-        $user = self::getInstance()->getRecord();
+        $user = $this->getDbTable()->createRow();
 
         $user->login = $request['login'];
         $user->email = $request['email'];
         $user->password = $request['password'];
         $user->role = 'user';
         $user->status = User_Model_Users::STATUS_ACTIVE;
-        
+
         $user->save();
         return $user->getLastModified();
     }
@@ -148,5 +147,20 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
         $user->save();
 
         return true;
+    }
+
+    public function getPaginator()
+    {
+        $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('users'));
+        $adapter->setRowCount(
+            $this->getDbTable()->select()->from(
+                'users',
+                array(
+                   Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'id'
+                )
+            )
+        );
+
+        return $adapter;
     }
 }

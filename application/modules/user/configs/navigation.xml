@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configdata>
     <production>
-        <login>
-            <label>Login</label>
-            <module>user</module>
-            <controller>authentication</controller>
-            <action>login</action>
-            <resource>user/authentication</resource>
-            <privilege>login</privilege>
+        <user>
+            <label>Index</label>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>default/index</resource>
+            <privilege>index</privilege>
             <pages>
+                <login>
+                    <label>Login</label>
+                    <module>user</module>
+                    <controller>authentication</controller>
+                    <action>login</action>
+                    <resource>user/authentication</resource>
+                    <privilege>login</privilege>
+                    <pages>
+                        <forgot>
+                            <label>Remind password</label>
+                            <module>user</module>
+                            <controller>forgot</controller>
+                            <action>index</action>
+                            <resource>user/forgot</resource>
+                            <privilege>index</privilege>
+                        </forgot>
+                    </pages>
+                </login>
                 <registration>
                     <label>Registration</label>
                     <module>user</module>
@@ -17,25 +35,15 @@
                     <resource>user/registration</resource>
                     <privilege>index</privilege>
                 </registration>
-
-                <forgot>
-                    <label>Forgot</label>
+                <logout>
+                    <label>Logout</label>
                     <module>user</module>
-                    <controller>forgot</controller>
-                    <action>index</action>
-                    <resource>user/forgot</resource>
-                    <privilege>index</privilege>
-                </forgot>
+                    <controller>authentication</controller>
+                    <action>logout</action>
+                    <resource>user/authentication</resource>
+                    <privilege>logout</privilege>
+                </logout>
             </pages>
-        </login>
-
-        <logout>
-            <label>Logout</label>
-            <module>user</module>
-            <controller>authentication</controller>
-            <action>logout</action>
-            <resource>user/authentication</resource>
-            <privilege>logout</privilege>
-        </logout>
+        </user>
     </production>
 </configdata>

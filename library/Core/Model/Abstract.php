@@ -2,10 +2,10 @@
 /**
  * Initialize set/get method in model
  *
- * @category   Core
- * @package    Core_Model
- *
- * @version  $Id: Abstract.php 103 2010-09-22 15:03:07Z vadim.leontiev $
+ * @category Core
+ * @package Core_Model
+ * @license New BSD
+ * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
 abstract class Core_Model_Abstract
 {
@@ -16,57 +16,70 @@ abstract class Core_Model_Abstract
      */
     public function __construct($options = null)
     {
+        if (method_exists($this, 'setDefault')) {
+            $this->setDefault();
+        }
+        
         if (null != $options) {
             $this->setOptions($options);
         }
     }
-
+   
     /**
      * Set options
      *
      * @param array $options
-     * @return Core_Db_Table_Row_Abstract 
+     * @return Core_Model_Abstract 
      */
     public function setOptions($options)
     {
-        $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
-            if (in_array($method, $methods)) {
-                $this->$method($value);
-            }
+            $this->setOption($key, $value);
         }
         return $this;
     }
-
+    
     /**
-     * Check and init set method on value
-     *
-     * @param string $columnName
-     * @param string $value
-     * @return string|bool
-     */
-    public function  __set($columnName, $value) {
-        $methodName = 'set' . ucfirst($columnName);
-
-        if (method_exists($this, $methodName)) {
-            return $this->$methodName($value);
-        }
-        return false;
-    }
-
-    /**
-     * Check and init get method for value
+     * Set one option
      * 
-     * @param string $columnName
-     * @return string|bool
+     * @param string $optionName
+     * @param mixed $optionValue
      */
-    public function __get($columnName) {
-        $methodName = 'get' . ucfirst($columnName);
+    public function setOption($optionName, $optionValue)
+    {
+        $methodName = 'set' . $this->_createMethodName((string)$optionName);
         
         if (method_exists($this, $methodName)) {
-            return $methodName($value);
+            return $this->$methodName($optionValue);
         }
-        return false;
+    }
+    
+    /**
+     * Create method name from sql field name
+     * 
+     * @param string $name
+     * @return string
+     */
+    protected function _createMethodName($name)
+    {
+        if (strstr($name, '_')) {
+            $function = function($part) {
+                return ucfirst($part);
+            };
+        
+            $parts = explode('_', $name);
+            $name = implode('', array_map($function, $parts));
+        }
+        return $name;
+    }
+    
+    public function getMysqlDate()
+    {
+        return date('Y-m-d');
+    }
+    
+    public function getSqlDateTime()
+    {
+        return date('Y-m-d H:i:s');
     }
 }

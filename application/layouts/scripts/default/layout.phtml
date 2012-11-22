@@ -1,67 +1,32 @@
 <?php echo $this->partial('default/partial/header.phtml') ?>
 
-<body>
-    <div class="body">
-        <div class="header">
-            <div class="cont_width">
-                <div class="logo">
-                    <h1><a href="/" title="Homepage"><?php print $this->translate('TITLE') ?></a></h1>
-                    <h2>&nbsp;</h2>
-                </div>
-                <div class="menu small">
-                    <?php echo $this->navigation()->menu()->setMinDepth(0)->setMaxDepth(0); ?>
-                </div>
-                <div class="menu clearright">
-                    <?php echo $this->navigation()->menu()->setMinDepth(1)->setMaxDepth(1); ?>
-                    <br class="clear"/>
-                </div>
+  <body>
+    <div id="wrap">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+              <a class="brand" href="/"><?php print strip_tags($this->projectTitle()) ?></a>
+              <div class="nav-collapse collapse">
+                <?php $homeMenu = $this->navigation()->findOneByLabel('Home'); ?>
+                <?php echo $this->navigation()->menu()->setMinDepth(0)->setMaxDepth(0)->renderMenu($homeMenu, array('ulClass'=>'nav')); ?>
+                <?php echo $this->action('index','authentication','user'); ?>
+              </div>
             </div>
-            <div class="topgreen clear">
-                <div class="cont_width">
-                <?php
-                    $titleArr = $this->headTitle()->getIterator();
-                    $title = reset($titleArr);
-                    if (sizeof($titleArr) != 1) {
-                        echo $this->translate($title);
-                    } else {
-                        $nav = $this->navigation()->menu()->setMinDepth(1)->setMaxDepth(1)->findByActive('true');
-                        if ($nav) {
-                        //showing page title or smthn another from navigation
-                        //done only for 1st lev navigation
-                            echo $this->translate($nav->getLabel());
-                        } else {
-                            echo '&nbsp;';
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-            <div class="tophelp">
-                <div class="cont_width">
-                    <?php echo $this->navigation()->breadcrumbs()->render(); ?>
-                </div>
-            </div>
+          </div>
         </div>
 
-        <div class="content cont_width">
-            <?php /*echo $this->fieldset('' ,$this->formLabel('translate', 'Language') .
-                $this->formSelect(
-                    'translate',
-                    Zend_Registry::get('Zend_Translate')->getLocale(),
-                    null,
-                    array('en'=>'en', 'ru'=>'ru')));*/
-            ?>
-
-            <br/>
-
-            <?php echo $this->layout()->content ?>
+        <div class="container">
+          <?php echo $this->layout()->content ?>
         </div>
 
-        <?php echo $this->partial('default/partial/messenger.phtml') ?>
-
-        <div class="footer">
-            <?php echo $this->partial('default/partial/footer.phtml') ?>
-        </div>
+        <div id="push"></div>
     </div>
-</body>
+      
+    <?php echo $this->partial('default/partial/footer.phtml') ?>
+  </body>
 </html>

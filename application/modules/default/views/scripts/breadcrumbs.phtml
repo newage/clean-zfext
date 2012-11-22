@@ -1,0 +1,17 @@
+<ul class="breadcrumb">
+<?php 
+    foreach($this->pages as $page) {
+        $label = $this->__($page->getLabel());
+        if ($page->isActive() === true) {
+            $active = 'class="active"';
+            $href = $label;
+            $divider = '';
+        } else {
+            $active = '';
+            $href = '<a href="'.$page->getHref().'">' . $label . '</a>';
+            $divider = ' <span class="divider">/</span>';
+        }
+        echo '<li '.$active.'>'.$href.$divider.'</li>';
+    }
+?>
+</ul>
