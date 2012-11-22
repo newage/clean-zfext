@@ -1,13 +1,13 @@
 {
     "require": {
-        "newage/zf-scaffold": "dev-master",
+        "newage/zf-tools": "dev-master",
         "zend/zf1": "1.12.0",
         "zfdebug": "1.5"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:newage/zf-scaffold.git"
+            "url":  "git@bitbucket.org:newage/zf-tools.git"
         },
         {
             "type": "package",
@@ -30,22 +30,6 @@
             "type": "package",
             "package": {
                 "name": "zfdebug",
-                "version": "1.5",
-                "dist": {
-                    "url": "https://bitbucket.org/newage/zf-debug/get/master.zip",
-                    "type": "zip"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "ZFDebug": "library"
-                    }
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "newage/zf-migration",
                 "version": "1.5",
                 "dist": {
                     "url": "https://bitbucket.org/newage/zf-debug/get/master.zip",
