@@ -16,7 +16,6 @@ class Manifest
         return array(
             new ZFTool_Tool_Project_Provider_Scaffold(),
             new ZFTool_Tool_Project_Provider_Schema(),
-            new ZFTool_Tool_Project_Provider_DbModel(),
             new ZFTool_Tool_Project_Provider_Migration(),
             new ZFTool_Tool_Project_Provider_Fixture()
         );
