@@ -37,8 +37,8 @@ class Core_Application_Resource_Debug extends Zend_Application_Resource_Resource
         $autoloader->registerNamespace('ZFDebug');
 
         $view = new Zend_View();
-        $view->headLink()->appendStylesheet('/core/css/zfdebug.css', 'screen');
-        $view->headScript()->appendFile('/core/js/debug.js');
+        $view->headLink()->appendStylesheet('/vendor/newage/zf-debug/css/zf-debug.css', 'screen');
+        $view->headScript()->appendFile('/vendor/newage/zf-debug/js/zf-debug.js');
 
         $options = $this->getOptions();
 

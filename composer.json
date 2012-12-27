@@ -1,8 +1,11 @@
 {
     "require": {
         "newage/zf-tools": "dev-master",
-        "zend/zf1": "1.12.0",
-        "zfdebug": "1.5"
+        "newage/zf-debug": "dev-master",
+        "zend/zf1": "1.12.1",
+        "components/jquery": "1.8.*",
+        "components/twitter-bootstrap": "2.2.*",
+        "components/select2": "3.2"
     },
     "repositories": [
         {
@@ -13,9 +16,9 @@
             "type": "package",
             "package": {
                 "name": "zend/zf1",
-                "version": "1.12.0",
+                "version": "1.12.1",
                 "dist": {
-                    "url": "http://framework.zend.com/releases/ZendFramework-1.12.0/ZendFramework-1.12.0.zip",
+                    "url": "http://framework.zend.com/releases/ZendFramework-1.12.1/ZendFramework-1.12.1.zip",
                     "type": "zip"
                 },
                 "autoload": {
@@ -27,18 +30,32 @@
             }
         },
         {
+            "type": "vcs",
+            "url":  "git@bitbucket.org:newage/zf-debug.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:components/jquery.git"
+        },
+        {
             "type": "package",
             "package": {
-                "name": "zfdebug",
-                "version": "1.5",
+                "name": "components/twitter-bootstrap",
+                "version": "2.2.3",
                 "dist": {
-                    "url": "https://bitbucket.org/newage/zf-debug/get/master.zip",
+                    "url": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
                     "type": "zip"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "ZFDebug": "library"
-                    }
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "components/select2",
+                "version": "3.2",
+                "dist": {
+                    "url": "https://github.com/ivaynberg/select2/archive/release-3.2.zip",
+                    "type": "zip"
                 }
             }
         }

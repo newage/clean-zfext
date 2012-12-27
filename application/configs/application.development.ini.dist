@@ -1,11 +1,9 @@
 [production]
 [development : production]
-;PHP settings 
+;PHP settings
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
 phpSettings.log_errors = 1
-phpSettings.upload_max_filesize = 10M
-phpSettings.post_max_size = 10M
 
 ; Connection for Zend_Db
 resources.db.adapter = pdo_mysql
@@ -17,7 +15,7 @@ resources.db.params.charset = utf8
 resources.db.isDefaultTableAdapter = true
 ;resources.db.DefaultMetadataCache = true
 
-;Disable cache 
+;Disable cache
 resources.cachemanager.routes.disable = true
 resources.cachemanager.translate.disable = true
 resources.cachemanager.acl.disable = true
@@ -34,8 +32,6 @@ resources.debug.plugins.Auth.user = email
 resources.debug.plugins.Auth.role = role
 resources.debug.plugins.3 = Time
 resources.debug.plugins.4 = Registry
-
-resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
 
 ; -- Cache
 ; Translate
@@ -58,5 +54,3 @@ resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
 ;resources.cachemanager.navigation.frontend.options.lifetime = 7200
 ;resources.cachemanager.navigation.frontend.options.automatic_serialization = true
 ;resources.cachemanager.navigation.backend.name = Apc
-
-resources.frontcontroller.plugins.translate.options.validateTranslatorPath = "/usr/local/lib/ZendFramework/resources/languages/"
