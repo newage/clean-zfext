@@ -3,11 +3,9 @@ SHELL=/bin/bash
 echo "Begin upload dependencies\n"
 curl -s http://getcomposer.org/installer | php
 php composer.phar install
-cd public
-bower install
 
-cd ../data
 echo "Begin setup project\n"
+cd ../data
 
 if [ ! -d "cache" ]; then
     mkdir --mode=0777 cache
