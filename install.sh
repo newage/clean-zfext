@@ -21,4 +21,11 @@ if [ ! -f "application.development.ini" ]; then
     cp application.development.ini.dist application.development.ini
 fi
 
+cd ../../
+
+if [ ! -f "zf.sh" ]; then
+    cp ${PWD}/vendor/zend/zf1/bin/zf.sh zf.sh
+    cp ${PWD}/vendor/zend/zf1/bin/zf.php zf.php
+fi
+
 echo "Install finish successfully!\n"
