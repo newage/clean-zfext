@@ -1,6 +1,6 @@
 #CHANGELOG
 
-##1.0.5 (2012-11-27)
+##1.1.5 (2012-11-27)
 - 2197727 (tag: 1.1.5, origin/master, origin/HEAD, master) Merge branch 'hotfix/1.1.5'
 - d462249 Remove bower from install.sh file
 
