@@ -1,6 +1,14 @@
 #CHANGELOG
 
-##1.1.5 (2012-11-27)
+##1.1.6 (2013-01-23):
+- fc327e2 (HEAD, origin/develop, release/1.1.6, develop) Fix error in changelog file
+- 1194068 Create changelog file
+- e0d411d Add select2 decorator and update other decorators
+- 2b6ee38 Clean old files from library
+- 45dfb6f Install zf tool
+- e656507 Merge branch 'hotfix/1.1.5' into develop
+
+##1.1.5 (2012-11-27):
 - 2197727 (tag: 1.1.5, origin/master, origin/HEAD, master) Merge branch 'hotfix/1.1.5'
 - d462249 Remove bower from install.sh file
 
