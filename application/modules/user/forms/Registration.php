@@ -11,7 +11,7 @@
  */
 class User_Form_Registration extends Core_Form
 {
-    
+
     /**
      * Create user registration form
      */
@@ -19,8 +19,9 @@ class User_Form_Registration extends Core_Form
     {
         $this->setMethod('post')
              ->setName('registration')
-             ->setDescription('User Registration');
-             
+             ->setDescription('User Registration')
+             ->setAttrib('required', 'true');
+
         //Add email
         $element = new Zend_Form_Element_Text('email');
         $element->setRequired(true);
@@ -31,9 +32,10 @@ class User_Form_Registration extends Core_Form
         $element->addDecorator(new Core_Form_Decorator_TwitterInput());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->addDecorator(new Core_Form_Decorator_TwitterPopover());
+        $element->setAttrib('class', '22');
         $element->setOrder(1);
         $this->addElement($element);
-        
+
         //Add password
         $element = new Zend_Form_Element_Password('password');
         $element->setRequired(true);
@@ -57,6 +59,16 @@ class User_Form_Registration extends Core_Form
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->addDecorator(new Core_Form_Decorator_TwitterPopover());
         $element->setOrder(3);
+        $this->addElement($element);
+
+        //Select
+        $element = new Zend_Form_Element_Select('language');
+        $element->addMultiOptions(array('1'=>'English', '2'=>'Russian'));
+        $element->setLabel('Language');
+        $element->addValidator('InArray', true, array(1,2));
+        $element->addDecorator(new Core_Form_Decorator_Select());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(4);
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Submit('submit');

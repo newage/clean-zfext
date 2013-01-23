@@ -59,3 +59,20 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+/* Form in hero-unit */
+.hero-unit form {
+    font-size: 14px;
+}
+
+form .select-default {
+    width: 220px;
+}
+
+form .select-medium {
+    width: 164px;
+}
+
+form .select-large {
+    width: 224px;
+}
