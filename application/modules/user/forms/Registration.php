@@ -14,6 +14,7 @@ class User_Form_Registration extends Core_Form
 
     /**
      * Create user registration form
+     * Set attribute required to form for view required fields
      */
     public function init()
     {
