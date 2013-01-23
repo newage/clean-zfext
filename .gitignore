@@ -5,4 +5,4 @@
 /vendor/*
 /composer*
 !/composer.json
-/public/components/*
+/zf.*
