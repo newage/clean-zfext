@@ -5,7 +5,8 @@
         "zend/zf1": "1.12.1",
         "components/jquery": "1.8.*",
         "components/twitter-bootstrap": "2.2.*",
-        "components/select2": "3.2"
+        "components/select2": "3.2",
+        "components/bootstrap-notify": "1.*"
     },
     "repositories": [
         {
@@ -41,7 +42,7 @@
             "type": "package",
             "package": {
                 "name": "components/twitter-bootstrap",
-                "version": "2.2.3",
+                "version": "2.2.2",
                 "dist": {
                     "url": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
                     "type": "zip"
@@ -55,6 +56,17 @@
                 "version": "3.2",
                 "dist": {
                     "url": "https://github.com/ivaynberg/select2/archive/release-3.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "components/bootstrap-notify",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "https://github.com/Nijikokun/bootstrap-notify/archive/1.0.0.zip",
                     "type": "zip"
                 }
             }

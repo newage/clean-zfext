@@ -23,8 +23,6 @@ class User_AuthenticationController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-//        $this->view->headScript()->appendScript('$(".dropdown-toggle").dropdown()');
-        
         $auth = Zend_Auth::getInstance();
         $this->view->identity = $auth->hasIdentity();
     }
@@ -63,9 +61,9 @@ class User_AuthenticationController extends Zend_Controller_Action
         $auth->getStorage()->clear();
 
         $this->_helper->redirector(
-                Zend_Controller_Front::getInstance()->getDefaultAction(),
-                Zend_Controller_Front::getInstance()->getDefaultControllerName(),
-                Zend_Controller_Front::getInstance()->getDefaultModule()
+            Zend_Controller_Front::getInstance()->getDefaultAction(),
+            Zend_Controller_Front::getInstance()->getDefaultControllerName(),
+            Zend_Controller_Front::getInstance()->getDefaultModule()
         );
     }
 }

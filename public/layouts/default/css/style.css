@@ -77,3 +77,8 @@ form .select-medium {
 form .select-large {
     width: 224px;
 }
+
+/* Update notifications */
+.notifications.top-right {
+    top: 50px !important;
+}

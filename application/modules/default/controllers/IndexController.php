@@ -34,12 +34,20 @@ class IndexController extends Zend_Controller_Action
 
     public function aboutAction()
     {
-        // action body
+        $this->getHelper('Messenger')->addMessage(
+            'This message from backend',
+            Core_Controller_Action_Helper_Messenger::TYPE_ERROR
+        );
     }
 
     public function dologinAction()
     {
-        
+        $this->getHelper('Messenger')->addMessage(
+            'This message from default/index/dologin action',
+            Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+            true
+        );
+        $this->getHelper('Redirector')->gotoUrl('/en/user/authentication/login');
     }
 }
 
