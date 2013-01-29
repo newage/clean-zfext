@@ -43,14 +43,23 @@ if [ ! -f "zf.sh" ]; then
     chmod 755 zf.php
 fi
 
+function zfsetup {
+    USER_HOME=$(eval echo ~${SUDO_USER})
+    TFILE="${USER_HOME}/.zf.ini"
+    echo "php.include_path = \"${PWD}/vendor/zend/zf1/library:${PWD}/vendor/zend/zf1/extras/library\"" > $TFILE
+}
+
+function setupmanifest {
+    zf enable config.manifest Manifest
+}
+
 if [ ! -f "~/.zf.ini" ]; then
     echo "Setup zf tool"
-    alias zf=${PWD}/zf.sh
     zfsetup
+    echo "Create new config file"
+    alias zf=${PWD}/zf.sh
+    setupmanifest
+    echo "Enable Manifest"
 fi
-
-function zfsetup () {
-    ZEND_TOOL_INCLUDE_PATH=${PWD}/vendor/zend/zf1/library zf --setup config-file
-}
 
 echo "Install finish successfully!"
