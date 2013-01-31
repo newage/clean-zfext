@@ -11,7 +11,7 @@
 class Core_Form_Decorator_TwitterButton extends Zend_Form_Decorator_Abstract
 {
     protected $_format = '<div class="control-group">
-    <div class="control">
+    <div class="controls">
       <button type="submit" class="btn btn-primary">%1$s</button>
     </div>
     </div>';

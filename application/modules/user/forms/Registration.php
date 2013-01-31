@@ -72,10 +72,18 @@ class User_Form_Registration extends Core_Form
         $element->setOrder(4);
         $this->addElement($element);
 
+        //Select
+        $element = new Zend_Form_Element_Textarea('description');
+        $element->setLabel('Description');
+        $element->addDecorator(new Core_Form_Decorator_TwitterEditor());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(5);
+        $this->addElement($element);
+
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');
         $element->addDecorator(new Core_Form_Decorator_TwitterButton);
-        $element->setOrder(5);
+        $element->setOrder(6);
         $this->addElement($element);
     }
 
