@@ -12,7 +12,7 @@ class Core_Form_Decorator_TwitterFile extends Zend_Form_Decorator_Abstract
 {
     protected $_format = '<div class="control-group">
         <div class="controls">
-          <button id="upload_button" class="btn btn-success"><i class="icon-plus"></i> %1$s</button>
+          <button type="button" id="upload_button" class="btn btn-success"><i class="icon-plus"></i> %1$s</button>
           <span id="upload_filename"></span>
         </div>
       </div>';
