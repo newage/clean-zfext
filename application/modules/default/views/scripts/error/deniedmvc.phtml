@@ -1,11 +1,31 @@
-<div class="hero-unit">
-    <div class="alert alert-error">
-        <h4><?php $this->_e('Access denied!') ?></h4>
-        <?php if ($this->identity === true) : ?>
-            <?php $this->_e('Access to this page is closed.') ?>
-        <?php else : ?>
-            <?php $this->_e('To access this page you must logged.') ?>
-        <?php endif; ?>
+<div class="alert alert-error">
+    <div class="page-header">
+        <h1><?php $this->_e('Access denied!') ?></h1>
     </div>
-</div>
 
+    <p>
+        <?php $this->_e('The page you requested requires that you login. Please use the login form on this page.
+                If you do not see a form, you are already logged in and do not have sufficient
+                permissions to view the requested page.') ?>
+    </p>
+    <p>
+        <?php echo $this->link(
+            array(
+                'module' => 'user',
+                'controller' => 'authentication',
+                'action' => 'login'
+            ),
+            $this->__('Sign in'),
+            array('class' => 'btn btn-danger')
+        ) ?>
+        <?php echo $this->link(
+            array(
+                'module' => 'user',
+                'controller' => 'registration',
+                'action' => 'index'
+            ),
+            $this->__('Registration'),
+            array('class' => 'btn')
+        ) ?>
+    </p>
+</div>
