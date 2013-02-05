@@ -3,11 +3,12 @@
  * User authentication controller
  * Login and logout actions
  *
- * @category   Application
- * @package    Application_User
- * @subpackage Controller
- *
- * @author V.Leontiev <vadim.leontiev@gmail.com>
+ * @category Application
+ * @package Application_User
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class User_AuthenticationController extends Zend_Controller_Action

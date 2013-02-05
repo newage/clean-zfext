@@ -2,11 +2,12 @@
 /**
  * Administrator resource controller
  *
- * @category   Application
- * @package    Application_Administrator
- * @subpackage Controller
- *
- * @version  $Id$
+ * @category Application
+ * @package Application_Administrator
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class Administrator_ResourceController extends Zend_Controller_Action
@@ -15,7 +16,7 @@ class Administrator_ResourceController extends Zend_Controller_Action
     public function init()
     {
         $this->_helper->layout->setLayout('administrator/layout');
-        
+
         $this->_helper->contextSwitch()
             ->addActionContext('data', 'json')
             ->initContext();

@@ -3,11 +3,12 @@
 /**
  * This is a class generated with Zend_CodeGenerator.
  *
- * @category ###CATEGORY###
- * @package ###PACKAGE###
- * @subpackage ###SUBPACKAGE###
- * @version $Id$
- * @license New BSD
+ * @category Application
+ * @package Application_User
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class User_UsersController extends Zend_Controller_Action
 {

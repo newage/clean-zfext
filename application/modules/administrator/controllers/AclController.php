@@ -2,16 +2,17 @@
 /**
  * Administrator acl controller
  *
- * @category   Application
- * @package    Application_Administrator
- * @subpackage Controller
- *
- * @version  $Id: AclController.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @category Application
+ * @package Application_Administrator
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class Administrator_AclController extends Zend_Controller_Action
 {
-    
+
     /**
      * Initialize default method
      *
@@ -20,7 +21,7 @@ class Administrator_AclController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout('administrator/layout');
     }
-    
+
     /**
      * Intex action
      * Show all routes
