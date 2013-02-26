@@ -1,5 +1,22 @@
 #CHANGELOG
 
+##1.1.7 (2013-02-26):
+- c58fe34 Create image model
+- 5bfa4b5 Create upload helper
+- 2971790 Fix error pages
+- ddfb8ef Fix button type in decorator
+- e1de74f Fix title in forms
+- 17d84d9 Merge branch 'feature/add-wysiwyg' into develop
+- 6311a4a Fix twitter buttons in decorators
+- a773860 Add wysiwyg
+- e81f34f Add textarea, file, buttons decorators and update button decorator
+- 8ca0ab1 [#7] Update install script
+- 71cf9fd Remove application.development.ini
+- f51ecd6 [#13] Add prettify library and create helper
+- 0296c86 [#10] Add notification js library and update messenger helper
+- d3b4a6e [#6] Update css for form in .hero-unit part
+- 7421b25 Update install and create uninstall
+
 ##1.1.6 (2013-01-23):
 - fc327e2 (HEAD, origin/develop, release/1.1.6, develop) Fix error in changelog file
 - 1194068 Create changelog file
