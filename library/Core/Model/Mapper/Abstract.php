@@ -20,36 +20,36 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
 
     /**
      * Delete row
-     * 
-     * @param int $id 
+     *
+     * @param int $id
      */
     public function delete($id)
     {
-        
+
     }
 
     public function fetchAll()
     {
-        
+
     }
 
     public function find($id)
     {
-        
+
     }
 
     /**
      * Save date
-     * 
+     *
      * @param Core_Model_Abstract $data
      * @return int
      */
     public function save(Core_Model_Abstract $data)
     {
         $table = $this->getDbTable();
-        return $table->insert((array)$data);
+        return $table->insert($data->toArray());
     }
-    
+
     /**
      * Set new dbTable
      * @param string $dbTable dbTable name
@@ -64,7 +64,7 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
             $replace = '$1_DbTable_$2';
             $dbTable = preg_replace($pattern, $replace, $modelClassName);
         }
-        
+
         if (is_string($dbTable)) {
             $dbTable = new $dbTable();
         }
@@ -72,7 +72,7 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
         if (!$dbTable instanceof Zend_Db_Table_Abstract) {
             throw new Exception('Invalid table data gateway provided');
         }
-        
+
         $this->_dbTable = $dbTable;
         return $this;
     }
