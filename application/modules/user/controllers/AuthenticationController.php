@@ -7,7 +7,7 @@
  * @package    Application_User
  * @subpackage Controller
  *
- * @version  $Id: AuthenticationController.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
 
 class User_AuthenticationController extends Zend_Controller_Action
@@ -23,8 +23,6 @@ class User_AuthenticationController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-//        $this->view->headScript()->appendScript('$(".dropdown-toggle").dropdown()');
-        
         $auth = Zend_Auth::getInstance();
         $this->view->identity = $auth->hasIdentity();
     }
@@ -42,8 +40,12 @@ class User_AuthenticationController extends Zend_Controller_Action
             $mapper = new User_Model_UsersMapper();
 
             if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'))) {
-                $this->_helper->FlashMessenger('Successful Login');
-                $this->getHelper('Redirector')->gotoUrl('/');
+                $this->getHelper('Messenger')->addMessage(
+                    'Successful Login',
+                    Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+                    true
+                );
+                $this->getHelper('Redirect')->gotoUrl('/');
             } else {
                 $form->addError('Not correct login or password! Or not active account');
             }
@@ -62,10 +64,6 @@ class User_AuthenticationController extends Zend_Controller_Action
         $auth->setStorage(new Zend_Auth_Storage_Session('Zend_Auth'));
         $auth->getStorage()->clear();
 
-        $this->_helper->redirector(
-                Zend_Controller_Front::getInstance()->getDefaultAction(),
-                Zend_Controller_Front::getInstance()->getDefaultControllerName(),
-                Zend_Controller_Front::getInstance()->getDefaultModule()
-        );
+        $this->getHelper('Redirect')->gotoUrl('/');
     }
 }

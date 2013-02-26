@@ -1,42 +1,74 @@
 <?php
 /**
+ * Sent message to frontend
  *
  * @category   Core
  * @package    Core_Controller
  * @subpackage Action_Helper_Messenger
- * @version    $Id: Messenger.php 87 2010-08-29 10:15:50Z vadim.leontiev $
  */
 class Core_Controller_Action_Helper_Messenger extends Zend_Controller_Action_Helper_Abstract implements Countable
 {
+    const TYPE_SUCCESS = 'success';
+    const TYPE_ERROR = 'error';
+    const TYPE_INFO = 'info';
+    const TYPE_WARNING = 'warning';
+
     /**
      * Messages collector
-     * 
+     *
      * @var array
      */
     protected $_messages = array();
 
     /**
+     * Session resource
+     *
+     * @var Zend_Session
+     */
+    static protected $_session = null;
+
+    /**
+     * Name for session namespace
+     *
+     * @var string
+     */
+    protected $_namespace = 'messenger';
+
+    /**
      * Constructor
      */
-    public function  __construct($message = null)
+    public function  __construct()
     {
-        if (null !== $message) {
-            $this->setMessage($message);
+        if (!self::$_session instanceof Zend_Session_Namespace) {
+            self::$_session = new Zend_Session_Namespace($this->_namespace);
+            $this->_messages = self::$_session->messages;
+            unset(self::$_session->messages);
         }
     }
 
     /**
      * Add message to collector
      *
-     * @param string $message
-     * @return bool
+     * @param string $message Message text
+     * @param string $type Nitification type
+     * @param bool $flash Add message to session
+     * @return /Core_Controller_Action_Helper_Messenger
      */
-    public function setMessage($message)
+    public function addMessage($message, $type = self::TYPE_INFO, $flash = false)
     {
-        if (empty($message)) {
+        $reflection = new Zend_Reflection_Class($this);
+        $consts = $reflection->getConstants();
+
+        if (empty($message) || !in_array($type, $consts)) {
             return false;
         }
-        $this->_messages[] = $message;
+
+        if ($flash === true) {
+            self::$_session->messages[$type] = $message;
+        } else {
+            $this->_messages[$type] = $message;
+        }
+
         return $this;
     }
 

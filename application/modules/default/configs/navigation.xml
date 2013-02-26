@@ -16,6 +16,24 @@
                     <action>index</action>
                     <resource>default/index</resource>
                     <privilege>index</privilege>
+                    <page>
+                        <error>
+                            <label>Error</label>
+                            <module>default</module>
+                            <controller>error</controller>
+                            <action>error</action>
+                            <resource>default/error</resource>
+                            <privilege>error</privilege>
+                        </error>
+                        <deniedmvc>
+                            <label>Error</label>
+                            <module>default</module>
+                            <controller>error</controller>
+                            <action>deniedmvc</action>
+                            <resource>default/error</resource>
+                            <privilege>deniedmvc</privilege>
+                        </deniedmvc>
+                    </page>
                 </index>
                 <about>
                     <label>About</label>

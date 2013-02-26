@@ -1,12 +1,13 @@
 <?php echo $this->navigation()->breadcrumbs()->setPartial(array('breadcrumbs.phtml', 'default')); ?>
 
 <div class="hero-unit">
-    <h1><?php $this->_e('Sign In') ?></h1>
-    <hr/>
+    <div class="page-header">
+        <h1><?php echo $this->form->getDescription() ?></h1>
+    </div>
     <?php $this->form->setAction($this->url(array('module'=>'user','controller'=>'authentication','action'=>'login'))) ?>
     <?php $this->form->setAttrib('class', 'form-horizontal') ?>
     <?php echo $this->form ?>
-    
+
     <?php echo $this->link(
         array(
             'module' => 'user',
@@ -16,7 +17,7 @@
         $this->__('Registration'),
         array('class' => 'btn btn-link', 'rel' => 'tooltip', 'title' => 'Registration new user')
     ) ?>
-    
+
     <?php echo $this->link(
         array(
             'module' => 'user',

@@ -21,24 +21,24 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
         $this->view->headTitle('Error');
-        
+
         $errors = $this->_getParam('error_handler');
-        
+
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
-                $this->view->exception = 'Page not found!';
+                $this->view->exception = 'Sorry, the page you were looking does not exist.';
                 break;
             default:
-                
+
                 if (APPLICATION_ENV != 'production') {
                     $message = $errors->exception->getMessage() . ' - ' .
                                $errors->exception->getFile() . ' [' . $errors->exception->getLine() . ']';
 
 //                    Zend_Registry::get('Zend_Log')->crit($message);
                 }
-                
+
                 $this->view->exception = 'Fatall error. Please try again!';
                 break;
         }

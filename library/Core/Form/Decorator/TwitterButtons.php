@@ -8,11 +8,12 @@
  * @subpackage TwitterButton
  * @author V.Leontiev
  */
-class Core_Form_Decorator_TwitterButton extends Zend_Form_Decorator_Abstract
+class Core_Form_Decorator_TwitterButtons extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<div class="control-group">
+    protected $_format = '<hr/><div class="control-group">
     <div class="controls">
       <button type="submit" class="btn btn-primary">%1$s</button>
+      <button type="reset" class="btn">%2$s</button>
     </div>
     </div>';
 
@@ -20,8 +21,9 @@ class Core_Form_Decorator_TwitterButton extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         $label   = $element->getLabel();
+        $cancel  = $element->getTranslator()->translate('Cancel');
 
-        $markup  = sprintf($this->_format, $label);
+        $markup  = sprintf($this->_format, $label, $cancel);
         return $markup;
     }
 }

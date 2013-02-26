@@ -63,6 +63,7 @@ div.container a.brand {
 /* Form in hero-unit */
 .hero-unit form {
     font-size: 14px;
+    line-height: 20px;
 }
 
 form .select-default {
@@ -75,4 +76,9 @@ form .select-medium {
 
 form .select-large {
     width: 224px;
+}
+
+/* Update notifications */
+.notifications.top-right {
+    top: 50px !important;
 }
