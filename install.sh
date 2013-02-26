@@ -27,6 +27,10 @@ if [ ! -d "bin" ]; then
     mkdir --mode=0777 bin
 fi
 
+if [ ! -d "upload" ]; then
+    mkdir --mode=0777 upload
+fi
+
 cd ../application/configs
 
 if [ ! -f "application.development.ini" ]; then

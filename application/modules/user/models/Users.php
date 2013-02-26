@@ -18,7 +18,7 @@ class User_Model_Users extends Core_Model_Abstract
     public function setDefault()
     {
         $this->status = self::STATUS_ENABLE;
-        $this->created_at = $this->getSqlDateTime();
+        $this->created_at = $this->_getMysqlDateTime();
         $this->role_id = 2;
     }
     

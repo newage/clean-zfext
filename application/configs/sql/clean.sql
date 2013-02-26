@@ -79,6 +79,21 @@ CREATE  TABLE `emails_template` (
   INDEX `name` (`name` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Definition of table `images`
+--
+
+CREATE  TABLE `images` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `path` VARCHAR(255) NOT NULL ,
+  `created_at` DATETIME NOT NULL ,
+  `user_id` INT UNSIGNED NOT NULL ,
+  `size_width` INT UNSIGNED NOT NULL ,
+  `size_height` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `size` (`size_width` ASC, `size_height` ASC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

@@ -64,21 +64,26 @@ class User_Form_Registration extends Core_Form
 
         //Select
         $element = new Zend_Form_Element_Select('language');
-        $element->addMultiOptions(array('1'=>'English', '2'=>'Russian'));
+        $element->addMultiOptions(array(1=>'English', 2=>'Russian'));
         $element->setLabel('Language');
-        $element->addValidator('InArray', true, array(1,2));
         $element->addDecorator(new Core_Form_Decorator_Select());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(4);
         $this->addElement($element);
 
-        //Select
-        $element = new Zend_Form_Element_Textarea('description');
-        $element->setLabel('Description');
-        $element->addDecorator(new Core_Form_Decorator_TwitterEditor());
+        //Upload avatar
+        $element = new Zend_Form_Element_File('avatar');
+        $element->setRequired(true);
+        $element->setLabel('Add file...');
+        $element->addValidator('Size', false, 102400);
+        $element->addValidator('Extension', false, array('jpg', 'png'));
+        $element->addValidator('MimeType', false, array('image/png', 'image/jpeg'));
+        $element->addDecorator(new Core_Form_Decorator_TwitterFile());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setValueDisabled(true);
         $element->setOrder(5);
         $this->addElement($element);
+
 
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');

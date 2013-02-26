@@ -5,7 +5,7 @@
  * @category Application
  * @package Bootstrap
  * @author V.Leontiev
- * 
+ *
  * @version $Id$
  */
 
@@ -22,15 +22,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('frontController');
         $this->_front = $this->getResource('frontController');
         $autoLoader = Zend_Loader_Autoloader::getInstance();
-        
+
         Zend_Controller_Action_HelperBroker::addPrefix('Core_Controller_Action_Helper');
-        
+
         return $autoLoader;
     }
-    
+
     /**
      * Autoload application resources (services, plugins, models)
-     * 
+     *
      * @return void
      */
     protected function _initAutoloadApplicationResources()
@@ -43,13 +43,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'namespace' => 'Model',
                     'path'      => 'models',
                 ),
+                'helper'   => array(
+                    'namespace' => 'Helper',
+                    'path'      => 'helpers',
+                ),
                 'plugin'  => array(
                     'namespace' => 'Plugin',
                     'path'      => 'plugins',
-                ),
-                'service' => array(
-                    'namespace' => 'Service',
-                    'path'      => 'services',
                 )
             )
         ));

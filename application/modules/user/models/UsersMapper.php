@@ -43,6 +43,24 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     }
 
     /**
+     * Save new user and upload avatar
+     *
+     * @return User_Model_Users
+     */
+    public function save(Core_Model_Abstract $model)
+    {
+        $imageModel = new Application_Model_Images();
+        $imageModel->setSizeWidth(Application_Model_Images::SIZE_MEDIUM_WIDTH);
+        $imageModel->setSizeHeight(Application_Model_Images::SIZE_MEDIUM_HEIGHT);
+
+        $imageMapper = new Application_Model_ImagesMapper();
+        $imageModel = $imageMapper->setModel($imageModel)->resize()->upload();
+
+        $table = $this->getDbTable();
+        return $table->insert($model->toArray());
+    }
+
+    /**
      * Update user data
      * @param array $request
      * @return array
