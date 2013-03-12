@@ -2,11 +2,12 @@
 /**
  * User registration controller
  *
- * @category   Application
- * @package    Application_User
- * @subpackage Controller
- *
- * @version  $Id$
+ * @category Application
+ * @package Application_User
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class User_RegistrationController extends Zend_Controller_Action
@@ -31,7 +32,7 @@ class User_RegistrationController extends Zend_Controller_Action
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
             $model = new User_Model_Users($form->getValues());
             $mapper = new User_Model_UsersMapper();
-            
+
             if (true === (bool)$mapper->save($model)) {
                 $this->_helper->FlashMessenger('Registration successful');
                 $this->getHelper('Redirector')->gotoUrl('/');

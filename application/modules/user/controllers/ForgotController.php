@@ -3,11 +3,12 @@
  * If forgot login or password
  * Create new password
  *
- * @category   Application
- * @package    Application_User
- * @subpackage Controller
- *
- * @version  $Id: ForgotController.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @category Application
+ * @package Application_User
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class User_ForgotController extends Zend_Controller_Action

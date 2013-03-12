@@ -2,13 +2,12 @@
 /**
  * Default index controller
  *
- * @category   Application
- * @package    Application_Default
- * @subpackage Controller
- *
- * @version  $Id: IndexController.php 101 2010-09-22 08:10:53Z vadim.leontiev $
- *
- *
+ * @category Application
+ * @package Application_Default
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class IndexController extends Zend_Controller_Action

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * DbTable for users table
+ * Example DbTable for default table
  *
  * @category Application
- * @package Application_User_Models
+ * @package Application_Default_Models
  * @subpackage DbTable
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
  * @see https://bitbucket.org/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Model_DbTable_Users extends Core_Db_Table_Abstract
+class Default_Model_DbTable_Default extends Core_Db_Table_Abstract
 {
 
-    protected $_name = 'users';
+    protected $_name = 'default';
 
 
 }

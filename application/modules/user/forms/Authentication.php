@@ -4,9 +4,10 @@
  *
  * @category Application
  * @package Application_User
- * @subpackage Form
- *
- * @version  $Id: Authentication.php 94 2010-09-20 10:29:13Z vadim.leontiev $
+ * @subpackage Forms
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class User_Form_Authentication extends Core_Form
 {

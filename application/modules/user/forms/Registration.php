@@ -4,10 +4,11 @@
  * Registration user form
  *
  * @category Application
- * @package Application_Default
- * @subpackage Form
- *
- * @version  $Id$
+ * @package Application_User
+ * @subpackage Forms
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class User_Form_Registration extends Core_Form
 {
