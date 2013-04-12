@@ -1,8 +1,8 @@
 {
     "require": {
-        "newage/zf-tools": "dev-master",
-        "newage/zf-debug": "dev-master",
-        "zend/zf1": "1.12.2",
+        "newage/zf-tools": "1.*",
+        "newage/zf-debug": "1.*",
+        "zend/zf1": "1.12.*",
         "components/jquery": "1.9.*",
         "components/twitter-bootstrap": "2.3.*",
         "components/select2": "3.*",
@@ -40,15 +40,8 @@
             "url":  "git@github.com:components/jquery.git"
         },
         {
-            "type": "package",
-            "package": {
-                "name": "components/twitter-bootstrap",
-                "version": "2.3.1",
-                "dist": {
-                    "url": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
-                    "type": "zip"
-                }
-            }
+            "type": "vcs",
+            "url":  "git@github.com:components/bootstrap.git"
         },
         {
             "type": "package",

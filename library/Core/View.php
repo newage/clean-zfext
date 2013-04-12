@@ -9,23 +9,23 @@
  */
 class Core_View extends Zend_View
 {
- 
+
     /**
      * Title project
-     * 
+     *
      * @var string
      */
     protected $_projectTitle = null;
-    
+
     /**
      * __
      *
      * @param  string $messageid Id of the message to be translated
      * @return string Translated message
      */
-    public function __($messageid = null)
+    public function __($messageid, Array $params = array())
     {
-        return $this->translate($messageid);
+        return $this->translate($messageid, $params);
     }
 
     /**
@@ -34,18 +34,27 @@ class Core_View extends Zend_View
      * @param  string $messageid Id of the message to be translated
      * @return string Translated message
      */
-    public function _e($messageid = null)
+    public function _e($messageid, Array $params = array())
     {
-        if ($messageid === null) {
-            return null;
-        }
-        
-        echo $this->translate($messageid);
+        echo $this->translate($messageid, $params);
     }
-    
+
+    /**
+     * Plural
+     *
+     * @param string $single
+     * @param string $plural
+     * @param int $number
+     * @return plural string
+     */
+    public function _n($single, $more, $number)
+    {
+        return $this->translate(array($single, $more, $number), $number);
+    }
+
     /**
      * Get project title
-     * 
+     *
      * @return string
      */
     public function projectTitle()
