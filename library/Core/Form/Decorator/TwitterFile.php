@@ -11,9 +11,9 @@
 class Core_Form_Decorator_TwitterFile extends Zend_Form_Decorator_Abstract
 {
     protected $_format = '<div class="control-group">
-        <div class="controls">
-          <button type="button" id="upload_button" class="btn btn-success"><i class="icon-plus"></i> %1$s</button>
-          <span id="upload_filename"></span>
+        <div class="controls input-append">
+            <input class="span2" id="appendedInputButton" type="text" value="" placeholder="%1$s">
+            <button class="btn" id="upload_button" type="button"><i class="icon-list"></i></button>
         </div>
       </div>';
 
@@ -29,17 +29,17 @@ class Core_Form_Decorator_TwitterFile extends Zend_Form_Decorator_Abstract
         preg_match('~<dd>.*</dd>~sm', $content, $matches);
         $dd = isset($matches[0]) ? $matches[0] : $content;
 
-        $element->getView()->headScript()->appendScript('$("#upload_button").click(function() {
+        $element->getView()->headScript()->appendScript('$("#upload_button, #appendedInputButton").click(function() {
                 $("#'.$id.'").trigger("click");
             });
             $("dd").hide();
             $("#'.$id.'").change(function() {
-                filename = $("#'.$id.'").val().split("\\\\")[2];
+                filename = $("#'.$id.'").val().split("\\\\").pop();
                 if (filename == undefined) {
                     filename = $("#'.$id.'").val();
                 }
 
-                $("#upload_filename").text(filename);
+                $("#appendedInputButton").val(filename);
             });');
 
         $markup = sprintf($this->_format, $label, $id, $name, $required);
