@@ -40,7 +40,7 @@ class User_AuthenticationController extends Zend_Controller_Action
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
             $mapper = new User_Model_UsersMapper();
 
-            if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'))) {
+            if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'), $form->getValue('remember'))) {
                 $this->getHelper('Messenger')->addMessage(
                     'Successful Login',
                     Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
