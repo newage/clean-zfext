@@ -56,6 +56,7 @@ class Core_Controller_Action_Helper_Messenger extends Zend_Controller_Action_Hel
      */
     public function addMessage($message, $type = self::TYPE_INFO, $flash = false)
     {
+        $translator = Zend_Registry::get('Zend_Translate');
         $reflection = new Zend_Reflection_Class($this);
         $consts = $reflection->getConstants();
 
@@ -64,9 +65,9 @@ class Core_Controller_Action_Helper_Messenger extends Zend_Controller_Action_Hel
         }
 
         if ($flash === true) {
-            self::$_session->messages[$type] = $message;
+            self::$_session->messages[$type] = $translator->_($message);
         } else {
-            $this->_messages[$type] = $message;
+            $this->_messages[$type] = $translator->_($message);
         }
 
         return $this;
