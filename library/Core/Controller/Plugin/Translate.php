@@ -63,13 +63,13 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
             $this->_default = $options['default'];
             unset($options['default']);
         }
-        
+
         $this->_options = array_merge($this->_options, $options);
     }
 
     /**
      * Create multilingual route before route startup
-     * 
+     *
      * @param Zend_Controller_Request_Abstract $request
      */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
@@ -81,7 +81,7 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         } else {
             $this->_language = $this->_default;
         }
-        
+
         $router = Zend_Controller_Front::getInstance()->getRouter();
         $route  = new Zend_Controller_Router_Route(
             ':translate/:module/:controller/:action/*',
@@ -97,11 +97,11 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         );
         $router->addRoute('multilingual', $route);
     }
-    
+
     /**
      * Set language global parametr to router
-     * 
-     * @param Zend_Controller_Request_Abstract $request 
+     *
+     * @param Zend_Controller_Request_Abstract $request
      */
     public function routeShutdown(Zend_Controller_Request_Abstract $request)
     {
@@ -127,22 +127,25 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         $localeString = $this->_locales[$this->_language];
         $locale    = new Zend_Locale($localeString);
         $this->_options['locale'] = $locale;
-        
+
         if ($this->_options['logUntranslated']) {
             $writer = new Zend_Log_Writer_Stream($this->_options['logPath']);
 
             $this->_options['log'] = new Zend_Log($writer);
             $this->_options['log']->setTimestampFormat('Y-m-d H:i:s');
         }
-        
+
         $translate = new Zend_Translate($this->_options);
 
         //Set default translator for validator
         $validateTranslator = new Zend_Translate(
-            'array',
-            $this->_options['validateTranslatorPath'],
-            $translate->getAdapter()->getLocale(),
-            array('scan' => Zend_Translate::LOCALE_DIRECTORY)
+            array(
+                'adapter' => 'array',
+                'content' => $this->_options['validateTranslatorPath'],
+                'locale' => $translate->getAdapter()->getLocale(),
+                'scan' => Zend_Translate::LOCALE_DIRECTORY,
+                'ignore'  => '==='
+            )
         );
 
         $translate->addTranslation($validateTranslator);
@@ -151,7 +154,7 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         Zend_Registry::set('Zend_Translate', $translate);
         Zend_Form::setDefaultTranslator($translate);
         Zend_Validate_Abstract::setDefaultTranslator($translate);
-        
+
         $currency = new Zend_Currency($localeString);
         $view = Zend_Layout::getMvcInstance()->getView();
         $view->assign('currency', $currency);
