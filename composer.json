@@ -4,7 +4,7 @@
         "newage/zf-debug": "1.*",
         "zend/zf1": "1.12.*",
         "components/jquery": "1.9.*",
-        "components/twitter-bootstrap": "2.3.*",
+        "components/bootstrap": "2.3.*",
         "components/select2": "3.*",
         "components/bootstrap-notify": "1.*",
         "components/font-awesome": "3.*"
@@ -49,7 +49,7 @@
         {
             "type": "package",
             "package": {
-                "name": "components/twitter-bootstrap",
+                "name": "components/bootstrap",
                 "version": "2.3.1",
                 "dist": {
                     "url": "http://twitter.github.io/bootstrap/assets/bootstrap.zip",
