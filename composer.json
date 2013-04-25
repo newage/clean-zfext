@@ -3,7 +3,6 @@
         "newage/zf-tools": "1.*",
         "newage/zf-debug": "1.*",
         "zend/zf1": "1.12.*",
-        "components/jquery": "1.9.*",
         "components/bootstrap": "2.3.*",
         "components/select2": "3.*",
         "components/bootstrap-notify": "1.*",
@@ -54,6 +53,9 @@
                 "dist": {
                     "url": "http://twitter.github.io/bootstrap/assets/bootstrap.zip",
                     "type": "zip"
+                },
+                "require": {
+                    "components/jquery": "1.9.*"
                 }
             }
         },
@@ -65,6 +67,9 @@
                 "dist": {
                     "url": "https://github.com/ivaynberg/select2/archive/3.3.1.zip",
                     "type": "zip"
+                },
+                "require": {
+                    "components/bootstrap": "2.*"
                 }
             }
         },
@@ -76,6 +81,9 @@
                 "dist": {
                     "url": "https://github.com/Nijikokun/bootstrap-notify/archive/1.0.0.zip",
                     "type": "zip"
+                },
+                "require": {
+                    "components/bootstrap": "2.*"
                 }
             }
         },
