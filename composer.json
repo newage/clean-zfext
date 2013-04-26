@@ -6,12 +6,27 @@
         "components/bootstrap": "2.3.*",
         "components/select2": "3.*",
         "components/bootstrap-notify": "1.*",
-        "components/font-awesome": "3.*"
+        "components/font-awesome": "3.*",
+        "components/jquery-i18n": "1.*"
     },
     "repositories": [
         {
             "type": "vcs",
             "url":  "git@bitbucket.org:newage/zf-tools.git"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "components/jquery-i18n",
+                "version": "1.0.1",
+                "dist": {
+                    "url": "https://github.com/newage/jquery-i18n/archive/develop.zip",
+                    "type": "zip"
+                },
+                "require": {
+                    "components/jquery": ">=1.4.1"
+                }
+            }
         },
         {
             "type": "package",

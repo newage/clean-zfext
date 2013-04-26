@@ -10,6 +10,7 @@
         $this->headScript()->prependFile('/components/bootstrap-notify/js/bootstrap-notify.js');
         $this->headScript()->prependFile('/components/bootstrap/js/bootstrap.min.js');
         $this->headScript()->prependFile('/components/jquery/jquery-1.9.1.min.js');
+        $this->headScript()->appendFile('/components/jquery-i18n/jquery.i18n.js');
         $this->headScript()->appendFile('js/core.js');
         $this->headScript()->appendFile('js/messenger.js');
         $this->jqueryScript()->appendScript('$("a").tooltip();');
