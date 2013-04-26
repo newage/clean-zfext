@@ -63,9 +63,9 @@
             "type": "package",
             "package": {
                 "name": "components/select2",
-                "version": "3.3.1",
+                "version": "3.3.2",
                 "dist": {
-                    "url": "https://github.com/ivaynberg/select2/archive/3.3.1.zip",
+                    "url": "https://github.com/ivaynberg/select2/archive/3.3.2.zip",
                     "type": "zip"
                 },
                 "require": {

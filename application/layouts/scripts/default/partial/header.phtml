@@ -1,14 +1,28 @@
 <?php echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <base href="http://<?php echo isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'clean-zfext' ?>/layouts/default/" />
     <?php echo $this->headMeta() ?>
     <?php echo $this->headTitle() ?>
     <?php
         $this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => 'favicon.ico', 'type' => 'image/vnd.microsoft.icon'));
+
+        $this->headScript()->prependFile('/components/select2/select2.js');
+        $this->headScript()->prependFile('/components/bootstrap-notify/js/bootstrap-notify.js');
+        $this->headScript()->prependFile('/components/bootstrap/js/bootstrap.min.js');
+        $this->headScript()->prependFile('/components/jquery/jquery-1.9.1.min.js');
+        $this->headScript()->appendFile('js/core.js');
         $this->headScript()->appendFile('js/messenger.js');
+        $this->jqueryScript()->appendScript('$("a").tooltip();');
+
+
+        $this->headLink()->appendStylesheet('/components/bootstrap/css/bootstrap.min.css');
+        $this->headLink()->appendStylesheet('/components/bootstrap/css/bootstrap-responsive.min.css');
+        $this->headLink()->appendStylesheet('/components/select2/select2.css');
+        $this->headLink()->appendStylesheet('/components/bootstrap-notify/css/bootstrap-notify.css');
+        $this->headLink()->appendStylesheet('/components/font-awesome/css/font-awesome.min.css');
+        $this->headLink()->appendStylesheet('css/style.css');
     ?>
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
-    <?php echo $this->jQuery() ?>
+    <?php echo $this->headScript() ?>
 </head>

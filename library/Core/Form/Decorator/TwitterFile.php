@@ -29,7 +29,7 @@ class Core_Form_Decorator_TwitterFile extends Zend_Form_Decorator_Abstract
         preg_match('~<dd>.*</dd>~sm', $content, $matches);
         $dd = isset($matches[0]) ? $matches[0] : $content;
 
-        $element->getView()->headScript()->appendScript('$("#upload_button, #appendedInputButton").click(function() {
+        $element->getView()->jqueryScript()->appendScript('$("#upload_button, #appendedInputButton").click(function() {
                 $("#'.$id.'").trigger("click");
             });
             $("dd").hide();

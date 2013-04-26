@@ -35,8 +35,8 @@ class Core_Form_Decorator_Select extends Zend_Form_Decorator_Abstract
         foreach ($element->options as $key => $val) {
             $options .= '<option value="'.$key.'">'.$val.'</option>';
         }
-        $view = new Zend_View();
-        $view->headScript()->appendScript('$("#'.$id.'").select2();');
+
+        $element->getView()->jqueryScript()->appendScript('$("#'.$id.'").select2();');
 
         $markup  = sprintf($this->_format, $label, $id, $name, $options, $required, $class);
         return $markup;
