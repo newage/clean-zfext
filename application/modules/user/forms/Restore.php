@@ -3,10 +3,11 @@
  * Recall login and password form
  *
  * @category Application
- * @package Application_Default
- * @subpackage Form
- *
- * @version  $Id: Forgot.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @package Application_User
+ * @subpackage Forms
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class User_Form_Restore extends Core_Form
 {

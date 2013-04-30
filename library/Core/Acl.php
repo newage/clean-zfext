@@ -43,7 +43,7 @@ class Core_Acl extends Zend_Acl
 
         //Allow all resource to role admin
         $this->allow('admin');
-        
+
         return $this;
     }
 
@@ -110,7 +110,7 @@ class Core_Acl extends Zend_Acl
                 $resource = $moduleName . '/' . $controllerName;
 
                 $this->_addResource($resource);
-                
+
                 $this->_addRule($rules, $resource);
             }
         }
@@ -119,7 +119,7 @@ class Core_Acl extends Zend_Acl
 
     /**
      * Add one rule
-     * 
+     *
      * @param array $rules
      * @param string $resource
      * @param string|null $privileges

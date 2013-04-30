@@ -42,17 +42,7 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         'controller' => 'error',
         'action'     => 'nofound'
     );
-    
-    /**
-     * Page for redirect after logined
-     * @var array
-     */
-    protected $_doLogin = array(
-        'module'     => 'default',
-        'controller' => 'index',
-        'action'     => 'index'
-    );
-    
+
     /**
      * default role name
      *
@@ -79,23 +69,19 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
      * @var array
      */
     protected $_resources = array();
-    
+
     /**
      *
-     * @param array $options 
+     * @param array $options
      */
     public function  __construct(Array $options = array())
     {
         if (isset($options['denied'])) {
             $this->_deniedPage = array_merge($this->_deniedPage, $options['denied']);
         }
-        
+
         if (isset($options['error'])) {
             $this->_errorPage = array_merge($this->_errorPage, $options['error']);
-        }
-        
-        if (isset($options['redirect'])) {
-            $this->_doLogin = array_merge($this->_doLogin, $options['redirect']);
         }
 
         if (isset($options['role'])) {
@@ -130,7 +116,7 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
             $this->setAcl(new Core_Acl($config));
             $this->saveCache();
         }
-        
+
         Zend_Registry::set('Zend_Acl', $this->_acl);
 
         return $this->_acl;
@@ -219,8 +205,8 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
     {
         $acl = $this->getAcl();
         $resource = $request->getModuleName() . '/' . $request->getControllerName();
-        $session = new Zend_Session_Namespace('Core_Request');
-        
+        $session = new Zend_Session_Namespace('Core_Acl');
+
         if (!empty($session->params) && Zend_Auth::getInstance()->hasIdentity() !== false) {
             $params = $session->params;
             $session->unsetAll();
@@ -245,21 +231,21 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
                 /** Save request to session */
                 $session->params = $this->_request->getParams();
             }
-            
+
             $this->_denyAccess();
         }
     }
-    
+
     /**
      * Set to error page
-     * 
+     *
      * @return void
      */
     protected function _toError()
     {
         $this->_setDispatched($this->_errorPage);
     }
-    
+
     /**
      * Deny Access Function
      * Redirects to errorPage,
@@ -274,7 +260,7 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 
     /**
      * Set new dispatched
-     * 
+     *
      * @param array $params Dispatcher params
      * @param type $dispatched
      */
@@ -285,7 +271,7 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         $this->_request->setActionName($params['action']);
         $this->_request->setDispatched($dispatched);
     }
-    
+
     /**
      * Create config rules array
      * @return array

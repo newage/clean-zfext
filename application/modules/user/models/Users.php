@@ -2,10 +2,13 @@
 
 /**
  * Model for user table
- * 
- * @package    Application_Model
- * @subpackage User
- * @author V.Leontiev 
+ *
+ * @category Application
+ * @package Application_User
+ * @subpackage Models
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class User_Model_Users extends Core_Model_Abstract
 {
@@ -21,52 +24,52 @@ class User_Model_Users extends Core_Model_Abstract
         $this->created_at = $this->_getMysqlDateTime();
         $this->role_id = 2;
     }
-    
+
     /**
      * Set role
      * @param int $value
-     * @return \User_Model_Users 
+     * @return \User_Model_Users
      */
     public function setRole($value)
     {
         $this->role_id = $value;
         return $this;
     }
-    
+
     /**
      * Set status
-     * 
+     *
      * @param string $value
-     * @return \User_Model_Users 
+     * @return \User_Model_Users
      */
     public function setStatus($value)
     {
         $this->status = $value;
         return $this;
     }
-    
+
     /**
      * Set email
-     * 
+     *
      * @param string $value
-     * @return \User_Model_Users 
+     * @return \User_Model_Users
      */
     public function setEmail($value)
     {
         $this->email = $value;
         return $this;
     }
-    
+
     /**
      * Get email
-     * 
+     *
      * @return string
      */
     public function getEmail()
     {
         return $this->email;
     }
-    
+
     /**
      * Generate hash to password
      *
@@ -83,20 +86,20 @@ class User_Model_Users extends Core_Model_Abstract
         } else {
             $this->password = $value;
         }
-        
+
         return $this;
     }
 
     /**
      * Get password
-     * 
+     *
      * @return string
      */
     public function getPassword()
     {
         return $this->password;
     }
-    
+
     /**
      * Create and set dynamic salt for password
      *

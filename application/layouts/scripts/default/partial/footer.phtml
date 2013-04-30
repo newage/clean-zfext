@@ -4,6 +4,27 @@
         <p>2011 - 2012</p>
       </div>
     </div>
-<!-- // Scripts -->
-<?php $this->headScript()->appendScript('$("a").tooltip()') ?>
-<?php echo $this->headScript() ?>
+
+<div id="errorModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><?php $this->_e('Ooops') ?></h3>
+  </div>
+  <div class="modal-body">
+    <p></p>
+  </div>
+</div>
+
+<div id="confirmModal" class="modal hide fade">
+    <div class="modal-header">
+        <h3><?php $this->_e('Confirm your action') ?></h3>
+    </div>
+    <div class="modal-body">
+        <p><?php $this->_e('This is a confirm modal, click confirm button to perform your action') ?></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><?php $this->_e('Close') ?></button>
+        <button class="btn btn-primary" id="confirmYesBtn"><?php $this->_e('Confirm') ?></button>
+    </div>
+</div>
+<?php echo $this->jqueryScript(); ?>

@@ -2,22 +2,17 @@
 /**
  * Administrator index controller
  *
- * @category   Application
- * @package    Application_Administrator
- * @subpackage Controller
- *
- * @version  $Id: IndexController.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @category Application
+ * @package Application_Administrator
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class Administrator_IndexController extends Zend_Controller_Action
 {
-    /**
-     * Default model object
-     *
-     * @var object
-     */
-    private $_model = null;
-    
+
     /**
      * Initialize default method
      *
@@ -26,7 +21,7 @@ class Administrator_IndexController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout('administrator/layout');
     }
-    
+
     /**
      * Intex action
      *

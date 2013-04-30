@@ -4,9 +4,10 @@
  *
  * @category Application
  * @package Application_User
- * @subpackage Form
- *
- * @version  $Id: Authentication.php 94 2010-09-20 10:29:13Z vadim.leontiev $
+ * @subpackage Forms
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class User_Form_Authentication extends Core_Form
 {
@@ -44,11 +45,21 @@ class User_Form_Authentication extends Core_Form
 
         $this->addElement($element);
 
+        //create password field
+        $element = new Zend_Form_Element_Checkbox('remember');
+        $element->setLabel('Remember me');
+        $element->addFilter('Boolean');
+        $element->addDecorator(new Core_Form_Decorator_TwitterCheckbox());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(3);
+
+        $this->addElement($element);
+
         //create submit button
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Sign In');
         $element->addDecorator(new Core_Form_Decorator_TwitterButton());
-        $element->setOrder(3);
+        $element->setOrder(4);
 
         $this->addElement($element);
     }

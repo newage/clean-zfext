@@ -2,16 +2,17 @@
 /**
  * Default search controller
  *
- * @category   Application
- * @package    Application_Default
- * @subpackage Controller
- *
- * @version  $Id$
+ * @category Application
+ * @package Application_Default
+ * @subpackage Controllers
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 
 class SearchController extends Zend_Controller_Action
 {
-    
+
     /**
      * Initialize default method
      *
@@ -26,7 +27,7 @@ class SearchController extends Zend_Controller_Action
             ->addActionContext('autocomplete', 'json')
             ->initContext();
     }
-    
+
     /**
      * Intex action
      * Generate login form

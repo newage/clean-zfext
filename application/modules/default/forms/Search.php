@@ -1,12 +1,14 @@
 <?php
+
 /**
  * Search form
  *
  * @category Application
- * @package Application_User
- * @subpackage Form
- *
- * @version  $Id$
+ * @package Application_Default
+ * @subpackage Forms
+ * @author Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @see https://bitbucket.org/newage/clean-zfext
+ * @since php 5.1 or higher
  */
 class Default_Form_Search extends Zend_Form
 {
