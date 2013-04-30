@@ -31,10 +31,10 @@ class Core_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstract
      *
      * @param \Zend_Controller_Request_Abstract $request
      */
-    public function postDispatch(\Zend_Controller_Request_Abstract $request)
+    public function dispatchLoopShutdown()
     {
         $layout = Zend_Layout::getMvcInstance();
-        $moduleName = $request->getModuleName();
+        $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
 
         if (!strstr($layout->getLayout(), $moduleName)
             && is_dir($layout->getLayoutPath() . DIRECTORY_SEPARATOR . $moduleName)
