@@ -1,5 +1,38 @@
 #CHANGELOG
 
+##1.2.0 (2013-04-30):
+- dc01677 [#14] Remove dead code, and redirect to access page after login
+- b910f91 [#19] Move jquery script from layout to plugin. Maybe in future not loaded jquery scripts from all view
+- f32c4c8 [#5] Fix login problem in authenticate controller
+- 8e5f9af Add library for jquery script
+- fd5b979 [#17] Collect all jquery string and show at one string
+- 1bb15d2 Merge branch 'feature/autoload-layouts' into develop
+- 69efc87 [#18] Load plugin after dispatch loot shutdown
+- 42b5c68 Create layout plugin with autoloading existing layout for modules
+- 962f220 Create controller plugin for autoload layout
+- ce435e8 Add jquery i18n plugin
+- f64023b Add jquery view helper
+- 80e342e Update composer
+- 164a82c Resolve conflicts
+- 83f7ca4 Add development.ini file to gitignore
+- a46e78b Add development.ini file to gitignore
+- 075150a Update composer config
+- 563e5ee Add twitter checkbox
+- b841c52 Fix bug in translate plugin
+- c1864ed Fix composer json
+- 16f2ba7 Update translate in messenger
+- 979012b Update twitter input file field
+- c8de906 Add i18n jquery plugin
+- e1b6982 Add plural to gettext translate file
+- d70df09 Add plural forms to translate
+- 00fa19f Add confirm modal and json error modal
+- 3f1878a Resolve conflicts
+- be6b6dd Add and on awesome font
+- c4494b4 Update libraries version
+- fa8633d Merge branch 'release/1.1.7' into develop
+- 5b7fdc6 Update docs in administrator and user modules
+- 3ccde9d Update documentation in default module
+
 ##1.1.7 (2013-02-26):
 - c58fe34 Create image model
 - 5bfa4b5 Create upload helper
