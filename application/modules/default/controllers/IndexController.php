@@ -43,8 +43,7 @@ class IndexController extends Zend_Controller_Action
     {
         $this->getHelper('Messenger')->addMessage(
             'This message from default/index/dologin action',
-            Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
-            true
+            Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS
         );
         $this->getHelper('Redirector')->gotoUrl('/en/user/authentication/login');
     }
