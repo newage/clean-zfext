@@ -1,10 +1,3 @@
-<?php if ($this->Messenger()->count() > 0) :?>
-    <div class="notifications top-right"></div>
-    <?php foreach ($this->Messenger()->getMessages() as $type => $message) : ?>
-        <?php $this->jqueryScript()->append('$(".notifications").notify({
-                message: { text: "'.$message.'" },
-                type: "'.$type.'"}
-            ).show();');
-        ?>
-    <?php endforeach ?>
-<?php endif; ?>
+<?php if ($this->Messenger()->count() > 0) {
+    echo $this->Messenger()->showMessages();
+} ?>

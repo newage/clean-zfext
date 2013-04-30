@@ -74,6 +74,25 @@ class Core_Controller_Action_Helper_Messenger extends Zend_Controller_Action_Hel
     }
 
     /**
+     * Show alert message in notification windows
+     *
+     * @retur string
+     */
+    public function showMessages()
+    {
+        $view = Zend_Layout::getMvcInstance()->getView();
+        foreach ($this->_messages as $type => $message) {
+            $view->jqueryScript()->append('$(".notifications").notify({
+                    message: { text: "'.$message.'" },
+                    type: "'.$type.'"}
+                ).show();'
+            );
+        }
+
+        return '<div class="notifications top-right"></div>';
+    }
+
+    /**
      * Get messages from collector
      *
      * @return array
