@@ -32,7 +32,7 @@ class Core_Form_Decorator_TwitterEditor extends Zend_Form_Decorator_Abstract
         $value    = $element->getValue();
         $required = $element->isRequired() ? 'required' : '';
 
-        $element->getView()->jqueryScript()->appendScript('$("#'.$id.'").wysihtml5()');
+        $element->getView()->jqueryScript()->append('$("#'.$id.'").wysihtml5()');
 
         $markup  = sprintf($this->_format, $label, $id, $name, $value, $required);
         return $markup;

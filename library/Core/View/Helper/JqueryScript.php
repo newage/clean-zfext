@@ -11,6 +11,8 @@
  */
 class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Container_Standalone
 {
+    protected $_items = array();
+
     /**
      *
      * @return \Core_View_Helper_JqueryScript
@@ -21,17 +23,25 @@ class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Contain
     }
 
     /**
+     * Add jquery script
      *
      * @see Zend_View_Helper_HeadScript::__call()
-     * @param  string $method
-     * @param  array $args
+     * @param  string $script
      * @return Zend_View_Helper_HeadScript
      * @throws Zend_View_Exception if too few arguments or invalid method
      */
-    public function __call($method, $args)
+    public function append($script)
     {
-        $headScript = new Zend_View_Helper_HeadScript();
-        $content = "$(function() {\n" . $args[0] . "\n})";
-        return $headScript->$method($content);
+        $this->_items[] = "\n" . $script . "\n";
+    }
+
+    public function toString()
+    {
+        if (count($this->_items) > 0) {
+            $scripts = '<script type="text/javascript">$(function() {'.implode("\n", $this->_items).'})</script>';
+        } else {
+            $scripts = '';
+        }
+        return $scripts;
     }
 }

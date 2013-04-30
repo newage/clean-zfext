@@ -23,7 +23,7 @@ class Core_Form_Decorator_TwitterPopover extends Zend_Form_Decorator_Abstract
             title:"' . $translate->translate('Description') . '"
         });';
 
-        $element->getView()->jqueryScript()->appendScript($script);
+        $element->getView()->jqueryScript()->append($script);
 
         return $content;
     }
