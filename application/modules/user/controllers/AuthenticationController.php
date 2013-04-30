@@ -34,6 +34,8 @@ class User_AuthenticationController extends Zend_Controller_Action
      */
     public function loginAction()
     {
+        $this->view->jqueryScript()->append('$("a").tooltip();');
+        
         $this->view->headTitle('Login');
         $form = new User_Form_Authentication();
 
