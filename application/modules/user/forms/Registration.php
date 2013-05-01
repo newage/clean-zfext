@@ -21,7 +21,7 @@ class User_Form_Registration extends Core_Form
     {
         $this->setMethod('post')
              ->setName('registration')
-             ->setDescription('User Registration')
+             ->setDescription('New User Registration')
              ->setAttrib('required', 'true');
 
         //Add email
@@ -75,20 +75,22 @@ class User_Form_Registration extends Core_Form
         //Upload avatar
         $element = new Zend_Form_Element_File('avatar');
         $element->setRequired(true);
-        $element->setLabel('Add file...');
+        $element->setLabel('Avatar');
+        $element->setDescription('Add file...');
         $element->addValidator('Size', false, 102400);
         $element->addValidator('Extension', false, array('jpg', 'png'));
         $element->addValidator('MimeType', false, array('image/png', 'image/jpeg'));
         $element->addDecorator(new Core_Form_Decorator_TwitterFile());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setValueDisabled(true);
+        $element->setAttrib('class', 'span2');
         $element->setOrder(5);
         $this->addElement($element);
 
 
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');
-        $element->addDecorator(new Core_Form_Decorator_TwitterButton);
+        $element->addDecorator(new Core_Form_Decorator_TwitterButtons);
         $element->setOrder(6);
         $this->addElement($element);
     }

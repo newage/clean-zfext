@@ -11,20 +11,29 @@
 class Core_Form_Decorator_TwitterFile extends Zend_Form_Decorator_Abstract
 {
     protected $_format = '<div class="control-group">
-        <div class="controls input-append">
-            <input class="span2" id="appendedInputButton" type="text" value="" placeholder="%1$s">
-            <button class="btn" id="upload_button" type="button"><i class="icon-list"></i></button>
+        <label class="control-label">%1$s%4$s</label>
+        <div class="controls">
+            <div class="input-append">
+                <input %3$s id="appendedInputButton" type="text" value="" placeholder="%2$s">
+                <button class="btn" id="upload_button" type="button"><i class="icon-folder-open"></i></button>
+            </div>
         </div>
       </div>';
 
     public function render($content)
     {
-        $matches = null;
-        $element  = $this->getElement();
-        $name     = htmlentities($element->getFullyQualifiedName());
-        $label    = $element->getLabel();
-        $id       = htmlentities($element->getId());
-        $required = $element->isRequired() ? 'required' : '';
+        $matches     = null;
+        $element     = $this->getElement();
+        $label       = $element->getLabel();
+        $description = $element->getDescription();
+        $id          = htmlentities($element->getId());
+        $required    = $element->isRequired() ? ' *' : '';
+        $class       = $element->getAttrib('class');
+        if (!empty($class)) {
+            $class = 'class="'.$class.'"';
+        } else {
+            $class = '';
+        }
 
         preg_match('~<dd>.*</dd>~sm', $content, $matches);
         $dd = isset($matches[0]) ? $matches[0] : $content;
@@ -42,7 +51,7 @@ class Core_Form_Decorator_TwitterFile extends Zend_Form_Decorator_Abstract
                 $("#appendedInputButton").val(filename);
             });');
 
-        $markup = sprintf($this->_format, $label, $id, $name, $required);
+        $markup = sprintf($this->_format, $label, $description, $class, $required);
         $markup .= $dd;
         return $markup;
     }
