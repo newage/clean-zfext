@@ -7,12 +7,27 @@
         "components/select2": "3.*",
         "components/bootstrap-notify": "1.*",
         "components/font-awesome": "3.*",
-        "components/jquery-i18n": "1.*"
+        "components/jquery-i18n": "1.*",
+        "components/bootstrap-dropdown": "1.*"
     },
     "repositories": [
         {
             "type": "vcs",
             "url":  "git@bitbucket.org:newage/zf-tools.git"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "components/bootstrap-dropdown",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "http://lightglitch.github.io/bootstrap-xtra/js/bootstrap-dropdown.js",
+                    "type": "file"
+                },
+                "require": {
+                    "components/bootstrap": ">=2.3.1"
+                }
+            }
         },
         {
             "type": "package",
