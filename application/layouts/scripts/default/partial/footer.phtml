@@ -1,9 +1,11 @@
-    <div id="footer">
-      <div class="container">
-        <p class="pull-right"><a href="<?php echo $this->url() ?>#top"><?php $this->_e('Back to top') ?></a></p>
-        <p>2011 - 2012</p>
-      </div>
+<footer class="footer">
+    <div class="container">
+      <p class="pull-right"><a href="<?php echo $this->url() ?>#top">Back to top</a></p>
+      <p>
+        Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>.
+      </p>
     </div>
+</footer>
 
 <div id="errorModal" class="modal hide fade">
   <div class="modal-header">
@@ -27,5 +29,7 @@
         <button class="btn btn-primary" id="confirmYesBtn"><?php $this->_e('Confirm') ?></button>
     </div>
 </div>
-<?php echo $this->headScript() ?>
-<?php echo $this->jqueryScript(); ?>
+<?php
+    echo $this->headScript();
+    echo $this->jqueryScript();
+?>
