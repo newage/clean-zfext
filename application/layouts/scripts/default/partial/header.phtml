@@ -6,19 +6,19 @@
     <?php
         $this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => 'favicon.ico', 'type' => 'image/vnd.microsoft.icon'));
 
-        $this->headScript()->prependFile('/components/select2/select2.js');
-        $this->headScript()->prependFile('/components/bootstrap-dropdown/bootstrap-dropdown.js');
-        $this->headScript()->prependFile('/components/bootstrap-notify/js/bootstrap-notify.js');
-        $this->headScript()->prependFile('/components/bootstrap/js/bootstrap.min.js');
-        $this->headScript()->prependFile('/components/jquery/jquery-1.9.1.min.js');
-        $this->headScript()->appendFile('/components/jquery-i18n/jquery.i18n.js');
+        $this->headScript()->prependFile('/view/select2/select2.js');
+        $this->headScript()->prependFile('/view/bootstrap-dropdown/bootstrap-dropdown.js');
+        $this->headScript()->prependFile('/view/bootstrap-notify/js/bootstrap-notify.js');
+        $this->headScript()->prependFile('/view/bootstrap/js/bootstrap.min.js');
+        $this->headScript()->prependFile('/view/jquery/jquery-1.9.1.min.js');
+        $this->headScript()->appendFile('/view/jquery-i18n/jquery.i18n.js');
         $this->headScript()->appendFile('js/core.js');
 
-        $this->headLink()->appendStylesheet('/components/bootstrap/css/bootstrap.min.css');
-        $this->headLink()->appendStylesheet('/components/bootstrap/css/bootstrap-responsive.min.css');
-        $this->headLink()->appendStylesheet('/components/select2/select2.css');
-        $this->headLink()->appendStylesheet('/components/bootstrap-notify/css/bootstrap-notify.css');
-        $this->headLink()->appendStylesheet('/components/font-awesome/css/font-awesome.min.css');
+        $this->headLink()->appendStylesheet('/view/bootstrap/css/bootstrap.min.css');
+        $this->headLink()->appendStylesheet('/view/bootstrap/css/bootstrap-responsive.min.css');
+        $this->headLink()->appendStylesheet('/view/select2/select2.css');
+        $this->headLink()->appendStylesheet('/view/bootstrap-notify/css/bootstrap-notify.css');
+        $this->headLink()->appendStylesheet('/view/font-awesome/css/font-awesome.min.css');
         $this->headLink()->appendStylesheet('css/style.css');
     ?>
     <?php echo $this->headLink() ?>
