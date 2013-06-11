@@ -37,7 +37,7 @@ class Core_Application_Resource_Db extends Zend_Application_Resource_Db
             if ($this->isDefaultTableAdapter()) {
                 Zend_Db_Table::setDefaultAdapter($db);
                 $options = $this->getOptions();
-                if ((bool)$options['DefaultMetadataCache'] === true &&
+                if ((bool)$options['setMetadataCache'] === true &&
                     ($cache = $this->getMetadataCache()) !== false) {
                     Zend_Db_Table::setDefaultMetadataCache($cache);
                 }

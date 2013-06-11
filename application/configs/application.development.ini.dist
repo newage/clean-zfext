@@ -32,6 +32,7 @@ resources.debug.plugins.Auth.user = email
 resources.debug.plugins.Auth.role = role
 resources.debug.plugins.3 = Time
 resources.debug.plugins.4 = Registry
+resources.debug.plugins.5 = Database
 
 ; -- Cache
 ; Translate
