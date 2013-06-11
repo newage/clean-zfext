@@ -31,7 +31,7 @@ class Core_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstract
      *
      * @param \Zend_Controller_Request_Abstract $request
      */
-    public function dispatchLoopShutdown()
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $layout = Zend_Layout::getMvcInstance();
         $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
