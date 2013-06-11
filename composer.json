@@ -8,27 +8,12 @@
         "view/bootstrap-notify": "1.*",
         "view/font-awesome": "3.*",
         "view/jquery-i18n": "1.*",
-        "view/bootstrap-dropdown": "1.*",
-        "view/fuelux": "2.*"
+        "view/bootstrap-dropdown": "1.*"
     },
     "repositories": [
         {
             "type": "vcs",
             "url":  "git@bitbucket.org:newage/zf-tools.git"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/fuelux",
-                "version": "2.3.0",
-                "dist": {
-                    "url": "https://github.com/ExactTarget/fuelux/archive/master.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "view/bootstrap": ">=2.3.1"
-                }
-            }
         },
         {
             "type": "package",
@@ -138,7 +123,7 @@
                 "name": "view/font-awesome",
                 "version": "3.1.1",
                 "dist": {
-                    "url": "https://github.com/FortAwesome/Font-Awesome/zipball/master",
+                    "url": "http://fontawesome.io/assets/font-awesome.zip",
                     "type": "zip"
                 }
             }
