@@ -12,14 +12,16 @@ resources.db.params.username = root
 resources.db.params.password = 123456
 resources.db.params.dbname = zend
 resources.db.params.charset = utf8
+resources.db.params.persistent = true
 resources.db.isDefaultTableAdapter = true
-;resources.db.DefaultMetadataCache = true
+resources.db.setMetadataCache = true
 
 ;Disable cache
 resources.cachemanager.routes.disable = true
 resources.cachemanager.translate.disable = true
 resources.cachemanager.acl.disable = true
 resources.cachemanager.navigation.disable = true
+resources.cachemanager.metadata.disable = true
 
 ;Controller setup
 resources.frontcontroller.params.displayExceptions = true
