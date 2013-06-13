@@ -5,4 +5,4 @@
 /vendor/*
 /composer*
 !/composer.json
-/zf.*
+/.zf.ini

@@ -40,7 +40,6 @@ fi
 cd ../../
 
 function zfsetup {
-    ZF_CONFIG_FILE=$(eval echo ~${PWD})
     TFILE=".zf.ini"
     echo "php.include_path = \"${PWD}/vendor/zend/zf1/library\"" > $TFILE
 }
@@ -49,7 +48,7 @@ function setupmanifest {
     ./zf enable config.manifest Manifest
 }
 
-if [ ! -f "~/.zf.ini" ]; then
+if [ ! -f "${PWD}/.zf.ini" ]; then
     echo "Setup zf tool"
     zfsetup
     echo "Create new config file"
