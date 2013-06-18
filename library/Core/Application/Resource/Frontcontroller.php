@@ -15,7 +15,7 @@
  * @category   Core
  * @package    Core_Application
  * @subpackage Resource
- * 
+ *
  * @version  $Id: Frontcontroller.php 87 2010-08-29 10:15:50Z vadim.leontiev $
  */
 class Core_Application_Resource_Frontcontroller extends Zend_Application_Resource_ResourceAbstract
@@ -27,13 +27,13 @@ class Core_Application_Resource_Frontcontroller extends Zend_Application_Resourc
 
     /**
      * Initialize Front Controller
-     * 
+     *
      * @return Zend_Controller_Front
      */
     public function init()
     {
         $front = $this->getFrontController();
-        
+
         foreach ($this->getOptions() as $key => $value) {
             switch (strtolower($key)) {
                 case 'controllerdirectory':
@@ -41,40 +41,40 @@ class Core_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                         $front->setControllerDirectory($value);
                     } elseif (is_array($value)) {
                         foreach ($value as $module => $directory) {
-                            $front->addControllerDirectory($directory, 
+                            $front->addControllerDirectory($directory,
                                                            $module);
                         }
                     }
                     break;
-                    
+
                 case 'modulecontrollerdirectoryname':
                     $front->setModuleControllerDirectoryName($value);
                     break;
-                    
+
                 case 'moduledirectory':
                     $front->addModuleDirectory($value);
                     break;
-                    
+
                 case 'defaultcontrollername':
                     $front->setDefaultControllerName($value);
                     break;
-                    
+
                 case 'defaultaction':
                     $front->setDefaultAction($value);
                     break;
-                    
+
                 case 'defaultmodule':
                     $front->setDefaultModule($value);
                     break;
-                    
+
                 case 'baseurl':
                     $front->setBaseUrl($value);
                     break;
-                    
+
                 case 'params':
                     $front->setParams($value);
                     break;
-                    
+
                 case 'plugins':
                     ksort($value);
                     foreach ((array) $value as $index => $pluginClass) {
@@ -82,7 +82,7 @@ class Core_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                             if (!isset($pluginClass['options'])) {
                                 $pluginClass['options'] = array();
                             }
-                            $plugin = new $pluginClass['classname']($pluginClass['options']);
+                            $plugin = new $pluginClass['class']($pluginClass['options']);
                         } else {
                             $plugin = new $pluginClass();
                         }
@@ -117,7 +117,7 @@ class Core_Application_Resource_Frontcontroller extends Zend_Application_Resourc
 
     /**
      * Retrieve front controller instance
-     * 
+     *
      * @return Zend_Controller_Front
      */
     public function getFrontController()
