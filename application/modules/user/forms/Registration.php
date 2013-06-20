@@ -87,11 +87,28 @@ class User_Form_Registration extends Core_Form
         $element->setOrder(5);
         $this->addElement($element);
 
-
+        //Gender
+        $element = new Zend_Form_Element_Radio('gender');
+        $element->addMultiOptions(array(1=>'Male', 2=>'Female'));
+        $element->setLabel('Gender');
+        $element->addDecorator(new Core_Form_Decorator_TwitterRadio());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(6);
+        $this->addElement($element);
+        
+        //Hobbies
+        $element = new Zend_Form_Element_MultiCheckbox('hobbies');
+        $element->addMultiOptions(array(1=>'Games', 2=>'Photos'));
+        $element->setLabel('Hobbies');
+        $element->addDecorator(new Core_Form_Decorator_TwitterMultiCheckbox());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(7);
+        $this->addElement($element);
+        
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');
         $element->addDecorator(new Core_Form_Decorator_TwitterButtons);
-        $element->setOrder(6);
+        $element->setOrder(10);
         $this->addElement($element);
     }
 
