@@ -73,19 +73,18 @@ class User_Form_Registration extends Core_Form
         $this->addElement($element);
 
         //Upload avatar
-        $element = new Zend_Form_Element_File('file');
-        $element->setRequired(true);
-        $element->setLabel('File');
-        $element->setDescription('Add file...');
-        $element->addValidator('Size', false, 102400);
-        $element->addValidator('Extension', false, array('jpg', 'png'));
-        $element->addValidator('MimeType', false, array('image/png', 'image/jpeg'));
-        $element->addDecorator(new Core_Form_Decorator_TwitterFile());
-        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
-        $element->setValueDisabled(true);
-        $element->setAttrib('class', 'span2');
-        $element->setOrder(5);
-        $this->addElement($element);
+//        $element = new Zend_Form_Element_File('file');
+//        $element->setLabel('File');
+//        $element->setDescription('Add file...');
+//        $element->addValidator('Size', false, 102400);
+//        $element->addValidator('Extension', false, array('jpg', 'png'));
+//        $element->addValidator('MimeType', false, array('image/png', 'image/jpeg'));
+//        $element->addDecorator(new Core_Form_Decorator_TwitterFile());
+//        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+//        $element->setValueDisabled(true);
+//        $element->setAttrib('class', 'span2');
+//        $element->setOrder(5);
+//        $this->addElement($element);
 
         //Upload avatar
         $element = new Zend_Form_Element_File('avatar');
@@ -101,6 +100,7 @@ class User_Form_Registration extends Core_Form
         $element->setAttrib('class', 'thumbnail');
         $element->setAttrib('width', '100');
         $element->setAttrib('height', '100');
+//        $element->setAttrib('default', '/public/5/3/4/67f.jpg');
         $element->setOrder(6);
         $this->addElement($element);
         

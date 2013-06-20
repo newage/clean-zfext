@@ -13,7 +13,7 @@ class Core_Form_Decorator_TwitterAvatar extends Zend_Form_Decorator_Abstract
     protected $_format = '<div class="control-group">
         <label class="control-label">%1$s%4$s</label>
         <div class="controls">
-            <img %3$s id="imageAvatar" src="img/default_user.png" width="%5$d" height="%6$d" alt="%2$s" />
+            <img %3$s id="imageAvatar" src="%7$s" width="%5$d" height="%6$d" alt="%2$s" />
         </div>
       </div>';
 
@@ -25,14 +25,12 @@ class Core_Form_Decorator_TwitterAvatar extends Zend_Form_Decorator_Abstract
         $description = $element->getDescription();
         $id          = htmlentities($element->getId());
         $required    = $element->isRequired() ? ' *' : '';
-        $class       = $element->getAttrib('class');
-        $width       = $element->getAttrib('width');
-        $height      = $element->getAttrib('height');
-        if (!empty($class)) {
-            $class = 'class="'.$class.'"';
-        } else {
-            $class = '';
-        }
+        $class       = $element->getAttrib('class') !== null ? 'class="' . $element->getAttrib('class') . '"' : '';
+        $width       = $element->getAttrib('width') !== null ? $element->getAttrib('width') : 100;
+        $height      = $element->getAttrib('height') !== null ? $element->getAttrib('height') : 100;
+        $value       = $element->getAttrib('default') !== null
+                     ? $element->getAttrib('default')
+                     : 'img/default_user.png';
 
         preg_match('~<dd>.*</dd>~sm', $content, $matches);
         $dd = isset($matches[0]) ? $matches[0] : $content;
@@ -70,7 +68,8 @@ class Core_Form_Decorator_TwitterAvatar extends Zend_Form_Decorator_Abstract
             $class,
             $required,
             $width,
-            $height
+            $height,
+            $value
         );
         $markup .= $dd;
         return $markup;
