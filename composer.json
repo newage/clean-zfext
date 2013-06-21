@@ -3,11 +3,12 @@
         "newage/zf-tools": "1.*",
         "newage/zf-debug": "1.*",
         "zend/zf1": "1.12.*",
-        "components/bootstrap": "2.3.*",
-        "components/select2": "3.*",
-        "components/bootstrap-notify": "1.*",
-        "components/font-awesome": "3.*",
-        "components/jquery-i18n": "1.*"
+        "view/bootstrap": "2.3.*",
+        "view/select2": "3.*",
+        "view/bootstrap-notify": "1.*",
+        "view/font-awesome": "3.*",
+        "view/jquery-i18n": "1.*",
+        "view/bootstrap-dropdown": "1.*"
     },
     "repositories": [
         {
@@ -17,14 +18,28 @@
         {
             "type": "package",
             "package": {
-                "name": "components/jquery-i18n",
+                "name": "view/bootstrap-dropdown",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "http://lightglitch.github.io/bootstrap-xtra/js/bootstrap-dropdown.js",
+                    "type": "file"
+                },
+                "require": {
+                    "view/bootstrap": ">=2.3.1"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "view/jquery-i18n",
                 "version": "1.0.1",
                 "dist": {
                     "url": "https://github.com/newage/jquery-i18n/archive/develop.zip",
                     "type": "zip"
                 },
                 "require": {
-                    "components/jquery": ">=1.4.1"
+                    "view/jquery": ">=1.4.1"
                 }
             }
         },
@@ -52,7 +67,7 @@
         {
             "type": "package",
             "package": {
-                "name": "components/jquery",
+                "name": "view/jquery",
                 "version": "1.9.1",
                 "dist": {
                     "url": "http://code.jquery.com/jquery-1.9.1.min.js",
@@ -63,52 +78,52 @@
         {
             "type": "package",
             "package": {
-                "name": "components/bootstrap",
+                "name": "view/bootstrap",
                 "version": "2.3.1",
                 "dist": {
                     "url": "http://twitter.github.io/bootstrap/assets/bootstrap.zip",
                     "type": "zip"
                 },
                 "require": {
-                    "components/jquery": "1.9.*"
+                    "view/jquery": "1.9.*"
                 }
             }
         },
         {
             "type": "package",
             "package": {
-                "name": "components/select2",
+                "name": "view/select2",
                 "version": "3.3.2",
                 "dist": {
                     "url": "https://github.com/ivaynberg/select2/archive/3.3.2.zip",
                     "type": "zip"
                 },
                 "require": {
-                    "components/bootstrap": "2.*"
+                    "view/bootstrap": "2.*"
                 }
             }
         },
         {
             "type": "package",
             "package": {
-                "name": "components/bootstrap-notify",
+                "name": "view/bootstrap-notify",
                 "version": "1.0.0",
                 "dist": {
                     "url": "https://github.com/Nijikokun/bootstrap-notify/archive/1.0.0.zip",
                     "type": "zip"
                 },
                 "require": {
-                    "components/bootstrap": "2.*"
+                    "view/bootstrap": "2.*"
                 }
             }
         },
         {
             "type": "package",
             "package": {
-                "name": "components/font-awesome",
-                "version": "3.0.2",
+                "name": "view/font-awesome",
+                "version": "3.1.1",
                 "dist": {
-                    "url": "https://github.com/FortAwesome/Font-Awesome/zipball/master",
+                    "url": "http://fontawesome.io/assets/font-awesome.zip",
                     "type": "zip"
                 }
             }

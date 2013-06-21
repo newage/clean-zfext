@@ -1,5 +1,27 @@
 #CHANGELOG
 
+##1.2.1 (2013-06-21):
+- 3e85e98 Fixed show default image
+- bcdc5c6 Created avatar decorator for file field, created errorModal function
+- 5c80b38 Fixed load font-awesome style
+- f239abe Added new fields to registration form for more example
+- 29f15a3 Added decorator for radio with use twitter bootstrap
+- 2902106 Added multi-checkbox element decorator with twitter bootstrap
+- 4169e39 Update Manifest for load zf_tool
+- 242219d Update install.sh script
+- ee420be Enable database persistent connection
+- 433b4c1 Set metadata cache
+- 9074b32 Update composer and create skeleton for email core
+- 95c4e45 [#21] Change method name for load layout for default module
+- 6dfe189 [#20] Create zf bash file for load local zf config
+- bfa651c Update header for new font-awesome library
+- 101e06d Change components folder name to view
+- 1ceff85 Add Zend_Currency to Zend_Registry, and will can use view helper $this->currency()
+- b9b831e Update footer view
+- 529ddf6 Added to composer extend dropdown menu for bootstrap
+- 8031e54 Move all js scripts from header to footer
+- 84c9646 Update new user registration, update file upload field
+
 ##1.2.0 (2013-04-30):
 - dc01677 [#14] Remove dead code, and redirect to access page after login
 - b910f91 [#19] Move jquery script from layout to plugin. Maybe in future not loaded jquery scripts from all view

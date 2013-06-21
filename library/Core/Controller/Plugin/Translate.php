@@ -156,7 +156,6 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         Zend_Validate_Abstract::setDefaultTranslator($translate);
 
         $currency = new Zend_Currency($localeString);
-        $view = Zend_Layout::getMvcInstance()->getView();
-        $view->assign('currency', $currency);
+        Zend_Registry::set('Zend_Currency', $currency);
     }
 }

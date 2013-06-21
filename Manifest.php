@@ -3,7 +3,15 @@
 defined('VENDOR_PATH')
     || define('VENDOR_PATH', realpath(dirname(__FILE__) . '/vendor/'));
 
-require_once VENDOR_PATH . '/autoload.php';
+$prefixes = require_once VENDOR_PATH . '/autoload.php';
+
+$paths = array(get_include_path());
+foreach ($prefixes->getPrefixes() as $path) {
+    $paths[] = $path[0];
+}
+
+set_include_path(implode(PATH_SEPARATOR, $paths));
+
 Zend_Loader_Autoloader::getInstance();
 
 class Manifest

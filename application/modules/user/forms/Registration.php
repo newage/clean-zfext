@@ -21,7 +21,7 @@ class User_Form_Registration extends Core_Form
     {
         $this->setMethod('post')
              ->setName('registration')
-             ->setDescription('User Registration')
+             ->setDescription('New User Registration')
              ->setAttrib('required', 'true');
 
         //Add email
@@ -73,23 +73,59 @@ class User_Form_Registration extends Core_Form
         $this->addElement($element);
 
         //Upload avatar
+//        $element = new Zend_Form_Element_File('file');
+//        $element->setLabel('File');
+//        $element->setDescription('Add file...');
+//        $element->addValidator('Size', false, 102400);
+//        $element->addValidator('Extension', false, array('jpg', 'png'));
+//        $element->addValidator('MimeType', false, array('image/png', 'image/jpeg'));
+//        $element->addDecorator(new Core_Form_Decorator_TwitterFile());
+//        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+//        $element->setValueDisabled(true);
+//        $element->setAttrib('class', 'span2');
+//        $element->setOrder(5);
+//        $this->addElement($element);
+
+        //Upload avatar
         $element = new Zend_Form_Element_File('avatar');
         $element->setRequired(true);
-        $element->setLabel('Add file...');
+        $element->setLabel('Avatar');
+        $element->setDescription('Select avatar');
         $element->addValidator('Size', false, 102400);
         $element->addValidator('Extension', false, array('jpg', 'png'));
         $element->addValidator('MimeType', false, array('image/png', 'image/jpeg'));
-        $element->addDecorator(new Core_Form_Decorator_TwitterFile());
+        $element->addDecorator(new Core_Form_Decorator_TwitterAvatar());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setValueDisabled(true);
-        $element->setOrder(5);
+        $element->setAttrib('class', 'thumbnail');
+        $element->setAttrib('width', '100');
+        $element->setAttrib('height', '100');
+//        $element->setAttrib('default', '/public/5/3/4/67f.jpg');
+        $element->setOrder(6);
         $this->addElement($element);
-
-
+        
+        //Gender
+        $element = new Zend_Form_Element_Radio('gender');
+        $element->addMultiOptions(array(1=>'Male', 2=>'Female'));
+        $element->setLabel('Gender');
+        $element->addDecorator(new Core_Form_Decorator_TwitterRadio());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(7);
+        $this->addElement($element);
+        
+        //Hobbies
+        $element = new Zend_Form_Element_MultiCheckbox('hobbies');
+        $element->addMultiOptions(array(1=>'Games', 2=>'Photos'));
+        $element->setLabel('Hobbies');
+        $element->addDecorator(new Core_Form_Decorator_TwitterMultiCheckbox());
+        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
+        $element->setOrder(8);
+        $this->addElement($element);
+        
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');
-        $element->addDecorator(new Core_Form_Decorator_TwitterButton);
-        $element->setOrder(6);
+        $element->addDecorator(new Core_Form_Decorator_TwitterButtons);
+        $element->setOrder(10);
         $this->addElement($element);
     }
 

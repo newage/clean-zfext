@@ -1,0 +1,11 @@
+#!/bin/sh
+# path to local config file
+ZF_CONFIG_FILE="./.zf.ini"
+export ZF_CONFIG_FILE
+ 
+# add include_path option
+ZEND_TOOL_INCLUDE_PATH_PREPEND="./vendor/zend/zf1/library:./library"
+export ZEND_TOOL_INCLUDE_PATH_PREPEND
+ 
+# call vendor zf.sh
+./vendor/zend/zf1/bin/zf.sh $@
