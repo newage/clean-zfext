@@ -88,7 +88,6 @@ class User_Form_Registration extends Core_Form
 
         //Upload avatar
         $element = new Zend_Form_Element_File('avatar');
-        $element->setRequired(true);
         $element->setLabel('Avatar');
         $element->setDescription('Select avatar');
         $element->addValidator('Size', false, 102400);
@@ -103,7 +102,7 @@ class User_Form_Registration extends Core_Form
 //        $element->setAttrib('default', '/public/5/3/4/67f.jpg');
         $element->setOrder(6);
         $this->addElement($element);
-        
+
         //Gender
         $element = new Zend_Form_Element_Radio('gender');
         $element->addMultiOptions(array(1=>'Male', 2=>'Female'));
@@ -112,7 +111,7 @@ class User_Form_Registration extends Core_Form
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(7);
         $this->addElement($element);
-        
+
         //Hobbies
         $element = new Zend_Form_Element_MultiCheckbox('hobbies');
         $element->addMultiOptions(array(1=>'Games', 2=>'Photos'));
@@ -121,7 +120,7 @@ class User_Form_Registration extends Core_Form
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->setOrder(8);
         $this->addElement($element);
-        
+
         $element = new Zend_Form_Element_Submit('submit');
         $element->setLabel('Registration');
         $element->addDecorator(new Core_Form_Decorator_TwitterButtons);

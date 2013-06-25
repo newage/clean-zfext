@@ -4,8 +4,8 @@
  * Model for user table
  *
  * @category Application
- * @package Application_User
- * @subpackage Models
+ * @package    Application_Modules_User
+ * @subpackage Model
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
  * @see https://bitbucket.org/newage/clean-zfext
  * @since php 5.1 or higher
@@ -15,32 +15,120 @@ class User_Model_Users extends Core_Model_Abstract
     const STATUS_ENABLE  = 'ENABLE';
     const STATUS_DISABLE = 'DISABLE';
 
+    public $id = null;
+    public $status = null;
+    public $createdAt = null;
+    public $roleId = null;
+    public $email = null;
+    public $password = null;
+    public $salt = null;
+    public $passwordResetHash = null;
+
     /**
      * Set default variable
      */
     public function setDefault()
     {
-        $this->status = self::STATUS_ENABLE;
-        $this->created_at = $this->_getMysqlDateTime();
-        $this->role_id = 2;
+        $this->setStatus(self::STATUS_ENABLE);
+        $this->setCreatedAt();
+        $this->setRoleId(2);
     }
 
     /**
-     * Set role
-     * @param int $value
-     * @return \User_Model_Users
+     * Get user id
+     *
+     * @return int
      */
-    public function setRole($value)
+    public function getId()
     {
-        $this->role_id = $value;
+        return (int)$this->id;
+    }
+
+    /**
+     * Set user id
+     *
+     * @param int $id
+     * @return User_Model_Users
+     */
+    public function setId($value)
+    {
+        $this->id = (int)$value;
         return $this;
     }
 
     /**
-     * Set status
+     * Get user role id
      *
-     * @param string $value
+     * @return int
+     */
+    public function getRoleId()
+    {
+        return (int)$this->roleId;
+    }
+
+    /**
+     * Get image model
+     *
+     * @return \Application_Model_Images
+     */
+    public function getAvatar()
+    {
+        $images = $this->findDependentRowset('Application_Model_DbTable_Images');
+        return $images->current();
+    }
+
+    /**
+     * Get created date time
+     *
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Create or set date and time
+     *
+     * @param string $value [optional]
      * @return \User_Model_Users
+     */
+    public function setCreatedAt($value = null)
+    {
+        if ($value === null) {
+            $value = date('Y-m-d H:i:s');
+        }
+        $this->createdAt = $value;
+        return $this;
+    }
+
+    /**
+     * Set user role id
+     *
+     * @param int $id
+     * @return \User_Model_Users
+     */
+    public function setRoleId($value)
+    {
+        $this->roleId = (int)$value;
+        return $this;
+    }
+
+    /**
+     * Get user status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set user status
+     *
+     * @param string $id
+     * @return User_Model_Users
      */
     public function setStatus($value)
     {
@@ -56,7 +144,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setEmail($value)
     {
-        $this->email = $value;
+        $this->email = strtolower(trim($value));
         return $this;
     }
 
@@ -68,6 +156,28 @@ class User_Model_Users extends Core_Model_Abstract
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Get password hash
+     *
+     * @return string
+     */
+    public function getPasswordResetHash()
+    {
+        return $this->passwordResetHash;
+    }
+
+    /**
+     * Set new hash for pasword restore
+     *
+     * @param string $value
+     * @return \User_Model_Users
+     */
+    public function setPasswordResetHash($value)
+    {
+        $this->passwordResetHash = $value;
+        return $this;
     }
 
     /**
@@ -88,6 +198,16 @@ class User_Model_Users extends Core_Model_Abstract
         }
 
         return $this;
+    }
+
+    /**
+     * Get salt after generate password
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
     /**

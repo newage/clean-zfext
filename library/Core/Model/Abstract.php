@@ -7,7 +7,7 @@
  * @license New BSD
  * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
-abstract class Core_Model_Abstract
+abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
 {
 
     /**
@@ -16,13 +16,17 @@ abstract class Core_Model_Abstract
      */
     public function __construct($options = null)
     {
-        if (method_exists($this, 'setDefault')) {
-            $this->setDefault();
+        if (isset($options['data'])) {
+            $this->setOptions($options['data']);
+        } elseif (!empty($options)) {
+            $this->setOptions($options);
+            
+            if (method_exists($this, 'setDefault')) {
+                $this->setDefault();
+            }
         }
 
-        if (null != $options) {
-            $this->setOptions($options);
-        }
+        parent::__construct($options);
     }
 
     /**
@@ -106,7 +110,10 @@ abstract class Core_Model_Abstract
         $classVars = (array)$this;
 
         foreach ($classVars as $name => $value) {
-            $returnArrayVars[$this->_unCreateCamelCaseName($name)] = $value;
+            $methodName = 'get' . ucfirst($name);
+            if (method_exists($this, $methodName)) {
+                $returnArrayVars[$this->_unCreateCamelCaseName($name)] = $value;
+            }
         }
         return $returnArrayVars;
     }
