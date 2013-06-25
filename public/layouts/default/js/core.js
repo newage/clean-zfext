@@ -78,11 +78,13 @@ $(function() {
     });
 
     $(document).ajaxComplete(function(event, request, settings) {
-        var requestJson = JSON.parse(request.responseText);
-        if (requestJson.error !== undefined) {
-            $('#errorModal').find('.modal-header h3').text('Error response');
-            $('#errorModal').find('.modal-body p').text(requestJson.error);
-            $('#errorModal').modal('show');
+        if (request.responseText.search('{') === 0) {
+            var requestJson = JSON.parse(request.responseText);
+            if (requestJson.error !== undefined) {
+                $('#errorModal').find('.modal-header h3').text('Error response');
+                $('#errorModal').find('.modal-body p').text(requestJson.error);
+                $('#errorModal').modal('show');
+            }
         }
     });
 });
