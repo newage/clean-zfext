@@ -121,9 +121,9 @@
             "type": "package",
             "package": {
                 "name": "view/font-awesome",
-                "version": "3.1.1",
+                "version": "3.2.1",
                 "dist": {
-                    "url": "http://fontawesome.io/assets/font-awesome.zip",
+                    "url": "http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip",
                     "type": "zip"
                 }
             }

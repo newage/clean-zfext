@@ -1,16 +1,3 @@
-    <?php if ($this->FlashMessenger()->count() || (isset($this->messages) && count($this->messages))) :?>
-    <div id="messenger-window" class="ui-widget ui-widget-content ui-corner-all">
-        <div class="ui-dialog-content ui-widget-content" style="background: none; border: 0;">
-        <ul>
-            <?php foreach ($this->FlashMessenger()->getMessages() as $message) : ?>
-                <li><?php echo $this->translate($message) ?></li>
-            <?php endforeach ?>
-            <?php if (isset($this->messages)) : ?>
-                <?php foreach ($this->messages as $message) : ?>
-                    <li><?php echo $this->translate($message) ?></li>
-                <?php endforeach ?>
-            <?php endif ?>
-        </ul>
-        </div>
-    </div>
-    <?php endif ?>
+<?php if ($this->Messenger()->count() > 0) {
+    echo $this->Messenger()->showMessages();
+} ?>
