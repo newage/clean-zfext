@@ -14,13 +14,13 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
      * Constructor
      * @param array $options [optional]
      */
-    public function __construct($options = null)
+    public function __construct($options = array())
     {
         if (isset($options['data'])) {
             $this->setOptions($options['data']);
         } elseif (!empty($options)) {
             $this->setOptions($options);
-            
+
             if (method_exists($this, 'setDefault')) {
                 $this->setDefault();
             }
@@ -119,26 +119,6 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
     }
 
     /**
-     * Get current date for mysql DATE format
-     *
-     * @return string
-     */
-    protected function _getMysqlDate()
-    {
-        return date('Y-m-d');
-    }
-
-    /**
-     * Get current data and time for mysql DATETIME format
-     *
-     * @return string
-     */
-    protected function _getMysqlDateTime()
-    {
-        return date('Y-m-d H:i:s');
-    }
-
-    /**
      * Get current logined user id
      *
      * @return int
@@ -147,5 +127,21 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
         return (int)$identity->id;
+    }
+
+    /**
+     * Get dependent model
+     *
+     * @param string $name Full DbTable name
+     * @return object
+     */
+    protected function _getDependentModel($name)
+    {
+        $images = $this->findDependentRowset($name);
+        if (($current = $images->current()) === null) {
+            $modelName = str_replace('_DbTable', '', $name);
+            $current = new $modelName();
+        }
+        return $current;
     }
 }
