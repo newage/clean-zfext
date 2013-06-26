@@ -17,7 +17,6 @@ class User_Model_DbTable_Users extends Core_Db_Table_Abstract
 
     protected $_name = 'users';
     protected $_dependentTables = array(
-        'Application_Model_DbTable_Roles',
         'Application_Model_DbTable_Images'
     );
 
