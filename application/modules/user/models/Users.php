@@ -75,7 +75,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getAvatar()
     {
-        return $this->_getDependentModel('Application_Model_DbTable_Images');
+        return $this->_getDependentModel('Application', 'Images');
     }
 
     /**

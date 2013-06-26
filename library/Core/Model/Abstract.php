@@ -132,14 +132,16 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
     /**
      * Get dependent model
      *
-     * @param string $name Full DbTable name
+     * @param string $moduleName Module name
+     * @param string $modelName Model name
      * @return object
      */
-    protected function _getDependentModel($name)
+    protected function _getDependentModel($moduleName, $modelName)
     {
-        $images = $this->findDependentRowset($name);
+        $dbTableName = ucfirst($moduleName) . '_Model_DbTable_' . ucfirst($modelName);
+        $images = $this->findDependentRowset($dbTableName);
         if (($current = $images->current()) === null) {
-            $modelName = str_replace('_DbTable', '', $name);
+            $modelName = str_replace('_DbTable', '', $dbTableName);
             $current = new $modelName();
         }
         return $current;
