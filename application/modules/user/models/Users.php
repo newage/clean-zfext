@@ -20,6 +20,7 @@ class User_Model_Users extends Core_Model_Abstract
     public $createdAt = null;
     public $roleId = null;
     public $email = null;
+    public $nick = null;
     public $password = null;
     public $salt = null;
     public $passwordResetHash = null;
@@ -68,35 +69,38 @@ class User_Model_Users extends Core_Model_Abstract
 
     /**
      * Get image model
+     * If empty query result return empty image object
      *
      * @return \Application_Model_Images
      */
     public function getAvatar()
     {
-        $images = $this->findDependentRowset('Application_Model_DbTable_Images');
-        return $images->current();
+        return $this->_getDependentModel('Application', 'Images');
     }
 
     /**
      * Get created date time
      *
-     * @return string
+     * @return string | Zend_Date
      */
     public function getCreatedAt()
     {
+        if (is_string($this->createdAt)) {
+            return new Zend_Date($this->createdAt, Zend_Date::ISO_8601);
+        }
         return $this->createdAt;
     }
 
     /**
      * Create or set date and time
      *
-     * @param string $value [optional]
+     * @param string | Zend_Db_Expr
      * @return \User_Model_Users
      */
     public function setCreatedAt($value = null)
     {
         if ($value === null) {
-            $value = date('Y-m-d H:i:s');
+            $value = new Zend_Db_Expr('NOW()');
         }
         $this->createdAt = $value;
         return $this;
@@ -156,6 +160,28 @@ class User_Model_Users extends Core_Model_Abstract
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set nickname
+     *
+     * @param string $value
+     * @return \User_Model_Users
+     */
+    public function setNick($value)
+    {
+        $this->nick = $value;
+        return $this;
+    }
+
+    /**
+     * Get nickname
+     *
+     * @return string
+     */
+    public function getNick()
+    {
+        return $this->nick;
     }
 
     /**
