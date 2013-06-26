@@ -18,8 +18,10 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
     {
         if (isset($options['data'])) {
             $this->setOptions($options['data']);
-        } elseif (!empty($options)) {
-            $this->setOptions($options);
+        } else {
+            if (!empty($options)) {
+                $this->setOptions($options);
+            }
 
             if (method_exists($this, 'setDefault')) {
                 $this->setDefault();
