@@ -15,15 +15,17 @@ class User_Model_Users extends Core_Model_Abstract
     const STATUS_ENABLE  = 'ENABLE';
     const STATUS_DISABLE = 'DISABLE';
 
-    public $id = null;
-    public $status = null;
-    public $createdAt = null;
-    public $roleId = null;
-    public $email = null;
-    public $nick = null;
-    public $password = null;
-    public $salt = null;
-    public $passwordResetHash = null;
+    const TABLE_NAME = 'User_Model_DbTable_Users';
+//
+//    public $id = null;
+//    public $status = null;
+//    public $createdAt = null;
+//    public $roleId = null;
+//    public $email = null;
+//    public $nick = null;
+//    public $password = null;
+//    public $salt = null;
+//    public $passwordResetHash = null;
 
     /**
      * Set default variable
@@ -42,7 +44,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getId()
     {
-        return (int)$this->id;
+        return (int)$this->get('id');
     }
 
     /**
@@ -53,7 +55,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setId($value)
     {
-        $this->id = (int)$value;
+        $this->set('id', (int)$value);
         return $this;
     }
 
@@ -64,18 +66,17 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getRoleId()
     {
-        return (int)$this->roleId;
+        return (int)$this->get('role_id');
     }
 
     /**
-     * Get image model
-     * If empty query result return empty image object
+     * Get user details model
      *
-     * @return \Application_Model_Images
+     * @return \User_Model_Profile
      */
-    public function getAvatar()
+    public function getProfile()
     {
-        return $this->_getDependentModel('Application', 'Images');
+        return $this->_getDependentModel('User', 'Profile');
     }
 
     /**
@@ -85,16 +86,17 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getCreatedAt()
     {
-        if (is_string($this->createdAt)) {
-            return new Zend_Date($this->createdAt, Zend_Date::ISO_8601);
+        $time = $this->get('created_at');
+        if (is_string($time)) {
+            return new Zend_Date($time, Zend_Date::ISO_8601);
         }
-        return $this->createdAt;
+        return $time;
     }
 
     /**
      * Create or set date and time
      *
-     * @param string | Zend_Db_Expr
+     * @param string | Zend_Db_Expr $value
      * @return \User_Model_Users
      */
     public function setCreatedAt($value = null)
@@ -102,7 +104,7 @@ class User_Model_Users extends Core_Model_Abstract
         if ($value === null) {
             $value = new Zend_Db_Expr('NOW()');
         }
-        $this->createdAt = $value;
+        $this->set('created_at', $value);
         return $this;
     }
 
@@ -114,7 +116,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setRoleId($value)
     {
-        $this->roleId = (int)$value;
+        $this->set('role_id', (int)$value);
         return $this;
     }
 
@@ -125,7 +127,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getStatus()
     {
-        return $this->status;
+        return $this->get('status');
     }
 
     /**
@@ -136,7 +138,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setStatus($value)
     {
-        $this->status = $value;
+        $this->set('status', $value);
         return $this;
     }
 
@@ -148,7 +150,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setEmail($value)
     {
-        $this->email = strtolower(trim($value));
+        $this->set('email', strtolower(trim($value)));
         return $this;
     }
 
@@ -159,7 +161,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->get('email');
     }
 
     /**
@@ -170,7 +172,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setNick($value)
     {
-        $this->nick = $value;
+        $this->set('nick', $value);
         return $this;
     }
 
@@ -181,7 +183,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getNick()
     {
-        return $this->nick;
+        return $this->get('nick');
     }
 
     /**
@@ -191,7 +193,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getPasswordResetHash()
     {
-        return $this->passwordResetHash;
+        return $this->get('password_reset_hash');
     }
 
     /**
@@ -202,7 +204,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setPasswordResetHash($value)
     {
-        $this->passwordResetHash = $value;
+        $this->set('password_reset_hash', $value);
         return $this;
     }
 
@@ -217,10 +219,10 @@ class User_Model_Users extends Core_Model_Abstract
     {
         if (strlen($value) < 32) {
             $salt = $this->_generateSalt();
-            $this->salt = $salt;
-            $this->password = md5($salt . $value);
+            $this->set('salt', $salt);
+            $this->set('password', md5($salt . $value));
         } else {
-            $this->password = $value;
+            $this->set('password', $value);
         }
 
         return $this;
@@ -233,7 +235,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getSalt()
     {
-        return $this->salt;
+        return $this->get('salt');
     }
 
     /**
@@ -243,7 +245,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->get('password');
     }
 
     /**

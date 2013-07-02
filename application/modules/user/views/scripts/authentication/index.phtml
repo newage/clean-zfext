@@ -1,4 +1,14 @@
 <?php if ($this->identity === false) : ?>
+<div class="btn-group pull-right">
+    <?php echo $this->link(
+        array(
+            'module' => 'user',
+            'controller' => 'registration',
+            'action' => 'index'
+        ),
+        $this->__('Registration'),
+        array('class' => 'btn btn-info')
+    ) ?>
     <?php echo $this->link(
         array(
             'module' => 'user',
@@ -6,8 +16,9 @@
             'action' => 'login'
         ),
         $this->__('Sign In'),
-        array('class' => 'btn btn-success pull-right')
+        array('class' => 'btn btn-success')
     ) ?>
+    </div>
 <?php else : ?>
     <ul class="nav pull-right">
         <li>

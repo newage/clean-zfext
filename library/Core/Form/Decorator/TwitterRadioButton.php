@@ -5,13 +5,15 @@
  *
  * @category Core
  * @package Core_Form_Decorator
- * @author V.Leontiev
+ * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
-class Core_Form_Decorator_TwitterRadio extends Zend_Form_Decorator_Abstract
+class Core_Form_Decorator_TwitterRadioButton extends Zend_Form_Decorator_Abstract
 {
     protected $_format = '<div class="control-group">
         <label class="control-label">%1$s</label>
-        <div class="controls">%2$s</div>
+        <div class="controls">
+            <div class="btn-group" data-toggle="buttons-radio">%2$s</div>
+        </div>
       </div>';
 
     public function render($content)
@@ -20,25 +22,26 @@ class Core_Form_Decorator_TwitterRadio extends Zend_Form_Decorator_Abstract
         $label     = $element->getLabel();
         $fieldName = htmlentities($element->getFullyQualifiedName());
         $extClass  = $element->getAttrib('class');
-        $class     = !empty($extClass) ? 'class="'.$extClass.'"' : '';
+        $class     = !empty($extClass) ? 'btn '.$extClass : 'btn';
         $value    = $element->getValue();
         $checkbox  = array();
-        $checked = '';
 
         foreach ($element->getMultiOptions() as $key => $name) {
 
-            $checked  = strtolower($key) == strtolower($value) ? 'checked' : '';
+            $active = '';
+            if (!empty($value) && $key == $value) {
+                $active = ' active';
+            }
 
             $checkbox[] = sprintf(
-                '<label class="radio">'.
-                '<input type="radio" name="%1$s" id="%1$s-%2$s" value="%2$s" %4$s %5$s>'.
+                '<button type="button" name="%1$s" id="%1$s-%2$s" value="%3$s" class="%4$s%5$s">'.
                 ' %3$s'.
-                '</label>',
+                '</button>',
                 $fieldName,
                 $key,
                 $name,
-                $checked,
-                $class
+                $class,
+                $active
             );
         }
 

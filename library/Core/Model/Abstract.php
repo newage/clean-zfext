@@ -7,8 +7,15 @@
  * @license New BSD
  * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
-abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
+abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
 {
+
+    /**
+     * Data from forms or another area
+     *
+     * @var array
+     */
+    protected $_originalData = array();
 
     /**
      * Constructor
@@ -16,16 +23,12 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
      */
     public function __construct($options = array())
     {
-        if (isset($options['data'])) {
-            $this->setOptions($options['data']);
-        } else {
-            if (!empty($options)) {
-                $this->setOptions($options);
-            }
+        if (!empty($options) && !isset($options['data'])) {
+            $this->setOptions($options);
+        }
 
-            if (method_exists($this, 'setDefault')) {
-                $this->setDefault();
-            }
+        if (method_exists($this, 'setDefault')) {
+            $this->setDefault();
         }
 
         parent::__construct($options);
@@ -58,6 +61,58 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
         if (method_exists($this, $methodName)) {
             return $this->$methodName($optionValue);
         }
+    }
+
+    /**
+     * Set property to _data or _originalData
+     *
+     * @param string $propertyName
+     * @param string $propertyValue
+     */
+    protected function set($propertyName, $propertyValue)
+    {
+        if (array_key_exists($propertyName, $this->_data)) {
+            parent::__set($propertyName, $propertyValue);
+        } else {
+            $this->_originalData[$propertyName] = $propertyValue;
+        }
+    }
+
+    /**
+     * Get property from _data or _originalData
+     *
+     * @param string $propertyName
+     * @return string
+     */
+    protected function get($propertyName)
+    {
+        if (array_key_exists($propertyName, $this->_data)) {
+            return parent::__get($propertyName);
+        } elseif (array_key_exists($propertyName, $this->_originalData)) {
+            return $this->_originalData[$propertyName];
+        } else {
+            //TODO: need create exception
+            return null;
+        }
+
+    }
+
+    /**
+     * Return array from all properties
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $returnArrayVars = array();
+
+        if (!empty($this->_data)) {
+            $returnArrayVars = $this->_data;
+        } else {
+            $returnArrayVars = $this->_originalData;
+        }
+        
+        return $returnArrayVars;
     }
 
     /**
@@ -101,26 +156,6 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
     }
 
     /**
-     * Return array from all properties
-     * Convert properties from camelCase name to property_name
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $returnArrayVars = array();
-        $classVars = (array)$this;
-
-        foreach ($classVars as $name => $value) {
-            $methodName = 'get' . ucfirst($name);
-            if (method_exists($this, $methodName)) {
-                $returnArrayVars[$this->_unCreateCamelCaseName($name)] = $value;
-            }
-        }
-        return $returnArrayVars;
-    }
-
-    /**
      * Get current logined user id
      *
      * @return int
@@ -141,11 +176,29 @@ abstract class Core_Model_Abstract extends Core_Db_Table_Row_Abstract
     protected function _getDependentModel($moduleName, $modelName)
     {
         $dbTableName = ucfirst($moduleName) . '_Model_DbTable_' . ucfirst($modelName);
-        $images = $this->findDependentRowset($dbTableName);
-        if (($current = $images->current()) === null) {
+        $result = $this->findDependentRowset($dbTableName);
+        if (($current = $result->current()) === null) {
             $modelName = str_replace('_DbTable', '', $dbTableName);
             $current = new $modelName();
         }
         return $current;
+    }
+
+    /**
+     * Get parent model
+     *
+     * @param string $moduleName
+     * @param string $modelName
+     * @return object
+     */
+    protected function _getParentModel($moduleName, $modelName)
+    {
+        $dbTableName = ucfirst($moduleName) . '_Model_DbTable_' . ucfirst($modelName);
+        $result = $this->findParentRow($dbTableName);
+        if ($result === null) {
+            $modelName = str_replace('_DbTable', '', $dbTableName);
+            $result = new $modelName();
+        }
+        return $result;
     }
 }

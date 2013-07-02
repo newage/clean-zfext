@@ -47,7 +47,7 @@ class Application_Model_ImagesMapper extends Core_Model_Mapper_Abstract
             throw new Zend_File_Transfer_Exception(implode(' ', $upload->getMessages()));
         }
 
-        $imageId = $this->_saveImageToBase();
+        $imageId = parent::save($this->getModel());
         $this->getModel()->setId($imageId);
 
         return $this->getModel();
@@ -95,15 +95,20 @@ class Application_Model_ImagesMapper extends Core_Model_Mapper_Abstract
     }
 
     /**
-     * Write image path to base
+     * Get image info
      *
-     * @param type $localImagePath
-     * @return int
+     * @param type $id
+     * @return Application_Model_Images
+     * @throws Core_Model_Mapper_Exception
      */
-    protected function _saveImageToBase()
+    public function getImageInfo($id)
     {
-        $array = $this->getModel()->toArray();
-        return $this->getDbTable()->insert($array);
+        if (!isset($id) || empty($id) || !is_int($id)) {
+            throw new Core_Model_Mapper_Exception('Not valid image_id');
+        }
+
+        $imageRow = $this->getDbTable()->getById($id);
+        return $imageRow->toModel();
     }
 
     /**
