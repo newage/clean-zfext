@@ -10,7 +10,7 @@
  * @see https://bitbucket.org/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_ProfileController extends Zend_Controller_Action
+class User_IndexController extends Zend_Controller_Action
 {
 
     /**
@@ -41,7 +41,7 @@ class User_ProfileController extends Zend_Controller_Action
 
                 if (true === (bool)$mapper->update($model)) {
                     $this->_helper->FlashMessenger('Update profile successful');
-                    $this->getHelper('Redirector')->gotoUrl('/user/profile');
+                    $this->getHelper('Redirector')->gotoUrl('/user/index');
                 } else {
                     $form->addError('Update profile failed!');
                 }

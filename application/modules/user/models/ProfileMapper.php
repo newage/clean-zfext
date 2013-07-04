@@ -59,6 +59,7 @@ class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
             $profile = $this->getDbTable()->create();
         }
 
+        $profile->setName($model->getName());
         $profile->setBirthday($model->getBirthday());
         $profile->setLocation($model->getLocation());
         $profile->setAbout($model->getAbout());

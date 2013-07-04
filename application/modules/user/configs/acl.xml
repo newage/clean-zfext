@@ -8,7 +8,7 @@
         
         <mvc>
             <user>
-                <index allow="guest" />
+                <index allow="user" />
                 <authentication>
                     <login allow="guest" deny="user"/>
                     <logout allow="user" deny="guest"/>
@@ -21,7 +21,6 @@
                     <index allow="guest" deny="user"/>
                     <restore allow="guest" deny="user"/>
                 </forgot>
-                <profile allow="user" />
                 <users>
                     <create allow="admin"/>
                     <delete allow="admin"/>

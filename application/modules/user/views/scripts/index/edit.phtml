@@ -4,7 +4,7 @@
     <div class="page-header">
         <h1><?php echo $this->form->getDescription() ?></h1>
     </div>
-    <?php $this->form->setAction($this->url(array('module'=>'user','controller'=>'profile','action'=>'edit'))) ?>
+    <?php $this->form->setAction($this->url(array('module'=>'user','controller'=>'index','action'=>'edit'))) ?>
     <?php $this->form->setAttrib('class', 'form-horizontal') ?>
     <?php echo $this->form ?>
 </div>

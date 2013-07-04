@@ -17,32 +17,22 @@
                     <resource>user/index</resource>
                     <privilege>index</privilege>
                     <pages>
-                        <profile>
-                            <label>Profile</label>
+                        <edit>
+                            <label>Edit</label>
                             <module>user</module>
-                            <controller>profile</controller>
-                            <action>index</action>
-                            <resource>user/profile</resource>
-                            <privilege>index</privilege>
-                            <pages>
-                                <edit>
-                                    <label>Edit</label>
-                                    <module>user</module>
-                                    <controller>profile</controller>
-                                    <action>edit</action>
-                                    <resource>user/profile</resource>
-                                    <privilege>edit</privilege>
-                                </edit>
-                                <change>
-                                    <label>Change password</label>
-                                    <module>user</module>
-                                    <controller>profile</controller>
-                                    <action>change-password</action>
-                                    <resource>user/profile</resource>
-                                    <privilege>change-password</privilege>
-                                </change>
-                            </pages>
-                        </profile>
+                            <controller>index</controller>
+                            <action>edit</action>
+                            <resource>user/index</resource>
+                            <privilege>edit</privilege>
+                        </edit>
+                        <change>
+                            <label>Change password</label>
+                            <module>user</module>
+                            <controller>index</controller>
+                            <action>change-password</action>
+                            <resource>user/index</resource>
+                            <privilege>change-password</privilege>
+                        </change>
                     </pages>
                 </users>
             </pages>
