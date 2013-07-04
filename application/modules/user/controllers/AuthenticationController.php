@@ -67,6 +67,12 @@ class User_AuthenticationController extends Zend_Controller_Action
         $auth->setStorage(new Zend_Auth_Storage_Session('Zend_Auth'));
         $auth->getStorage()->clear();
 
+        $this->getHelper('Messenger')->addMessage(
+            'Successful Logout',
+            Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+            true
+        );
+        
         $this->getHelper('Redirect')->gotoUrl('/');
     }
 }
