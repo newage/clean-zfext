@@ -44,8 +44,8 @@ class User_AuthenticationController extends Zend_Controller_Action
 
             if ($mapper->authenticate($form->getValue('email'), $form->getValue('password'), $form->getValue('remember'))) {
                 $this->getHelper('Messenger')->addMessage(
-                    'Successful Login',
-                    Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+                    'You Logined',
+                    Core_Controller_Action_Helper_Messenger::TYPE_INFO,
                     true
                 );
                 $this->getHelper('Redirect')->gotoUrl('/');
@@ -68,8 +68,8 @@ class User_AuthenticationController extends Zend_Controller_Action
         $auth->getStorage()->clear();
 
         $this->getHelper('Messenger')->addMessage(
-            'Successful Logout',
-            Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+            'You Logout',
+            Core_Controller_Action_Helper_Messenger::TYPE_INFO,
             true
         );
         

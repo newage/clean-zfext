@@ -68,7 +68,11 @@ class User_ProfileController extends Zend_Controller_Action
             $mapper = new User_Model_UsersMapper();
 
             if (true === (bool)$mapper->changePassword($model)) {
-                $this->_helper->FlashMessenger('Update password successful');
+                $this->getHelper('Messenger')->addMessage(
+                    'Changed Password Successful',
+                    Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+                    true
+                );
                 $this->forward('logout', 'authentication');
             } else {
                 $form->addError('Update password failed!');
