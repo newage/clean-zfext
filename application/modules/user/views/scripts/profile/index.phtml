@@ -1,0 +1,13 @@
+<?php echo $this->navigation()->breadcrumbs()->setPartial(array('breadcrumbs.phtml', 'default')); ?>
+
+<ul class="thumbnails" id="user-profile">
+  <li class="span4">
+      <h3 class="text-info"><i class="icon-user"></i> User Profile</h3>
+      <img src="<?php echo $this->user->getProfile()->getAvatar()->getRealPath(); ?>" class="img-rounded">
+      <br/><br/>
+    <address>
+        <strong><?php echo $this->user->getProfile()->getName(); ?></strong><br>
+        <?php echo $this->user->getCreatedAt()->toString(); ?><br/>
+    </address>
+  </li>
+</ul>

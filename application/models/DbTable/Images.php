@@ -12,15 +12,20 @@
  */
 class Application_Model_DbTable_Images extends Core_Db_Table_Abstract
 {
-    protected $_rowClass = 'Application_Model_Images';
-
     protected $_name = 'images';
 
+    protected $_rowClass = 'Application_Model_Images';
+
+    protected $_dependentTables = array(
+        'User_Model_DbTable_Profile'
+    );
+    
     protected $_referenceMap    = array(
         'User' => array(
-            'columns'           => 'user_id',
+            'columns'           => array('user_id'),
             'refTableClass'     => 'User_Model_DbTable_Users',
-            'refColumns'        => 'id'
+            'refColumns'        => array('id')
         )
     );
+
 }

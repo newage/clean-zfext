@@ -15,18 +15,6 @@ class User_Model_Users extends Core_Model_Abstract
     const STATUS_ENABLE  = 'ENABLE';
     const STATUS_DISABLE = 'DISABLE';
 
-    const TABLE_NAME = 'User_Model_DbTable_Users';
-//
-//    public $id = null;
-//    public $status = null;
-//    public $createdAt = null;
-//    public $roleId = null;
-//    public $email = null;
-//    public $nick = null;
-//    public $password = null;
-//    public $salt = null;
-//    public $passwordResetHash = null;
-
     /**
      * Set default variable
      */
@@ -76,7 +64,19 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getProfile()
     {
-        return $this->_getDependentModel('User', 'Profile');
+        return $this->_depend['profile'];
+    }
+
+    /**
+     * Set profile model
+     *
+     * @param Application_Model_Profile $value
+     * @return \User_Model_Profile
+     */
+    public function setProfile(User_Model_Profile $value)
+    {
+        $this->_depend['profile'] = $value;
+        return $value;
     }
 
     /**

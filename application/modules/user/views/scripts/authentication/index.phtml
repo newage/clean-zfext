@@ -1,35 +1,78 @@
 <?php if ($this->identity === false) : ?>
-<div class="btn-group pull-right">
-    <?php echo $this->link(
-        array(
-            'module' => 'user',
-            'controller' => 'registration',
-            'action' => 'index'
-        ),
-        $this->__('Registration'),
-        array('class' => 'btn btn-info')
-    ) ?>
-    <?php echo $this->link(
-        array(
-            'module' => 'user',
-            'controller' => 'authentication',
-            'action' => 'login'
-        ),
-        $this->__('Sign In'),
-        array('class' => 'btn btn-success')
-    ) ?>
-    </div>
+    <ul class="nav pull-right">
+        <div class="btn-group">
+            <?php echo $this->link(
+                array(
+                    'module' => 'user',
+                    'controller' => 'authentication',
+                    'action' => 'login'
+                ),
+                $this->__('Login'),
+                array('class' => 'btn btn-inverse')
+            ) ?>
+
+            <?php echo $this->link(
+                array(
+                    'module' => 'user',
+                    'controller' => 'registration',
+                    'action' => 'index'
+                ),
+                $this->__('Register'),
+                array('class' => 'btn btn-inverse')
+            ) ?>
+        </div>
+    </ul>
 <?php else : ?>
     <ul class="nav pull-right">
-        <li>
+        <div class="btn-group">
             <?php echo $this->link(
                 array(
                     'module'=>'user',
-                    'controller'=>'authentication',
-                    'action'=> 'logout'
+                    'controller'=>'profile',
+                    'action'=> 'index'
                 ),
-                $this->__('Logout')
+                $this->__('Profile'),
+                array('class' => 'btn btn-inverse')
             ) ?>
-        </li>
+            <button class="btn dropdown-toggle btn-inverse" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <?php echo $this->link(
+                        array(
+                            'module'=>'user',
+                            'controller'=>'profile',
+                            'action'=> 'edit'
+                        ),
+                        $this->__('Edit Profile'),
+                        array('tabindex' => '-1')
+                    ) ?>
+                </li>
+                <li>
+                    <?php echo $this->link(
+                        array(
+                            'module'=>'user',
+                            'controller'=>'profile',
+                            'action'=> 'change-password'
+                        ),
+                        $this->__('Change Password'),
+                        array('tabindex' => '-1')
+                    ) ?>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <?php echo $this->link(
+                        array(
+                            'module'=>'user',
+                            'controller'=>'authentication',
+                            'action'=> 'logout'
+                        ),
+                        $this->__('Logout'),
+                        array('tabindex' => '-1')
+                    ) ?>
+                </li>
+            </ul>
+        </div>
     </ul>
 <?php endif; ?>

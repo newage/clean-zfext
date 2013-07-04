@@ -11,6 +11,7 @@
  */
 class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
 {
+
     /**
      * Set default Row class
      *

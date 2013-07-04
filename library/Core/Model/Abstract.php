@@ -18,6 +18,12 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
     protected $_originalData = array();
 
     /**
+     * Dependent objects
+     * @var array
+     */
+    protected $_depend = array();
+
+    /**
      * Constructor
      * @param array $options [optional]
      */
@@ -69,7 +75,7 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
      * @param string $propertyName
      * @param string $propertyValue
      */
-    protected function set($propertyName, $propertyValue)
+    public function set($propertyName, $propertyValue)
     {
         if (array_key_exists($propertyName, $this->_data)) {
             parent::__set($propertyName, $propertyValue);
@@ -84,7 +90,7 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
      * @param string $propertyName
      * @return string
      */
-    protected function get($propertyName)
+    public function get($propertyName)
     {
         if (array_key_exists($propertyName, $this->_data)) {
             return parent::__get($propertyName);
@@ -111,7 +117,7 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
         } else {
             $returnArrayVars = $this->_originalData;
         }
-        
+
         return $returnArrayVars;
     }
 
@@ -167,38 +173,12 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
     }
 
     /**
-     * Get dependent model
+     * Added to serialize string variable _depend
      *
-     * @param string $moduleName Module name
-     * @param string $modelName Model name
-     * @return object
+     * @return array
      */
-    protected function _getDependentModel($moduleName, $modelName)
+    public function __sleep()
     {
-        $dbTableName = ucfirst($moduleName) . '_Model_DbTable_' . ucfirst($modelName);
-        $result = $this->findDependentRowset($dbTableName);
-        if (($current = $result->current()) === null) {
-            $modelName = str_replace('_DbTable', '', $dbTableName);
-            $current = new $modelName();
-        }
-        return $current;
-    }
-
-    /**
-     * Get parent model
-     *
-     * @param string $moduleName
-     * @param string $modelName
-     * @return object
-     */
-    protected function _getParentModel($moduleName, $modelName)
-    {
-        $dbTableName = ucfirst($moduleName) . '_Model_DbTable_' . ucfirst($modelName);
-        $result = $this->findParentRow($dbTableName);
-        if ($result === null) {
-            $modelName = str_replace('_DbTable', '', $dbTableName);
-            $result = new $modelName();
-        }
-        return $result;
+        return array_merge(parent::__sleep(), array('_depend'));
     }
 }

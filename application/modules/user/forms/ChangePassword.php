@@ -1,42 +1,28 @@
 <?php
 
 /**
- * Registration user form
+ * Change user password form
  *
  * @category Application
- * @package Application_User
- * @subpackage Forms
+ * @package Application_Modules_User
+ * @subpackage Form
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
  * @see https://bitbucket.org/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Form_Registration extends Core_Form
+class User_Form_ChangePassword extends Core_Form
 {
 
     /**
-     * Create user registration form
+     * Change password for user account
      * Set attribute required to form for view required fields
      */
     public function init()
     {
         $this->setMethod('post')
-             ->setName('registration')
-             ->setDescription('New User Registration')
+             ->setName('changepassword')
+             ->setDescription('Change password')
              ->setAttrib('required', 'true');
-
-        //Add email
-        $element = new Zend_Form_Element_Text('email');
-        $element->setRequired(true);
-        $element->setLabel('E-mail');
-        $element->setDescription('This email used be for the login');
-        $element->addValidator('EmailAddress', true, array('domain' => false));
-        $element->addValidator('Db_NoRecordExists', true, array('users','email'));
-        $element->addDecorator(new Core_Form_Decorator_TwitterInput());
-        $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
-        $element->addDecorator(new Core_Form_Decorator_TwitterPopover());
-        $element->setAttrib('class', '22');
-        $element->setOrder(1);
-        $this->addElement($element);
 
         //Add password
         $element = new Zend_Form_Element_Password('password');
@@ -46,7 +32,7 @@ class User_Form_Registration extends Core_Form
                  ->addValidator('Alnum', true, array(false));
         $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
-        $element->setOrder(2);
+        $element->setOrder(5);
         $this->addElement($element);
 
         //Repeat password
@@ -60,13 +46,13 @@ class User_Form_Registration extends Core_Form
         $element->addDecorator(new Core_Form_Decorator_TwitterPassword());
         $element->addDecorator(new Core_Form_Decorator_TwitterErrors());
         $element->addDecorator(new Core_Form_Decorator_TwitterPopover());
-        $element->setOrder(3);
+        $element->setOrder(6);
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Submit('submit');
-        $element->setLabel('Registration');
+        $element->setLabel('Change');
         $element->addDecorator(new Core_Form_Decorator_TwitterButtons);
-        $element->setOrder(10);
+        $element->setOrder(7);
         $this->addElement($element);
     }
 

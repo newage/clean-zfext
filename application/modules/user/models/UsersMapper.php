@@ -60,29 +60,6 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     }
 
     /**
-     * Update user data
-     * @param User_Model_Users $request
-     * @return mixed
-     */
-    public function update(User_Model_Users $request)
-    {
-//        $imageModel = new Application_Model_Images();
-//        $imageModel->setSizeWidth(Application_Model_Images::SIZE_MEDIUM_WIDTH);
-//        $imageModel->setSizeHeight(Application_Model_Images::SIZE_MEDIUM_HEIGHT);
-//
-//        $imageMapper = new Application_Model_ImagesMapper();
-//        $imageModel = $imageMapper->setModel($imageModel)->resize()->upload();
-
-        $user = $this->getDbTable()->getById($this->_getCurrentUserId());
-
-        $user->fname = $request->getFname();
-        $user->lname = $request->getLname();
-        $user->location = $request->getLocation();
-
-        return $user->save();
-    }
-
-    /**
      * Update user password
      *
      * @param User_Model_Users $request
@@ -131,36 +108,37 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     /**
      * Get users models with search params
      *
-     * @param string $search
-     * @return array
+     * @param string $searchText
+     * @param int $limit Limit result on page
+     * @param int $page Current page number
+     * @return \User_Model_Users
      */
-    public function getUsersListArray($search)
+    public function getUsers($searchText, $limit = 10, $page = 0)
     {
-        $rows = $this->getDbTable()->fetchAll($search, null, 20);
-
-        $results = new SplFixedArray(count($rows));
-
-        foreach ($rows as $key => $row) {
-            $model = $row->toModel();
-            $results[$key] = array(
-                'id' => $model->getId(),
-                'nick' => $model->getNick(),
-                'name' => sprintf('%s %s', $model->getFname(), $model->getLname()),
-                'avatar' => $model->getAvatar(),
-                'belts' => array()
-            );
+        if ($searchText === null) {
+            $users = $this->getDbTable()->fetchAll();
+        } else {
+            $where = 'name LIKE %%';
+            $users = $this->getDbTable()->fetchAll($where);
         }
 
-        return $results;
+        foreach ($users as $user) {
+            $profile = $user->findDependentRowset('User_Model_DbTable_Profile')->current();
+            $image = $profile->findParentRow('Application_Model_DbTable_Images');
+
+            $user->setProfile($profile)->setAvatar($image);
+        }
+
+        return $users;
     }
 
     /**
-     * Get user profile
+     * Get user
      *
      * @param int $id
      * @return User_Model_Users
      */
-    public function getUserProfile($id = 0)
+    public function getUser($id = 0)
     {
         if ($id == 0) {
             $id = $this->_getCurrentUserId();
@@ -215,17 +193,27 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     /**
      * Get user profile
      *
-     * @param string $nick
      * @return User_Model_Users
      */
-    public function getProfile($nick)
+    public function getCurrentUser()
     {
-        if ($nick === null) {
-            $identity = Zend_Auth::getInstance()->getIdentity();
-            $nick = $identity->nick;
-        }
+        $identity = Zend_Auth::getInstance()->getIdentity();
 
-        $user = $this->getDbTable()->getByNick($nick);
+//        $cacheId = 'User_' . $nick;
+//        $this->getCache()->remove($cacheId);
+//        if (!($user = $this->loadCache($cacheId))) {
+            $user = $this->getDbTable()->getById($identity->id);
+
+            if ($user === null) {
+                //go to error page for don't find user
+            }
+
+            $profile = $user->findDependentRowset('User_Model_DbTable_Profile')->current();
+            $image = $profile->findParentRow('Application_Model_DbTable_Images');
+
+            $user->setProfile($profile)->setAvatar($image);
+//            $this->saveCache($user, $cacheId, array('users', 'users_details'));
+//        }
 
         return $user;
     }

@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configdata>
     <production>
+        <default>
+            <label>Home</label>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>default/index</resource>
+            <privilege>index</privilege>
+            <pages>
+                <users>
+                    <label>Users</label>
+                    <module>user</module>
+                    <controller>index</controller>
+                    <action>index</action>
+                    <resource>user/index</resource>
+                    <privilege>index</privilege>
+                    <pages>
+                        <profile>
+                            <label>Profile</label>
+                            <module>user</module>
+                            <controller>profile</controller>
+                            <action>index</action>
+                            <resource>user/profile</resource>
+                            <privilege>index</privilege>
+                            <pages>
+                                <edit>
+                                    <label>Edit</label>
+                                    <module>user</module>
+                                    <controller>profile</controller>
+                                    <action>edit</action>
+                                    <resource>user/profile</resource>
+                                    <privilege>edit</privilege>
+                                </edit>
+                                <change>
+                                    <label>Change password</label>
+                                    <module>user</module>
+                                    <controller>profile</controller>
+                                    <action>change-password</action>
+                                    <resource>user/profile</resource>
+                                    <privilege>change-password</privilege>
+                                </change>
+                            </pages>
+                        </profile>
+                    </pages>
+                </users>
+            </pages>
+        </default>
         <user>
             <label>Index</label>
             <module>default</module>
