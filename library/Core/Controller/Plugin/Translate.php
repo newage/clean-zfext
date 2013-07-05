@@ -125,7 +125,9 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         }
 
         $localeString = $this->_locales[$this->_language];
-        $locale    = new Zend_Locale($localeString);
+        $locale = Zend_Registry::isRegistered('Zend_Locale')
+            ? Zend_Registry::get('Zend_Locale') : new Zend_Locale();
+        $locale->setLocale($localeString);
         $this->_options['locale'] = $locale;
 
         if ($this->_options['logUntranslated']) {
@@ -150,12 +152,10 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
 
         $translate->addTranslation($validateTranslator);
 
-        Zend_Registry::set('Zend_Locale', $locale);
+        Zend_Registry::isRegistered('Zend_Locale')
+            || Zend_Registry::set('Zend_Locale', $locale);
         Zend_Registry::set('Zend_Translate', $translate);
         Zend_Form::setDefaultTranslator($translate);
         Zend_Validate_Abstract::setDefaultTranslator($translate);
-
-        $currency = new Zend_Currency($localeString);
-        Zend_Registry::set('Zend_Currency', $currency);
     }
 }

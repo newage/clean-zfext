@@ -27,28 +27,26 @@ class Application_Model_Images extends Core_Model_Abstract
      * Medium image width in px
      * @type int
      */
-    const SIZE_MEDIUM_WIDTH = 120;
+    const SIZE_MEDIUM_WIDTH = 80;
 
     /**
      * Medium image height in px
      * @type int
      */
-    const SIZE_MEDIUM_HEIGHT = 120;
+    const SIZE_MEDIUM_HEIGHT = 80;
 
-    public $id = null;
-    public $path = null;
-    public $createdAt = null;
-    public $userId = null;
-    public $sizeWidth = null;
-    public $sizeHeight = null;
+    /**
+     * Default image
+     * @type string
+     */
+    const DEFAULT_IMAGE = 'img/default_user.png';
 
     /**
      * Set default data
      */
     public function setDefault()
     {
-        $this->setCreatedAt($this->_getMysqlDateTime());
-        $this->setUserId($this->_getCurrentUserId());
+        $this->setCreatedAt();
     }
 
     /**
@@ -59,18 +57,18 @@ class Application_Model_Images extends Core_Model_Abstract
      */
     public function setId($value)
     {
-        $this->id = (int)$value;
+        $this->set('id', (int)$value);
         return $this;
     }
 
     /**
      * Get id
-     * 
+     *
      * @return int
      */
     public function getId()
     {
-        return (int)$this->id;
+        return (int)$this->get('id');
     }
 
     /**
@@ -80,62 +78,64 @@ class Application_Model_Images extends Core_Model_Abstract
      */
     public function getPath()
     {
-        return $this->path;
+        return $this->get('path');
+    }
+
+    /**
+     * Get real path
+     *
+     * @return string
+     */
+    public function getRealPath()
+    {
+        $path = $this->get('path');
+        if (empty($path)) {
+            $path = self::DEFAULT_IMAGE;
+        } else {
+            $imageAlias = Zend_Controller_Front::getInstance()->getParam('upload');
+            $path = DIRECTORY_SEPARATOR . $imageAlias['alias'] . DIRECTORY_SEPARATOR . $path;
+        }
+        return $path;
     }
 
     /**
      * Set path to file
      *
      * @param string $value
-     * @return Application_Model_Images
+     * @return \Application_Model_Images
      */
     public function setPath($value)
     {
-        $this->path = (string)$value;
+        $this->set('path', (string)$value);
         return $this;
     }
 
     /**
      * Get created date
      *
-     * @return string
+     * @return string | Zend_Date
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        $date = $this->get('created_at');
+        if (is_string($date)) {
+            return new Zend_Date($date, Zend_Date::ISO_8601);
+        }
+        return $date;
     }
 
     /**
      *  Set created date
      *
-     * @param string $value
-     * @return Application_Model_Images
+     * @param string | Zend_Db_Expr $param
+     * @return \Application_Model_Images
      */
-    public function setCreatedAt($value)
+    public function setCreatedAt($value = null)
     {
-        $this->createdAt = $value;
-        return $this;
-    }
-
-    /**
-     * Set creator id
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return (int)$this->userId;
-    }
-
-    /**
-     * Set creator id
-     *
-     * @param int $value
-     * @return Application_Model_Images
-     */
-    public function setUserId($value)
-    {
-        $this->userId = (int)$value;
+        if ($value === null) {
+            $value = new Zend_Db_Expr('NOW()');
+        }
+        $this->set('created_at', $value);
         return $this;
     }
 
@@ -146,7 +146,7 @@ class Application_Model_Images extends Core_Model_Abstract
      */
     public function getSizeWidth()
     {
-        return (int)$this->sizeWidth;
+        return (int)$this->get('size_width');
     }
 
     /**
@@ -157,7 +157,7 @@ class Application_Model_Images extends Core_Model_Abstract
      */
     public function setSizeWidth($value)
     {
-        $this->sizeWidth = (int)$value;
+        $this->set('size_width', (int)$value);
         return $this;
     }
 
@@ -168,7 +168,7 @@ class Application_Model_Images extends Core_Model_Abstract
      */
     public function getSizeHeight()
     {
-        return (int)$this->sizeHeight;
+        return (int)$this->get('size_height');
     }
 
     /**
@@ -179,7 +179,7 @@ class Application_Model_Images extends Core_Model_Abstract
      */
     public function setSizeHeight($value)
     {
-        $this->sizeHeight = (int)$value;
+        $this->set('size_height', (int)$value);
         return $this;
     }
 

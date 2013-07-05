@@ -12,7 +12,8 @@ foreach ($prefixes->getPrefixes() as $path) {
 
 set_include_path(implode(PATH_SEPARATOR, $paths));
 
-Zend_Loader_Autoloader::getInstance();
+$loader = Zend_Loader_Autoloader::getInstance();
+$loader->registerNamespace('Core');
 
 class Manifest
     implements Zend_Tool_Framework_Manifest_Interface,
@@ -25,7 +26,8 @@ class Manifest
             new ZFTool_Tool_Project_Provider_Scaffold(),
             new ZFTool_Tool_Project_Provider_Schema(),
             new ZFTool_Tool_Project_Provider_Migration(),
-            new ZFTool_Tool_Project_Provider_Fixture()
+            new ZFTool_Tool_Project_Provider_Fixture(),
+            new Core_Tool_Project_Provider_DbModel()
         );
     }
 }

@@ -11,21 +11,21 @@
     <p>
         <?php echo $this->link(
             array(
+                'module' => 'default',
+                'controller' => 'index',
+                'action' => 'index'
+            ),
+            $this->__('Back to Home'),
+            array('class' => 'btn')
+        ) ?>
+        <?php echo $this->link(
+            array(
                 'module' => 'user',
                 'controller' => 'authentication',
                 'action' => 'login'
             ),
             $this->__('Sign in'),
             array('class' => 'btn btn-danger')
-        ) ?>
-        <?php echo $this->link(
-            array(
-                'module' => 'user',
-                'controller' => 'registration',
-                'action' => 'index'
-            ),
-            $this->__('Registration'),
-            array('class' => 'btn')
         ) ?>
     </p>
 </div>

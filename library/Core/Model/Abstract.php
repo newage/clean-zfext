@@ -7,22 +7,37 @@
  * @license New BSD
  * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
-abstract class Core_Model_Abstract
+abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
 {
+
+    /**
+     * Data from forms or another area
+     *
+     * @var array
+     */
+    protected $_originalData = array();
+
+    /**
+     * Dependent objects
+     * @var array
+     */
+    protected $_depend = array();
 
     /**
      * Constructor
      * @param array $options [optional]
      */
-    public function __construct($options = null)
+    public function __construct($options = array())
     {
+        if (!empty($options) && !isset($options['data'])) {
+            $this->setOptions($options);
+        }
+
         if (method_exists($this, 'setDefault')) {
             $this->setDefault();
         }
 
-        if (null != $options) {
-            $this->setOptions($options);
-        }
+        parent::__construct($options);
     }
 
     /**
@@ -52,6 +67,58 @@ abstract class Core_Model_Abstract
         if (method_exists($this, $methodName)) {
             return $this->$methodName($optionValue);
         }
+    }
+
+    /**
+     * Set property to _data or _originalData
+     *
+     * @param string $propertyName
+     * @param string $propertyValue
+     */
+    public function set($propertyName, $propertyValue)
+    {
+        if (array_key_exists($propertyName, $this->_data)) {
+            parent::__set($propertyName, $propertyValue);
+        } else {
+            $this->_originalData[$propertyName] = $propertyValue;
+        }
+    }
+
+    /**
+     * Get property from _data or _originalData
+     *
+     * @param string $propertyName
+     * @return string
+     */
+    public function get($propertyName)
+    {
+        if (array_key_exists($propertyName, $this->_data)) {
+            return parent::__get($propertyName);
+        } elseif (array_key_exists($propertyName, $this->_originalData)) {
+            return $this->_originalData[$propertyName];
+        } else {
+            //TODO: need create exception
+            return null;
+        }
+
+    }
+
+    /**
+     * Return array from all properties
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $returnArrayVars = array();
+
+        if (!empty($this->_data)) {
+            $returnArrayVars = $this->_data;
+        } else {
+            $returnArrayVars = $this->_originalData;
+        }
+
+        return $returnArrayVars;
     }
 
     /**
@@ -95,43 +162,6 @@ abstract class Core_Model_Abstract
     }
 
     /**
-     * Return array from all properties
-     * Convert properties from camelCase name to property_name
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $returnArrayVars = array();
-        $classVars = (array)$this;
-
-        foreach ($classVars as $name => $value) {
-            $returnArrayVars[$this->_unCreateCamelCaseName($name)] = $value;
-        }
-        return $returnArrayVars;
-    }
-
-    /**
-     * Get current date for mysql DATE format
-     *
-     * @return string
-     */
-    protected function _getMysqlDate()
-    {
-        return date('Y-m-d');
-    }
-
-    /**
-     * Get current data and time for mysql DATETIME format
-     *
-     * @return string
-     */
-    protected function _getMysqlDateTime()
-    {
-        return date('Y-m-d H:i:s');
-    }
-
-    /**
      * Get current logined user id
      *
      * @return int
@@ -140,5 +170,15 @@ abstract class Core_Model_Abstract
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
         return (int)$identity->id;
+    }
+
+    /**
+     * Added to serialize string variable _depend
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array_merge(parent::__sleep(), array('_depend'));
     }
 }

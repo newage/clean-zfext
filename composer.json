@@ -8,12 +8,17 @@
         "view/bootstrap-notify": "1.*",
         "view/font-awesome": "3.*",
         "view/jquery-i18n": "1.*",
-        "view/bootstrap-dropdown": "1.*"
+        "view/bootstrap-dropdown": "1.*",
+        "view/bootstrap-datepicker": "1.*"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:newage/zf-tools.git"
+            "url":  "git@github.com:newage/zf-tools.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@github.com:newage/zf-console.git"
         },
         {
             "type": "package",
@@ -26,6 +31,21 @@
                 },
                 "require": {
                     "view/bootstrap": ">=2.3.1"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "view/bootstrap-datepicker",
+                "version": "1.0.1",
+                "dist": {
+                    "url": "https://github.com/eternicode/bootstrap-datepicker/zipball/v1.0.1",
+                    "type": "zip"
+                },
+                "require": {
+                    "view/bootstrap": ">=2.0.4",
+                    "view/jquery": ">=1.7.1"
                 }
             }
         },
@@ -59,10 +79,6 @@
                     }
                 }
             }
-        },
-        {
-            "type": "vcs",
-            "url":  "git@bitbucket.org:newage/zf-debug.git"
         },
         {
             "type": "package",
@@ -121,9 +137,9 @@
             "type": "package",
             "package": {
                 "name": "view/font-awesome",
-                "version": "3.1.1",
+                "version": "3.2.1",
                 "dist": {
-                    "url": "http://fontawesome.io/assets/font-awesome.zip",
+                    "url": "http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip",
                     "type": "zip"
                 }
             }

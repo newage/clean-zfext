@@ -11,49 +11,50 @@
  */
 class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
 {
+
     /**
      * Set default Row class
      *
      * @var string
      */
     protected $_rowClass = 'Core_Db_Table_Row';
-    
+
     /**
      * Set default Rowset class
-     * 
+     *
      * @var string
      */
     protected $_rowsetClass = 'Core_Db_Table_Rowset';
-    
+
     /**
      * Return Primary Key
-     * 
+     *
      * @return string
      */
     public function getPrimary()
     {
         return $this->_primary;
     }
-    
+
     /**
      * Fetches a new blank row (not from the database).
      *
      * @param  array $data OPTIONAL data to populate in the new row.
      * @param  string $defaultSource OPTIONAL flag to force default values
-     * @return Zend_Db_Table_Row_Abstract
+     * @return Core_Db_Table_Row
      */
     public function create(array $data = array(), $defaultSource = null)
     {
         return parent::createRow($data, $defaultSource);
     }
-    
+
     /**
-     * get row by id
-     * 
+     * Get row by id
+     *
      * @param  integer $id  primary key
-     * @return 
+     * @return Core_Db_Table_Row
      */
-    public function getById($id) 
+    public function getById($id)
     {
         $rowset = $this->find($id);
         if (sizeof($rowset) > 0) {
@@ -62,7 +63,7 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
             return false;
         }
     }
-    
+
     /**
      * deleteById
      *
@@ -71,7 +72,7 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
      * @param  integer $id  primary key
      * @return integer The number of rows deleted.
      */
-    public function deleteById($id) 
+    public function deleteById($id)
     {
         if (is_array($this->_primary)) {
             $this->_primary = current($this->_primary);
@@ -79,12 +80,13 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto($this->_primary .' = ?', intval($id));
         return $this->delete($where);
     }
-    
+
     /**
      * Unexistent methods handler
      *
      * @param string $name
      * @param mixed $arguments
+     * @return Core_Db_Table_Rowset
      */
     public function __call($name, $arguments)
     {
@@ -95,18 +97,18 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
             return false;
         }
     }
-    
+
     /**
      * getByColumnsFinder
-     * 
+     *
      * <code>
      *    $this->getByLoginOrPasswordAndEmail(
      *        'vasya',
-     *        md5(123456), 
+     *        md5(123456),
      *        'vasya@mail.ru'
      *    )
      * </code>
-     * 
+     *
      * <code>
      *    //fields like UserLogin => Userlogin
      *    //fields like user_login => User_login
@@ -143,7 +145,7 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
         }
         return false;
     }
-    
+
     /**
      * Build Zend_Db_Table_Select object
      *
@@ -154,12 +156,12 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
     private function _buildSelect($params, $values)
     {
         $select = $this->select();
-        
+
         $fields = $this->info(Zend_Db_Table_Abstract::COLS);
         $fields = array_map('strtolower', $fields);
-        
+
         $condition = '';
-        
+
         foreach ($params as $param) {
             if (in_array($param, $fields)) {
                 if ($value = array_shift($values)) {
@@ -177,7 +179,7 @@ class Core_Db_Table_Abstract extends Zend_Db_Table_Abstract
             } elseif (in_array($param, array('or', 'and'))) {
                 $condition = $param;
             } else {
-                throw new Zend_Db_Exception('No such condition must be OR or ' . 
+                throw new Zend_Db_Exception('No such condition must be OR or ' .
                                          'AND, got '.$param);
             }
         }

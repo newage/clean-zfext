@@ -9,7 +9,7 @@
  * @license New BSD
  * @author V.Leontiev <vadim.leontiev@gmail.com>
  */
-class Core_Db_Table_Rowset extends Core_Db_Table_Rowset_Abstract
+class Core_Db_Table_Rowset extends Zend_Db_Table_Rowset_Abstract
 {
-    
+
 }

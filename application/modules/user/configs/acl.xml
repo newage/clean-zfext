@@ -8,7 +8,7 @@
         
         <mvc>
             <user>
-                <index allow="guest" />
+                <index allow="user" />
                 <authentication>
                     <login allow="guest" deny="user"/>
                     <logout allow="user" deny="guest"/>

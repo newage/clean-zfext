@@ -46,6 +46,23 @@ CREATE TABLE  `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Definition of table `users_details`
+--
+
+CREATE TABLE  `users_details` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `image_id` int(9) UNSIGNED NULL DEFAULT 0,
+  `name` varchar(255) NOT NULL,
+  `birthday` DATE DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `gender` enum('MALE', 'FEMALE') NOT NULL DEFAULT 'MALE',
+  `about` TEXT DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user_id` (`user_id` ASC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Definition of table `roles`
 --
 

@@ -4,8 +4,8 @@
  * Model for user table
  *
  * @category Application
- * @package Application_User
- * @subpackage Models
+ * @package    Application_Modules_User
+ * @subpackage Model
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
  * @see https://bitbucket.org/newage/clean-zfext
  * @since php 5.1 or higher
@@ -20,31 +20,125 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setDefault()
     {
-        $this->status = self::STATUS_ENABLE;
-        $this->created_at = $this->_getMysqlDateTime();
-        $this->role_id = 2;
+        $this->setStatus(self::STATUS_ENABLE);
+        $this->setCreatedAt();
+        $this->setRoleId(2);
     }
 
     /**
-     * Set role
-     * @param int $value
-     * @return \User_Model_Users
+     * Get user id
+     *
+     * @return int
      */
-    public function setRole($value)
+    public function getId()
     {
-        $this->role_id = $value;
+        return (int)$this->get('id');
+    }
+
+    /**
+     * Set user id
+     *
+     * @param int $id
+     * @return User_Model_Users
+     */
+    public function setId($value)
+    {
+        $this->set('id', (int)$value);
         return $this;
     }
 
     /**
-     * Set status
+     * Get user role id
      *
-     * @param string $value
+     * @return int
+     */
+    public function getRoleId()
+    {
+        return (int)$this->get('role_id');
+    }
+
+    /**
+     * Get user details model
+     *
+     * @return \User_Model_Profile
+     */
+    public function getProfile()
+    {
+        return $this->_depend['profile'];
+    }
+
+    /**
+     * Set profile model
+     *
+     * @param Application_Model_Profile $value
+     * @return \User_Model_Profile
+     */
+    public function setProfile(User_Model_Profile $value)
+    {
+        $this->_depend['profile'] = $value;
+        return $value;
+    }
+
+    /**
+     * Get created date time
+     *
+     * @return string | Zend_Date
+     */
+    public function getCreatedAt()
+    {
+        $time = $this->get('created_at');
+        if (is_string($time)) {
+            return new Zend_Date($time, Zend_Date::ISO_8601);
+        }
+        return $time;
+    }
+
+    /**
+     * Create or set date and time
+     *
+     * @param string | Zend_Db_Expr $value
      * @return \User_Model_Users
+     */
+    public function setCreatedAt($value = null)
+    {
+        if ($value === null) {
+            $value = new Zend_Db_Expr('NOW()');
+        }
+        $this->set('created_at', $value);
+        return $this;
+    }
+
+    /**
+     * Set user role id
+     *
+     * @param int $id
+     * @return \User_Model_Users
+     */
+    public function setRoleId($value)
+    {
+        $this->set('role_id', (int)$value);
+        return $this;
+    }
+
+    /**
+     * Get user status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->get('status');
+    }
+
+    /**
+     * Set user status
+     *
+     * @param string $id
+     * @return User_Model_Users
      */
     public function setStatus($value)
     {
-        $this->status = $value;
+        $this->set('status', $value);
         return $this;
     }
 
@@ -56,7 +150,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function setEmail($value)
     {
-        $this->email = $value;
+        $this->set('email', strtolower(trim($value)));
         return $this;
     }
 
@@ -67,7 +161,51 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->get('email');
+    }
+
+    /**
+     * Set nickname
+     *
+     * @param string $value
+     * @return \User_Model_Users
+     */
+    public function setNick($value)
+    {
+        $this->set('nick', $value);
+        return $this;
+    }
+
+    /**
+     * Get nickname
+     *
+     * @return string
+     */
+    public function getNick()
+    {
+        return $this->get('nick');
+    }
+
+    /**
+     * Get password hash
+     *
+     * @return string
+     */
+    public function getPasswordResetHash()
+    {
+        return $this->get('password_reset_hash');
+    }
+
+    /**
+     * Set new hash for pasword restore
+     *
+     * @param string $value
+     * @return \User_Model_Users
+     */
+    public function setPasswordResetHash($value)
+    {
+        $this->set('password_reset_hash', $value);
+        return $this;
     }
 
     /**
@@ -81,13 +219,23 @@ class User_Model_Users extends Core_Model_Abstract
     {
         if (strlen($value) < 32) {
             $salt = $this->_generateSalt();
-            $this->salt = $salt;
-            $this->password = md5($salt . $value);
+            $this->set('salt', $salt);
+            $this->set('password', md5($salt . $value));
         } else {
-            $this->password = $value;
+            $this->set('password', $value);
         }
 
         return $this;
+    }
+
+    /**
+     * Get salt after generate password
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->get('salt');
     }
 
     /**
@@ -97,7 +245,7 @@ class User_Model_Users extends Core_Model_Abstract
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->get('password');
     }
 
     /**

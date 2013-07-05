@@ -207,12 +207,6 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         $resource = $request->getModuleName() . '/' . $request->getControllerName();
         $session = new Zend_Session_Namespace('Core_Acl');
 
-        if (!empty($session->params) && Zend_Auth::getInstance()->hasIdentity() !== false) {
-            $params = $session->params;
-            $session->unsetAll();
-            $this->_setDispatched($params);
-        }
-
         /** Check resource */
         if (!$acl->has($resource)) {
             if (Zend_Controller_Front::getInstance()->getParam('env') == 'development') {
@@ -225,16 +219,26 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         }
 
         if ($acl->isAllowed($this->getRoleName(), $resource, $request->getActionName()) === true) {
+            /** Redirect with user session params */
+            if (!empty($session->params) && Zend_Auth::getInstance()->hasIdentity() !== false) {
+                $params = $session->params;
+                $session->unsetAll();
+
+                $router = Zend_Controller_Front::getInstance()->getRouter();
+                $url = $router->assemble($params);
+                $this->getResponse()->setRedirect($url);
+            }
             return true;
         } else {
             if (Zend_Auth::getInstance()->hasIdentity() === false) {
                 /** Save request to session */
-                $session->params = $this->_request->getParams();
+                $session->params = $request->getParams();
             }
 
             $this->_denyAccess();
         }
     }
+
 
     /**
      * Set to error page
@@ -262,7 +266,7 @@ class Core_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
      * Set new dispatched
      *
      * @param array $params Dispatcher params
-     * @param type $dispatched
+     * @param bool $dispatched
      */
     protected function _setDispatched(Array $params, $dispatched = false)
     {
