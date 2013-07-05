@@ -1,5 +1,16 @@
 #CHANGELOG
 
+##2.0.0 (2013-07-05):
+- 5fce7d0 Update (user); Enable database queries caching
+- 018ade1 [#2] Feature (core); Added command-tool for create new models structure
+- 3f27aae Fix (core); Fixed paths in zf
+- 7f1da08 Fix (user); Removed old code, changed bug in save name in profile, changed profile comtroller to index controller
+- 718b114 [#1] Fix (user); Fixed show notification
+- 463042c Fix (user, core); Updated core, changed job in database layer, changed all models to work with Zend_Db_Table
+- d5cb852 Fix (core); Removed old code
+- 852dff5 Fix (users); Added relationships to users and images db_tables. Changed models to db_row object
+- b9978df [#23] Fix (acl); Fixed redirect to previous url after login
+
 ##1.2.1 (2013-06-21):
 - 3e85e98 Fixed show default image
 - bcdc5c6 Created avatar decorator for file field, created errorModal function
