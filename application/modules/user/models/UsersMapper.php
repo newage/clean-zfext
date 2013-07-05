@@ -51,12 +51,18 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     /**
      * Save new user and upload avatar
      *
-     * @return User_Model_Users
+     * @return mixed
      */
     public function save(Core_Model_Abstract $model)
     {
         $table = $this->getDbTable();
-        return $table->insert($model->toArray());
+        $result = $table->insert($model->toArray());
+
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $cacheId = md5('User_' . $identity->id);
+        $this->getCache()->remove($cacheId);
+
+        return $result;
     }
 
     /**
@@ -103,33 +109,6 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
         $user->status = User_Model_Users::STATUS_ENABLE;
 
         return $user->save();
-    }
-
-    /**
-     * Get users models with search params
-     *
-     * @param string $searchText
-     * @param int $limit Limit result on page
-     * @param int $page Current page number
-     * @return \User_Model_Users
-     */
-    public function getUsers($searchText, $limit = 10, $page = 0)
-    {
-        if ($searchText === null) {
-            $users = $this->getDbTable()->fetchAll();
-        } else {
-            $where = 'name LIKE %%';
-            $users = $this->getDbTable()->fetchAll($where);
-        }
-
-        foreach ($users as $user) {
-            $profile = $user->findDependentRowset('User_Model_DbTable_Profile')->current();
-            $image = $profile->findParentRow('Application_Model_DbTable_Images');
-
-            $user->setProfile($profile)->setAvatar($image);
-        }
-
-        return $users;
     }
 
     /**
@@ -183,8 +162,8 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     {
         $user = $this->getDbTable()->getByPassword_reset_hash($request['hash']);
 
-        $user->password = $request['password'];
-        $user->passwordResetHash = '';
+        $user->setPassword($request['password']);
+        $user->setPasswordResetHash('');
         $user->save();
 
         return true;
@@ -199,9 +178,8 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
 
-//        $cacheId = 'User_' . $nick;
-//        $this->getCache()->remove($cacheId);
-//        if (!($user = $this->loadCache($cacheId))) {
+        $cacheId = md5('User_' . $identity->id);
+        if (!($user = $this->loadCache($cacheId))) {
             $user = $this->getDbTable()->getById($identity->id);
 
             if ($user === null) {
@@ -212,8 +190,8 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
             $image = $profile->findParentRow('Application_Model_DbTable_Images');
 
             $user->setProfile($profile)->setAvatar($image);
-//            $this->saveCache($user, $cacheId, array('users', 'users_details'));
-//        }
+            $this->saveCache($user, $cacheId, array('users', 'users_details'));
+        }
 
         return $user;
     }
