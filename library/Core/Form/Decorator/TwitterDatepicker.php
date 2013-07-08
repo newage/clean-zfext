@@ -52,9 +52,10 @@ class Core_Form_Decorator_TwitterDatepicker extends Zend_Form_Decorator_Abstract
         };
 
         $view = $element->getView();
-        $view->headLink()->appendStylesheet('/components/bootstrap-datepicker/css/datepicker.css');
-        $view->headScript()->appendFile('/components/bootstrap-datepicker/js/bootstrap-datepicker.js');
-        $view->jqueryScript()->append('$("#'.$id.'").datepicker('.$options($this->getOptions()).');');
+        $view->jqueryScript()->append(
+            '$("#'.$id.'").datepicker('.$options($this->getOptions()).');',
+            'bootstrap-datepicker'
+        );
 
         $markup  = sprintf($this->_format, $label, $id, $name, $value, $required, $class);
 

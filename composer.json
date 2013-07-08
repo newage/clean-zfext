@@ -43,7 +43,10 @@
                         ],
                         "styles": [
                             "select2.css"
-                        ]
+                        ],
+                        "shim": {
+                            "deps": ["bootstrap"]
+                        }
                     }
                 },
                 "require": {
@@ -73,7 +76,10 @@
                         ],
                         "styles": [
                             "css/bootstrap-notify.css"
-                        ]
+                        ],
+                        "shim": {
+                            "deps": ["bootstrap"]
+                        }
                     }
                 },
                 "require": {
@@ -100,7 +106,10 @@
                     "component": {
                         "scripts": [
                             "jquery.i18n.js"
-                        ]
+                        ],
+                        "shim": {
+                            "deps": ["jquery"]
+                        }
                     }
                 },
                 "require": {
@@ -126,8 +135,14 @@
                 "extra": {
                     "component": {
                         "scripts": [
-                            "jquery.i18n.js"
-                        ]
+                            "js/bootstrap-datepicker.js"
+                        ],
+                        "styles": [
+                            "css/datepicker.css"
+                        ],
+                        "shim": {
+                            "deps": ["bootstrap"]
+                        }
                     }
                 },
                 "require": {

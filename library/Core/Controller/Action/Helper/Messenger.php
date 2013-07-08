@@ -82,10 +82,12 @@ class Core_Controller_Action_Helper_Messenger extends Zend_Controller_Action_Hel
     {
         $view = Zend_Layout::getMvcInstance()->getView();
         foreach ($this->_messages as $type => $message) {
-            $view->jqueryScript()->append('$(".notifications").notify({
+            $view->jqueryScript()->append(
+                '$(".notifications").notify({
                     message: { text: "'.$message.'" },
                     type: "'.$type.'"}
-                ).show();'
+                ).show();',
+                'bootstrap-notify'
             );
         }
 

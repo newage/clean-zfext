@@ -11,7 +11,14 @@
  */
 class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Container_Standalone
 {
-    protected $_items = array();
+    protected $_items = array(
+        '$("a").tooltip();'
+    );
+    
+    protected $_libraries = array(
+        'jquery',
+        'bootstrap'
+    );
 
     /**
      *
@@ -26,20 +33,25 @@ class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Contain
      * Add jquery script
      *
      * @see Zend_View_Helper_HeadScript::__call()
-     * @param  string $script
+     * @param string $script
+     * @param string $library Require js library
      * @return Zend_View_Helper_HeadScript
      * @throws Zend_View_Exception if too few arguments or invalid method
      */
-    public function append($script)
+    public function append($script, $library = 'jquery')
     {
-        $this->_items[] = "\n" . $script . "\n";
+        if (!in_array($library, $this->_libraries)) {
+            array_push($this->_libraries, $library);
+        }
+        
+        array_push($this->_items, $script);
     }
 
     public function toString()
     {
         if (count($this->_items) > 0) {
             $scripts = '<script type="text/javascript">' . "\n"
-                . 'require(["jquery", "bootstrap"], function($) {'.implode("\n", $this->_items).'});' . "\n"
+                . 'require(["'.implode('","', $this->_libraries).'"], function($) {'.implode("\n", $this->_items).'});' . "\n"
                 . '</script>';
         } else {
             $scripts = '';

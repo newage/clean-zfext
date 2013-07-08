@@ -39,7 +39,7 @@ class Application_Model_Images extends Core_Model_Abstract
      * Default image
      * @type string
      */
-    const DEFAULT_IMAGE = 'img/default_user.png';
+    const DEFAULT_IMAGE = 'layouts/default/img/default_user.png';
 
     /**
      * Set default data
