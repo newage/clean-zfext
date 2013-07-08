@@ -38,7 +38,9 @@ class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Contain
     public function toString()
     {
         if (count($this->_items) > 0) {
-            $scripts = '<script type="text/javascript">$(function() {'.implode("\n", $this->_items).'})</script>';
+            $scripts = '<script type="text/javascript">' . "\n"
+                . 'require(["jquery", "bootstrap"], function($) {'.implode("\n", $this->_items).'});' . "\n"
+                . '</script>';
         } else {
             $scripts = '';
         }

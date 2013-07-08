@@ -1,15 +1,16 @@
 {
     "require": {
         "newage/zf-tools": "1.*",
-        "newage/zf-debug": "1.*",
+        "newage/zf-console": "1.*",
         "zend/zf1": "1.12.*",
-        "view/bootstrap": "2.3.*",
-        "view/select2": "3.*",
-        "view/bootstrap-notify": "1.*",
-        "view/font-awesome": "3.*",
-        "view/jquery-i18n": "1.*",
-        "view/bootstrap-dropdown": "1.*",
-        "view/bootstrap-datepicker": "1.*"
+        "components/jquery": "1.9.*",
+        "components/bootstrap": "2.3.*",
+        "components/bootstrap-default": "2.3.*",
+        "components/font-awesome": "3.2.*",
+        "ivaynberg/select2": "3.*",
+        "Nijikokun/bootstrap-notify": "1.*",
+        "newage/jquery-i18n": "1.*",
+        "eternicode/bootstrap-datepicker": "1.*"
     },
     "repositories": [
         {
@@ -23,43 +24,114 @@
         {
             "type": "package",
             "package": {
-                "name": "view/bootstrap-dropdown",
-                "version": "1.0.0",
+                "name": "ivaynberg/select2",
+                "type": "component",
+                "version": "3.4.1",
                 "dist": {
-                    "url": "http://lightglitch.github.io/bootstrap-xtra/js/bootstrap-dropdown.js",
-                    "type": "file"
+                    "url": "https://github.com/ivaynberg/select2/archive/3.4.1.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/ivaynberg/select2",
+                    "type": "git",
+                    "reference": "3.4.1"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "select2.js"
+                        ],
+                        "styles": [
+                            "select2.css"
+                        ]
+                    }
                 },
                 "require": {
-                    "view/bootstrap": ">=2.3.1"
+                    "robloach/component-installer": "*"
                 }
             }
         },
         {
             "type": "package",
             "package": {
-                "name": "view/bootstrap-datepicker",
+                "name": "Nijikokun/bootstrap-notify",
+                "type": "component",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "https://github.com/Nijikokun/bootstrap-notify/archive/1.0.0.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/Nijikokun/bootstrap-notify",
+                    "type": "git",
+                    "reference": "1.0.0"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "js/bootstrap-notify.js"
+                        ],
+                        "styles": [
+                            "css/bootstrap-notify.css"
+                        ]
+                    }
+                },
+                "require": {
+                    "robloach/component-installer": "*"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "newage/jquery-i18n",
+                "type": "component",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "https://github.com/newage/jquery-i18n/archive/v1.0.0.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/newage/jquery-i18n",
+                    "type": "git",
+                    "reference": "1.0.0"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "jquery.i18n.js"
+                        ]
+                    }
+                },
+                "require": {
+                    "robloach/component-installer": "*"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "eternicode/bootstrap-datepicker",
+                "type": "component",
                 "version": "1.0.1",
                 "dist": {
                     "url": "https://github.com/eternicode/bootstrap-datepicker/zipball/v1.0.1",
                     "type": "zip"
                 },
-                "require": {
-                    "view/bootstrap": ">=2.0.4",
-                    "view/jquery": ">=1.7.1"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/jquery-i18n",
-                "version": "1.0.1",
-                "dist": {
-                    "url": "https://github.com/newage/jquery-i18n/archive/develop.zip",
-                    "type": "zip"
+                "source": {
+                    "url": "https://github.com/eternicode/bootstrap-datepicker",
+                    "type": "git",
+                    "reference": "1.0.0"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "jquery.i18n.js"
+                        ]
+                    }
                 },
                 "require": {
-                    "view/jquery": ">=1.4.1"
+                    "robloach/component-installer": "*"
                 }
             }
         },
@@ -74,73 +146,8 @@
                 },
                 "autoload": {
                     "psr-0": {
-                        "Zend": "library",
-                        "ZendX": "extras/library"
+                        "Zend": "library"
                     }
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/jquery",
-                "version": "1.9.1",
-                "dist": {
-                    "url": "http://code.jquery.com/jquery-1.9.1.min.js",
-                    "type": "file"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/bootstrap",
-                "version": "2.3.1",
-                "dist": {
-                    "url": "http://twitter.github.io/bootstrap/assets/bootstrap.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "view/jquery": "1.9.*"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/select2",
-                "version": "3.3.2",
-                "dist": {
-                    "url": "https://github.com/ivaynberg/select2/archive/3.3.2.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "view/bootstrap": "2.*"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/bootstrap-notify",
-                "version": "1.0.0",
-                "dist": {
-                    "url": "https://github.com/Nijikokun/bootstrap-notify/archive/1.0.0.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "view/bootstrap": "2.*"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "view/font-awesome",
-                "version": "3.2.1",
-                "dist": {
-                    "url": "http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip",
-                    "type": "zip"
                 }
             }
         }

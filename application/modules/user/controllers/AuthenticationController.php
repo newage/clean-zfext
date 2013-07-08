@@ -72,7 +72,7 @@ class User_AuthenticationController extends Zend_Controller_Action
             Core_Controller_Action_Helper_Messenger::TYPE_INFO,
             true
         );
-        
+
         $this->getHelper('Redirect')->gotoUrl('/');
     }
 }

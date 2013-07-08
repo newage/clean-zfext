@@ -64,27 +64,27 @@ function confirmModal(options) {
     });
 }
 
-$(function() {
+require(['jquery'], function($) {
 
-    $('form[required=true] .control-group').each(function() {
-        if ($(this).find(':input :last').prop('required')) {
-            $(this).find('label').append(requireSymbol);
-        }
-    });
-
-    $(document).ajaxError(function() {
-        $('#errorModal').find('.modal-body p').text('Server is busy. Please try later.');
-        $('#errorModal').modal('show');
-    });
-
-    $(document).ajaxComplete(function(event, request, settings) {
-        if (request.responseText.search('{') === 0) {
-            var requestJson = JSON.parse(request.responseText);
-            if (requestJson.error !== undefined) {
-                $('#errorModal').find('.modal-header h3').text('Error response');
-                $('#errorModal').find('.modal-body p').text(requestJson.error);
-                $('#errorModal').modal('show');
-            }
-        }
-    });
+//    $('form[required=true] .control-group').each(function() {
+//        if ($(this).find(':input :last').prop('required')) {
+//            $(this).find('label').append(requireSymbol);
+//        }
+//    });
+//
+//    $(document).ajaxError(function() {
+//        $('#errorModal').find('.modal-body p').text('Server is busy. Please try later.');
+//        $('#errorModal').modal('show');
+//    });
+//
+//    $(document).ajaxComplete(function(event, request, settings) {
+//        if (request.responseText.search('{') === 0) {
+//            var requestJson = JSON.parse(request.responseText);
+//            if (requestJson.error !== undefined) {
+//                $('#errorModal').find('.modal-header h3').text('Error response');
+//                $('#errorModal').find('.modal-body p').text(requestJson.error);
+//                $('#errorModal').modal('show');
+//            }
+//        }
+//    });
 });
