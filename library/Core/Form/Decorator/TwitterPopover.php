@@ -15,12 +15,12 @@ class Core_Form_Decorator_TwitterPopover extends Zend_Form_Decorator_Abstract
         $element = $this->getElement();
         $id      = htmlentities($element->getId());
         $description = $element->getDescription();
-        $translate = $element->getTranslator();
+        $title = $element->getLabel();
 
         $script = '$("#'.$id.'").popover({
             trigger:"hover",
-            content:"' . $translate->translate($description) . '",
-            title:"' . $translate->translate('Description') . '"
+            content:"' . $description . '",
+            title:"' . $title . '"
         });';
 
         $element->getView()->jqueryScript()->append($script);
