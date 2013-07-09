@@ -74,9 +74,9 @@ php composer.phar install
 * Setup manifest
 
 ```
-./zf show config
-./zf create config
-./zf enable config.manifest Manifest
+zf show config
+zf create config
+zf enable config.manifest Manifest
 ```
 ## Setup database
 
@@ -97,8 +97,8 @@ resources.db.isDefaultTableAdapter = true
 * Create schema on your database
 
 ```
-./zf apply schema
-./zf load fixture
+zf apply schema
+zf load fixture
 ```
 
 After load fixture created default users
