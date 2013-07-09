@@ -26,6 +26,7 @@ Releases will be numbered with the following format:
 * style - fix typos, correct formatting
 * refactor - refactoring your code
 * test - everything associated with testing
+
 ```
 [issue number] type (module); action**ed** + wherefore + details [optional]
 ```
@@ -46,6 +47,7 @@ git clone git@github.com:newage/clean-zfext.git
 ## Automatically setup on ubuntu
 
 Run bash script: create need folders, copy config.ini and zf.sh, config zf tool
+
 ```
 cd project-home
 source install.sh
@@ -54,6 +56,7 @@ source install.sh
 ## Manual setup
 
 * Install composer and dependencies
+
 ```
 cd project-home
 curl -s http://getcomposer.org/installer | php
@@ -80,6 +83,7 @@ php composer.phar install
 Config you application.development.ini for use module and db connection
 
 * Enter database parameters:
+
 ```
 resources.db.adapter = pdo_mysql
 resources.db.params.host = localhost
