@@ -30,7 +30,7 @@ class Core_Form_Decorator_TwitterAvatar extends Zend_Form_Decorator_Abstract
         $height      = $element->getAttrib('height') !== null ? $element->getAttrib('height') : 100;
         $value       = $element->getAttrib('default') !== null
                      ? $element->getAttrib('default')
-                     : 'img/default_user.png';
+                     : 'default_user.png';
 
         preg_match('~<dd>.*</dd>~sm', $content, $matches);
         $dd = isset($matches[0]) ? $matches[0] : $content;

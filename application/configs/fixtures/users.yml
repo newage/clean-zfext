@@ -1,7 +1,7 @@
 users:
   new_admin:
     id: 1
-    email: admin@no.no
+    email: admin@example.com
     password: 8db933e12bac8dc5420c935b971a3c58
     salt: 17818fe018509ba8f72f2599b7657ed5
     created_at: 2011-07-01 14:06:28
@@ -10,7 +10,7 @@ users:
     status: ENABLE
   new_user:
     id: 2
-    email: user@no.no
+    email: user@example.com
     password: 8db933e12bac8dc5420c935b971a3c58
     salt: 17818fe018509ba8f72f2599b7657ed5
     created_at: 2011-07-01 14:06:28
