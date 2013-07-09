@@ -12,8 +12,9 @@
 ##Versioning
 
 Releases will be numbered with the following format:
-
+```
 <major>.<minor>.<patch>
+```
 
 ##In the commit message
 
