@@ -6,3 +6,4 @@
 /composer*
 !/composer.json
 /.zf.ini
+/components/*

@@ -34,7 +34,7 @@ class User_AuthenticationController extends Zend_Controller_Action
      */
     public function loginAction()
     {
-        $this->view->jqueryScript()->append('$("a").tooltip();');
+        $this->view->jqueryScript()->append('$("a").tooltip();', 'bootstrap');
 
         $this->view->headTitle('Login');
         $form = new User_Form_Authentication();
@@ -72,7 +72,7 @@ class User_AuthenticationController extends Zend_Controller_Action
             Core_Controller_Action_Helper_Messenger::TYPE_INFO,
             true
         );
-        
+
         $this->getHelper('Redirect')->gotoUrl('/');
     }
 }

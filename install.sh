@@ -42,6 +42,7 @@ cd ../../
 function zfsetup {
     TFILE=".zf.ini"
     echo "php.include_path = \"${PWD}/vendor/zend/zf1/library\"" > $TFILE
+    echo 'export PATH=$PATH:'${PWD} >> ~/.bashrc
 }
 
 function setupmanifest {

@@ -1,8 +1,4 @@
-# Extends library for Zend Framework 1
-
-## Install & Setup
-
-## System Requirements
+##System Requirements
 
 * PHP >= 5.3
 
@@ -16,15 +12,13 @@
 ##Versioning
 
 Releases will be numbered with the following format:
-
-
 ```
 <major>.<minor>.<patch>
 ```
 
 ##In the commit message
 
-###Types
+### Types
 
 * feature - is used when adding a new application-level functionality
 * fix - if any serious bug fixed
@@ -37,26 +31,22 @@ Releases will be numbered with the following format:
 [issue number] type (module); action**ed** + wherefore + details [optional]
 ```
 
-###Example commit message:
-
+### Example commit message:
 ```
 [#32] Fix (users, administrator); Added new migrations. For correct work need rebuild database.
 ```
 
-# Install
+## Install
 
 Clone this project
 
 ```
 git clone git@github.com:newage/clean-zfext.git
-
 ```
-
 
 ## Automatically setup on ubuntu
 
 Run bash script: create need folders, copy config.ini and zf.sh, config zf tool
-
 
 ```
 cd project-home
@@ -83,13 +73,11 @@ php composer.phar install
 
 * Setup manifest
 
-
 ```
 zf show config
 zf create config
 zf enable config.manifest Manifest
 ```
-
 ## Setup database
 
 Config you application.development.ini for use module and db connection
@@ -108,21 +96,22 @@ resources.db.isDefaultTableAdapter = true
 
 * Create schema on your database
 
-
 ```
 zf apply schema
 zf load fixture
 ```
 
 After load fixture created default users
-
+```
 Admin
-email: admin@no.no
+email: admin@example.com
 password: 123qwe
-
+```
+```
 User
-email: user@no.no
+email: user@example.com
 password: 123qwe
+```
 
 ##Setup upload
 
@@ -132,8 +121,8 @@ resources.frontcontroller.params.upload.path = BASE_PATH "/data/upload"
 resources.frontcontroller.params.upload.alias = public
 ```
 path - upload path
-
 alias - alias to upload folder in apache virtualhost
+
 
 ## Create apache virtualhost
 
@@ -156,8 +145,8 @@ alias - alias to upload folder in apache virtualhost
 		allow from all
 	</Directory>
 
-	Alias /components /var/www/clean-zfext/vendor/view
-	<Directory /var/www/clean-zfext/vendor/view>
+	Alias /components /var/www/clean-zfext/components
+	<Directory /var/www/clean-zfext/components>
 		AllowOverride All
 		Order allow,deny
 		allow from all
@@ -172,9 +161,8 @@ alias - alias to upload folder in apache virtualhost
         SetEnv APPLICATION_ENV development
 </VirtualHost>
 ```
-
 ## Create API documentation
-
+```
 apigen --source application --destination data/docs
-
+```
 ## Examples

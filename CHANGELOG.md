@@ -1,5 +1,9 @@
 #CHANGELOG
 
+##2.0.1 (2013-07-09):
+- 97127ae Updated readme
+- 642ed47 Included and enabled RequireJs
+
 ##2.0.0 (2013-07-05):
 - 5fce7d0 Update (user); Enable database queries caching
 - 018ade1 [#2] Feature (core); Added command-tool for create new models structure

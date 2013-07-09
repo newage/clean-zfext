@@ -64,7 +64,7 @@ function confirmModal(options) {
     });
 }
 
-$(function() {
+require(['jquery'], function($) {
 
     $('form[required=true] .control-group').each(function() {
         if ($(this).find(':input :last').prop('required')) {
