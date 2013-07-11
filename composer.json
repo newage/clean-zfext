@@ -22,6 +22,10 @@
             "url":  "git@github.com:newage/zf-console.git"
         },
         {
+            "type": "vcs",
+            "url":  "git@github.com:newage/jquery-i18n.git"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "ivaynberg/select2",
@@ -79,36 +83,6 @@
                         ],
                         "shim": {
                             "deps": ["bootstrap"]
-                        }
-                    }
-                },
-                "require": {
-                    "robloach/component-installer": "*"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "newage/jquery-i18n",
-                "type": "component",
-                "version": "1.0.0",
-                "dist": {
-                    "url": "https://github.com/newage/jquery-i18n/archive/v1.0.0.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/newage/jquery-i18n",
-                    "type": "git",
-                    "reference": "1.0.0"
-                },
-                "extra": {
-                    "component": {
-                        "scripts": [
-                            "jquery.i18n.js"
-                        ],
-                        "shim": {
-                            "deps": ["jquery"]
                         }
                     }
                 },
