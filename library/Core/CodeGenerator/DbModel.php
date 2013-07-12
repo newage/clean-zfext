@@ -179,6 +179,8 @@ class Core_CodeGenerator_DbModel extends Core_CodeGenerator_Abstract
 
             $parts = explode('_', $name);
             $name = implode('', array_map($function, $parts));
+        } else {
+            $name = ucfirst($name);
         }
         return $prefix . $name;
     }

@@ -1,5 +1,8 @@
 #CHANGELOG
 
+##2.0.2 (2013-07-12):
+- 3f1aa3f [#3] Fix (core); fixed generate method name in tool db-model without underscore symbol
+
 ##2.0.1 (2013-07-09):
 - 97127ae Updated readme
 - 642ed47 Included and enabled RequireJs
