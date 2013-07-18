@@ -104,6 +104,34 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
     }
 
     /**
+     * Set depend model
+     *
+     * @param string $modelName
+     * @param object $value
+     * @return object
+     */
+    public function setDepend(Core_Model_Abstract $value)
+    {
+        $className = get_class($value);
+        $this->_depend[$className] = $value;
+        return $value;
+    }
+
+    /**
+     * Get depend model
+     *
+     * @param string $modelName
+     * @return object
+     */
+    public function getDepend($modelName)
+    {
+        if (!isset($this->_depend[$modelName])) {
+            throw new Core_Model_Exception('Don\'t set depend model: ' . $modelName);
+        }
+        return $this->_depend[$modelName];
+    }
+
+    /**
      * Return array from all properties
      *
      * @return array
