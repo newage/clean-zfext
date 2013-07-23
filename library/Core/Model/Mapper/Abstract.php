@@ -44,6 +44,57 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     }
 
     /**
+     * Set \Zend_Paginator_Adapter_DbSelect
+     * And initialize Zend_Paginator
+     *
+     * @return \Zend_Paginator
+     */
+    public function getPaginator()
+    {
+        if (empty($this->_lastSelectWhere) || $this->_lastSelectWhere === null) {
+            throw new Core_Model_Mapper_Exception('Need set select object use method "setPaginatorSelect"');
+        }
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $currentPage = $request->getParam('page') ? (int)$request->getParam('page') : 1;
+
+        $select = $this->getDbTable()->select();
+        $select->from('users', array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'id'));
+
+        foreach ($this->_lastSelectWhere as $part) {
+            $select->where($part);
+        }
+
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+        $adapter->setRowCount($select);
+
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setCurrentPageNumber($currentPage);
+
+        return $paginator;
+    }
+
+    /**
+     * Set select for paginator
+     * And set limitPage to select
+     *
+     * @param Zend_Db_Table_Select $select
+     */
+    public function setPaginatorSelect(Zend_Db_Table_Select $select)
+    {
+        $this->_lastSelectWhere = $select->getPart('where');
+
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $pageNumber = $request->getParam('page') !== null
+                    ? (int)$request->getParam('page')
+                    : self::DEFAULT_PAGE_NUMBER;
+        $rowCount = $request->getParam('rows') !== null
+                  ? (int)$request->getParam('rows')
+                  : Zend_Paginator::getDefaultItemCountPerPage();
+
+        $select->limitPage($pageNumber, $rowCount);
+    }
+
+    /**
      * Save date
      *
      * @param Core_Model_Abstract $data
