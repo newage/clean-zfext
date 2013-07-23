@@ -11,20 +11,24 @@
  */
 class Core_Db_Table_Rowset extends Zend_Db_Table_Rowset_Abstract
 {
-    const DATE_FEATURE = 0;
-    const DATE_NOW = 1;
-    const DATE_PAST = 2;
+    const DATE_FEATURE = 'feature';
+    const DATE_NOW = 'now';
+    const DATE_PAST = 'past';
 
     /**
      * Count date for rowset
      *
      * @param string $methodName
-     * @param int $type Return type (0-feature, 1-now, 2-past)
+     * @param int $type Return type [feature, now, past]
      * @return array
      */
     public function dateCount($methodName, $type = self::DATE_FEATURE)
     {
-        $result = array();
+        $result = array(
+            self::DATE_FEATURE => 0,
+            self::DATE_NOW => 0,
+            self::DATE_PAST => 0
+        );
         $date = Zend_Date::now();
         foreach ($this as $row) {
             $compare = $date->compareDate($row->{$methodName}());
