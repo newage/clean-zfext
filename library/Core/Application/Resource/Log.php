@@ -1,12 +1,15 @@
 <?php
+
 /**
  * Logger Application Resources
  *
- * @category   Core
+ * @category   Library
  * @package    Core_Application
  * @subpackage Resource
- *
- * @version  $Id: Log.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Application_Resource_Log extends Zend_Application_Resource_ResourceAbstract
 {
@@ -27,8 +30,8 @@ class Core_Application_Resource_Log extends Zend_Application_Resource_ResourceAb
 
     /**
      * Attach logger
-     * 
-     * @param  Zend_Log $log 
+     *
+     * @param  Zend_Log $log
      * @return Zend_Application_Resource_Log
      */
     public function setLog(Zend_Log $log)

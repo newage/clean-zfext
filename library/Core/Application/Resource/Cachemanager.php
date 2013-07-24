@@ -1,12 +1,15 @@
 <?php
+
 /**
  * Cache Manager resource
  *
- * @category   Core
+ * @category   Library
  * @package    Core_Application
  * @subpackage Resource
- *
- * @version  $Id: Cachemanager.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Application_Resource_Cachemanager extends Zend_Application_Resource_ResourceAbstract
 {
@@ -30,11 +33,11 @@ class Core_Application_Resource_Cachemanager extends Zend_Application_Resource_R
         if (Zend_Registry::isRegistered('Zend_Cache_Manager')) {
             $manager = Zend_Registry::get('Zend_Cache_Manager');
         }
-        
+
         if (!isset($manager)) {
             $manager = new Zend_Cache_Manager;
         }
-        
+
         $options = $this->getOptions();
         foreach ($options as $key => $value) {
             if (isset($value['disable'])) {
@@ -47,7 +50,7 @@ class Core_Application_Resource_Cachemanager extends Zend_Application_Resource_R
                 $manager->setCacheTemplate($key, $value);
             }
         }
-        
+
         Zend_Registry::set('Zend_Cache_Manager', $manager);
 
         return $manager;

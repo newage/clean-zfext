@@ -3,18 +3,20 @@
 /**
  * Helper for html element <a href="...">...</a>
  *
- * @category Core
- * @package Core_View
+ * @category   Library
+ * @package    Core_View
  * @subpackage Helper
- * @author V.Leontiev
- *
- * @version $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
+ * @example    $view->link(array('module'=>'default'), 'text', array('class'=>'link'))
  */
 class Core_View_Helper_Link extends Zend_View_Helper_HtmlElement
 {
     /**
      * Create href link
-     * 
+     *
      * $urlOptions = array(
      *   'module' => '',
      *   'controller' => '',
@@ -23,7 +25,7 @@ class Core_View_Helper_Link extends Zend_View_Helper_HtmlElement
      *   'reset' => false,
      *   'encode' => true
      * )
-     * 
+     *
      * @param array $urlOptions
      * @param string $content
      * @param array $options Element options
@@ -37,7 +39,7 @@ class Core_View_Helper_Link extends Zend_View_Helper_HtmlElement
         unset($urlOptions['reset']);
         $encode = isset($urlOptions['encode']) ? $urlOptions['encode'] : true;
         unset($urlOptions['encode']);
-        
+
         $router = Zend_Controller_Front::getInstance()->getRouter();
         $link = $router->assemble($urlOptions, $name, $reset, $encode);
 
@@ -45,14 +47,14 @@ class Core_View_Helper_Link extends Zend_View_Helper_HtmlElement
         if (isset($options['title'])) {
             $options['title'] = Zend_Registry::get('Zend_Translate')->translate($options['title']);
         }
-        
+
         //translate alt
         if (isset($options['alt'])) {
             $options['alt'] = Zend_Registry::get('Zend_Translate')->translate($options['alt']);
         }
-        
+
         $params = $this->_htmlAttribs($options);
-        
+
         return '<a href="' . $link . '" ' . $params . '>' . $content . '</a>';
     }
 }

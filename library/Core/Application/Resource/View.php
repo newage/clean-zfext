@@ -3,12 +3,13 @@
 /**
  * Extend resource for View
  *
- * @category Core
- * @package Core_Application
+ * @category   Library
+ * @package    Core_Application
  * @subpackage Resource
- * @author V.Leontiev
- *
- * @version  $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Application_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {

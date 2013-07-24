@@ -3,9 +3,12 @@
  * By extending the Zend_Form class it is possible to create a
  * new form with automatic CSRF protection
  *
- * @category Core
- * @package Core_Form
- * @author V.Leontiev
+ * @category Library
+ * @package  Core
+ * @author   V.Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://github.com/newage/clean-zfext
  */
 
 class Core_Form extends Zend_Form

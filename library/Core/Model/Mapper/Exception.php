@@ -3,11 +3,13 @@
 /**
  * Model mapper exception
  *
- * @category Library
- * @package Core_Model_Mapper
- * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
- * @since php 5.1 or higher
+ * @category   Library
+ * @package    Core_Model
+ * @subpackage Mapper
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Model_Mapper_Exception extends Core_Model_Exception
 {

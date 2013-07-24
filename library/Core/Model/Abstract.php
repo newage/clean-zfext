@@ -2,10 +2,12 @@
 /**
  * Initialize set/get method in model
  *
- * @category Core
- * @package Core_Model
- * @license New BSD
- * @author V.Leontiev <vadim.leontiev@gmail.com>
+ * @category Library
+ * @package  Core_Model
+ * @author   V.Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://github.com/newage/clean-zfext
  */
 abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
 {

@@ -2,16 +2,22 @@
 
 /**
  * Abstract code genaretor
- * 
- * @category Core
- * @package Core_CodeGenerator
- * @author V.Leontiev
  *
- * @version  $Id$
+ * @category Library
+ * @package  Core_CodeGenerator
+ * @author   V.Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://github.com/newage/clean-zfext
  */
 abstract class Core_CodeGenerator_Abstract
 {
 
+    /**
+     * String separator for generate data
+     *
+     * @var string
+     */
     protected $_stringSeparator = "\n";
 
     /**
@@ -86,7 +92,7 @@ abstract class Core_CodeGenerator_Abstract
 
     /**
      * Generate standart docblock
-     * 
+     *
      * @return Zend_CodeGenerator_Php_Docblock
      */
     protected function _generateDocBlock()
@@ -120,7 +126,7 @@ abstract class Core_CodeGenerator_Abstract
 
     /**
      * Get path to resource
-     * 
+     *
      * @param string $resourceType
      * @return string
      */
@@ -139,7 +145,7 @@ abstract class Core_CodeGenerator_Abstract
 
     /**
      * Write body to file
-     * 
+     *
      * @param string $body
      * @param string $filePath
      */

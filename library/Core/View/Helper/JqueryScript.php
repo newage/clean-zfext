@@ -4,17 +4,21 @@
  * Extends HeadScript helper
  * Add method jqueryScript()
  *
- * @category Core
- * @package Core_View
+ * @category   Library
+ * @package    Core_View
  * @subpackage Helper
- * @author V.Leontiev
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
+ * @example    $view->JqueryScript->append('script_code', 'library')
  */
 class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     protected $_items = array(
         '$("a").tooltip();'
     );
-    
+
     protected $_libraries = array(
         'jquery',
         'bootstrap'
@@ -43,7 +47,7 @@ class Core_View_Helper_JqueryScript extends Zend_View_Helper_Placeholder_Contain
         if (!in_array($library, $this->_libraries)) {
             array_push($this->_libraries, $library);
         }
-        
+
         array_push($this->_items, $script);
     }
 

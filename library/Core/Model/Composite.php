@@ -4,10 +4,12 @@
  * Extend object for stdClass
  * Call of methods
  *
- * @category Core
- * @package Core_Model
- * @license New BSD
- * @author V.Leontiev <vadim.leontiev@gmail.com>
+ * @category Library
+ * @package  Core_Model
+ * @author   V.Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://github.com/newage/clean-zfext
  */
 class Core_Model_Composite extends stdClass
 {

@@ -4,9 +4,13 @@ require_once 'Interface.php';
 /**
  * Abstract Model mapper
  *
- * @category   Core
+ * @category   Library
  * @package    Core_Model
  * @subpackage Mapper
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 
 abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface

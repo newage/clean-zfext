@@ -4,12 +4,13 @@
  * Front controller plugin
  * Set route for translate
  *
- * @category Core
- * @package Core_Controller
+ * @category   Library
+ * @package    Core_Controller
  * @subpackage Plugin
- * @author V.Leontiev
- *
- * @version $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
 {

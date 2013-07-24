@@ -1,25 +1,26 @@
 <?php
 
 /**
- * Short string
+ * Trim long string
  *
- * @category Core
- * @package Core_View
+ * @category   Library
+ * @package    Core_View
  * @subpackage Helper
- * @author V.Leontiev
- *
- * @version $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_View_Helper_Short extends Zend_View_Helper_Abstract
 {
 
     /**
-     * Short string
-     * 
-     * @param string $text
-     * @param int $length
-     * @param bool $fullWords
-     * @param sting $end
+     * Trim string
+     *
+     * @param string $text Original string
+     * @param int $length Length string
+     * @param bool $fullWords Trin only words
+     * @param sting $end String suffix
      * @return string
      */
     public function short($text, $length = 50, $fullWords = false, $end = '')

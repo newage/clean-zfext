@@ -1,13 +1,14 @@
 <?php
 
 /**
- * DbModel class generator
+ * Generator for DbTable object
  *
- * @category Core
- * @package Core_CodeGenerator
- * @author V.Leontiev
- *
- * @version  $Id$
+ * @category Library
+ * @package  Core_CodeGenerator
+ * @author   V.Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://github.com/newage/clean-zfext
  */
 class Core_CodeGenerator_DbModel extends Core_CodeGenerator_Abstract
 {

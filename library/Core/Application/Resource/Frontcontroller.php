@@ -1,22 +1,26 @@
 <?php
+
 /**
  * Front Controller Application Resources
  *
  * You can use this is resource in your application.ini
+ * Example
  * <code>
- * ; set classname (0 is order for loader)
- * resources.frontController.plugins.0.classname = "Core_Controller_Plugin_Acl"
+ * ; set classname
+ * resources.frontController.plugins.acl.classname = "Core_Controller_Plugin_Acl"
  * ; set some options
- * resources.frontController.plugins.0.options.denied.controller = error
- * resources.frontController.plugins.0.options.denied.action = denied
- * resources.frontController.plugins.0.options.role = guest
+ * resources.frontController.plugins.acl.options.denied.controller = error
+ * resources.frontController.plugins.acl.options.denied.action = denied
+ * resources.frontController.plugins.acl.options.role = guest
  * </code>
  *
- * @category   Core
+ * @category   Library
  * @package    Core_Application
  * @subpackage Resource
- *
- * @version  $Id: Frontcontroller.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Application_Resource_Frontcontroller extends Zend_Application_Resource_ResourceAbstract
 {

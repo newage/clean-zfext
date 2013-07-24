@@ -3,11 +3,13 @@
 /**
  * Class extends for Core_Db_Table_Rowset_Abstract
  *
- * @category Core
- * @package Core_Db
+ * @category   Library
+ * @package    Core_Db
  * @subpackage Table
- * @license New BSD
- * @author V.Leontiev <vadim.leontiev@gmail.com>
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Db_Table_Rowset extends Zend_Db_Table_Rowset_Abstract
 {

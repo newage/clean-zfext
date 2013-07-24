@@ -1,12 +1,15 @@
 <?php
+
 /**
  * Set Db metadata cache
  *
- * @category   Core
+ * @category   Library
  * @package    Core_Application
  * @subpackage Resource
- *
- * @version  $Id: Db.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Application_Resource_Db extends Zend_Application_Resource_Db
 {

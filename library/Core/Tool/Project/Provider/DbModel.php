@@ -3,11 +3,13 @@
 /**
  * Create Model, dbTable, ModeMapper
  *
- * @category Library
- * @package Library_Tool_Project_Provider
- * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/zf-tool
- * @since php 5.1 or higher
+ * @category   Library
+ * @package    Core_Tool
+ * @subpackage Project_Provider
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Tool_Project_Provider_DbModel
     extends ZFTool_Tool_Project_Provider_Abstract

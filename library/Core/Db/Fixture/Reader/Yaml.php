@@ -3,19 +3,20 @@
 /**
  * Read data from Yaml
  *
- * @category Core
- * @package  Core_Migration
- * @subpackage Core_Migration_Reader
- * @author   V.Leontiev
- * 
- * @version  $Id$
+ * @category   Library
+ * @package    Core_Db
+ * @subpackage Fixture_Reader
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Migration_Reader_Yaml extends Core_Migration_Reader_Abstract
 {
-    
+
     /**
      * Load yaml data from the file
-     * 
+     *
      * @author V.Leontiev
      * @param string $yaml
      * @param array $options
@@ -28,16 +29,16 @@ class Core_Migration_Reader_Yaml extends Core_Migration_Reader_Abstract
         }
 
         $yaml = file_get_contents($yaml);
-        
+
         $data = self::decode($yaml);
-        
+
         if (null === $data) {
             throw new Zend_Exception("Error parsing YAML data");
         }
-        
+
         parent::__construct($data);
     }
-    
+
     /**
      * Very dumb YAML parser
      *
@@ -66,7 +67,7 @@ class Core_Migration_Reader_Yaml extends Core_Migration_Reader_Abstract
         $inIndent = false;
         while (list($n, $line) = each($lines)) {
             $lineno = $n + 1;
-            
+
             $line = rtrim(preg_replace("/#.*$/", "", $line));
             if (strlen($line) == 0) {
                 continue;

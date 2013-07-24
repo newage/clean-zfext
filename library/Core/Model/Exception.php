@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Model exception
+ * Exception for models
  *
  * @category Library
- * @package Core_Model
- * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
- * @since php 5.1 or higher
+ * @package  Core_Model
+ * @author   Vadim Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://bitbucket.org/newage/clean-zfext
  */
 class Core_Model_Exception extends Zend_Exception
 {
