@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Extend object for stdClass
- * Call of methods
+ * Extend object for SplObjectStorage
+ * Caching models in storage
  *
  * @category Library
  * @package  Core_Model
@@ -11,14 +11,71 @@
  * @since    php 5.3 or higher
  * @see      https://github.com/newage/clean-zfext
  */
-class Core_Model_Composite extends stdClass
+class Core_Model_Composite extends SplObjectStorage
 {
-    public function fromArray(Array $data)
+    const CACHE_NAME = 'composite';
+
+    /**
+     * Cache identifier
+     * @var string
+     */
+    protected $_cacheId = null;
+
+    /**
+     * Cache tags
+     *
+     * @var array
+     */
+    protected $_cacheTags = array();
+
+    /**
+     * Check is cached
+     *
+     * @param Zend_Db_Select $select
+     * @return bool
+     */
+    public function isCached(Zend_Db_Select $select)
     {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
+        $this->_cacheId = md5($select);
+        $this->_cacheTags = array_keys($select->getPart('from'));
+
+        $cache = $this->_getCache();
+        if (($data = $cache->load($this->_cacheId)) !== false) {
+            $this->unserialize($data);
         }
-        return $this;
+
+        return $this->count() > 0 ? true : false;
+    }
+
+    /**
+     * Save models to cache
+     *
+     * @throws Core_Exception
+     * @return void
+     */
+    public function toCache()
+    {
+        if (empty($this->_cacheId)) {
+            throw new Core_Exception('Need set cache id called method "isCached()"');
+        }
+
+        $cache = $this->_getCache();
+        $cache->save($this->serialize(), $this->_cacheId, $this->_cacheTags);
+    }
+
+    /**
+     * Get registered cache
+     *
+     * @return Zend_Cache_Core
+     * @throws Core_Exception
+     */
+    protected function _getCache()
+    {
+        $cacheName = 'Zend_Cache_Manager';
+        if (Zend_Registry::isRegistered($cacheName) && Zend_Registry::get($cacheName)->hasCache(self::CACHE_NAME)) {
+            return Zend_Registry::get($cacheName)->getCache(self::CACHE_NAME);
+        }
+        throw new Core_Exception('Don\'t set cache with name "'.self::CACHE_NAME.'" in cache manager!');
     }
 }
 
