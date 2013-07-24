@@ -55,9 +55,6 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      */
     public function getPaginator()
     {
-        if (empty($this->_lastSelectWhere) || $this->_lastSelectWhere === null) {
-            throw new Core_Model_Mapper_Exception('Need set select object use method "setPaginatorSelect"');
-        }
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $currentPage = $request->getParam('page') ? (int)$request->getParam('page') : 1;
 
@@ -71,10 +68,25 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
         $adapter->setRowCount($select);
 
+        $this->_setCacheToPaginator();
+
         $paginator = new Zend_Paginator($adapter);
         $paginator->setCurrentPageNumber($currentPage);
 
         return $paginator;
+    }
+
+    /**
+     * Set cache to Paginator
+     *
+     */
+    protected function _setCacheToPaginator()
+    {
+        $cacheName = 'Zend_Cache_Manager';
+        if (Zend_Registry::isRegistered($cacheName) && Zend_Registry::get($cacheName)->hasCache(self::CACHE_NAME)) {
+            $cache = Zend_Registry::get($cacheName)->getCache(self::CACHE_NAME);
+            Zend_Paginator::setCache($cache);
+        }
     }
 
     /**
