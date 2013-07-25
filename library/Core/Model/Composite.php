@@ -2,17 +2,16 @@
 
 /**
  * Extend object for SplObjectStorage
- * Caching models in storage
  *
- * @category Library
+ *
+ * @category Core
  * @package  Core_Model
  * @author   V.Leontiev <vadim.leontiev@gmail.com>
- * @license  http://opensource.org/licenses/MIT MIT
- * @since    php 5.3 or higher
- * @see      https://github.com/newage/clean-zfext
+ * @license  MIT
  */
 class Core_Model_Composite extends SplObjectStorage
 {
+
     const CACHE_NAME = 'composite';
 
     /**
@@ -36,8 +35,12 @@ class Core_Model_Composite extends SplObjectStorage
      */
     public function isCached(Zend_Db_Select $select)
     {
+        $tables = array();
         $this->_cacheId = md5($select);
-        $this->_cacheTags = array_keys($select->getPart('from'));
+        foreach ($select->getPart('from') as $table) {
+            $tables[] = $table['tableName'];
+        }
+        $this->_cacheTags = $tables;
 
         $cache = $this->_getCache();
         if (($data = $cache->load($this->_cacheId)) !== false) {

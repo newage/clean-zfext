@@ -4,17 +4,21 @@ require_once 'Interface.php';
 /**
  * Abstract Model mapper
  *
- * @category   Library
+ * @category   Core
  * @package    Core_Model
  * @subpackage Mapper
- * @author     V.Leontiev <vadim.leontiev@gmail.com>
- * @license    http://opensource.org/licenses/MIT MIT
- * @since      php 5.3 or higher
- * @see        https://github.com/newage/clean-zfext
  */
 
 abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
 {
+
+    const CACHE_NAME = 'paginator';
+
+    /**
+     * Default start page number
+     */
+    const DEFAULT_PAGE_NUMBER = 1;
+
     /**
      * @var Zend_Db
      */
@@ -26,6 +30,13 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      * @var string
      */
     protected $_cacheName = 'database';
+
+    /**
+     * Last wheres on last Zend_Db_Select query
+     *
+     * @var array
+     */
+    protected $_lastSelect = null;
 
     /**
      * Delete row
@@ -58,15 +69,10 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $currentPage = $request->getParam('page') ? (int)$request->getParam('page') : 1;
 
-        $select = $this->getDbTable()->select();
-        $select->from('users', array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'id'));
-
-        foreach ($this->_lastSelectWhere as $part) {
-            $select->where($part);
-        }
+        $select = $this->_lastSelect;
+        $select->columns(array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'id'));
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
-        $adapter->setRowCount($select);
 
         $this->_setCacheToPaginator();
 
@@ -82,9 +88,9 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      */
     protected function _setCacheToPaginator()
     {
-        $cacheName = 'Zend_Cache_Manager';
-        if (Zend_Registry::isRegistered($cacheName) && Zend_Registry::get($cacheName)->hasCache(self::CACHE_NAME)) {
-            $cache = Zend_Registry::get($cacheName)->getCache(self::CACHE_NAME);
+        $cacheManager = $this->_getCacheManager();
+        if ($cacheManager && $cacheManager->hasCache(self::CACHE_NAME)) {
+            $cache = $cacheManager->getCache(self::CACHE_NAME);
             Zend_Paginator::setCache($cache);
         }
     }
@@ -95,9 +101,9 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      *
      * @param Zend_Db_Table_Select $select
      */
-    public function setPaginatorSelect(Zend_Db_Table_Select $select)
+    public function setPaginatorSelect(Zend_Db_Select $select)
     {
-        $this->_lastSelectWhere = $select->getPart('where');
+        $this->_lastSelect = $select;
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $pageNumber = $request->getParam('page') !== null
@@ -108,6 +114,37 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
                   : Zend_Paginator::getDefaultItemCountPerPage();
 
         $select->limitPage($pageNumber, $rowCount);
+    }
+
+    /**
+     * Get cache manager
+     *
+     * @return Zend_Cache_Manager
+     */
+    protected function _getCacheManager()
+    {
+        $cacheName = 'Zend_Cache_Manager';
+        if (Zend_Registry::isRegistered($cacheName) === false) {
+            return false;
+        } else {
+            return Zend_Registry::get($cacheName);
+        }
+    }
+
+    /**
+     * Clean all cache in Zend_Cache_Manager
+     *
+     * @param string $mode Type from Zend_Cache
+     * @param array $tags
+     */
+    protected function _cleanCache($mode, Array $tags)
+    {
+        $cacheManager = $this->_getCacheManager();
+        if ($cacheManager !== false) {
+            foreach ($this->getCaches() as $cache) {
+                $cache->clean($mode, $tags);
+            }
+        }
     }
 
     /**
