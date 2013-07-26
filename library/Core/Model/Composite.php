@@ -45,9 +45,9 @@ class Core_Model_Composite extends SplObjectStorage
         $cache = $this->_getCache();
         if (($data = $cache->load($this->_cacheId)) !== false) {
             $this->unserialize($data);
+            return true;
         }
-
-        return $this->count() > 0 ? true : false;
+        return false;
     }
 
     /**

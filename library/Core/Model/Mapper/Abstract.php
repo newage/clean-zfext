@@ -32,13 +32,6 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     protected $_cacheName = 'database';
 
     /**
-     * Last wheres on last Zend_Db_Select query
-     *
-     * @var array
-     */
-    protected $_lastSelect = null;
-
-    /**
      * Delete row
      *
      * @param int $id
@@ -69,12 +62,7 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $currentPage = $request->getParam('page') ? (int)$request->getParam('page') : 1;
 
-        $select = $this->_lastSelect;
-        $select->columns(array(Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'id'));
-
-        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
-
-        $this->_setCacheToPaginator();
+        $adapter = new Zend_Paginator_Adapter_DbSelect($this->_getSelectForPaginator());
 
         $paginator = new Zend_Paginator($adapter);
         $paginator->setCurrentPageNumber($currentPage);
@@ -83,17 +71,11 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     }
 
     /**
-     * Set cache to Paginator
+     * Get select object for paginator
      *
+     * @return Zend_Db_Select
      */
-    protected function _setCacheToPaginator()
-    {
-        $cacheManager = $this->_getCacheManager();
-        if ($cacheManager && $cacheManager->hasCache(self::CACHE_NAME)) {
-            $cache = $cacheManager->getCache(self::CACHE_NAME);
-            Zend_Paginator::setCache($cache);
-        }
-    }
+    abstract protected function _getSelectForPaginator();
 
     /**
      * Set select for paginator
@@ -103,7 +85,7 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      */
     public function setPaginatorSelect(Zend_Db_Select $select)
     {
-        $this->_lastSelect = $select;
+        $this->_lastSelectWhere = $select->getPart('where');
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $pageNumber = $request->getParam('page') !== null
@@ -141,7 +123,7 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     {
         $cacheManager = $this->_getCacheManager();
         if ($cacheManager !== false) {
-            foreach ($this->getCaches() as $cache) {
+            foreach ($cacheManager->getCaches() as $cache) {
                 $cache->clean($mode, $tags);
             }
         }
@@ -227,8 +209,9 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      */
     public function getCache()
     {
-        if (Zend_Registry::get('Zend_Cache_Manager')->hasCache($this->_cacheName)) {
-            return Zend_Registry::get('Zend_Cache_Manager')->getCache($this->_cacheName);
+        $cacheManager = $this->_getCacheManager();
+        if ($cacheManager->hasCache($this->_cacheName)) {
+            return $cacheManager->getCache($this->_cacheName);
         } else {
             throw new Core_Model_Mapper_Exception('Didn\'t set cache to manager with name: ' . $this->_cacheName);
         }
