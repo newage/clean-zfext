@@ -32,6 +32,13 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     protected $_cacheName = 'database';
 
     /**
+     * Last select object
+     *
+     * @var Zend_Db_Select
+     */
+    protected $_lastSelect = null;
+
+    /**
      * Delete row
      *
      * @param int $id
@@ -52,40 +59,14 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     }
 
     /**
-     * Set \Zend_Paginator_Adapter_DbSelect
-     * And initialize Zend_Paginator
-     *
-     * @return \Zend_Paginator
-     */
-    public function getPaginator()
-    {
-        $request = Zend_Controller_Front::getInstance()->getRequest();
-        $currentPage = $request->getParam('page') ? (int)$request->getParam('page') : 1;
-
-        $adapter = new Zend_Paginator_Adapter_DbSelect($this->_getSelectForPaginator());
-
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setCurrentPageNumber($currentPage);
-
-        return $paginator;
-    }
-
-    /**
-     * Get select object for paginator
-     *
-     * @return Zend_Db_Select
-     */
-    abstract protected function _getSelectForPaginator();
-
-    /**
      * Set select for paginator
-     * And set limitPage to select
+     * And add limitPage to select
      *
      * @param Zend_Db_Table_Select $select
      */
-    public function setPaginatorSelect(Zend_Db_Select $select)
+    public function setSelectLimit(Zend_Db_Select $select)
     {
-        $this->_lastSelectWhere = $select->getPart('where');
+        $this->_lastSelect = $select;
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $pageNumber = $request->getParam('page') !== null
