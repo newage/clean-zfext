@@ -12,7 +12,7 @@ require_once 'Interface.php';
 abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
 {
 
-    const CACHE_NAME = 'paginator';
+    const DEFAULT_CACHE_NAME = 'composite';
 
     /**
      * Default start page number
@@ -23,13 +23,6 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
      * @var Zend_Db
      */
     protected $_dbTable = null;
-
-    /**
-     * Cache name for database caching
-     *
-     * @var string
-     */
-    protected $_cacheName = 'database';
 
     /**
      * Last select object
@@ -191,10 +184,10 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     public function getCache()
     {
         $cacheManager = $this->_getCacheManager();
-        if ($cacheManager->hasCache($this->_cacheName)) {
-            return $cacheManager->getCache($this->_cacheName);
+        if ($cacheManager->hasCache(self::DEFAULT_CACHE_NAME)) {
+            return $cacheManager->getCache(self::DEFAULT_CACHE_NAME);
         } else {
-            throw new Core_Model_Mapper_Exception('Didn\'t set cache to manager with name: ' . $this->_cacheName);
+            throw new Core_Model_Mapper_Exception('Don\'t set cache with name: ' . self::DEFAULT_CACHE_NAME);
         }
     }
 
@@ -219,6 +212,20 @@ abstract class Core_Model_Mapper_Abstract implements Core_Model_Maper_Interface
     {
         if ($this->isCache($cacheId) === true) {
             return $this->getCache()->load($cacheId);
+        }
+        return false;
+    }
+
+    /**
+     * Remove cache
+     *
+     * @param string $cacheId
+     * @return boolean
+     */
+    public function removeCache($cacheId)
+    {
+        if ($this->isCache($cacheId) === true) {
+            return $this->getCache()->remove($cacheId);
         }
         return false;
     }

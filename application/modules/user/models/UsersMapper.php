@@ -178,7 +178,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
 
-        $cacheId = md5('User_' . $identity->id);
+        $cacheId = md5('users_' . $identity->id);
         if (!($user = $this->loadCache($cacheId))) {
             $user = $this->getDbTable()->getById($identity->id);
 
@@ -190,7 +190,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
             $image = $profile->findParentRow('Application_Model_DbTable_Images');
 
             $user->setProfile($profile)->setAvatar($image);
-            $this->saveCache($user, $cacheId, array('users', 'users_details'));
+            $this->saveCache($user, $cacheId);
         }
 
         return $user;

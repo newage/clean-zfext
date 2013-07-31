@@ -66,6 +66,9 @@ class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
         $profile->setGender($model->getGender());
         $profile->setImageId($imageModel->getId());
 
-        return $profile->save();
+        $profile->save();
+
+        $cacheId = md5('users_' . $profile->getUserId());
+        return $this->removeCache($cacheId);
     }
 }
