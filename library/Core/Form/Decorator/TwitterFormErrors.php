@@ -30,12 +30,13 @@ class Core_Form_Decorator_TwitterFormErrors extends Zend_Form_Decorator_Abstract
 
         $formErrors = $element->getErrorMessages();
 
-        if (empty($formErrors) && empty($errors)) {
+        if (empty($formErrors)) {
             return $content;
         }
 
         $append = '';
         foreach ($formErrors as $error) {
+            $error = $view->escape($error);
             $append .= $this->addErrorToContent($error) . PHP_EOL;
         }
 
