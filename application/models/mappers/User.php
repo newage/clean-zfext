@@ -4,14 +4,19 @@
  * Mepper for user model
  *
  * @category Application
- * @package    Application_Modules_User
- * @subpackage Model_Mapper
+ * @package    Application_Model
+ * @subpackage Mapper
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
  * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
+class Application_Model_Mapper_User extends Core_Model_Mapper_Abstract
 {
+    
+    protected $_lastSelect = null;
+
+    protected $_prefixCache = 'user';
+    
     /**
      * Return bool if find registerd user on fields email and password
      *
@@ -49,20 +54,25 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     }
 
     /**
-     * Save new user and upload avatar
+     * Save new user
      *
-     * @return mixed
+     * @param array $formValues
+     * @return int
      */
-    public function save(Core_Model_Abstract $model)
+    public function save($formValues)
     {
-        $table = $this->getDbTable();
-        $result = $table->insert($model->toArray());
+        //Save user
+        $modelUser = new Application_Model_User($formValues);
+        $modelUser->setRoleId(2);
+        
+        $insertUserId = parent::save($modelUser);
+        
+        parent::_cleanCache(
+            Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
+            array('users')
+        );
 
-        $identity = Zend_Auth::getInstance()->getIdentity();
-        $cacheId = md5('User_' . $identity->id);
-        $this->getCache()->remove($cacheId);
-
-        return $result;
+        return $insertUserId;
     }
 
     /**
@@ -82,48 +92,58 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     }
 
     /**
-     * Disable user account
+     * Change status for user
      *
-     * @param User_Model_Users $request
-     * @return mixed
+     * @param int $id User id
+     * @return Application_Model_User
      */
-    public function disable(User_Model_Users $request)
+    public function changeStatus($id)
     {
-        $user = $this->getDbTable()->getById($this->_getCurrentUserId());
+        $user = $this->getDbTable()->getById((int)$id);
 
-        $user->status = User_Model_Users::STATUS_DISABLE;
+        switch ($user->getStatus()) {
+            case Application_Model_User::STATUS_ENABLE:
+                $user->status = Application_Model_User::STATUS_DISABLE;
+                break;
+            case Application_Model_User::STATUS_DISABLE:
+                $user->status = Application_Model_User::STATUS_ENABLE;
+                break;
+        }
 
-        return $user->save();
-    }
+        $user->save();
 
-    /**
-     * Enable user account
-     *
-     * @param User_Model_Users $request
-     * @return mixed
-     */
-    public function enable(User_Model_Users $request)
-    {
-        $user = $this->getDbTable()->findOneById($this->_getCurrentUserId());
+        $cacheId = $this->_getCacheId($id);
+        $this->_removeCache($cacheId);
 
-        $user->status = User_Model_Users::STATUS_ENABLE;
-
-        return $user->save();
+        return $user;
     }
 
     /**
      * Get user
      *
      * @param int $id
-     * @return User_Model_Users
+     * @return Application_Model_User
      */
-    public function getUser($id = 0)
+    public function find($id)
     {
-        if ($id == 0) {
-            $id = $this->_getCurrentUserId();
+        $cacheId = $this->_getCacheId($id);
+
+        if (!($user = $this->_loadCache($cacheId))) {
+            $user = $this->getDbTable()->getById($id);
+
+            if ($user === null) {
+                return null;
+            }
+
+            $profile = $user->findDependentRowset('Application_Model_DbTable_Profile')->current();
+            $user->setProfileModel($profile);
+
+            $image = $profile->findDependentRowset('Application_Model_DbTable_Image');
+            $profile->setImagesModel($image);
+
+            $this->_saveCache($user, $cacheId, array('users', 'users_details'));
         }
 
-        $user = $this->getDbTable()->getById($id);
         return $user;
     }
 
@@ -178,7 +198,7 @@ class User_Model_UsersMapper extends Core_Model_Mapper_Abstract
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
 
-        $cacheId = md5('users_' . $identity->id);
+        $cacheId = md5($this->_ . $identity->id);
         if (!($user = $this->loadCache($cacheId))) {
             $user = $this->getDbTable()->getById($identity->id);
 

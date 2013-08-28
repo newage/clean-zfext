@@ -3,12 +3,9 @@
 /**
  * Enable short translate method __ and _e
  *
- * @category Library
- * @package  Core
- * @author   V.Leontiev <vadim.leontiev@gmail.com>
- * @license  http://opensource.org/licenses/MIT MIT
- * @since    php 5.3 or higher
- * @see      https://github.com/newage/clean-zfext
+ * @category Core
+ * @package Core_View
+ * @author V.Leontiev
  */
 class Core_View extends Zend_View
 {

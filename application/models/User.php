@@ -10,7 +10,7 @@
  * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Model_Users extends Core_Model_Abstract
+class Application_Model_User extends Core_Model_Abstract
 {
     const STATUS_ENABLE  = 'ENABLE';
     const STATUS_DISABLE = 'DISABLE';
@@ -79,6 +79,28 @@ class User_Model_Users extends Core_Model_Abstract
         return $value;
     }
 
+    /**
+     * Get user details id
+     *
+     * @return int
+     */
+    public function getUserDetailsId()
+    {
+        return (int)$this->get('user_details_id');
+    }
+
+    /**
+     * Set user details id
+     *
+     * @param int $id
+     * @return \Application_Model_User
+     */
+    public function setUserDetailsId($value)
+    {
+        $this->set('user_details_id', (int)$value);
+        return $this;
+    }
+    
     /**
      * Get created date time
      *

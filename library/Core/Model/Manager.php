@@ -3,12 +3,9 @@
 /**
  * Core model manager
  *
- * @category Library
+ * @category Core
  * @package  Core_Model
- * @author   V.Leontiev <vadim.leontiev@gmail.com>
- * @license  http://opensource.org/licenses/MIT MIT
- * @since    php 5.3 or higher
- * @see      https://github.com/newage/clean-zfext
+ * @author V.Leontiev
  */
 class Core_Model_Manager
 {

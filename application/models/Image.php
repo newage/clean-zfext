@@ -6,10 +6,10 @@
  * @category Application
  * @package Application_Model
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
+ * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class Application_Model_Images extends Core_Model_Abstract
+class Application_Model_Image extends Core_Model_Abstract
 {
     /**
      * Small image widht in px
@@ -27,19 +27,19 @@ class Application_Model_Images extends Core_Model_Abstract
      * Medium image width in px
      * @type int
      */
-    const SIZE_MEDIUM_WIDTH = 80;
+    const SIZE_MEDIUM_WIDTH = 100;
 
     /**
      * Medium image height in px
      * @type int
      */
-    const SIZE_MEDIUM_HEIGHT = 80;
+    const SIZE_MEDIUM_HEIGHT = 100;
 
     /**
      * Default image
      * @type string
      */
-    const DEFAULT_IMAGE = 'layouts/default/img/default_user.png';
+    const DEFAULT_IMAGE = 'img/default_user.png';
 
     /**
      * Set default data
@@ -47,13 +47,15 @@ class Application_Model_Images extends Core_Model_Abstract
     public function setDefault()
     {
         $this->setCreatedAt();
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $this->setCreatorId($identity->id);
     }
 
     /**
      * Set id
      *
      * @param int $value
-     * @return Application_Model_Images
+     * @return Application_Model_Image
      */
     public function setId($value)
     {
@@ -72,6 +74,28 @@ class Application_Model_Images extends Core_Model_Abstract
     }
 
     /**
+     * Set user id
+     *
+     * @param int $value
+     * @return Application_Model_Image
+     */
+    public function setCreatorId($value)
+    {
+        $this->set('creator_id', (int)$value);
+        return $this;
+    }
+
+    /**
+     * Get user id
+     *
+     * @return int
+     */
+    public function getCreatorId()
+    {
+        return (int)$this->get('creator_id');
+    }
+
+    /**
      * Get path to file
      *
      * @return string
@@ -82,13 +106,30 @@ class Application_Model_Images extends Core_Model_Abstract
     }
 
     /**
+     * Get base upload path for image
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        $path = $this->getPath();
+        if (empty($path)) {
+            $path = self::DEFAULT_IMAGE;
+        } else {
+            $imageAlias = Zend_Controller_Front::getInstance()->getParam('upload');
+            $path = realpath(DIRECTORY_SEPARATOR . $imageAlias['path'] . DIRECTORY_SEPARATOR . $path);
+        }
+        return $path;
+    }
+
+    /**
      * Get real path
      *
      * @return string
      */
     public function getRealPath()
     {
-        $path = $this->get('path');
+        $path = $this->getPath();
         if (empty($path)) {
             $path = self::DEFAULT_IMAGE;
         } else {
@@ -102,7 +143,7 @@ class Application_Model_Images extends Core_Model_Abstract
      * Set path to file
      *
      * @param string $value
-     * @return \Application_Model_Images
+     * @return \Application_Model_Image
      */
     public function setPath($value)
     {
@@ -128,7 +169,7 @@ class Application_Model_Images extends Core_Model_Abstract
      *  Set created date
      *
      * @param string | Zend_Db_Expr $param
-     * @return \Application_Model_Images
+     * @return \Application_Model_Image
      */
     public function setCreatedAt($value = null)
     {
@@ -153,7 +194,7 @@ class Application_Model_Images extends Core_Model_Abstract
      * Set image width size
      *
      * @param int $value
-     * @return Application_Model_Images
+     * @return Application_Model_Image
      */
     public function setSizeWidth($value)
     {
@@ -175,7 +216,7 @@ class Application_Model_Images extends Core_Model_Abstract
      * Set image height size
      *
      * @param int $value
-     * @return Application_Model_Images
+     * @return Application_Model_Image
      */
     public function setSizeHeight($value)
     {

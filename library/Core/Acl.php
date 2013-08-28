@@ -2,12 +2,8 @@
 /**
  * Config support
  *
- * @category Library
- * @package  Core
- * @author   V.Leontiev <vadim.leontiev@gmail.com>
- * @license  http://opensource.org/licenses/MIT MIT
- * @since    php 5.3 or higher
- * @see      https://github.com/newage/clean-zfext
+ * @category Core
+ * @package  Core_Acl
  */
 
 class Core_Acl extends Zend_Acl

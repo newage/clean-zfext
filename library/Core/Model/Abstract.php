@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Initialize set/get method in model
  *
@@ -108,14 +109,17 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
     /**
      * Set depend model
      *
-     * @param string $modelName
      * @param object $value
+     * @param string $name
      * @return object
      */
-    public function addDependModel(Core_Model_Abstract $value)
+    public function addDependModel($value, $name = null)
     {
-        $className = get_class($value);
-        $this->_depend[$className] = $value;
+        if ($name === null) {
+            $name = get_class($value);
+        }
+
+        $this->_depend[$name] = $value;
         return $value;
     }
 
@@ -125,12 +129,23 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
      * @param string $modelName
      * @return object
      */
-    public function getDependModel($modelName)
+    public function getDependModel($name)
     {
-        if (!isset($this->_depend[$modelName])) {
-            throw new Core_Model_Exception('Don\'t set depend model: ' . $modelName);
+        if (!isset($this->_depend[$name])) {
+            throw new Core_Model_Exception('Don\'t set depend model: ' . $name);
         }
-        return $this->_depend[$modelName];
+        return $this->_depend[$name];
+    }
+
+    /**
+     * Isset depemd model
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function isDependModel($name)
+    {
+        return isset($this->_depend[$name]) ? true : false;
     }
 
     /**
@@ -189,17 +204,6 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
             $name = implode('_', array_map($function, $matches[0]));
         }
         return $name;
-    }
-
-    /**
-     * Get current logined user id
-     *
-     * @return int
-     */
-    protected function _getCurrentUserId()
-    {
-        $identity = Zend_Auth::getInstance()->getIdentity();
-        return (int)$identity->id;
     }
 
     /**

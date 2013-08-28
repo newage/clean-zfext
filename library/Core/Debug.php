@@ -1,36 +1,27 @@
 <?php
 
 /**
- * Enable/disable debug information
+ * Description of Debug
  *
- * @category Library
- * @package  Core
- * @author   V.Leontiev <vadim.leontiev@gmail.com>
- * @license  http://opensource.org/licenses/MIT MIT
- * @since    php 5.3 or higher
- * @see      https://github.com/newage/clean-zfext
+ * @category Core
+ * @package Core_Debug
+ * @author V.Leontiev
  */
 class Core_Debug extends Zend_Debug
 {
     /**
      * Get debug option from config
-     *
-     * @param string $message
-     * @param string $label
+     * 
+     * @author V.Leontiev
+     * @param type $message
+     * @param type $label 
      * @return string
      */
-    public static function dump($message, $label = null)
+    public static function dump($message, $label = null, $show = true)
     {
-        $show = false;
         $bootstrap = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getApplication();
-        switch ($bootstrap->getOption('debugger')) {
-            case '1':
-            case 'on':
-            case 'true':
-                $show = true;
-                break;
-        }
-
+        $show = $bootstrap->getOption('debugger') == 1 ? true : false;
+        
         return parent::dump($message, $label, $show);
     }
 }

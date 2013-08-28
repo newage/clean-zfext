@@ -1,31 +1,23 @@
 <?php
 
 /**
- * Extend object for SplObjectStorage
+ * Extend storage for objects used SplObjectStorage
  *
  *
  * @category Core
- * @package  Core_Model
  * @author   V.Leontiev <vadim.leontiev@gmail.com>
  * @license  MIT
  */
-class Core_Model_Composite extends SplObjectStorage
+class Core_Storage extends SplObjectStorage
 {
 
-    const CACHE_NAME = 'composite';
+    const CACHE_NAME = 'models';
 
     /**
      * Cache identifier
      * @var string
      */
     protected $_cacheId = null;
-
-    /**
-     * Cache tags
-     *
-     * @var array
-     */
-    protected $_cacheTags = array();
 
     /**
      * Check is cached

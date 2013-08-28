@@ -3,34 +3,33 @@
 /**
  * Nead methods in all providers
  *
- * @category   Library
- * @package    Core_Tool
- * @subpackage Project_Provider
- * @author     V.Leontiev <vadim.leontiev@gmail.com>
- * @license    http://opensource.org/licenses/MIT MIT
- * @since      php 5.3 or higher
- * @see        https://github.com/newage/clean-zfext
+ * @category Core
+ * @package Core_Tool
+ * @see Zend_Tool_Project_Provider_Abstract
+ * @author V.Leontiev
+ * 
+ * @version $Id$
  */
 abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Provider_Abstract
 {
-
+    
     /**
      * Title for console messages
      * @var string
      */
     protected $_title = '';
-
+    
     /**
      * @var Zend_Application
      */
     protected $_app = null;
-
+    
     protected static $_bootstrap = false;
-
+    
     /**
      * Initialize Core_Migration_Manager
      * Load profile and load development config
-     *
+     * 
      * @author V.Leontiev
      */
     public function initialize()
@@ -41,7 +40,7 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
             $this->_bootstrapWithOtherConfig();
 //        }
     }
-
+    
     /**
      * Get Application with load development config
      *
@@ -58,7 +57,7 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
                 $this->_getDevelopmentConfig()
             ));
             $this->_app->bootstrap();
-
+            
             self::$_bootstrap = true;
         } else {
             $applicationEnv = getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production';
@@ -68,12 +67,12 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
             );
         }
     }
-
+    
     /**
-     * Get config
-     *
+     * Get config 
+     * 
      * @author V.Leontiev
-     * @return array
+     * @return array 
      */
     private function _getDevelopmentConfig()
     {
@@ -89,10 +88,10 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
             return $config->toArray();
         }
     }
-
+    
     /**
      * Print message to console
-     *
+     * 
      * @author V.Leontiev
      * @param string $line
      * @param array $decoratorOptions
@@ -101,10 +100,10 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
     {
         $this->_registry->getResponse()->appendContent($this->_title . ' ' . $line, $decoratorOptions);
     }
-
+    
     /**
      * Print content message
-     *
+     * 
      * @author V.Leontiev
      * @param string $line
      * @param array $decoratorOptions
@@ -114,6 +113,6 @@ abstract class Core_Tool_Project_Provider_Abstract extends Zend_Tool_Project_Pro
         if (empty($decoratorOptions)) {
             $decoratorOptions = array('color' => 'yelow');
         }
-        $this->_registry->getResponse()->appendContent('Note: ' . $line, $decoratorOptions);
+        $this->_registry->getResponse()->appendContent('Note: ' . $line, $decoratorOptions); 
     }
 }

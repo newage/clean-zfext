@@ -50,6 +50,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'plugin'  => array(
                     'namespace' => 'Plugin',
                     'path'      => 'plugins',
+                ),
+                'mapper' => array(
+                    'namespace' => 'Model_Mapper',
+                    'path' => 'models/mappers'
                 )
             )
         ));

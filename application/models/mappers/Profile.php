@@ -4,15 +4,17 @@
  * Mapper for profile model
  *
  * @category Application
- * @package    Application_Modules_User
- * @subpackage ModelMapper
+ * @package    Application_Model
+ * @subpackage Mapper
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
  * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
+class Application_Model_Mapper_Profile extends Core_Model_Mapper_Abstract
 {
 
+    protected $_prefixCache = 'user_profile';
+    
     /**
      * Save new user and upload avatar
      *
@@ -27,7 +29,7 @@ class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
     /**
      * Get profile for logined user
      *
-     * @return User_Model_Profile
+     * @return Application_Model_Profile
      */
     public function getCurrentProfile()
     {
@@ -52,7 +54,7 @@ class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
         $imageModel = $imageMapper->setModel($imageModel)->resize()->upload();
 
         //Get user profile
-        $profile = $this->getDbTable()->getByUser_id($this->_getCurrentUserId());
+        $profile = $this->getDbTable()->getById($model->get);
 
         if ($profile === null) {
             //Create new user profile

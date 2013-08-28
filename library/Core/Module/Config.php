@@ -2,12 +2,10 @@
 /**
  * Reads configs from all modules
  *
- * @category Library
- * @package  Core_Module
- * @author   V.Leontiev <vadim.leontiev@gmail.com>
- * @license  http://opensource.org/licenses/MIT MIT
- * @since    php 5.3 or higher
- * @see      https://github.com/newage/clean-zfext
+ * @category Core
+ * @package Core_Module
+  *
+ * @version $Id: Config.php 87 2010-08-29 10:15:50Z vadim.leontiev $
  */
 
 class Core_Module_Config
@@ -25,7 +23,7 @@ class Core_Module_Config
 
     /**
      * Constructor
-     *
+     * 
      * @param array $config
      */
     public function  __construct(Array $options = array())
@@ -121,7 +119,7 @@ class Core_Module_Config
 
     /**
      * Get all configs from modules
-     *
+     * 
      * @param string $name Config name
      * @return array
      */

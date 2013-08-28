@@ -6,7 +6,7 @@
  * @package Application_User
  * @subpackage Forms
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
+ * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
 class User_Form_Restore extends Core_Form
