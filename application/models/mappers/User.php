@@ -12,8 +12,6 @@
  */
 class Application_Model_Mapper_User extends Core_Model_Mapper_Abstract
 {
-    
-    protected $_lastSelect = null;
 
     protected $_prefixCache = 'user';
     
@@ -135,13 +133,15 @@ class Application_Model_Mapper_User extends Core_Model_Mapper_Abstract
                 return null;
             }
 
-            $profile = $user->findDependentRowset('Application_Model_DbTable_Profile')->current();
-            $user->setProfileModel($profile);
+            if ($user->getUserDetailsId() > 0) {
+                $profile = $user->findDependentRowset('Application_Model_DbTable_Profile');
+                $user->setProfileModel($profile);
 
-            $image = $profile->findDependentRowset('Application_Model_DbTable_Image');
-            $profile->setImagesModel($image);
-
-            $this->_saveCache($user, $cacheId, array('users', 'users_details'));
+                $image = $profile->findDependentRowset('Application_Model_DbTable_Image');
+                $profile->setImagesModel($image);
+                
+                $this->_saveCache($user, $cacheId, array('users', 'users_details'));
+            }
         }
 
         return $user;
@@ -198,21 +198,8 @@ class Application_Model_Mapper_User extends Core_Model_Mapper_Abstract
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
 
-        $cacheId = md5($this->_ . $identity->id);
-        if (!($user = $this->loadCache($cacheId))) {
-            $user = $this->getDbTable()->getById($identity->id);
-
-            if ($user === null) {
-                //go to error page for don't find user
-            }
-
-            $profile = $user->findDependentRowset('User_Model_DbTable_Profile')->current();
-            $image = $profile->findParentRow('Application_Model_DbTable_Images');
-
-            $user->setProfile($profile)->setAvatar($image);
-            $this->saveCache($user, $cacheId);
-        }
-
+        $user = $this->find($identity->id);
+        
         return $user;
     }
 

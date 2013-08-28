@@ -15,6 +15,8 @@ class Application_Model_User extends Core_Model_Abstract
     const STATUS_ENABLE  = 'ENABLE';
     const STATUS_DISABLE = 'DISABLE';
 
+    protected $_imagesModels = 'Storage_Model_Image';
+    
     /**
      * Set default variable
      */
@@ -55,28 +57,6 @@ class Application_Model_User extends Core_Model_Abstract
     public function getRoleId()
     {
         return (int)$this->get('role_id');
-    }
-
-    /**
-     * Get user details model
-     *
-     * @return \User_Model_Profile
-     */
-    public function getProfile()
-    {
-        return $this->_depend['profile'];
-    }
-
-    /**
-     * Set profile model
-     *
-     * @param Application_Model_Profile $value
-     * @return \User_Model_Profile
-     */
-    public function setProfile(User_Model_Profile $value)
-    {
-        $this->_depend['profile'] = $value;
-        return $value;
     }
 
     /**
@@ -282,6 +262,79 @@ class Application_Model_User extends Core_Model_Abstract
             $salt .= chr(rand(33, 126));
         }
         return md5($salt);
+    }
+    
+    /**
+     * Get user details model
+     *
+     * @return Application_Model_Profile
+     */
+    public function getProfileModel()
+    {
+        return $this->getDependModel('Application_Model_Profile');
+    }
+
+    /**
+     * Set profile model
+     *
+     * @param Application_Model_Profile $value
+     * @return Application_Model_Profile
+     */
+    public function setProfileModel(Application_Model_Profile $value)
+    {
+        $this->addDependModel($value);
+        return $value;
+    }
+    
+    /**
+     * Get one image model
+     *
+     * @return Application_Model_Image
+     */
+    public function getImageModel($width, $height)
+    {
+        $images = $this->getDependModel($this->_imagesModels);
+        $last = array(
+            'image' => null,
+            'rate' => 0
+        );
+
+        $getRate = function($one, $two) {
+            $result = ($one > $two) ? $one - $two : $two - $one;
+            return $result;
+        };
+
+        foreach ($images as $image) {
+            $rate = $getRate($image->getSizeWidth() + $image->getSizeHeight(), $width + $height);
+            if ($rate < $last['rate'] || $last['image'] === null) {
+                $last['rate'] = $rate;
+                $last['image'] = $image;
+            }
+        }
+
+        return $last['image'];
+    }
+
+    /**
+     * Get all images models for user
+     *
+     * @return Core_Storage
+     */
+    public function getImagesModel()
+    {
+        return $this->getDependModel($this->_imagesModels);
+    }
+
+    /**
+     * Set images models for user
+     *
+     * @param Core_Storage $value
+     * @return Core_Storage
+     */
+    public function setImagesModel($value)
+    {
+        $this->addDependModel($value, $this->_imagesModels);
+        return $value;
     }
 }
 

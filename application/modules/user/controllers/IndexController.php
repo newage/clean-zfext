@@ -19,7 +19,7 @@ class User_IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $modelMapper = new User_Model_UsersMapper();
+        $modelMapper = new Application_Model_Mapper_User();
         $user = $modelMapper->getCurrentUser();
 
         $this->view->user = $user;
