@@ -38,6 +38,7 @@ CREATE TABLE  `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `last_logon_at` datetime DEFAULT NULL,
+  `user_detail_id` int(11) UNSIGNED NOT NULL,
   `password_reset_hash` varchar(32) DEFAULT NULL,
   `status` enum('ENABLE', 'DISABLE') NOT NULL DEFAULT 'DISABLE',
   PRIMARY KEY (`id`),
@@ -51,15 +52,13 @@ CREATE TABLE  `users` (
 
 CREATE TABLE  `users_details` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) UNSIGNED NOT NULL,
   `image_id` int(9) UNSIGNED NULL DEFAULT 0,
   `name` varchar(255) NOT NULL,
   `birthday` DATE DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   `gender` enum('MALE', 'FEMALE') NOT NULL DEFAULT 'MALE',
   `about` TEXT DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `user_id` (`user_id` ASC)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -104,7 +103,7 @@ CREATE  TABLE `images` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `path` VARCHAR(255) NOT NULL ,
   `created_at` DATETIME NOT NULL ,
-  `user_id` INT UNSIGNED NOT NULL ,
+  `creator_id` INT UNSIGNED NOT NULL ,
   `size_width` INT UNSIGNED NOT NULL ,
   `size_height` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
