@@ -3,10 +3,15 @@
 /**
  * Create texarea field and use bootstrap-wysiwyg
  *
- * @category Core
- * @package Core_Form_Decorator
- * @subpackage TwitterEditor
- * @author V.Leontiev
+ * @category   Library
+ * @package    Core_Form
+ * @subpackage Decorator
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
+ * @link       http://twitter.github.io/bootstrap/ "twitter-bootstrap" js framework
+ * @ignore
  */
 class Core_Form_Decorator_TwitterEditor extends Zend_Form_Decorator_Abstract
 {

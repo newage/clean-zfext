@@ -1,12 +1,18 @@
 <?php
 /**
- * Sent message to frontend
+ * Sent text message to frontend
  *
- * @category   Core
- * @package    Core_Controller
- * @subpackage Action_Helper_Messenger
+ * @category   Library
+ * @package    Core_controller
+ * @subpackage Action_Helper
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
-class Core_Controller_Action_Helper_Messenger extends Zend_Controller_Action_Helper_Abstract implements Countable
+class Core_Controller_Action_Helper_Messenger
+    extends Zend_Controller_Action_Helper_Abstract
+        implements Countable
 {
     const TYPE_SUCCESS = 'success';
     const TYPE_ERROR = 'error';

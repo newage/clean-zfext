@@ -3,12 +3,12 @@
 /**
  * Load default configs
  *
- * @category Core
- * @package Core_Test
- * @subpackage UnitTest
- * @author V.Leontiev
- *
- * @version  $Id$
+ * @category   Library
+ * @package    Core_Text
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Test_ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
 {
@@ -28,7 +28,7 @@ class Core_Test_ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         $this->bootstrap = new Zend_Application(APPLICATION_ENV, $config);
         parent::setUp();
     }
-    
+
     /**
      * Tear down after test case
      */

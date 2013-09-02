@@ -1,14 +1,30 @@
 <?php echo $this->navigation()->breadcrumbs()->setPartial(array('breadcrumbs.phtml', 'default')); ?>
 
 <ul class="thumbnails" id="user-profile">
-  <li class="span4">
-      <h3 class="text-info"><i class="icon-user"></i> User Profile</h3>
-      <img src="<?php echo $this->user->getProfile()->getAvatar()->getRealPath(); ?>" class="img-rounded">
-      <br/><br/>
-    <address>
-        <strong><?php echo $this->user->getProfile()->getName(); ?></strong><br>
-        <?php echo $this->user->getProfile()->getLocation(); ?><br/>
-        <?php echo $this->user->getCreatedAt()->toString(); ?><br/>
-    </address>
-  </li>
+    <li class="span4">
+        <h3 class="text-info"><i class="icon-user"></i> User Profile</h3>
+        <?php if ($this->user->getUserDetailsId() > 0) : ?>
+            <img src="<?php echo $this->user->getProfileModel()->getImageModel(100, 100)->getRealPath(); ?>" class="img-rounded">
+            <br/><br/>
+            <address>
+                <strong><?php echo $this->user->getProfileModel()->getName(); ?></strong><br>
+                <?php echo $this->user->getProfileModel()->getLocation(); ?><br/>
+                <?php echo $this->user->getCreatedAt()->toString(); ?><br/>
+            </address>
+        <?php else : ?>
+            <?php $this->_e('You need create your profile'); ?>
+            <br/>
+            <?php
+                echo $this->link(
+                        array(
+                            'module' => 'user',
+                            'controller' => 'index',
+                            'action' => 'edit'
+                        ),
+                        $this->__('Create profile'),
+                        array('class' => 'btn btn-info')
+                    );
+                ?>
+        <?php endif; ?>
+    </li>
 </ul>

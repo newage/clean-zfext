@@ -3,12 +3,13 @@
 /**
  * Write data to Yaml
  *
- * @category Core
- * @package  Core_Migration
- * @subpackage Core_Migration_Writer
- * @author   V.Leontiev
- * 
- * @version  $Id$
+ * @category   Library
+ * @package    Core_Db
+ * @subpackage Fixture_Writer
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Migration_Writer_Yaml
 {

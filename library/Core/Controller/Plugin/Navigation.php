@@ -1,13 +1,14 @@
 <?php
 /**
  * Controller plugin that sets the correct paths to the Zend_Layout instances
- * 
- * @category Core
- * @package Core_Controller
+ *
+ * @category   Library
+ * @package    Core_Controller
  * @subpackage Plugin
- * @author V.Leontiev
- * 
- * @version  $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
 {
@@ -31,7 +32,7 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
     {
         $this->_options = $options;
     }
-    
+
     /**
      * preDispatch
      *
@@ -42,21 +43,21 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
         $this->_initNavigation();
     }
 
-    
+
     /**
      * Initialize navigation
      * Add acl, role and translator to navigation
-     * 
+     *
      * @param   string $section
-     * @return  void  
+     * @return  void
      */
-    protected function _initNavigation() 
+    protected function _initNavigation()
     {
         $config = $this->_getConfig();
 
         if (!empty($config)) {
             $container = new Zend_Navigation($config);
-            
+
             Zend_Layout::getMvcInstance()->getView()->navigation($container);
 
             if (Zend_Registry::isRegistered('Zend_Translate') && Zend_Registry::isRegistered('Zend_Acl')) {
@@ -73,7 +74,7 @@ class Core_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstract
             }
         }
     }
-    
+
     /**
      * Get config from cache or read config
      *

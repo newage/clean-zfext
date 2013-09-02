@@ -1,13 +1,19 @@
 <?php
 
 /**
- * Abstract Reader
+ * Abstract fixture reader
  *
- * @author V.Leontiev
+ * @category   Library
+ * @package    Core_Db
+ * @subpackage Fixture_Reader
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Migration_Reader_Abstract implements Countable, Iterator
 {
- 
+
     /**
      * Iteration index
      *
@@ -28,7 +34,7 @@ class Core_Migration_Reader_Abstract implements Countable, Iterator
      * @var array
      */
     protected $_data;
-    
+
     /**
      * Used when unsetting values during iteration to ensure we do not skip
      * the next element
@@ -36,11 +42,11 @@ class Core_Migration_Reader_Abstract implements Countable, Iterator
      * @var boolean
      */
     protected $_skipNextIteration;
-    
+
     /**
      *
      * @param array $array
-     * @param type $allowModifications 
+     * @param type $allowModifications
      */
     public function __construct(array $array)
     {
@@ -55,7 +61,7 @@ class Core_Migration_Reader_Abstract implements Countable, Iterator
         }
         $this->_count = count($this->_data);
     }
-    
+
     /**
      * Retrieve a value and return $default if there is no element set.
      *
@@ -228,5 +234,5 @@ class Core_Migration_Reader_Abstract implements Countable, Iterator
     {
         return $this->_index < $this->_count;
     }
-    
+
 }

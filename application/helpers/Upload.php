@@ -6,7 +6,7 @@
  * @category Application
  * @package Application_Helper
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
+ * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
 class Application_Helper_Upload implements Application_Helper_Interface
@@ -133,6 +133,12 @@ class Application_Helper_Upload implements Application_Helper_Interface
     {
         $paramUpload = Zend_Controller_Front::getInstance()->getParam('upload');
         return $paramUpload['alias'];
+    }
+
+    static public function getUploadPath()
+    {
+        $paramUpload = Zend_Controller_Front::getInstance()->getParam('upload');
+        return $paramUpload['path'];
     }
 
 }

@@ -3,10 +3,14 @@
 /**
  * Create popover in form element
  *
- * @category Core
- * @package Core_Form_Decorator
- * @subpackage TwitterPopover
- * @author V.Leontiev
+ * @category   Library
+ * @package    Core_Form
+ * @subpackage Decorator
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
+ * @link       http://twitter.github.io/bootstrap/ "twitter-bootstrap" js framework
  */
 class Core_Form_Decorator_TwitterPopover extends Zend_Form_Decorator_Abstract
 {
@@ -15,12 +19,12 @@ class Core_Form_Decorator_TwitterPopover extends Zend_Form_Decorator_Abstract
         $element = $this->getElement();
         $id      = htmlentities($element->getId());
         $description = $element->getDescription();
-        $translate = $element->getTranslator();
+        $title = $element->getLabel();
 
         $script = '$("#'.$id.'").popover({
             trigger:"hover",
-            content:"' . $translate->translate($description) . '",
-            title:"' . $translate->translate('Description') . '"
+            content:"' . $description . '",
+            title:"' . $title . '"
         });';
 
         $element->getView()->jqueryScript()->append($script);

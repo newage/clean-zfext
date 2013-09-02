@@ -1,24 +1,25 @@
 <?php
 
 /**
- * Check Birth Date
+ * Validate Birth Date
  *
- * @category Core
- * @package Core_Validate
- * @author V.Leontiev
- * 
- * @version $Id$
+ * @category   Library
+ * @package    Core_Validate
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Validate_DateBirth extends Zend_Validate_Abstract
 {
-    
+
     const INVALID_DATE = 'dateInvalidDate';
     const MIN_DATE     = 'dateMinimumDate';
     const MAX_DATE     = 'dateMaximumDate';
-    
+
     /**
      * Message templates
-     * 
+     *
      * @var array
      */
     protected $_messageTemplates = array(
@@ -32,7 +33,7 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
         'min' => '_min',
         'max' => '_max'
     );
-    
+
     /**
      * Optional format
      *
@@ -46,28 +47,28 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
      * @var string|Zend_Locale|null
      */
     protected $_locale;
-    
+
     /**
      * Minimum date
-     * 
+     *
      * @var Zend_Date
      */
     protected $_min = null;
-    
+
     /**
      * Maximum date
-     * 
+     *
      * @var Zend_Date
      */
     protected $_max = null;
-    
+
     /**
      * Constructor
      * <code>
      * Core_Validate_DateBirth($format, $min, $max, $locale)
      * <code>
-     * 
-     * @param string|Zend_Config $options 
+     *
+     * @param string|Zend_Config $options
      */
     public function __construct($options = array())
     {
@@ -102,16 +103,16 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
         if (array_key_exists('locale', $options)) {
             $this->setLocale($options['locale']);
         }
-        
+
         if (array_key_exists('min', $options)) {
             $this->setMin($options['min']);
         }
-        
+
         if (array_key_exists('max', $options)) {
             $this->setMax($options['max']);
         }
     }
-    
+
     /**
      * Returns the locale option
      *
@@ -158,10 +159,10 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
         $this->_format = $format;
         return $this;
     }
-    
+
     /**
      * Return mininum date
-     * 
+     *
      * @author V.Leontiev
      * @return Zend_Date
      */
@@ -169,14 +170,14 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
     {
         return $this->_min;
     }
-    
+
     /**
      * Set minimum date
      * Date format string in strtotime()
-     * 
+     *
      * @author V.Leontiev
      * @param string $min
-     * @return Core_Validate_Date 
+     * @return Core_Validate_Date
      */
     public function setMin($min)
     {
@@ -185,10 +186,10 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
         $this->_min = $date;
         return $this;
     }
-    
+
     /**
      * Return mininum date
-     * 
+     *
      * @author V.Leontiev
      * @return Zend_Date
      */
@@ -196,13 +197,13 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
     {
         return $this->_max;
     }
-    
+
     /**
      * Set maximum date
-     * 
+     *
      * @author V.Leontiev
      * @param string $max
-     * @return Core_Validate_Date 
+     * @return Core_Validate_Date
      */
     public function setMax($max)
     {
@@ -211,10 +212,10 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
         $this->_max = $date;
         return $this;
     }
-    
+
     /**
      * Validate
-     * 
+     *
      * @param Zend_Date $value
      * @return bool
      */
@@ -224,9 +225,9 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
             $this->_error(self::INVALID_DATE);
             return false;
         }
-        
+
         $date = new Zend_Date($value, $this->getFormat());
-        
+
         if ($this->getMin() !== null && !$date->isLater($this->getMin())) {
             $this->_min = $this->getMin()->toString($this->getFormat());
             $this->_error(self::MIN_DATE);
@@ -240,7 +241,7 @@ class Core_Validate_DateBirth extends Zend_Validate_Abstract
             $this->_format = null;
             return false;
         }
-        
+
         return true;
     }
 }

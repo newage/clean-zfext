@@ -3,11 +3,12 @@
 /**
  * Create singleton instance Zend_File_transfer
  *
- * @category Library
- * @package Core_File_Transfer
- * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
- * @since php 5.1 or higher
+ * @category   Library
+ * @package    Core_File
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 final class Core_File_Transfer
 {

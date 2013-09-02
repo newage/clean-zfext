@@ -3,15 +3,17 @@
 /**
  * Get role name from loged user
  *
- * @category   Core
+ * @category   Library
  * @package    Core_Auth
  * @subpackage Adapter
- *
- * @version $Id: DbTable.php 87 2010-08-29 10:15:50Z vadim.leontiev $
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Auth_Adapter_DbTable extends Zend_Auth_Adapter_DbTable
 {
-    
+
     /**
      * Get role from loged user
      *

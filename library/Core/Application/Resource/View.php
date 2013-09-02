@@ -3,12 +3,13 @@
 /**
  * Extend resource for View
  *
- * @category Core
- * @package Core_Application
+ * @category   Library
+ * @package    Core_Application
  * @subpackage Resource
- * @author V.Leontiev
- *
- * @version  $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Application_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
@@ -55,7 +56,7 @@ class Core_Application_Resource_View extends Zend_Application_Resource_ResourceA
             if (isset($options['assign']) && is_array($options['assign'])) {
                 $this->_view->assign($options['assign']);
             }
-            
+
             if (isset($options['title'])) {
                 $this->_view->headTitle($options['title'])->enableTranslation();
             }
@@ -63,12 +64,10 @@ class Core_Application_Resource_View extends Zend_Application_Resource_ResourceA
             if (isset($options['titleSeparator'])) {
                 $this->_view->headTitle()->setSeparator($options['titleSeparator']);
             }
-            
+
             if (isset($options['title'])) {
                 $this->_view->projectTitle($options['title']);
             }
-            
-            $this->_view->assign('env', defined('APPLICATION_ENV') ? APPLICATION_ENV : '');
         }
         return $this->_view;
     }

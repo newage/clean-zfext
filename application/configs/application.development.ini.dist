@@ -4,6 +4,7 @@
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
 phpSettings.log_errors = 1
+debugger = on
 
 ; Connection for Zend_Db
 resources.db.adapter = pdo_mysql

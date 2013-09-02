@@ -2,11 +2,16 @@
 
 /**
  * Create datepicker field use extension datepicker for twitter bootstrap
- * GitHub: https://github.com/eternicode/bootstrap-datepicker
  *
- * @category Core
- * @package Core_Form_Decorator
- * @author V.Leontiev <vadim.leontiev@gmail.com>
+ * @category   Library
+ * @package    Core_Form
+ * @subpackage Decorator
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
+ * @link       http://twitter.github.io/bootstrap/ "twitter-bootstrap" js framework
+ * @link       https://github.com/eternicode/bootstrap-datepicker "datepicker" js library
  */
 class Core_Form_Decorator_TwitterDatepicker extends Zend_Form_Decorator_Abstract
 {

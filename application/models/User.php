@@ -7,14 +7,16 @@
  * @package    Application_Modules_User
  * @subpackage Model
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
+ * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Model_Users extends Core_Model_Abstract
+class Application_Model_User extends Core_Model_Abstract
 {
     const STATUS_ENABLE  = 'ENABLE';
     const STATUS_DISABLE = 'DISABLE';
 
+    protected $_imagesModels = 'Storage_Model_Image';
+    
     /**
      * Set default variable
      */
@@ -58,27 +60,27 @@ class User_Model_Users extends Core_Model_Abstract
     }
 
     /**
-     * Get user details model
+     * Get user details id
      *
-     * @return \User_Model_Profile
+     * @return int
      */
-    public function getProfile()
+    public function getUserDetailsId()
     {
-        return $this->_depend['profile'];
+        return (int)$this->get('user_details_id');
     }
 
     /**
-     * Set profile model
+     * Set user details id
      *
-     * @param Application_Model_Profile $value
-     * @return \User_Model_Profile
+     * @param int $id
+     * @return \Application_Model_User
      */
-    public function setProfile(User_Model_Profile $value)
+    public function setUserDetailsId($value)
     {
-        $this->_depend['profile'] = $value;
-        return $value;
+        $this->set('user_details_id', (int)$value);
+        return $this;
     }
-
+    
     /**
      * Get created date time
      *
@@ -260,6 +262,79 @@ class User_Model_Users extends Core_Model_Abstract
             $salt .= chr(rand(33, 126));
         }
         return md5($salt);
+    }
+    
+    /**
+     * Get user details model
+     *
+     * @return Application_Model_Profile
+     */
+    public function getProfileModel()
+    {
+        return $this->getDependModel('Application_Model_Profile');
+    }
+
+    /**
+     * Set profile model
+     *
+     * @param Application_Model_Profile $value
+     * @return Application_Model_Profile
+     */
+    public function setProfileModel(Application_Model_Profile $value)
+    {
+        $this->addDependModel($value);
+        return $value;
+    }
+    
+    /**
+     * Get one image model
+     *
+     * @return Application_Model_Image
+     */
+    public function getImageModel($width, $height)
+    {
+        $images = $this->getDependModel($this->_imagesModels);
+        $last = array(
+            'image' => null,
+            'rate' => 0
+        );
+
+        $getRate = function($one, $two) {
+            $result = ($one > $two) ? $one - $two : $two - $one;
+            return $result;
+        };
+
+        foreach ($images as $image) {
+            $rate = $getRate($image->getSizeWidth() + $image->getSizeHeight(), $width + $height);
+            if ($rate < $last['rate'] || $last['image'] === null) {
+                $last['rate'] = $rate;
+                $last['image'] = $image;
+            }
+        }
+
+        return $last['image'];
+    }
+
+    /**
+     * Get all images models for user
+     *
+     * @return Core_Storage
+     */
+    public function getImagesModel()
+    {
+        return $this->getDependModel($this->_imagesModels);
+    }
+
+    /**
+     * Set images models for user
+     *
+     * @param Core_Storage $value
+     * @return Core_Storage
+     */
+    public function setImagesModel($value)
+    {
+        $this->addDependModel($value, $this->_imagesModels);
+        return $value;
     }
 }
 

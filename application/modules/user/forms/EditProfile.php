@@ -7,7 +7,7 @@
  * @package    Application_Modules_User
  * @subpackage Form
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
+ * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
 class User_Form_EditProfile extends Core_Form
@@ -70,7 +70,7 @@ class User_Form_EditProfile extends Core_Form
         $element->setAttrib('class', 'thumbnail');
         $element->setAttrib('width', '100');
         $element->setAttrib('height', '100');
-        $element->setAttrib('default', Application_Model_Images::DEFAULT_IMAGE);
+        $element->setAttrib('default', Application_Model_Image::DEFAULT_IMAGE);
         $element->setOrder(5);
         $this->addElement($element);
 

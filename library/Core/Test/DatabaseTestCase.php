@@ -4,12 +4,12 @@
  * DbTestCase
  * Loader fixtures for model
  *
- * @category Core
- * @package Core_Test
- * @subpackage UnitTest
- * @author V.Leontiev
- *
- * @version  $Id$
+ * @category   Library
+ * @package    Core_Text
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 abstract class Core_Test_DatabaseTestCase extends Zend_Test_PHPUnit_DatabaseTestCase
 {
@@ -25,9 +25,9 @@ abstract class Core_Test_DatabaseTestCase extends Zend_Test_PHPUnit_DatabaseTest
 
     /**
      * Delete all
-     * 
+     *
      * @author V.Leontiev
-     * @return PHPUnit_Extensions_Database_Operation_IDatabaseOperation 
+     * @return PHPUnit_Extensions_Database_Operation_IDatabaseOperation
      */
     protected function getTearDownOperation()
     {
@@ -36,9 +36,9 @@ abstract class Core_Test_DatabaseTestCase extends Zend_Test_PHPUnit_DatabaseTest
 
     /**
      * Get db connection
-     * 
+     *
      * @author V.Leontiev
-     * @return Zend_Test_PHPUnit_Db_Connection 
+     * @return Zend_Test_PHPUnit_Db_Connection
      */
     protected function getConnection()
     {
@@ -53,7 +53,7 @@ abstract class Core_Test_DatabaseTestCase extends Zend_Test_PHPUnit_DatabaseTest
 
             $application = new Zend_Application(APPLICATION_ENV, $config);
             $application->bootstrap();
-            
+
             $dbname = $config->resources->db->params->dbname;
 
             $db = $application->getBootstrap()->getPluginResource('db')->getDbAdapter();
@@ -64,10 +64,10 @@ abstract class Core_Test_DatabaseTestCase extends Zend_Test_PHPUnit_DatabaseTest
 
     /**
      * Get dataSet
-     * 
+     *
      * @author V.Leontiev
      * @param string $fileName Only file name, without extension
-     * @return type 
+     * @return type
      */
     protected function getDataSet()
     {

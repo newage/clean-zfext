@@ -5,60 +5,62 @@
  *
  * abstract migration
  *
- * @category Core
- * @package  Core_Migration
- * @author   V.Leontiev
- * 
- * @version  $Id$
+ * @category   Library
+ * @package    Core_Db
+ * @subpackage Schema
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 abstract class Core_Migration_Abstract
 {
     const TYPE_INT = 'int';
     const TYPE_BIGINT = 'bigint';
-    
+
     const TYPE_FLOAT = 'float';
-    
+
     const TYPE_TEXT = 'text';
     const TYPE_LONGTEXT = 'longtext';
-    
+
     const TYPE_VARCHAR = 'varchar';
     const TYPE_ENUM = 'enum';
-    
+
     const TYPE_DATE = 'date';
     const TYPE_DATETIME = 'datetime';
     const TYPE_TIME = 'time';
-    const TYPE_TIMESTAMP = 'timestamp';    
-    
+    const TYPE_TIMESTAMP = 'timestamp';
+
     /**
      * Default Database adapter
      *
      * @var Zend_Db_Adapter_Abstract
      */
     protected $_dbAdapter = null;
-    
+
     /**
      * migration Adapter
      *
      * @var Core_Migration_Adapter_Abstract
      */
-    
+
     protected $_migrationAdapter = null;
-    
+
     /**
      * up
      *
      * update DB from migration
-     * 
+     *
      * @author V.Leontiev
      * @return  Core_Migration_Abstract
      */
     abstract public function up();
-    
+
     /**
      * down
      *
      * degrade DB from migration
-     * 
+     *
      * @author V.Leontiev
      * @return  Core_Migration_Abstract
      */
@@ -92,30 +94,30 @@ abstract class Core_Migration_Abstract
             $this->setDbAdapter();
         }
         return $this->_dbAdapter;
-    } 
-     
+    }
+
     /**
      * stop
      *
      * @throws Exception
      */
-    public function stop() 
+    public function stop()
     {
         throw new Zend_Exception('This is final migration');
     }
-       
+
     /**
      * query
      *
      * @param   string     $query
      * @return  Zend_Db_Statement_Interface
      */
-    public function query($query) 
+    public function query($query)
     {
         $this->getDbAdapter()->query($query);
         return $this;
     }
-    
+
     /**
      * insert
      *
@@ -123,11 +125,11 @@ abstract class Core_Migration_Abstract
      * @param   array      $params
      * @return  int The number of affected rows.
      */
-    public function insert($table, array $params) 
+    public function insert($table, array $params)
     {
         return $this->getDbAdapter()->insert($table, $params);
     }
-    
+
     /**
      * Updates table rows with specified data based on a WHERE clause.
      *
@@ -140,7 +142,7 @@ abstract class Core_Migration_Abstract
     {
         return $this->getDbAdapter()->update($table, $bind, $where);
     }
-    
+
     /**
      * Delete table rows with specified data based on a WHERE clause.
      *
@@ -153,14 +155,14 @@ abstract class Core_Migration_Abstract
         $this->getDbAdapter()->delete($table, $where);
         return $this;
     }
-     
+
     /**
      * createTable
      *
      * @param   string $table table name
      * @return  Core_Migration_Abstract
      */
-    public function createTable($table) 
+    public function createTable($table)
     {
         $this->query(
             'CREATE TABLE '.
@@ -168,28 +170,28 @@ abstract class Core_Migration_Abstract
             ' ( `id` bigint NOT NULL AUTO_INCREMENT , PRIMARY KEY (`id`))'.
             ' Engine=InnoDB'
         );
-        
+
         return $this;
     }
-    
+
     /**
      * dropTable
      *
      * @param   string     $table  table name
      * @return  Core_Migration_Abstract
      */
-    public function dropTable($table) 
+    public function dropTable($table)
     {
         return $this;
     }
-    
+
     /**
      * createColumn
      *
      * Not realise
-     * 
+     *
      * @param   string   $table
-     * @param   string   $column 
+     * @param   string   $column
      * @param   string   $datatype
      * @param   string   $length
      * @param   string   $default
@@ -197,47 +199,47 @@ abstract class Core_Migration_Abstract
      * @param   bool     $primary
      * @return  Core_Migration_Abstract
      */
-    public function createColumn($table, 
+    public function createColumn($table,
                                  $column,
                                  $datatype,
                                  $length = null,
                                  $default = null,
                                  $notnull = false,
                                  $primary = false
-                                 ) 
+                                 )
     {
-        
+
     }
-    
+
     /**
      * dropColumn
      * Not realise
      *
      * @param   string   $table
-     * @param   string   $name 
+     * @param   string   $name
      * @return  bool
      */
-    public function dropColumn($table, $name) 
+    public function dropColumn($table, $name)
     {
         $this->getDbAdapter()->dropColumn($table, $name);
-        
+
         return $this;
-    }   
+    }
 
     /**
      * createUniqueIndexes
      * Not realise
      *
      * @param   string   $table
-     * @param   array    $columns 
-     * @param   string   $indName 
+     * @param   array    $columns
+     * @param   string   $indName
      * @return  bool
      */
     public function createUniqueIndexes($table, array $columns, $indName = null)
     {
         return $this;
-    }    
-    
+    }
+
     /**
      * dropColumn
      * Not realise
@@ -246,11 +248,11 @@ abstract class Core_Migration_Abstract
      * @param   array    $columns
      * @return  bool
      */
-    public function dropUniqueIndexes($table, $indName) 
+    public function dropUniqueIndexes($table, $indName)
     {
         return $this;
     }
-    
+
     /**
      * message
      *
@@ -259,7 +261,7 @@ abstract class Core_Migration_Abstract
      * @param   string     $message
      * @return  Core_Migration_Abstract
      */
-    public function message($message) 
+    public function message($message)
     {
         echo $message . "\n";
         return $this;

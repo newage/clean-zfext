@@ -1,11 +1,14 @@
 <?php
+
 /**
  * Initialize set/get method in model
  *
- * @category Core
- * @package Core_Model
- * @license New BSD
- * @author V.Leontiev <vadim.leontiev@gmail.com>
+ * @category Library
+ * @package  Core_Model
+ * @author   V.Leontiev <vadim.leontiev@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @since    php 5.3 or higher
+ * @see      https://github.com/newage/clean-zfext
  */
 abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
 {
@@ -104,6 +107,48 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
     }
 
     /**
+     * Set depend model
+     *
+     * @param object $value
+     * @param string $name
+     * @return object
+     */
+    public function addDependModel($value, $name = null)
+    {
+        if ($name === null) {
+            $name = get_class($value);
+        }
+
+        $this->_depend[$name] = $value;
+        return $value;
+    }
+
+    /**
+     * Get depend model
+     *
+     * @param string $modelName
+     * @return object
+     */
+    public function getDependModel($name)
+    {
+        if (!isset($this->_depend[$name])) {
+            throw new Core_Model_Exception('Don\'t set depend model: ' . $name);
+        }
+        return $this->_depend[$name];
+    }
+
+    /**
+     * Isset depemd model
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function isDependModel($name)
+    {
+        return isset($this->_depend[$name]) ? true : false;
+    }
+
+    /**
      * Return array from all properties
      *
      * @return array
@@ -159,17 +204,6 @@ abstract class Core_Model_Abstract extends Zend_Db_Table_Row_Abstract
             $name = implode('_', array_map($function, $matches[0]));
         }
         return $name;
-    }
-
-    /**
-     * Get current logined user id
-     *
-     * @return int
-     */
-    protected function _getCurrentUserId()
-    {
-        $identity = Zend_Auth::getInstance()->getIdentity();
-        return (int)$identity->id;
     }
 
     /**

@@ -4,15 +4,38 @@
  * Front controller plugin
  * Set route for translate
  *
- * @category Core
- * @package Core_Controller
+ * @category   Library
+ * @package    Core_Controller
  * @subpackage Plugin
- * @author V.Leontiev
- *
- * @version $Id$
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
  */
 class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
 {
+
+    /**
+     * Default registry name
+     */
+    const DEFAULT_REGISTRY_KEY = 'Zend_Translate';
+
+    /**
+     * Default name on cache manager
+     * Setted in configuration param:
+     * <code>
+     *   resources.frontcontroller.plugins.translate.options.cache = translate
+     * <code>
+     *
+     * Need add cache to cache manager
+     * <code>
+     *   resources.cachemanager.translate.frontend.name = Core
+     *   resources.cachemanager.translate.frontend.options.lifetime = 7200
+     *   resources.cachemanager.translate.frontend.options.automatic_serialization = true
+     *   resources.cachemanager.translate.backend.name = Apc
+     * <code>
+     */
+    const DEFAULT_CACHE_NAME = 'translate';
 
     /**
      * Options
@@ -117,10 +140,19 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-        $cacheName = 'Zend_Cache_Manager';
-        if (Zend_Registry::isRegistered($cacheName) && Zend_Registry::get($cacheName)->hasCache('translate')) {
+        $nameCacheManager = 'Zend_Cache_Manager';
+        if (isset($this->_options['cache'])) {
+            $cacheName = $this->_options['cache'];
+            unset($this->_options['cache']);
+        } else {
+            $cacheName = self::DEFAULT_CACHE_NAME;
+        }
+
+        if (Zend_Registry::isRegistered($nameCacheManager) &&
+            Zend_Registry::get($nameCacheManager)->hasCache($cacheName)
+        ) {
             Zend_Translate::setCache(
-                Zend_Registry::get($cacheName)->getCache('translate')
+                Zend_Registry::get($nameCacheManager)->getCache($cacheName)
             );
         }
 
@@ -137,25 +169,24 @@ class Core_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
             $this->_options['log']->setTimestampFormat('Y-m-d H:i:s');
         }
 
-        $translate = new Zend_Translate($this->_options);
+        $translator = new Zend_Translate($this->_options);
 
         //Set default translator for validator
         $validateTranslator = new Zend_Translate(
             array(
                 'adapter' => 'array',
                 'content' => $this->_options['validateTranslatorPath'],
-                'locale' => $translate->getAdapter()->getLocale(),
-                'scan' => Zend_Translate::LOCALE_DIRECTORY,
+                'locale' => $translator->getAdapter()->getLocale(),
+                'scan' => Zend_Translate::LOCALE_FILENAME,
                 'ignore'  => '==='
             )
         );
 
-        $translate->addTranslation($validateTranslator);
+        $translator->addTranslation($validateTranslator);
 
         Zend_Registry::isRegistered('Zend_Locale')
             || Zend_Registry::set('Zend_Locale', $locale);
-        Zend_Registry::set('Zend_Translate', $translate);
-        Zend_Form::setDefaultTranslator($translate);
-        Zend_Validate_Abstract::setDefaultTranslator($translate);
+        Zend_Registry::isRegistered(self::DEFAULT_REGISTRY_KEY)
+            || Zend_Registry::set(self::DEFAULT_REGISTRY_KEY, $translator);
     }
 }

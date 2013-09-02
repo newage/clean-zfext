@@ -22,6 +22,10 @@
             "url":  "git@github.com:newage/zf-console.git"
         },
         {
+            "type": "vcs",
+            "url":  "git@github.com:newage/jquery-i18n.git"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "ivaynberg/select2",
@@ -57,6 +61,39 @@
         {
             "type": "package",
             "package": {
+                "name": "eternicode/bootstrap-datepicker",
+                "type": "component",
+                "version": "1.2.0",
+                "dist": {
+                    "url": "https://github.com/eternicode/bootstrap-datepicker/archive/1.2.0.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/eternicode/bootstrap-datepicker",
+                    "type": "git",
+                    "reference": "1.2.0"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "js/bootstrap-datepicker.js"
+                        ],
+                        "styles": [
+                            "css/datepicker.css"
+                        ],
+                        "shim": {
+                            "deps": ["bootstrap"]
+                        }
+                    }
+                },
+                "require": {
+                    "robloach/component-installer": "*"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "Nijikokun/bootstrap-notify",
                 "type": "component",
                 "version": "1.0.0",
@@ -76,69 +113,6 @@
                         ],
                         "styles": [
                             "css/bootstrap-notify.css"
-                        ],
-                        "shim": {
-                            "deps": ["bootstrap"]
-                        }
-                    }
-                },
-                "require": {
-                    "robloach/component-installer": "*"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "newage/jquery-i18n",
-                "type": "component",
-                "version": "1.0.0",
-                "dist": {
-                    "url": "https://github.com/newage/jquery-i18n/archive/v1.0.0.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/newage/jquery-i18n",
-                    "type": "git",
-                    "reference": "1.0.0"
-                },
-                "extra": {
-                    "component": {
-                        "scripts": [
-                            "jquery.i18n.js"
-                        ],
-                        "shim": {
-                            "deps": ["jquery"]
-                        }
-                    }
-                },
-                "require": {
-                    "robloach/component-installer": "*"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "eternicode/bootstrap-datepicker",
-                "type": "component",
-                "version": "1.0.1",
-                "dist": {
-                    "url": "https://github.com/eternicode/bootstrap-datepicker/zipball/v1.0.1",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "https://github.com/eternicode/bootstrap-datepicker",
-                    "type": "git",
-                    "reference": "1.0.0"
-                },
-                "extra": {
-                    "component": {
-                        "scripts": [
-                            "js/bootstrap-datepicker.js"
-                        ],
-                        "styles": [
-                            "css/datepicker.css"
                         ],
                         "shim": {
                             "deps": ["bootstrap"]

@@ -4,35 +4,66 @@
  * Mapper for profile model
  *
  * @category Application
- * @package    Application_Modules_User
- * @subpackage ModelMapper
+ * @package    Application_Model
+ * @subpackage Mapper
  * @author Vadim Leontiev <vadim.leontiev@gmail.com>
- * @see https://bitbucket.org/newage/clean-zfext
+ * @see https://github.com/newage/clean-zfext
  * @since php 5.1 or higher
  */
-class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
+class Application_Model_Mapper_Profile extends Core_Model_Mapper_Abstract
 {
 
+    protected $_prefixCache = 'user_profile';
+    
     /**
-     * Save new user and upload avatar
+     * Save new profile
      *
+     * @param array $formValues
      * @return User_Model_Users
      */
-    public function save(Core_Model_Abstract $model)
+    public function save($formValues)
     {
         $table = $this->getDbTable();
         return $table->insert($model->toArray());
     }
 
     /**
-     * Get profile for logined user
+     * Find profile for user
+     * 
+     * @param int $id
+     * @return Application_Model_Profile
+     */
+    public function find($id)
+    {
+        $cacheId = $this->_getCacheId($id);
+
+        if (!($user = $this->_loadCache($cacheId))) {
+            $profile = $this->getDbTable()->getById($id);
+
+            if ($profile === false) {
+                return null;
+            }
+
+            $image = $profile->findDependentRowset('Application_Model_DbTable_Image');
+            $profile->setImageModel($image);
+                
+            $this->_saveCache($profile, $cacheId, array('users_details'));
+        }
+
+        return $profile;
+    }
+    
+    /**
+     * Get profile model
      *
-     * @return User_Model_Profile
+     * @return Application_Model_Profile
      */
     public function getCurrentProfile()
     {
-        $userId = $this->_getCurrentUserId();
-        $profile = $this->getDbTable()->getByUser_id($userId);
+        $userMapper = new Application_Model_Mapper_User();
+        $userModel = $userMapper->find($this->_getCurrentUserId());
+        
+        $profile = $this->find($userModel->getUserDetailsId());
         return $profile;
     }
 
@@ -52,7 +83,7 @@ class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
         $imageModel = $imageMapper->setModel($imageModel)->resize()->upload();
 
         //Get user profile
-        $profile = $this->getDbTable()->getByUser_id($this->_getCurrentUserId());
+        $profile = $this->getDbTable()->getById($model->get);
 
         if ($profile === null) {
             //Create new user profile
@@ -66,6 +97,9 @@ class User_Model_ProfileMapper extends Core_Model_Mapper_Abstract
         $profile->setGender($model->getGender());
         $profile->setImageId($imageModel->getId());
 
-        return $profile->save();
+        $profile->save();
+
+        $cacheId = md5('users_' . $profile->getUserId());
+        return $this->removeCache($cacheId);
     }
 }

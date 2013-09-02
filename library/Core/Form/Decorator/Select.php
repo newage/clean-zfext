@@ -1,12 +1,16 @@
 <?php
 
 /**
- * Decorator for select input used select2 library
+ * Decorator for select input used js library "select2"
  *
- * @category Core
- * @package Core_Form_Decorator
- * @subpackage Select2
- * @author V.Leontiev
+ * @category   Library
+ * @package    Core_Form
+ * @subpackage Decorator
+ * @author     V.Leontiev <vadim.leontiev@gmail.com>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @since      php 5.3 or higher
+ * @see        https://github.com/newage/clean-zfext
+ * @link       http://ivaynberg.github.io/select2/ "select2" js library
  */
 class Core_Form_Decorator_Select extends Zend_Form_Decorator_Abstract
 {
@@ -36,7 +40,7 @@ class Core_Form_Decorator_Select extends Zend_Form_Decorator_Abstract
             $options .= '<option value="'.$key.'">'.$val.'</option>';
         }
 
-        $element->getView()->jqueryScript()->append('$("#'.$id.'").select2();');
+        $element->getView()->jqueryScript()->append('$("#'.$id.'").select2();', 'select2');
 
         $markup  = sprintf($this->_format, $label, $id, $name, $options, $required, $class);
         return $markup;
