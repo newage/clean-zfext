@@ -6,10 +6,10 @@
     <?php
         $this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => 'favicon.ico', 'type' => 'image/vnd.microsoft.icon'));
         $this->headScript()->prependFile('/components/require.js', 'text/javascript');
-        $this->headScript()->appendFile('/layouts/default/js/core.js', 'text/javascript');
+        $this->headScript()->appendFile('/js/core.js', 'text/javascript');
 
         $this->headLink()->appendStylesheet('/components/require.css');
-        $this->headLink()->appendStylesheet('/layouts/default/css/style.css');
+        $this->headLink()->appendStylesheet('/css/style.css');
     ?>
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
