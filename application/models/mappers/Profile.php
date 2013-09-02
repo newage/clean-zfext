@@ -16,16 +16,43 @@ class Application_Model_Mapper_Profile extends Core_Model_Mapper_Abstract
     protected $_prefixCache = 'user_profile';
     
     /**
-     * Save new user and upload avatar
+     * Save new profile
      *
+     * @param array $formValues
      * @return User_Model_Users
      */
-    public function save(Core_Model_Abstract $model)
+    public function save($formValues)
     {
         $table = $this->getDbTable();
         return $table->insert($model->toArray());
     }
 
+    /**
+     * Find profile for user
+     * 
+     * @param int $id
+     * @return Application_Model_Profile
+     */
+    public function find($id)
+    {
+        $cacheId = $this->_getCacheId($id);
+
+        if (!($user = $this->_loadCache($cacheId))) {
+            $profile = $this->getDbTable()->getById($id);
+
+            if ($profile === null) {
+                return null;
+            }
+
+            $image = $profile->findDependentRowset('Application_Model_DbTable_Image');
+            $profile->setImageModel($image);
+                
+            $this->_saveCache($profile, $cacheId, array('users_details'));
+        }
+
+        return $profile;
+    }
+    
     /**
      * Get profile for logined user
      *

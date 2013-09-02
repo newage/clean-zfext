@@ -33,14 +33,16 @@ class User_IndexController extends Zend_Controller_Action
     {
         $this->view->headTitle('Edit User Profile');
         $form = new User_Form_EditProfile();
-        $mapper = new User_Model_ProfileMapper();
+        $mapper = new Application_Model_Mapper_Profile();
 
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
-                $model = new User_Model_Profile($form->getValues());
-
-                if (true === (bool)$mapper->update($model)) {
-                    $this->_helper->FlashMessenger('Update profile successful');
+                if (true === (bool)$mapper->save($form->getValues())) {
+                    $this->getHelper('Messenger')->addMessage(
+                        'Update profile successful',
+                        Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,
+                        true
+                    );
                     $this->getHelper('Redirector')->gotoUrl('/user/index');
                 } else {
                     $form->addError('Update profile failed!');
@@ -64,10 +66,9 @@ class User_IndexController extends Zend_Controller_Action
         $form = new User_Form_ChangePassword();
 
         if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-            $model = new User_Model_Users($form->getValues());
-            $mapper = new User_Model_UsersMapper();
+            $mapper = new Application_Model_Mapper_User();
 
-            if (true === (bool)$mapper->changePassword($model)) {
+            if (true === (bool)$mapper->changePassword($form->getValues())) {
                 $this->getHelper('Messenger')->addMessage(
                     'Changed Password Successful',
                     Core_Controller_Action_Helper_Messenger::TYPE_SUCCESS,

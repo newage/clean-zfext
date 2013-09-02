@@ -29,7 +29,7 @@ class Application_Model_Mapper_User extends Core_Model_Mapper_Abstract
                     ->setIdentityColumn('email')
                     ->setCredentialColumn('password')
                     ->setCredentialTreatment('MD5(CONCAT(salt, ?)) AND status = "' .
-                        User_Model_Users::STATUS_ENABLE . '"');
+                        Application_Model_User::STATUS_ENABLE . '"');
 
         $authAdapter->setIdentity($email)
                     ->setCredential($password);
@@ -76,15 +76,14 @@ class Application_Model_Mapper_User extends Core_Model_Mapper_Abstract
     /**
      * Update user password
      *
-     * @param User_Model_Users $request
+     * @param Array $formValues
      * @return mixed
      */
-    public function changePassword(User_Model_Users $request)
+    public function changePassword($formValues)
     {
         $user = $this->getDbTable()->getById($this->_getCurrentUserId());
 
-        $user->password = $request->getPassword();
-        $user->salt = $request->getSalt();
+        $user->setPassword($formValues['password']);
 
         return $user->save();
     }
