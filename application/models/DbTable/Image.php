@@ -16,6 +16,10 @@ class Application_Model_DbTable_Image extends Core_Db_Table_Abstract
 
     protected $_rowClass = 'Application_Model_Image';
 
+    protected $_dependentTables = array(
+        'Application_Model_DbTable_Profile'
+    );
+    
     protected $_referenceMap    = array(
         'Creator' => array(
             'columns'           => 'creator_id',

@@ -40,7 +40,7 @@ class Application_Model_Mapper_Profile extends Core_Model_Mapper_Abstract
         if (!($user = $this->_loadCache($cacheId))) {
             $profile = $this->getDbTable()->getById($id);
 
-            if ($profile === null) {
+            if ($profile === false) {
                 return null;
             }
 
@@ -54,14 +54,16 @@ class Application_Model_Mapper_Profile extends Core_Model_Mapper_Abstract
     }
     
     /**
-     * Get profile for logined user
+     * Get profile model
      *
      * @return Application_Model_Profile
      */
     public function getCurrentProfile()
     {
-        $userId = $this->_getCurrentUserId();
-        $profile = $this->getDbTable()->getByUser_id($userId);
+        $userMapper = new Application_Model_Mapper_User();
+        $userModel = $userMapper->find($this->_getCurrentUserId());
+        
+        $profile = $this->find($userModel->getUserDetailsId());
         return $profile;
     }
 

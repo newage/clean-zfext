@@ -31,7 +31,7 @@ class User_IndexController extends Zend_Controller_Action
      */
     public function editAction()
     {
-        $this->view->headTitle('Edit User Profile');
+        $this->view->headTitle('Edit Profile');
         $form = new User_Form_EditProfile();
         $mapper = new Application_Model_Mapper_Profile();
 
@@ -49,8 +49,9 @@ class User_IndexController extends Zend_Controller_Action
                 }
             }
         } else {
-            $model = $mapper->getCurrentProfile();
-            $form->setDefaults($model->toArray());
+            if ($model = $mapper->getCurrentProfile()) {
+                $form->setDefaults($model->toArray());
+            }
         }
 
         $this->view->form = $form;

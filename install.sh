@@ -23,8 +23,12 @@ if [ ! -d "docs" ]; then
     mkdir --mode=0777 docs
 fi
 
-if [ ! -d "bin" ]; then
-    mkdir --mode=0777 bin
+if [ ! -d "indexes" ]; then
+    mkdir --mode=0777 indexes
+fi
+
+if [ ! -d "tmp" ]; then
+    mkdir --mode=0777 tmp
 fi
 
 if [ ! -d "upload" ]; then
