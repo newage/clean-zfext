@@ -1,35 +1,35 @@
 #CHANGELOG
 
 ##2.1.0 (2013-08-02):
-ead33ee (HEAD, origin/develop, release/2.1.0, develop) [#7] Fix (user); fixed login path
-bd6e4ab Fix (core); moved img/js/css folders, fixed header layout
-df29dfb Fix (core); fixed libraries on composer.json
-4f277d3 Fix (user); fixed change password
-3e43567 Fix (user); updated error controller and user index controller
-b0dfe56 Feature (users); fixed models and mappers for user
-8f96557 Feature (core); updated database schema and fixtures for new models feature
-c9da60a Fix (core); removed Apache license link from footer
-fe798be Fix (core); fixed css for sticky footer
-9354bbb Fix (core); escaped errors messages
-ea7a375 Fix (users); changed cache in mapper, update composer.json
-951ea74 Fix (core); remove paginator from abstract
-3b50694 Fix (core); fixed composite and abstract for models
-8af5ce2 Fix (core); changed models caching
-b1f1977 Fix (core); added paginator cache config
-9316c20 [#5] Feature (core); added caching for paginator
-8948921 Feature (core); added cache to composite model
-c2261ce Refactor (core); updated docblock in library
-5d259c7 Fix (core); fixed initialize default array in rowset object
-e58568e Fix (core); removed default view env variable
-a8dedd5 Feature (core); added method for create paginator
-a4f1445 Feature (core); added compare date method to rowset object
-bea4a30 Fix (core); renamed methods for get/set depend model
-bf30b2c Feature (core); set methods for set/get depend models in model
-c3a75c8 Fix (core); Update dependencies on composer config
-b91c4d8 Fix (users); fixed translate message
-b9d5c9f Fix (core); fixed add cache to translator, fix rescan folder with language files
-b43f840 Fix (core); fixed ignore char in translate plugin
-99460b8 Fix (core); Small changed decorators
+- ead33ee (HEAD, origin/develop, release/2.1.0, develop) [#7] Fix (user); fixed login path
+- bd6e4ab Fix (core); moved img/js/css folders, fixed header layout
+- df29dfb Fix (core); fixed libraries on composer.json
+- 4f277d3 Fix (user); fixed change password
+- 3e43567 Fix (user); updated error controller and user index controller
+- b0dfe56 Feature (users); fixed models and mappers for user
+- 8f96557 Feature (core); updated database schema and fixtures for new models feature
+- c9da60a Fix (core); removed Apache license link from footer
+- fe798be Fix (core); fixed css for sticky footer
+- 9354bbb Fix (core); escaped errors messages
+- ea7a375 Fix (users); changed cache in mapper, update composer.json
+- 951ea74 Fix (core); remove paginator from abstract
+- 3b50694 Fix (core); fixed composite and abstract for models
+- 8af5ce2 Fix (core); changed models caching
+- b1f1977 Fix (core); added paginator cache config
+- 9316c20 [#5] Feature (core); added caching for paginator
+- 8948921 Feature (core); added cache to composite model
+- c2261ce Refactor (core); updated docblock in library
+- 5d259c7 Fix (core); fixed initialize default array in rowset object
+- e58568e Fix (core); removed default view env variable
+- a8dedd5 Feature (core); added method for create paginator
+- a4f1445 Feature (core); added compare date method to rowset object
+- bea4a30 Fix (core); renamed methods for get/set depend model
+- bf30b2c Feature (core); set methods for set/get depend models in model
+- c3a75c8 Fix (core); Update dependencies on composer config
+- b91c4d8 Fix (users); fixed translate message
+- b9d5c9f Fix (core); fixed add cache to translator, fix rescan folder with language files
+- b43f840 Fix (core); fixed ignore char in translate plugin
+- 99460b8 Fix (core); Small changed decorators
 
 ##2.0.2 (2013-07-12):
 - 3f1aa3f [#3] Fix (core); fixed generate method name in tool db-model without underscore symbol
