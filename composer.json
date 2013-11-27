@@ -15,15 +15,15 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:newage/zf-tools.git"
+            "url":  "https://github.com/newage/zf-tools.git"
         },
         {
             "type": "vcs",
-            "url":  "git@github.com:newage/zf-console.git"
+            "url":  "https://github.com/newage/zf-console.git"
         },
         {
             "type": "vcs",
-            "url":  "git@github.com:newage/jquery-i18n.git"
+            "url":  "https://github.com/newage/jquery-i18n.git"
         },
         {
             "type": "package",
